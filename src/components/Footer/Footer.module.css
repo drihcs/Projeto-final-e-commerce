@@ -1,0 +1,85 @@
+footer {
+  background-color: #1c1c1c;
+  color: #ffffff;
+  padding: 20px 30px; /* Diminuir o padding para reduzir a altura */
+  font-family: Arial, sans-serif;
+}
+
+.footerContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px; /* Diminuir o gap entre os itens */
+}
+
+.footerAbout,
+.footerInfo,
+.footerCategories,
+.footerContact {
+  flex: 1;
+  min-width: 220px;
+}
+
+.footerAbout h2,
+.footerInfo h4,
+.footerCategories h4,
+.footerContact h4 {
+  font-size: 18px; /* Diminuir o tamanho da fonte para economizar espaço */
+  margin-bottom: 8px; /* Reduzir o espaço entre o título e o conteúdo */
+}
+
+.footerAbout p,
+.footerInfo p,
+.footerCategories a,
+.footerContact p {
+  color: #cccccc;
+  font-size: 12px; /* Diminuir o tamanho da fonte para economizar espaço */
+  line-height: 1.4; /* Diminuir o espaçamento entre as linhas */
+}
+
+.footerSocial {
+  display: flex;
+  gap: 10px; /* Diminuir o gap entre os ícones sociais */
+  margin-top: 10px; /* Diminuir a margem superior */
+}
+
+.footerSocial a img {
+  width: 18px; /* Reduzir o tamanho dos ícones sociais */
+  height: 18px;
+}
+
+.footerInfo ul,
+.footerCategories ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footerInfo li,
+.footerCategories li {
+  margin-bottom: 8px; /* Diminuir o espaçamento entre os itens */
+}
+
+.footerInfo a,
+.footerCategories a {
+  color: #cccccc;
+  text-decoration: none;
+  font-size: 12px; /* Diminuir o tamanho da fonte para economizar espaço */
+}
+
+.footerInfo a:hover,
+.footerCategories a:hover {
+  text-decoration: underline;
+}
+
+.footerBottom {
+  text-align: center;
+  margin-top: 20px; /* Diminuir a margem superior */
+  padding-top: 10px; /* Diminuir o padding superior */
+  border-top: 1px solid #333333;
+}
+
+.footerBottom p {
+  color: #888888;
+  font-size: 12px; /* Reduzir o tamanho da fonte para economizar espaço */
+}

@@ -1,0 +1,61 @@
+.colecoes {
+  padding: 40px 20px;
+}
+
+.section-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.collections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.collection-card {
+  position: relative;
+  height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  color: white;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+
+.collection-card:hover {
+  transform: scale(1.03);
+}
+
+.discount-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background-color: red;
+  color: white;
+  padding: 4px 8px;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.card-content {
+  z-index: 2;
+}
+
+.button {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 6px 12px;
+  background-color: #fff;
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 6px;
+}

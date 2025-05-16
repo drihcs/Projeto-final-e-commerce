@@ -1,0 +1,58 @@
+import React from 'react'
+import styles from '../Footer/Footer.module.css'
+
+export default function Footer() {
+  return (
+    <footer>
+      <div className="footerContainer">
+        <div className="footerAbout">
+          <h2>Digital Store</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore.
+          </p>
+          <div className="footerSocial">
+            <a href="#"><img src="/src/assets/facebook.svg" alt="Facebook" /></a>
+            <a href="#"><img src="/src/assets/instagram.svg" alt="Instagram" /></a>
+            <a href="#"><img src="/src/assets/twitter.svg" alt="Twitter" /></a>
+          </div>
+        </div>
+
+        <div className="footerInfo">
+          <h4>Informação</h4>
+          <ul>
+            <li><a href="#">Sobre Drip Store</a></li>
+            <li><a href="#">Segurança</a></li>
+            <li><a href="#">Wishlist</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Trabalhe conosco</a></li>
+            <li><a href="#">Meus Pedidos</a></li>
+          </ul>
+        </div>
+
+        <div className="footerCategories">
+          <h4>Categorias</h4>
+          <ul>
+            <li><a href="#">Camisetas</a></li>
+            <li><a href="#">Calças</a></li>
+            <li><a href="#">Bonés</a></li>
+            <li><a href="#">Headphones</a></li>
+            <li><a href="#">Tênis</a></li>
+          </ul>
+        </div>
+
+        <div className="footerContact">
+          <h4>Contato</h4>
+          <p>
+            Av. Santos Dumont, 1510 - 1 andar - Aldeota, Fortaleza - CE, 60150-161<br /><br />
+            (85) 3051-3411
+          </p>
+        </div>
+      </div>
+
+      <div className="footerBottom">
+        <p>@ 2025 Digital College</p>
+      </div>
+    </footer>
+  )
+}

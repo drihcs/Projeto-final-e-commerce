@@ -1,0 +1,34 @@
+.finalizar-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  background: #fff;
+}
+
+.dados-entrega,
+.resumo-compra {
+  margin-bottom: 2rem;
+}
+
+h3 {
+  margin-bottom: 0.5rem;
+}
+
+ul {
+  padding-left: 1rem;
+}
+
+button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  background: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+button:disabled {
+  background: #888;
+  cursor: not-allowed;
+}

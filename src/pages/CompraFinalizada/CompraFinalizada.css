@@ -1,0 +1,27 @@
+.compra-finalizada-container {
+  max-width: 600px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: #fdfdfd;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.acoes {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.botao {
+  padding: 0.75rem 1.5rem;
+  background: #222;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.botao.secundario {
+  background: #666;
+}

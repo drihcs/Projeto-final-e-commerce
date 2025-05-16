@@ -1,0 +1,50 @@
+.main {
+  display: flex;
+  gap: 20px;
+}
+
+.filtros {
+  width: 250px;
+  border-right: 1px solid #ccc;
+  padding-right: 20px;
+}
+
+.filtro {
+  margin-bottom: 20px;
+}
+
+.filtroEstado {
+  margin-top: 30px;
+}
+
+.produtos {
+  flex: 1;
+}
+
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.gradeProdutos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.produto {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+.desconto {
+  background-color: red;
+  color: white;
+  padding: 2px 5px;
+  font-size: 12px;
+  display: inline-block;
+  margin-bottom: 5px;
+}
