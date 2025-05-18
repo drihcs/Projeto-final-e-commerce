@@ -21,7 +21,7 @@ export default function Footer() {
         <div className="footerInfo">
           <h4>Informação</h4>
           <ul>
-            <li><a href="#">Sobre Drip Store</a></li>
+            <li><a href="#">Sobre Digital Store</a></li>
             <li><a href="#">Segurança</a></li>
             <li><a href="#">Wishlist</a></li>
             <li><a href="#">Blog</a></li>
