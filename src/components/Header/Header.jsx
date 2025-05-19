@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styles from './Header.module.css'
-import CartModal from './components/CartModal/CartModal'
+import CartModal from '../CartModal/CartModal'
 
 export default function Header() {
   // Estado para mostrar/ocultar modal do carrinho
