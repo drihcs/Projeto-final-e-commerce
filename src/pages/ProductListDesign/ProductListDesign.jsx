@@ -1,5 +1,5 @@
 import React from 'react'
-import '../ProductListDesign/ProductListDesign.css'
+import './ProductListDesign.module.css'
 
 export default function Busca() {
   const produtos = Array.from({ length: 15 }, (_, i) => ({
