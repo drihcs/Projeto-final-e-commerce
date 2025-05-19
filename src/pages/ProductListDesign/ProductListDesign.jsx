@@ -1,27 +1,19 @@
-import React, { useEffect } from 'react'
-import '..ProductListDesign/ProductListDesign.css'
+import React from 'react'
+import '../ProductListDesign/ProductListDesign.css'
 
 export default function Busca() {
-  useEffect(() => {
-    const container = document.getElementById("grade-produtos")
-
-    for (let i = 1; i <= 15; i++) {
-      const produto = document.createElement("div")
-      produto.className = "produto"
-
-      produto.innerHTML = `
-        <span class="desconto">30% OFF</span>
-        <img src="https://via.placeholder.com/180x130" alt="Tênis ${i}">
-        <h4>Tênis K-Swiss V8 - Masculino</h4>
-        <del>$200</del> <strong>$100</strong>
-      `
-
-      container.appendChild(produto)
-    }
-  }, [])
+  const produtos = Array.from({ length: 15 }, (_, i) => ({
+    id: i + 1,
+    nome: 'Tênis K-Swiss V8 - Masculino',
+    precoOriginal: 200,
+    precoComDesconto: 100,
+    imagem: './public/k-swiss-v8.png',
+    desconto: '30% OFF',
+  }))
 
   return (
     <div className="pagina-busca">
+      {/* Barra lateral de filtros */}
       <aside className="filtros">
         <h3>Filtrar por</h3>
 
@@ -56,9 +48,10 @@ export default function Busca() {
         </div>
       </aside>
 
+      {/* Grade de produtos */}
       <section className="produtos">
         <div className="top-bar">
-          <p>Resultados para “Tênis” – 389 produtos</p>
+          <p>Resultados para “Tênis” – {produtos.length} produtos</p>
           <select>
             <option>Ordenar por: mais relevantes</option>
             <option>Menor preço</option>
@@ -66,7 +59,18 @@ export default function Busca() {
           </select>
         </div>
 
-        <div className="grade-produtos" id="grade-produtos"></div>
+        <div className="grade-produtos">
+          {produtos.map(produto => (
+            <div className="produto" key={produto.id}>
+              <span className="desconto">{produto.desconto}</span>
+              <img src={produto.imagem} alt={`Imagem do ${produto.nome}`} />
+              <h4>{produto.nome}</h4>
+              <p>
+                <del>${produto.precoOriginal}</del> <strong>${produto.precoComDesconto}</strong>
+              </p>
+            </div>
+          ))}
+        </div>
       </section>
     </div>
   )
