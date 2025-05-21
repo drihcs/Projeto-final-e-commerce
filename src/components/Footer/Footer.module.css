@@ -1,7 +1,7 @@
-footer {
+.footer {
   background-color: #1c1c1c;
   color: #ffffff;
-  padding: 20px 30px; /* Diminuir o padding para reduzir a altura */
+  padding: 20px 30px;
   font-family: Arial, sans-serif;
 }
 
@@ -9,7 +9,7 @@ footer {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 30px; /* Diminuir o gap entre os itens */
+  gap: 30px;
 }
 
 .footerAbout,
@@ -24,8 +24,8 @@ footer {
 .footerInfo h4,
 .footerCategories h4,
 .footerContact h4 {
-  font-size: 18px; /* Diminuir o tamanho da fonte para economizar espaço */
-  margin-bottom: 8px; /* Reduzir o espaço entre o título e o conteúdo */
+  font-size: 18px;
+  margin-bottom: 8px;
 }
 
 .footerAbout p,
@@ -33,18 +33,18 @@ footer {
 .footerCategories a,
 .footerContact p {
   color: #cccccc;
-  font-size: 12px; /* Diminuir o tamanho da fonte para economizar espaço */
-  line-height: 1.4; /* Diminuir o espaçamento entre as linhas */
+  font-size: 12px;
+  line-height: 1.4;
 }
 
 .footerSocial {
   display: flex;
-  gap: 10px; /* Diminuir o gap entre os ícones sociais */
-  margin-top: 10px; /* Diminuir a margem superior */
+  gap: 10px;
+  margin-top: 10px;
 }
 
 .footerSocial a img {
-  width: 18px; /* Reduzir o tamanho dos ícones sociais */
+  width: 18px;
   height: 18px;
 }
 
@@ -57,14 +57,14 @@ footer {
 
 .footerInfo li,
 .footerCategories li {
-  margin-bottom: 8px; /* Diminuir o espaçamento entre os itens */
+  margin-bottom: 8px;
 }
 
 .footerInfo a,
 .footerCategories a {
   color: #cccccc;
   text-decoration: none;
-  font-size: 12px; /* Diminuir o tamanho da fonte para economizar espaço */
+  font-size: 12px;
 }
 
 .footerInfo a:hover,
@@ -74,12 +74,12 @@ footer {
 
 .footerBottom {
   text-align: center;
-  margin-top: 20px; /* Diminuir a margem superior */
-  padding-top: 10px; /* Diminuir o padding superior */
+  margin-top: 20px;
+  padding-top: 10px;
   border-top: 1px solid #333333;
 }
 
 .footerBottom p {
   color: #888888;
-  font-size: 12px; /* Reduzir o tamanho da fonte para economizar espaço */
+  font-size: 12px;
 }
