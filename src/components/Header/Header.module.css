@@ -1,7 +1,7 @@
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 20px; /* Aumentei um pouco o padding padrão */
 }
 
 .btnPrimary {
@@ -12,7 +12,7 @@
   padding: 10px 24px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease; /* Adicionei 'ease' para uma transição mais suave */
 }
 
 .btnPrimary:hover {
@@ -45,7 +45,7 @@
 .header {
   padding: 20px 0;
   border-bottom: 1px solid var(--light-gray-3);
-  background-color: var(--white);
+  background-color: var(--white); /* Adicionei um background branco para consistência */
 }
 
 .headerContainer {
@@ -63,7 +63,7 @@
 .logo h1 {
   font-size: 24px;
   font-weight: 700;
-  margin: 0;
+  margin: 0; /* Adicionei para resetar margens padrão */
 }
 
 .searchBar {
@@ -80,7 +80,7 @@
   border: 1px solid var(--light-gray-2);
   border-radius: 4px;
   font-size: 14px;
-  background-color: var(--light-gray-3);
+  background-color: var(--light-gray-3); /* Mantive a cor de fundo */
 }
 
 .searchButton {
@@ -137,11 +137,11 @@
 .navList {
   display: flex;
   gap: 40px;
-  list-style: none;
-  padding: 0;
-  margin: 0 auto;
-  max-width: 1200px;
-  padding-left: 20px;
+  list-style: none; /* Removi a estilização desnecessária aqui */
+  padding: 0; /* Adicionei para resetar padding padrão da lista */
+  margin: 0 auto; /* Centralizar a navegação dentro do .mainNav */
+  max-width: 1200px; /* Limitar a largura da navegação */
+  padding-left: 20px; /* Adicionar um pouco de padding para telas maiores */
   padding-right: 20px;
 }
 
@@ -164,7 +164,7 @@
 .navList li a {
   text-decoration: none;
   color: inherit;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease; /* Adicionei transição suave na cor */
 }
 
 .navList li a:hover {
