@@ -17,21 +17,24 @@
 
 .logo {
   display: flex;
-  gap: 5px;
   align-items: center;
+  gap: 8px;
 }
 
-.logo h1 {
+.logoIcon {
+  width: 32px;
+  height: 32px;
+}
+
+.logoText {
   font-size: 24px;
   font-weight: 700;
   margin: 0;
-  display: flex;
-  align-items: center;
-  text-decoration: none;
+  color: var(--dark-gray-2); /* cor da palavra 'Store' */
 }
 
 .highlight {
-  color: var(--primary);
+  color: var(--primary); /* cor rosa para 'Digital' */
 }
 
 .searchBar {

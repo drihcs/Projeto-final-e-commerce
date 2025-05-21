@@ -38,13 +38,12 @@ export default function Header() {
     <header className={styles.header}>
       <div className={styles.headerContainer}>
         {/* Logo */}
-        <div className={styles.logo}>
-          <Link to="../public/logoDigitalCollege.png">
-            <h1>
-              <span className={styles.highlight}>Digital</span> Store
-            </h1>
-          </Link>
-        </div>
+       <div className={styles.logo}>
+  <img src="/logo.svg" alt="Ícone da logo" className={styles.logoIcon} />
+  <h1 className={styles.logoText}>
+    <span className={styles.highlight}>Digital</span> Store
+  </h1>
+</div>
 
         {/* Search */}
         <div className={styles.searchBar}>
