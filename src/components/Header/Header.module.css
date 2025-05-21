@@ -27,17 +27,7 @@
   margin: 0;
   display: flex;
   align-items: center;
-}
-
-.logo h1::before {
-  content: "";
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  background-color: #e91e63;
-  border-radius: 6px;
-  margin-right: 8px;
-  position: relative;
+  text-decoration: none;
 }
 
 .highlight {
