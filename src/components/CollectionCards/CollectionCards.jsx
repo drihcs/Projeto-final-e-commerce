@@ -1,5 +1,5 @@
 import React from 'react'
-import './CollectionCards.module.css'
+import styles from './CollectionCards.module.css'
 
 const colecoes = [
   {
@@ -24,25 +24,21 @@ const colecoes = [
 
 export default function CollectionCards() {
   return (
-    <section className="colecoes">
+    <section className={styles.colecoes}>
       <div className="container">
         <h2 className="section-title">Coleções em destaque</h2>
-        <div className="collections-grid">
+        <div className={styles.collectionsGrid}>
           {colecoes.map(colecao => (
             <div
               key={colecao.id}
-              className="collection-card"
-              style={{
-                backgroundImage: `linear-gradient(to top, rgba(0,0,0,0.7), transparent), url(${colecao.imagem})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center'
-              }}
+              className={styles.collectionCard}
             >
-              <span className="discount-tag">{colecao.desconto}</span>
-              <div className="card-content">
+              <div className={styles.textBlock}>
+                <span className={styles.discountTag}>{colecao.desconto}</span>
                 <h3>{colecao.titulo}</h3>
-                <a className="button" href={`/colecao/${colecao.id}`}>Comprar</a>
+                <a className={styles.buyButton} href={`/colecao/${colecao.id}`}>Comprar</a>
               </div>
+              <img className={styles.productImage} src={colecao.imagem} alt={colecao.titulo} />
             </div>
           ))}
         </div>

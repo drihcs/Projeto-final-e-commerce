@@ -1,61 +1,77 @@
 .colecoes {
-  padding: 40px 20px;
+  padding: 40px 0;
 }
 
-.section-title {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.collections-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
-}
-
-.collection-card {
-  position: relative;
-  height: 300px;
-  border-radius: 12px;
-  overflow: hidden;
-  color: white;
+.collectionsGrid {
   display: flex;
-  align-items: flex-end;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.collectionCard {
+  background-color: #e7f0fc;
+  border-radius: 12px;
   padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 405px;
+  height: 250px;
+  overflow: hidden;
   transition: transform 0.3s ease;
 }
 
-.collection-card:hover {
-  transform: scale(1.03);
+.collectionCard:hover {
+  transform: translateY(-4px);
 }
 
-.discount-tag {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  background-color: red;
-  color: white;
-  padding: 4px 8px;
-  font-size: 14px;
-  border-radius: 4px;
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  max-width: 50%;
 }
 
-.card-content {
-  z-index: 2;
-}
-
-.button {
-  display: inline-block;
-  margin-top: 8px;
-  padding: 6px 12px;
-  background-color: #fff;
+.discountTag {
+  background-color: #ecff36;
   color: #000;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 20px;
+  width: fit-content;
+}
+
+h3 {
+  font-size: 22px;
+  font-weight: 800;
+  color: #222;
+  margin: 0;
+}
+
+.buyButton {
+  background-color: #fff;
+  color: #c92071;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
   text-decoration: none;
-  font-weight: bold;
-  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.buyButton:hover {
+  background-color: #fce4f1;
+}
+
+.productImage {
+  max-height: 100%;
+  max-width: 50%;
+  object-fit: contain;
 }
