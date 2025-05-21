@@ -72,29 +72,18 @@
 
 .btnPrimary {
   background-color: var(--primary);
+  color: var(--white);
   border: none;
   border-radius: 4px;
   padding: 10px 24px;
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-decoration: none;
 }
 
 .btnPrimary:hover {
   background-color: var(--tertiary);
-}
-
-/* Corrige aparência do Link como botão */
-.btnPrimary:where(a) {
-  color: var(--white);
-  text-decoration: none;
-  display: inline-block;
-  width: 100%;
-  height: 100%;
 }
 
 .cart {
@@ -104,14 +93,6 @@
   background: none;
   border: none;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cart span.material-symbols-outlined {
-  font-size: 24px;
-  color: var(--dark-gray-2);
 }
 
 .cartCount {
@@ -171,10 +152,3 @@
 .navList li a:hover {
   color: var(--primary);
 }
-
-/* Container base (se for usado) */
-/* .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-} */
