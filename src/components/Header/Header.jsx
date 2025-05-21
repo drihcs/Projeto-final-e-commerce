@@ -39,7 +39,7 @@ export default function Header() {
       <div className={styles.headerContainer}>
         {/* Logo */}
        <div className={styles.logo}>
-  <img src="/logo.svg" alt="Ícone da logo" className={styles.logoIcon} />
+  <img src="../public/logoDigitalCollege.png" alt="Ícone da logo" className={styles.logoIcon} />
   <h1 className={styles.logoText}>
     <span className={styles.highlight}>Digital</span> Store
   </h1>
