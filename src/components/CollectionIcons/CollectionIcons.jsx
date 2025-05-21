@@ -4,7 +4,7 @@ import './CollectionIcons.module.css'
 
 export default function CollectionIcons() {
   return (
-    <section className="colecoesIcones">
+    <section className="collectionIcons">
       <div className="container">
         <h2 className="section-title">Coleções em destaque</h2>
 

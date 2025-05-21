@@ -19,14 +19,14 @@
 }
 
 /* Estilo para a seção de ícones */
-.colecoesIcones {
+.collectionIcons {
   padding: 2rem;
   background-color: var(--light-gray-3);
   font-family: Arial, sans-serif;
 }
 
 /* Título da seção de ícones */
-.colecoesIcones h2 {
+.collectionIcons h2 {
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
   text-align: center;
