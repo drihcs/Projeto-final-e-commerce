@@ -1,7 +1,7 @@
 .header {
   padding: 20px 0;
   border-bottom: 1px solid var(--light-gray-3);
-  background-color: var(--white);
+  background-color: var(--white); /* Consistência visual */
 }
 
 .headerContainer {
@@ -60,13 +60,14 @@
   gap: 20px;
 }
 
-.linkText {
+/* Adição vinda do código 1 */
+.cadastro {
   color: var(--dark-gray-3);
   font-size: 14px;
   cursor: pointer;
-  text-decoration: none;
 }
 
+/* Botão primário */
 .btnPrimary {
   background-color: var(--primary);
   color: var(--white);
@@ -81,6 +82,20 @@
 
 .btnPrimary:hover {
   background-color: var(--tertiary);
+}
+
+/* Link dentro do botão */
+.btnPrimary a {
+  color: var(--white);
+  text-decoration: none;
+}
+
+/* Link padrão */
+.linkText {
+  color: var(--dark-gray-3);
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .cart {
@@ -148,4 +163,11 @@
 
 .navList li a:hover {
   color: var(--primary);
+}
+
+/* Container reutilizável */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
