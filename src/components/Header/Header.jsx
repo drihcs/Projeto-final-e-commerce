@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styles from './Header.module.css'
 import CartModal from '../CartModal/CartModal'
 
 export default function Header() {
-  // Estado para mostrar/ocultar modal do carrinho
   const [showCart, setShowCart] = useState(false)
 
-  // Estado dos itens no carrinho (exemplo estático)
   const [cartItems, setCartItems] = useState([
     {
       id: 1,
@@ -23,9 +21,17 @@ export default function Header() {
     },
   ])
 
-  // Limpar o carrinho
   const clearCart = () => {
     setCartItems([])
+  }
+
+  const [searchTerm, setSearchTerm] = useState('')
+  const navigate = useNavigate()
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && searchTerm.trim() !== '') {
+      navigate(`/busca?query=${encodeURIComponent(searchTerm.trim())}`)
+    }
   }
 
   return (
@@ -34,7 +40,6 @@ export default function Header() {
         {/* Logo */}
         <div className={styles.logo}>
           <Link to="/">
-            {/* SVG omitido para brevidade */}
             <h1>
               <span className={styles.highlight}>Digital</span> Store
             </h1>
@@ -43,12 +48,16 @@ export default function Header() {
 
         {/* Search */}
         <div className={styles.searchBar}>
-          <input placeholder="Pesquisar produto..." type="text" />
-          <Link to="/busca">
-            <button className={styles.searchButton}>
-              <span className="material-symbols-outlined">search</span>
-            </button>
-          </Link>
+          <input
+            placeholder="Pesquisar produto..."
+            type="text"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={handleKeyDown}
+          />
+          <button className={styles.searchButton} disabled>
+            <span className="material-symbols-outlined">search</span>
+          </button>
         </div>
 
         {/* Ações: Cadastro / Entrar / Carrinho */}
@@ -60,7 +69,6 @@ export default function Header() {
             Entrar
           </Link>
 
-          {/* Botão para abrir/fechar o modal do carrinho */}
           <button
             className={styles.cart}
             onClick={() => setShowCart(!showCart)}

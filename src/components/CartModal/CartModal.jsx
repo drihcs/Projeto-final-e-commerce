@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './CartModal.module.css';
 
 const CartModal = ({ cartItems, onClose, onClear }) => {
+  const navigate = useNavigate();
   const total = cartItems.reduce((acc, item) => acc + item.price, 0);
 
   return (
@@ -39,7 +41,12 @@ const CartModal = ({ cartItems, onClose, onClear }) => {
         <button className={styles['clear-btn']} onClick={onClear}>
           Esvaziar
         </button>
-        <button className={styles['checkout-btn']}>Ver Carrinho</button>
+        <button
+          className={styles['checkout-btn']}
+          onClick={() => navigate('/FinalizarCompra')}
+        >
+          Ver Carrinho
+        </button>
       </div>
     </div>
   );
