@@ -3,22 +3,22 @@ import styles from '../Footer/Footer.module.css'
 
 export default function Footer() {
   return (
-    <footer>
-      <div className="footerContainer">
-        <div className="footerAbout">
+    <footer className={styles.footer}>
+      <div className={styles.footerContainer}>
+        <div className={styles.footerAbout}>
           <h2>Digital Store</h2>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
             dolore.
           </p>
-          <div className="footerSocial">
+          <div className={styles.footerSocial}>
             <a href="#"><img src="/src/assets/facebook.svg" alt="Facebook" /></a>
             <a href="#"><img src="/src/assets/instagram.svg" alt="Instagram" /></a>
             <a href="#"><img src="/src/assets/twitter.svg" alt="Twitter" /></a>
           </div>
         </div>
 
-        <div className="footerInfo">
+        <div className={styles.footerInfo}>
           <h4>Informação</h4>
           <ul>
             <li><a href="#">Sobre Digital Store</a></li>
@@ -30,7 +30,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div className="footerCategories">
+        <div className={styles.footerCategories}>
           <h4>Categorias</h4>
           <ul>
             <li><a href="#">Camisetas</a></li>
@@ -41,7 +41,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div className="footerContact">
+        <div className={styles.footerContact}>
           <h4>Contato</h4>
           <p>
             Av. Santos Dumont, 1510 - 1 andar - Aldeota, Fortaleza - CE, 60150-161<br /><br />
@@ -50,7 +50,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="footerBottom">
+      <div className={styles.footerBottom}>
         <p>@ 2025 Digital College</p>
       </div>
     </footer>
