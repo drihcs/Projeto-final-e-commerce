@@ -52,7 +52,7 @@
   border-radius: 4px;
   font-weight: bold;
   color: orange;
-  text-shadow: 1px 1px 4px rgba(253, 252, 252, 0.6);
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
   display: inline-block;
   margin-bottom: 10px;
 }
