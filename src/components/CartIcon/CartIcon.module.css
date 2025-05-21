@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  color: transparent;
+  color: #333;
   font-size: 18px;
   user-select: none;
 }
