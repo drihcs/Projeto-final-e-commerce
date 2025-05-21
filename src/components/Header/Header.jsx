@@ -38,12 +38,12 @@ export default function Header() {
     <header className={styles.header}>
       <div className={styles.headerContainer}>
         {/* Logo */}
-       <div className={styles.logo}>
-  <img src="../public/logoDigitalCollege.png" alt="Ícone da logo" className={styles.logoIcon} />
-  <h1 className={styles.logoText}>
-    <span className={styles.highlight}>Digital</span> Store
-  </h1>
-</div>
+   <div className={styles.logo}>
+    <img src="/logoDigitalCollege.png" alt="Logo Digital Store" className={styles.logoIcon} />
+   <h1 className={styles.logoText}>
+      <span className={styles.highlight}>Digital</span> Store
+     </h1>
+    </div>
 
         {/* Search */}
         <div className={styles.searchBar}>
