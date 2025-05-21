@@ -73,6 +73,10 @@
   color: var(--light-gray);
 }
 
+.material-symbols-outlined {
+  line-height: normal !important;
+}
+
 .headerActions {
   display: flex;
   align-items: center;
