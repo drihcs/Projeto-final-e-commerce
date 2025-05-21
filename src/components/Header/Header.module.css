@@ -65,6 +65,13 @@
   cursor: pointer;
 }
 
+.searchButton:disabled {
+  background: none;
+  opacity: 1;
+  cursor: not-allowed;
+  color: var(--light-gray);
+}
+
 .headerActions {
   display: flex;
   align-items: center;
