@@ -39,7 +39,7 @@ export default function Header() {
       <div className={styles.headerContainer}>
         {/* Logo */}
         <div className={styles.logo}>
-          <Link to="/">
+          <Link to="../public/logoDigitalCollege.png">
             <h1>
               <span className={styles.highlight}>Digital</span> Store
             </h1>
