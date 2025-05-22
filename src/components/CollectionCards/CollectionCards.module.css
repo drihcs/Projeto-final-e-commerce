@@ -1,41 +1,40 @@
-.colecoes {
-  padding: 40px 0;
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.collectionsGrid {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 24px;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 20px;
+.sectionTitle {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--dark-gray);
+}
+
+.collectionGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
 }
 
 .collectionCard {
-  background-color: #e7f0fc;
-  border-radius: 12px;
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 405px;
   height: 250px;
+  width: 100%;
+  border-radius: 8px;
   overflow: hidden;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  color: var(--white);
+  display: flex;
+  align-items: flex-end;
+  background-color: #d8e3f2;
   transition: transform 0.3s ease;
 }
 
 .collectionCard:hover {
   transform: translateY(-4px);
-}
-
-.textBlock {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 12px;
-  flex: 1;
-  min-width: 0;
 }
 
 .discountTag {
@@ -45,14 +44,8 @@
   font-weight: 600;
   padding: 6px 12px;
   border-radius: 20px;
-  width: fit-content;
-}
-
-h3 {
-  font-size: 22px;
-  font-weight: 800;
-  color: #222;
-  margin: 0;
+  display: inline-block;
+  margin-bottom: 12px;
 }
 
 .buyButton {
@@ -63,9 +56,9 @@ h3 {
   border-radius: 8px;
   font-weight: 600;
   font-size: 14px;
-  cursor: pointer;
-  text-align: center;
   text-decoration: none;
+  display: inline-block;
+  margin-top: 12px;
   transition: background-color 0.2s ease;
 }
 
@@ -73,9 +66,10 @@ h3 {
   background-color: #fce4f1;
 }
 
-.productImage {
-  height: 160px;
-  width: auto;
-  object-fit: contain;
-  flex-shrink: 0;
+h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  color: #fff;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
 }

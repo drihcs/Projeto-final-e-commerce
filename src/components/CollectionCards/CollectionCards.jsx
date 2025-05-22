@@ -24,21 +24,23 @@ const colecoes = [
 
 export default function CollectionCards() {
   return (
-    <section className={styles.colecoes}>
-      <div className="container">
-        <h2 className="section-title">Coleções em destaque</h2>
-        <div className={styles.collectionsGrid}>
+    <section>
+      <div className={styles.container}>
+        <h2 className={styles.sectionTitle}>Coleções em destaque</h2>
+        <div className={styles.collectionGrid}>
           {colecoes.map(colecao => (
             <div
               key={colecao.id}
               className={styles.collectionCard}
+              style={{
+                backgroundImage: `url(${colecao.imagem})`
+              }}
             >
-              <div className={styles.textBlock}>
+              <div style={{ padding: '20px' }}>
                 <span className={styles.discountTag}>{colecao.desconto}</span>
                 <h3>{colecao.titulo}</h3>
                 <a className={styles.buyButton} href={`/colecao/${colecao.id}`}>Comprar</a>
               </div>
-              <img className={styles.productImage} src={colecao.imagem} alt={colecao.titulo} />
             </div>
           ))}
         </div>
