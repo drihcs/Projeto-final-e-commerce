@@ -31,25 +31,32 @@
 }
 
 .iconImage {
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   padding: 12px;
   background-color: #ffffff;
   border-radius: 50%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
   margin: 0 auto 12px;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  transition: box-shadow 0.3s ease, transform 0.3s ease, filter 0.3s ease;
   object-fit: contain;
 }
 
-/* Efeito de hover apenas com sombra suave */
-.iconItem:hover .iconImage,
+/* Hover rosa suave e filtro rosa para o ícone */
+.iconItem:hover .iconImage {
+  box-shadow: 0 4px 12px rgba(201, 32, 113, 0.3);
+  filter: brightness(0) saturate(100%) invert(16%) sepia(63%) saturate(2671%) hue-rotate(312deg) brightness(91%) contrast(91%);
+  transform: scale(1.05);
+}
+
 .iconItem.active .iconImage {
-  box-shadow: 0 4px 12px rgba(201, 32, 113, 0.2);
+  box-shadow: 0 4px 12px rgba(201, 32, 113, 0.3);
+  filter: brightness(0) saturate(100%) invert(16%) sepia(63%) saturate(2671%) hue-rotate(312deg) brightness(91%) contrast(91%);
   transform: scale(1.05);
 }
 
 .categoryName {
   font-size: 0.95rem;
   font-weight: 600;
+  color: #333;
 }
