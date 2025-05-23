@@ -45,7 +45,7 @@
 
 .iconItem:hover .iconCircle,
 .iconItem.active .iconCircle {
-  box-shadow: 0 4px 16px rgba(201, 32, 113, 0.3);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 .iconCircle img {
