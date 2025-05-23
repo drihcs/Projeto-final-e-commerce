@@ -10,23 +10,23 @@ export default function CollectionIcons() {
 
         <div className={styles.iconGrid}>
           <Link to="/categoria/camisetas" className={styles.iconItem}>
-            <i className="ph ph-t-shirt"></i>
+          <img src="./src/assets/tshirt.svg" alt="t-shirt" />
             <span className={styles.categoryName}>Camisetas</span>
           </Link>
           <Link to="/categoria/calcas" className={styles.iconItem}>
-            <i className="ph ph-pants"></i>
+            <img src="./src/assets/pants.svg" alt="pants" />
             <span className={styles.categoryName}>Calças</span>
           </Link>
           <Link to="/categoria/bones" className={styles.iconItem}>
-            <i className="ph ph-baseball-cap"></i>
+            <img src="./src/assets/cap.svg" alt="cap" />
             <span className={styles.categoryName}>Bonés</span>
           </Link>
           <Link to="/categoria/headphones" className={styles.iconItem}>
-            <i className="ph ph-headphones"></i>
+          <img src="./src/assets/headphone.svg" alt="headphone" />
             <span className={styles.categoryName}>Headphones</span>
           </Link>
           <Link to="/categoria/tenis" className={styles.iconItem}>
-            <i className="ph ph-sneaker"></i>
+          <img src="./src/assets/sneaker.svg" alt="sneaker" />
             <span className={styles.categoryName}>Tênis</span>
           </Link>
         </div>
