@@ -26,11 +26,6 @@
   transition: transform 0.3s ease;
 }
 
-.iconItem img {
-  padding: 8px;
-}
-
-
 .iconItem:hover {
   transform: translateY(-4px);
 }
@@ -45,6 +40,10 @@
   margin: 0 auto 12px;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
   object-fit: contain;
+}
+
+.iconImage img {
+  padding: 8px;
 }
 
 /* Efeito de hover apenas com sombra suave */
