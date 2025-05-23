@@ -1,56 +1,58 @@
 .collectionIcons {
-  padding: 2rem;
-  background-color: var(--light-gray-3);
+  padding: 3rem 1rem;
+  background-color: #f9f8fc;
   font-family: Arial, sans-serif;
 }
 
-.collectionIcons h2 {
+.sectionTitle {
   font-size: 1.8rem;
-  margin-bottom: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
   text-align: center;
-  color: var(--dark-gray);
+  color: #333;
 }
 
 .iconGrid {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: 1.5rem;
+  flex-wrap: wrap;
+  gap: 40px;
 }
 
 .iconItem {
-  text-decoration: none;
-  color: inherit;
   text-align: center;
+  text-decoration: none;
+  color: #444;
   transition: transform 0.3s ease;
-  width: 100px;
 }
 
 .iconItem:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
 }
 
 .iconItem i {
-  width: 60px;
-  height: 60px;
-  margin: 0 auto 0.5rem;
+  width: 96px;
+  height: 96px;
+  background-color: #fff;
   border-radius: 50%;
-  background-color: var(--gray-light);
+  font-size: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32px;
-  color: var(--blue-dark);
-  transition: background-color 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  margin: 0 auto 12px;
+  color: var(--light-gray); /* cinza por padrão */
+  transition: color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.iconItem:hover i {
-  background-color: var(--blue-light);
+/* Ícone ativo ou hover com destaque */
+.iconItem:hover i,
+.iconItem.active i {
+  color: var(--primary);
+  box-shadow: 0 4px 12px rgba(201, 32, 113, 0.2);
 }
 
-.category-name {
-  font-size: 0.9rem;
-  font-weight: 500;
-  display: block;
-  margin-top: 0.25rem;
+.categoryName {
+  font-size: 0.95rem;
+  font-weight: 600;
 }
