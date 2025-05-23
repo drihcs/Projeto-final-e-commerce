@@ -26,6 +26,11 @@
   transition: transform 0.3s ease;
 }
 
+.iconItem img {
+  padding: 8px;
+}
+
+
 .iconItem:hover {
   transform: translateY(-4px);
 }
