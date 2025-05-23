@@ -34,8 +34,8 @@
 }
 
 .iconImage {
-  width: 72px;
-  height: 72px;
+  width: 64px;
+  height: 64px;
   padding: 10px;
   background-color: #ffffff;
   border-radius: 50%;
@@ -47,8 +47,8 @@
 
 .iconItem:hover .iconImage,
 .iconItem.active .iconImage {
-  box-shadow: 0 6px 16px rgba(201, 32, 113, 0.2);
-  transform: scale(1.08);
+  box-shadow: 0 0 0 8px rgba(201, 32, 113, 0.1);
+  transform: scale(1.05);
 }
 
 .categoryName {
