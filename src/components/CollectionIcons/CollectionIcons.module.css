@@ -1,31 +1,9 @@
-/* Definição das variáveis */
-:root {
-  --primary: #C92071;
-  --secondary: #B5B6F2;
-  --tertiary: #991956;
-  --error: #EE4266;
-  --success: #52CA76;
-  --warning: #F6AA1C;
-  --dark-gray: #1F1F1F;
-  --dark-gray-2: #474747;
-  --dark-gray-3: #666666;
-  --light-gray: #8F8F8F;
-  --light-gray-2: #CCCCCC;
-  --light-gray-3: #F5F5F5;
-  --white: #FFFFFF;
-  --blue-dark: #1e40af;
-  --blue-light: #c7d2fe;
-  --gray-light: #e6e6e6;
-}
-
-/* Estilo para a seção de ícones */
 .collectionIcons {
   padding: 2rem;
   background-color: var(--light-gray-3);
   font-family: Arial, sans-serif;
 }
 
-/* Título da seção de ícones */
 .collectionIcons h2 {
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
@@ -33,7 +11,6 @@
   color: var(--dark-gray);
 }
 
-/* Grid de ícones */
 .iconGrid {
   display: flex;
   flex-wrap: wrap;
@@ -41,8 +18,7 @@
   gap: 1.5rem;
 }
 
-/* Link de cada ícone */
-.iconGrid a {
+.iconItem {
   text-decoration: none;
   color: inherit;
   text-align: center;
@@ -50,13 +26,11 @@
   width: 100px;
 }
 
-/* Efeito de hover no link */
-.iconGrid a:hover {
+.iconItem:hover {
   transform: translateY(-5px);
 }
 
-/* Estilo do ícone */
-.iconGrid .icon {
+.iconItem .material-symbols-outlined {
   width: 60px;
   height: 60px;
   margin: 0 auto 0.5rem;
@@ -65,18 +39,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  color: var(--blue-dark); /* Cor azul escuro */
+  font-size: 32px;
+  color: var(--blue-dark);
   transition: background-color 0.3s;
 }
 
-/* Efeito de hover no ícone */
-.iconGrid a:hover .icon {
-  background-color: var(--blue-light); /* Cor azul claro ao hover */
+.iconItem:hover .material-symbols-outlined {
+  background-color: var(--blue-light);
 }
 
-/* Estilo do texto abaixo do ícone */
-.iconGrid span {
+.category-name {
   font-size: 0.9rem;
   font-weight: 500;
   display: block;
