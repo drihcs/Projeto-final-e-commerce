@@ -16,27 +16,37 @@ export default function CollectionIcons() {
 
         <div className={styles.iconGrid}>
           <Link to="/categoria/camisetas" className={`${styles.iconItem} ${styles.active}`}>
-            <img src={tshirt} alt="Camisetas" className={styles.iconImage} />
+            <div className={styles.iconCircle}>
+              <img src={tshirt} alt="Camisetas" />
+            </div>
             <span className={styles.categoryName}>Camisetas</span>
           </Link>
 
           <Link to="/categoria/calcas" className={styles.iconItem}>
-            <img src={pants} alt="Calças" className={styles.iconImage} />
+            <div className={styles.iconCircle}>
+              <img src={pants} alt="Calças" />
+            </div>
             <span className={styles.categoryName}>Calças</span>
           </Link>
 
           <Link to="/categoria/bones" className={styles.iconItem}>
-            <img src={cap} alt="Bonés" className={styles.iconImage} />
+            <div className={styles.iconCircle}>
+              <img src={cap} alt="Bonés" />
+            </div>
             <span className={styles.categoryName}>Bonés</span>
           </Link>
 
           <Link to="/categoria/headphones" className={styles.iconItem}>
-            <img src={headphone} alt="Headphones" className={styles.iconImage} />
+            <div className={styles.iconCircle}>
+              <img src={headphone} alt="Headphones" />
+            </div>
             <span className={styles.categoryName}>Headphones</span>
           </Link>
 
           <Link to="/categoria/tenis" className={styles.iconItem}>
-            <img src={sneaker} alt="Tênis" className={styles.iconImage} />
+            <div className={styles.iconCircle}>
+              <img src={sneaker} alt="Tênis" />
+            </div>
             <span className={styles.categoryName}>Tênis</span>
           </Link>
         </div>
