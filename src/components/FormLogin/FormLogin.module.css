@@ -1,0 +1,198 @@
+.mainContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 40px;
+    /* Removido margin-left: 500px; para melhor centralização */
+    /* Removido width: 583px; para permitir que o flex controle */
+    /* Removido margin-bottom: 200px; */
+    background: var(--secondary);
+    background: linear-gradient(182deg, rgba(181, 182, 242, 1) 0%, rgba(239, 239, 255, 1) 100%);
+    min-height: 100vh; /* Garante que o container ocupe a altura da tela */
+
+  }
+  
+  .loginCard {
+    background-color: var(--white);
+    width: 100%;
+    max-width: 480px;
+    border-radius: 4px;
+    padding: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .loginTitle {
+    color: var(--dark-gray);
+    margin-bottom: 8px;
+    font-size: 32px;
+    font-weight: 700;
+  }
+  
+  .newClientText {
+    color: var(--dark-gray-2);
+    margin-bottom: 32px;
+    font-size: 14px;
+  }
+  
+  .registerLink {
+    color: var(--dark-gray-2);
+    text-decoration: underline;
+    cursor: pointer; /* Adicionado para indicar clicabilidade */
+  }
+  
+  .loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .inputGroup {
+    margin-bottom: 16px;
+  }
+  
+  .inputLabel {
+    display: block;
+    color: var(--dark-gray-2);
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .inputField {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: var(--light-gray-3);
+    outline: none;
+    box-sizing: border-box; /* Garante que padding não aumente o tamanho total */
+  }
+  
+  .inputField:focus {
+    box-shadow: 0 0 0 2px rgba(201, 32, 113, 0.2);
+  }
+  
+  .forgotPassword {
+    display: block;
+    color: var(--dark-gray-2);
+    font-size: 14px;
+    margin-bottom: 24px;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer; /* Adicionado para indicar clicabilidade */
+  }
+  
+  .loginButton {
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-bottom: 24px;
+  }
+  
+  .loginButton:hover {
+    background-color: var(--tertiary);
+  }
+
+  .loginButton:disabled {
+    background-color: #ccc; /* Estilo para botão desabilitado */
+    cursor: not-allowed;
+  }
+  
+  .socialLoginContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 16px;
+  }
+  
+  .socialTextContainer {
+    margin-bottom: 16px;
+  }
+  
+  .socialText {
+    color: var(--dark-gray-2);
+    font-size: 14px;
+  }
+  
+  .socialIconsContainer {
+    display: flex;
+    gap: 16px;
+  }
+  
+  .googleIcon,
+  .facebookIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--light-gray-3);
+    text-decoration: none;
+    cursor: pointer; /* Adicionado para indicar clicabilidade */
+  }
+  
+  .facebookIcon img{
+      width: 25px;
+      height: 25px;
+  }
+    
+  .socialIconImage {
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* Ajustes para o container de imagem, tornando-o opcional ou adaptável */
+  .imageContainer {
+    display: none; /* Oculto por padrão, pode ser reativado se necessário */
+    /* Ou ajustar para layout responsivo */
+    /* 
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    flex: 1; 
+    position: relative; 
+    */
+  }
+  
+  /* Estilos das imagens, se .imageContainer for reativado */
+  .shoeImage1 {
+    position: absolute;
+    width: 250px;
+    height: auto;
+    top: 70px;
+    transform: rotate(8deg);
+    z-index: 2;
+  }
+  
+  .shoeImage2 {
+    position: absolute;
+    width: 280px;
+    height: auto;
+    transform: rotate(10deg);
+    z-index: 2;
+    top: 250px;
+    margin-left: 110px;
+  }
+
+  .errorMessage {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+  }
+
