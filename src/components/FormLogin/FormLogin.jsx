@@ -1,8 +1,11 @@
-// src/components/FormLogin.jsx
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../contexts/AuthContext' 
-import '../FormLogin/FormLogin.module.css'
+import { useAuth } from '../../contexts/AuthContext'
+import styles from './FormLogin.module.css'
+
+import facebookIcon from '../../assets/facebook.svg'
+import shoe1 from '../../assets/pexels-melvin-buezo-2529148 1.png'
+import shoe2 from '../../assets/pexels-melvin-buezo-2529148 2.png'
 
 export default function FormLogin() {
   const { login } = useAuth()
@@ -23,7 +26,7 @@ export default function FormLogin() {
       alert('Login realizado com sucesso!')
       navigate('/usuario')
     } catch (err) {
-      setErro(err)
+      setErro('Email ou senha inválidos')
     } finally {
       setCarregando(false)
     }
@@ -34,13 +37,13 @@ export default function FormLogin() {
       <div className={styles.loginCard}>
         <h1 className={styles.loginTitle}>Acesse sua conta</h1>
         <p className={styles.newClientText}>
-          Novo cliente? Então registre-se{" "}
+          Novo cliente? Então registre-se{' '}
           <a href="#" className={styles.registerLink}>
             aqui
           </a>
           .
         </p>
-        <form className={styles.loginForm} onSubmit={(e) => e.preventDefault()}> {/* Adicionado preventDefault básico */}
+        <form className={styles.loginForm} onSubmit={handleSubmit}>
           <div className={styles.inputGroup}>
             <label htmlFor="login" className={styles.inputLabel}>
               Login *
@@ -51,6 +54,8 @@ export default function FormLogin() {
               placeholder="Insira seu login ou email"
               required
               className={styles.inputField}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className={styles.inputGroup}>
@@ -63,13 +68,16 @@ export default function FormLogin() {
               placeholder="Insira sua senha"
               required
               className={styles.inputField}
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
             />
           </div>
           <a href="#" className={styles.forgotPassword}>
             Esqueci minha senha
           </a>
-          <button type="submit" className={styles.loginButton}>
-            Acessar Conta
+          {erro && <p className={styles.errorText}>{erro}</p>}
+          <button type="submit" className={styles.loginButton} disabled={carregando}>
+            {carregando ? 'Carregando...' : 'Acessar Conta'}
           </button>
         </form>
         <div className={styles.socialLoginContainer}>
@@ -78,7 +86,7 @@ export default function FormLogin() {
           </div>
           <div className={styles.socialIconsContainer}>
             <a href="#" className={styles.googleIcon}>
-              {/* SVG do Google mantido como estava */}
+              {/* Ícone Google SVG */}
               <svg
                 width={24}
                 height={24}
@@ -111,11 +119,8 @@ export default function FormLogin() {
               </svg>
             </a>
             <a href="#" className={styles.facebookIcon}>
-              {/* Assumindo que 'imgs/facebook.svg' será movido para 'src/assets/facebook.svg' */}
-              {/* import facebookIcon from '../../assets/facebook.svg'; */}
-              {/* <img src={facebookIcon} alt="Facebook" className={styles.socialIconImage} /> */}
               <img
-                src="/assets/facebook.svg" /* Caminho ajustado - requer configuração ou importação */
+                src={facebookIcon}
                 alt="Facebook"
                 className={styles.socialIconImage}
               />
@@ -124,20 +129,17 @@ export default function FormLogin() {
         </div>
       </div>
       <div className={styles.imageContainer}>
-        {/* Assumindo que as imagens estarão em 'src/assets/' */}
-        {/* import shoe1 from '../../assets/pexels-melvin-buezo-2529148 1.png'; */}
-        {/* import shoe2 from '../../assets/pexels-melvin-buezo-2529148 2.png'; */}
         <img
-          src="/assets/pexels-melvin-buezo-2529148 1.png" /* Caminho ajustado */
+          src={shoe1}
           alt="Tênis flutuando"
           className={styles.shoeImage1}
         />
         <img
-          src="/assets/pexels-melvin-buezo-2529148 2.png" /* Caminho ajustado */
+          src={shoe2}
           alt="Tênis flutuando"
           className={styles.shoeImage2}
         />
       </div>
     </main>
-  );
+  )
 }
