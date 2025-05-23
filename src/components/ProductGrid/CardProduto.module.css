@@ -33,10 +33,6 @@
   font-weight: 600;
 }
 
-.card p::before {
-  content: "R$ ";
-}
-
 .botao {
   display: none;
 }
