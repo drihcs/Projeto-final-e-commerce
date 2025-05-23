@@ -4,7 +4,7 @@
   font-family: Arial, sans-serif;
 }
 
-.collectionIcons h2 {
+.sectionTitle {
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
   text-align: center;
@@ -30,7 +30,7 @@
   transform: translateY(-5px);
 }
 
-.iconItem .material-symbols-outlined {
+.iconItem i {
   width: 60px;
   height: 60px;
   margin: 0 auto 0.5rem;
@@ -44,11 +44,11 @@
   transition: background-color 0.3s;
 }
 
-.iconItem:hover .material-symbols-outlined {
+.iconItem:hover i {
   background-color: var(--blue-light);
 }
 
-.category-name {
+.categoryName {
   font-size: 0.9rem;
   font-weight: 500;
   display: block;
