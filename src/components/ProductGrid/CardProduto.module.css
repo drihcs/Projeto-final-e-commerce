@@ -5,79 +5,84 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  padding: 20px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  padding: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .imagem {
   width: 100%;
-  height: 200px;
+  height: 220px;
   object-fit: contain;
-  background-color: #f9f9f9;
-  margin-bottom: 15px;
+  background-color: white;
+  padding: 20px;
 }
 
 .card h3 {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
-  margin: 5px 0;
+  margin: 0;
+  padding: 0 15px 5px;
   color: #333;
 }
 
 .card p {
-  position: relative;
   font-size: 16px;
-  margin: 5px 0 10px;
+  margin: 0;
+  padding: 0 15px 5px;
   color: #000;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .card p::before {
   content: "R$ ";
 }
 
-/* Adiciona o preço original riscado */
-.card p::after {
-  content: "$200";
-  position: absolute;
-  left: 0;
-  top: -20px;
-  color: #9e9e9e;
-  font-weight: 400;
-  text-decoration: line-through;
-  font-size: 14px;
-}
-
 .botao {
-  background-color: transparent;
-  color: #333;
-  text-decoration: none;
-  padding: 8px 0;
-  font-size: 14px;
-  font-weight: 500;
-  display: none; /* Oculta o botão já que não aparece na imagem */
+  display: none;
 }
 
-/* Estilo para a categoria "Tênis" */
+/* Estilo para a categoria */
 .card::after {
   content: "Tênis";
   display: block;
   color: #9e9e9e;
   font-size: 14px;
-  margin-bottom: 5px;
+  padding: 0 15px 15px;
+}
+
+/* Estilo para o preço original */
+.card h3::after {
+  content: "$200";
+  display: block;
+  color: #9e9e9e;
+  font-size: 14px;
+  font-weight: normal;
+  text-decoration: line-through;
+  margin-top: 5px;
 }
 
 /* Estilo para a etiqueta de desconto */
 .card::before {
   content: "30% OFF";
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 10px;
+  left: 10px;
   background-color: #e8ff54;
   color: #333;
-  padding: 6px 12px;
+  padding: 5px 10px;
   border-radius: 20px;
   font-size: 12px;
   font-weight: 600;
   z-index: 1;
+}
+
+/* Adiciona o nome do produto no topo */
+.imagem::before {
+  content: "V8 - Masculino";
+  position: absolute;
+  top: 10px;
+  left: 110px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
 }
