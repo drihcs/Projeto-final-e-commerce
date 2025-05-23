@@ -1,3 +1,20 @@
+:root {
+  --primary: #C92071;
+  --secondary: #B5B6F2;
+  --tertiary: #991956;
+  --error: #EE4266;
+  --success: #52CA76;
+  --warning: #F6AA1C;
+  --dark-gray: #1F1F1F;
+  --dark-gray-2: #474747;
+  --dark-gray-3: #666666;
+  --light-gray: #8F8F8F;
+  --light-gray-2: #CCCCCC;
+  --light-gray-3: #F5F5F5;
+  --white: #FFFFFF;
+  --gray-light: #e6e6e6;
+}
+
 .collectionIcons {
   padding: 3rem 1rem;
   background-color: #f9f8fc;
@@ -30,25 +47,21 @@
   transform: translateY(-4px);
 }
 
-.iconItem i {
+.iconImage {
   width: 96px;
   height: 96px;
+  padding: 18px;
   background-color: #fff;
   border-radius: 50%;
-  font-size: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
   margin: 0 auto 12px;
-  color: var(--light-gray); /* cinza por padrão */
-  transition: color 0.3s ease, box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease, filter 0.3s ease;
 }
 
-/* Ícone ativo ou hover com destaque */
-.iconItem:hover i,
-.iconItem.active i {
-  color: var(--primary);
+/* Deixa o ícone colorido (tom magenta) ao hover ou se for ativo */
+.iconItem:hover .iconImage,
+.iconItem.active .iconImage {
+  filter: brightness(0) saturate(100%) invert(26%) sepia(97%) saturate(1892%) hue-rotate(309deg) brightness(90%) contrast(90%);
   box-shadow: 0 4px 12px rgba(201, 32, 113, 0.2);
 }
 
