@@ -15,7 +15,7 @@ export default function CollectionIcons() {
         <h2 className={styles.sectionTitle}>Coleções em destaque</h2>
 
         <div className={styles.iconGrid}>
-          <Link to="/categoria/camisetas" className={`${styles.iconItem} ${styles.active}`}>
+          <Link to="/categoria/camisetas" className={styles.iconItem}>
             <div className={styles.iconCircle}>
               <img src={tshirt} alt="Camisetas" />
             </div>
