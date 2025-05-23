@@ -26,7 +26,7 @@ export default function CollectionIcons() {
             <span className={styles.categoryName}>Headphones</span>
           </Link>
           <Link to="/categoria/tenis" className={styles.iconItem}>
-            <i className="ph ph-sneaker-move"></i>
+            <i className="ph ph-sneaker"></i>
             <span className={styles.categoryName}>Tênis</span>
           </Link>
         </div>
