@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import './CollectionIcons.module.css'
+import styles from './CollectionIcons.module.css'
 
 export default function CollectionIcons() {
   return (
