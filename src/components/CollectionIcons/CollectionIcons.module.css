@@ -26,6 +26,10 @@
   width: 100px;
 }
 
+.iconItem:hover {
+  transform: translateY(-5px);
+}
+
 .iconItem i {
   width: 60px;
   height: 60px;
