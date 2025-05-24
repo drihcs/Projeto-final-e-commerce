@@ -1,31 +1,34 @@
-import React from 'react'
-import styles from '../SpecialOffer/SpecialOffer.module.css'
+import styles from "../SpecialOffer/SpecialOffer.module.css"
 
 export default function SpecialOffer() {
   return (
-    <section className={styles.SpecialOffer}>
-      <div className={styles['offer-container']}>
-
-        <div className={styles['offer-image']}>
-          <img
-            alt="Air Jordan edição de colecionador"
-            loading="lazy"
-            decoding="async"
-            src="/Laye.png"
-          />
+    <section className={styles.specialOfferSection}>
+      <div className={styles.specialOfferContainer}>
+        {/* Círculo gradiente decorativo */}
+        <div className={styles.decorativeCircle}>
+          <img src="/Ellipse.png" alt="" />
         </div>
 
-        <div className={styles['offer-content']}>
-          <span className={styles['offer-badge']}>Oferta especial</span>
-          <h2 className={styles['offer-title']}>Air Jordan edição de colecionador</h2>
-          <p className={styles['offer-description']}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea.
-          </p>
-          <a className={styles.button} href="/oferta">Ver oferta</a>
+        {/* Imagem do produto */}
+        <div className={styles.productImageSection}>
+          <img src="/Laye.png" alt="Air Jordan edição de colecionador" className={styles.productImg} />
         </div>
 
+        {/* Conteúdo da oferta */}
+        <div className={styles.offerContentSection}>
+          <div className={styles.offerCard}>
+            <span className={styles.specialBadge}>Oferta especial</span>
+            <h2 className={styles.specialTitle}>Air Jordan edição de colecionador</h2>
+            <p className={styles.specialDescription}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+              dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+              ea.
+            </p>
+            <a className={styles.specialButton} href="/oferta">
+              Ver Oferta
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   )
