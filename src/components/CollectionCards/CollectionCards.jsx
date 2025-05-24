@@ -1,3 +1,27 @@
+import React from 'react'
+import styles from './CollectionCards.module.css'
+
+const colecoes = [
+  {
+    id: 'supreme',
+    titulo: 'Novo drop Supreme',
+    imagemProduto: '/tshirt-card.png',
+    desconto: '30% OFF'
+  },
+  {
+    id: 'adidas',
+    titulo: 'Coleção Adidas',
+    imagemProduto: '/sneaker-card.png',
+    desconto: '30% OFF'
+  },
+  {
+    id: 'beats',
+    titulo: 'Novo Beats Bass',
+    imagemProduto: '/headphone-card.png',
+    desconto: '30% OFF'
+  }
+]
+
 export default function CollectionCards() {
   return (
     <section>
@@ -7,30 +31,16 @@ export default function CollectionCards() {
           {colecoes.map(colecao => (
             <div key={colecao.id} className={styles.collectionCard}>
               <div className={styles.cardBackground}></div>
-
-              {/* Mover a tag de desconto para fora do cardContent */}
-              <span className={styles.discountTag}>{colecao.desconto}</span>
-
               <div className={styles.cardContent}>
-                {/* Título com quebra manual */}
-                <h3 className={styles.cardTitle}>
-                  {colecao.titulo.includes(' ') ? (
-                    <>
-                      {colecao.titulo.split(' ')[0]} <br /> {colecao.titulo.split(' ').slice(1).join(' ')}
-                    </>
-                  ) : (
-                    colecao.titulo
-                  )}
-                </h3>
-
+                <span className={styles.discountTag}>{colecao.desconto}</span>
+                <h3 className={styles.cardTitle}>{colecao.titulo}</h3>
                 <a className={styles.buyButton} href={`/colecao/${colecao.id}`}>
                   Comprar
                 </a>
               </div>
-
               <div className={styles.productImageContainer}>
-                <img
-                  src={colecao.imagemProduto || "/placeholder.svg"}
+                <img 
+                  src={colecao.imagemProduto || "/placeholder.svg"} 
                   alt={colecao.titulo}
                   className={styles.productImage}
                 />
