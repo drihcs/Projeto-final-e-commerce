@@ -78,10 +78,10 @@
 
 .productImageContainer {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
-  width: 140px;
-  height: 140px;
+  bottom: 0;
+  right: 0;
+  width: 160px; /* você pode aumentar ou reduzir aqui */
+  height: 160px;
   z-index: 1;
 }
 
