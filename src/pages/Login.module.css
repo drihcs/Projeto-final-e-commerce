@@ -162,7 +162,7 @@
      - rotate: gira a imagem
      - scale: aumenta ou diminui
   */
-  translate(-65%) translateY(-55%) rotate(-7deg) scale(2);
+  transform: translate(-65%) translateY(-55%) rotate(-7deg) scale(2);
   /* Exemplo: 15% para a direita do centro do container, 10% para baixo, leve rotação e um pouco maior */
 }
 
