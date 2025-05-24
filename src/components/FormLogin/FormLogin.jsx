@@ -21,7 +21,7 @@ export default function FormLogin() {
     try {
       await login(email, senha)
       alert('Login realizado com sucesso!')
-      navigate('/usuario')
+      navigate('/')
     } catch (err) {
       setErro(err)
     } finally {
