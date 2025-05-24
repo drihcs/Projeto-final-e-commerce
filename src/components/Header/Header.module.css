@@ -2,8 +2,7 @@
   padding: 20px 0;
   border-bottom: 1px solid var(--light-gray-3);
   background-color: var(--white);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .headerContainer {
@@ -13,12 +12,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .logo {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-shrink: 0;
 }
 
 .logoIcon {
@@ -30,11 +32,11 @@
   font-size: 24px;
   font-weight: 700;
   margin: 0;
-  color: var(--dark-gray-2); /* cor da palavra 'Store' */
+  color: var(--dark-gray-2);
 }
 
 .highlight {
-  color: var(--primary); /* cor rosa para 'Digital' */
+  color: var(--primary);
 }
 
 .searchBar {
@@ -43,6 +45,7 @@
   flex: 1;
   max-width: 400px;
   margin: 0 20px;
+  min-width: 200px;
 }
 
 .searchBar input {
@@ -77,6 +80,7 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  flex-shrink: 0;
 }
 
 .linkText {
@@ -84,6 +88,7 @@
   font-size: 14px;
   cursor: pointer;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .btnPrimary {
@@ -96,6 +101,7 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .btnPrimary:hover {
@@ -171,4 +177,157 @@
 
 .navList li a:hover {
   color: var(--primary);
+}
+
+/* Menu hambúrguer (oculto por padrão) */
+.menuToggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  color: var(--dark-gray-2);
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .headerContainer {
+    padding: 15px 15px;
+  }
+
+  .searchBar {
+    margin: 0 15px;
+    max-width: 300px;
+  }
+
+  .navList {
+    gap: 30px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .headerContainer {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .searchBar {
+    order: 3;
+    flex-basis: 100%;
+    margin: 10px 0 0 0;
+    max-width: none;
+  }
+
+  .headerActions {
+    gap: 15px;
+  }
+
+  .linkText {
+    font-size: 13px;
+  }
+
+  .btnPrimary {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .navList {
+    gap: 25px;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 5px;
+  }
+
+  .navList::-webkit-scrollbar {
+    height: 3px;
+  }
+
+  .navList::-webkit-scrollbar-track {
+    background: var(--light-gray-3);
+  }
+
+  .navList::-webkit-scrollbar-thumb {
+    background: var(--light-gray);
+    border-radius: 3px;
+  }
+}
+
+@media (max-width: 576px) {
+  .header {
+    padding: 15px 0;
+  }
+
+  .headerContainer {
+    padding: 10px 15px;
+  }
+
+  .logo {
+    gap: 6px;
+  }
+
+  .logoIcon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .logoText {
+    font-size: 20px;
+  }
+
+  .headerActions {
+    gap: 10px;
+  }
+
+  .linkText {
+    display: none; /* Oculta "Cadastre-se" em telas muito pequenas */
+  }
+
+  .btnPrimary {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+
+  .navList {
+    gap: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .navList li {
+    padding: 12px 0;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .headerContainer {
+    padding: 10px 10px;
+  }
+
+  .logoText {
+    font-size: 18px;
+  }
+
+  .searchBar input {
+    padding: 8px 32px 8px 12px;
+    font-size: 13px;
+  }
+
+  .navList {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+/* Menu mobile alternativo (se necessário implementar menu hambúrguer completo) */
+@media (max-width: 576px) {
+  .menuToggle {
+    display: block;
+  }
+
+  .mainNav.mobileHidden {
+    display: none;
+  }
 }

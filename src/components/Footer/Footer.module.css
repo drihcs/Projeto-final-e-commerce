@@ -1,7 +1,7 @@
-footer {
+.footer {
   background-color: #1c1c1c;
   color: #ffffff;
-  padding: 20px 30px;
+  padding: 40px 30px 20px;
   font-family: Arial, sans-serif;
 }
 
@@ -10,6 +10,8 @@ footer {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .footerAbout,
@@ -25,27 +27,49 @@ footer {
 .footerCategories h4,
 .footerContact h4 {
   font-size: 18px;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
+  font-weight: 600;
 }
 
-.footerAbout p,
+.footerAbout p {
+  color: #cccccc;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
 .footerInfo p,
 .footerCategories a,
 .footerContact p {
   color: #cccccc;
-  font-size: 12px;
-  line-height: 1.4;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .footerSocial {
   display: flex;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.footerSocial a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #333;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.footerSocial a:hover {
+  background-color: #555;
 }
 
 .footerSocial a img {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
 }
 
 .footerInfo ul,
@@ -57,29 +81,177 @@ footer {
 
 .footerInfo li,
 .footerCategories li {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .footerInfo a,
 .footerCategories a {
   color: #cccccc;
   text-decoration: none;
-  font-size: 12px;
+  font-size: 14px;
+  transition: color 0.3s ease;
 }
 
 .footerInfo a:hover,
 .footerCategories a:hover {
+  color: #ffffff;
   text-decoration: underline;
+}
+
+.footerContact p {
+  line-height: 1.6;
 }
 
 .footerBottom {
   text-align: center;
-  margin-top: 20px;
-  padding-top: 10px;
+  margin-top: 30px;
+  padding-top: 20px;
   border-top: 1px solid #333333;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .footerBottom p {
   color: #888888;
-  font-size: 12px;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .footer {
+    padding: 35px 25px 20px;
+  }
+
+  .footerContainer {
+    gap: 25px;
+  }
+
+  .footerAbout,
+  .footerInfo,
+  .footerCategories,
+  .footerContact {
+    min-width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 30px 20px 15px;
+  }
+
+  .footerContainer {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .footerAbout,
+  .footerInfo,
+  .footerCategories,
+  .footerContact {
+    min-width: auto;
+    flex: none;
+  }
+
+  /* Reorganizar em duas colunas */
+  .footerContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+  }
+
+  .footerAbout {
+    grid-column: 1 / -1; /* Ocupa toda a largura */
+  }
+}
+
+@media (max-width: 576px) {
+  .footer {
+    padding: 25px 15px 15px;
+  }
+
+  .footerContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .footerAbout h2,
+  .footerInfo h4,
+  .footerCategories h4,
+  .footerContact h4 {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .footerAbout p,
+  .footerInfo p,
+  .footerCategories a,
+  .footerContact p,
+  .footerInfo a,
+  .footerCategories a {
+    font-size: 13px;
+  }
+
+  .footerSocial {
+    gap: 12px;
+    justify-content: flex-start;
+  }
+
+  .footerSocial a {
+    width: 36px;
+    height: 36px;
+  }
+
+  .footerSocial a img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .footerBottom {
+    margin-top: 25px;
+    padding-top: 15px;
+  }
+
+  .footerBottom p {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 20px 10px 10px;
+  }
+
+  .footerContainer {
+    gap: 20px;
+  }
+
+  .footerAbout h2,
+  .footerInfo h4,
+  .footerCategories h4,
+  .footerContact h4 {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+  .footerInfo li,
+  .footerCategories li {
+    margin-bottom: 8px;
+  }
+
+  .footerSocial {
+    gap: 10px;
+  }
+
+  .footerSocial a {
+    width: 32px;
+    height: 32px;
+  }
+
+  .footerSocial a img {
+    width: 16px;
+    height: 16px;
+  }
 }
