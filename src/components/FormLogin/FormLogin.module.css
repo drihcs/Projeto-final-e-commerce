@@ -1,198 +1,69 @@
-.mainContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-    padding: 40px;
-    max-width: 1200px;
-    margin: 0 auto;
-    gap: 40px;
-    /* Removido margin-left: 500px; para melhor centralização */
-    /* Removido width: 583px; para permitir que o flex controle */
-    /* Removido margin-bottom: 200px; */
-    background: var(--secondary);
-    background: linear-gradient(182deg, rgba(181, 182, 242, 1) 0%, rgba(239, 239, 255, 1) 100%);
-    min-height: 100vh; /* Garante que o container ocupe a altura da tela */
+/* src/components/FormLogin/FormLogin.module.css */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px; /* Espaço entre os grupos de formulário e o botão */
+  width: 100%; /* Para ocupar a largura do container pai */
+}
 
-  }
-  
-  .loginCard {
-    background-color: var(--white);
-    width: 100%;
-    max-width: 480px;
-    border-radius: 4px;
-    padding: 40px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .loginTitle {
-    color: var(--dark-gray);
-    margin-bottom: 8px;
-    font-size: 32px;
-    font-weight: 700;
-  }
-  
-  .newClientText {
-    color: var(--dark-gray-2);
-    margin-bottom: 32px;
-    font-size: 14px;
-  }
-  
-  .registerLink {
-    color: var(--dark-gray-2);
-    text-decoration: underline;
-    cursor: pointer; /* Adicionado para indicar clicabilidade */
-  }
-  
-  .loginForm {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .inputGroup {
-    margin-bottom: 16px;
-  }
-  
-  .inputLabel {
-    display: block;
-    color: var(--dark-gray-2);
-    margin-bottom: 8px;
-    font-size: 14px;
-    font-weight: 500;
-  }
-  
-  .inputField {
-    width: 100%;
-    padding: 16px;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: var(--light-gray-3);
-    outline: none;
-    box-sizing: border-box; /* Garante que padding não aumente o tamanho total */
-  }
-  
-  .inputField:focus {
-    box-shadow: 0 0 0 2px rgba(201, 32, 113, 0.2);
-  }
-  
-  .forgotPassword {
-    display: block;
-    color: var(--dark-gray-2);
-    font-size: 14px;
-    margin-bottom: 24px;
-    text-align: left;
-    text-decoration: none;
-    cursor: pointer; /* Adicionado para indicar clicabilidade */
-  }
-  
-  .loginButton {
-    background-color: var(--primary);
-    color: var(--white);
-    padding: 16px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 100%;
-    margin-bottom: 24px;
-  }
-  
-  .loginButton:hover {
-    background-color: var(--tertiary);
-  }
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  text-align: left; /* Alinha a label à esquerda */
+}
 
-  .loginButton:disabled {
-    background-color: #ccc; /* Estilo para botão desabilitado */
-    cursor: not-allowed;
-  }
-  
-  .socialLoginContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 16px;
-  }
-  
-  .socialTextContainer {
-    margin-bottom: 16px;
-  }
-  
-  .socialText {
-    color: var(--dark-gray-2);
-    font-size: 14px;
-  }
-  
-  .socialIconsContainer {
-    display: flex;
-    gap: 16px;
-  }
-  
-  .googleIcon,
-  .facebookIcon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: var(--light-gray-3);
-    text-decoration: none;
-    cursor: pointer; /* Adicionado para indicar clicabilidade */
-  }
-  
-  .facebookIcon img{
-      width: 25px;
-      height: 25px;
-  }
-    
-  .socialIconImage {
-    width: 20px;
-    height: 20px;
-  }
-  
-  /* Ajustes para o container de imagem, tornando-o opcional ou adaptável */
-  .imageContainer {
-    display: none; /* Oculto por padrão, pode ser reativado se necessário */
-    /* Ou ajustar para layout responsivo */
-    /* 
-    display: flex;
-    align-items: center;
-    justify-content: center; 
-    flex: 1; 
-    position: relative; 
-    */
-  }
-  
-  /* Estilos das imagens, se .imageContainer for reativado */
-  .shoeImage1 {
-    position: absolute;
-    width: 250px;
-    height: auto;
-    top: 70px;
-    transform: rotate(8deg);
-    z-index: 2;
-  }
-  
-  .shoeImage2 {
-    position: absolute;
-    width: 280px;
-    height: auto;
-    transform: rotate(10deg);
-    z-index: 2;
-    top: 250px;
-    margin-left: 110px;
-  }
+.label {
+  font-size: 0.95em;
+  color: #333;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
 
-  .errorMessage {
-    color: red;
-    font-size: 14px;
-    margin-top: 10px;
-    text-align: center;
-  }
+.input {
+  padding: 12px 15px;
+  border: 1px solid #d1d1d1; /* Borda um pouco mais suave */
+  border-radius: 6px; /* Bordas levemente mais arredondadas */
+  font-size: 1em;
+  background-color: #f9f9f9; /* Fundo do input sutilmente diferente */
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
 
+.input:focus {
+  outline: none;
+  border-color: #ff007f; /* Cor rosa vibrante no foco */
+  box-shadow: 0 0 0 3px rgba(255, 0, 127, 0.15); /* Sombra no foco mais sutil */
+}
+
+.submitButton {
+  background-color: #ff007f; /* Cor rosa do botão, como na imagem */
+  color: white;
+  padding: 14px 20px; /* Botão um pouco maior */
+  border: none;
+  border-radius: 6px;
+  font-size: 1.05em; /* Fonte do botão um pouco maior */
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  margin-top: 10px; /* Espaço acima do botão */
+}
+
+.submitButton:hover {
+  background-color: #e60073; /* Tom mais escuro de rosa no hover */
+}
+
+.submitButton:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+.errorMessage {
+  color: #d93025; /* Cor vermelha para erro, padrão Google */
+  font-size: 0.9em;
+  text-align: center; /* Centraliza a mensagem de erro */
+  margin-top: 5px; /* Espaço acima da mensagem de erro, se ela aparecer */
+  padding: 8px;
+  background-color: rgba(217, 48, 37, 0.1);
+  border: 1px solid rgba(217, 48, 37, 0.2);
+  border-radius: 4px;
+}
