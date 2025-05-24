@@ -123,59 +123,82 @@
 }
 
 .imageSection {
-  flex: 1; /* Ocupa a outra parte do espaço */
-  display: flex;
-  align-items: center;    /* Centraliza a imagem verticalmente na sua coluna */
-  justify-content: flex-start; /* Centraliza a imagem horizontalmente na sua coluna */
-  padding-left: 20px; /* Um pequeno espaço */
-}
-
-.productImagePlaceholder { /* Estilo para o placeholder da imagem */
-  width: 90%; /* Ou um tamanho fixo, ex: 400px */
-  max-width: 450px; /* Garante que não fique excessivamente grande */
-  aspect-ratio: 1 / 1; /* Para manter uma proporção, se a imagem for quadrada, ajuste conforme necessário */
-  background-color: #ccc; /* Cor do placeholder */
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5em;
-  color: #fff;
-  border-radius: 8px;
-  /* Se você tiver a imagem:
-  .productImage {
-    width: 100%;
-    max-width: 450px;
-    height: auto;
-    border-radius: 8px;
-  }
+  overflow: hidden; /* Ajuda a conter elementos rotacionados */
+}
+
+.shoeDisplayContainer {
+  position: relative; /* Essencial para o posicionamento absoluto das imagens */
+  width: 80%;         /* Largura do container onde os tênis serão arranjados */
+  max-width: 480px;   /* Limita o tamanho máximo */
+  aspect-ratio: 4 / 3;  /* Ajustei para um container um pouco mais largo, pode ajustar conforme necessário (ex: 1/1, 3/2) */
+  display: flex;        /* Usado para centralizar, mas as imagens internas são absolutas */
+  align-items: center;
+  justify-content: center;
+  /* Se precisar de debug para ver a área do container:
+  border: 1px dashed blue;
   */
 }
 
-/* --- Media Queries para Responsividade (Exemplo) --- */
-/* Para telas menores, podemos querer que as colunas fiquem uma sobre a outra */
-@media (max-width: 900px) { /* Ajuste o valor de 900px conforme necessário */
-  .mainContent {
-    flex-direction: column-reverse; /* Coloca a imagem acima do formulário em telas menores */
-    padding: 20px;
-    align-items: center; /* Centraliza os blocos na vertical */
-  }
+/* Estilo base para ambas as imagens de tênis */
+.shoeImage {
+  position: absolute; /* Permite sobreposição e posicionamento preciso */
+  max-width: 75%;     /* Tamanho da imagem individual, ajuste para não ficarem muito grandes ou pequenas */
+  max-height: 75%;    /* Garante que a altura também seja controlada */
+  height: auto;
+  object-fit: contain; /* Mantém a proporção da imagem */
+  transition: transform 0.3s ease-out;
+}
 
-  .loginSection {
-    justify-content: center; /* Centraliza o formulário */
-    width: 100%;
-    max-width: 450px; /* Limita a largura do formulário */
-    padding-right: 0;
-  }
+/* Tênis que aparecerá mais à frente, geralmente o principal (tenisImageUrl1) */
+.shoeImageFront {
+  z-index: 2; /* Fica na frente */
+  /* Ajustes para "um ao lado do outro em alturas diferentes":
+     - translateX: move para a direita (positivo) ou esquerda (negativo)
+     - translateY: move para baixo (positivo) ou cima (negativo)
+     - rotate: gira a imagem
+     - scale: aumenta ou diminui
+  */
+  transform: translateX(15%) translateY(10%) rotate(-10deg) scale(1.1);
+  /* Exemplo: 15% para a direita do centro do container, 10% para baixo, leve rotação e um pouco maior */
+}
+
+/* Tênis que aparecerá atrás/ao lado e em altura diferente (tenisImageUrl2) */
+.shoeImageBack {
+  z-index: 1; /* Fica atrás */
+  /* Ajustes para posicionar ao lado e em altura diferente: */
+  transform: translateX(-25%) translateY(-15%) rotate(20deg) scale(1);
+  /* Exemplo: 25% para a esquerda do centro, 15% para cima, rotação oposta, tamanho normal */
+  opacity: 0.9; /* Levemente transparente para dar profundidade, se desejar */
+}
+
+/* ... (Restante do CSS, incluindo @media queries) ... */
+
+/* Lembre-se de ajustar as media queries também, se necessário, para o .shoeDisplayContainer e transforms */
+@media (max-width: 900px) {
+  /* ... (outras media queries) ... */
 
   .imageSection {
-    justify-content: center; /* Centraliza a imagem */
-    width: 100%;
-    max-width: 400px; /* Limita a largura da imagem */
-    margin-bottom: 30px; /* Espaço entre a imagem e o formulário */
-    padding-left: 0;
+    /* ... (manter ou ajustar estilos anteriores) ... */
+    min-height: 350px; /* Pode precisar de mais altura para o arranjo */
   }
 
-  .productImagePlaceholder {
-    width: 70%; /* Ajusta o tamanho do placeholder em telas menores */
+  .shoeDisplayContainer {
+    width: 90%; /* Pode precisar de mais largura em mobile para o arranjo lado a lado */
+    max-width: 400px;
+    aspect-ratio: 1 / 1; /* Em mobile, talvez um aspect-ratio mais quadrado funcione melhor */
+  }
+
+  .shoeImageFront {
+    /* Ajustar transforms para mobile se o arranjo acima não ficar bom */
+    transform: translateX(10%) translateY(5%) rotate(-8deg) scale(1);
+  }
+
+  .shoeImageBack {
+    /* Ajustar transforms para mobile */
+    transform: translateX(-20%) translateY(-10%) rotate(15deg) scale(0.9);
   }
 }
