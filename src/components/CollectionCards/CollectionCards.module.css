@@ -78,12 +78,12 @@
 
 .productImageContainer {
   position: absolute;
-  bottom: 0; /* diminua esse valor para subir a imagem */
-  right: -20px;
+  bottom: -40px;  /* ← Suba a imagem com valores negativos */
+  right: -40px;   /* ← Ajuste horizontalmente se necessário */
   width: 150px;
   height: 150px;
   z-index: 1;
-  overflow: visible; /* garante que partes da imagem fora do container ainda apareçam */
+  overflow: visible;
 }
 
 .productImage {
