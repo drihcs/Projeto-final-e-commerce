@@ -1,11 +1,11 @@
-.specialOfferSection {
-  background-color: #ffffff;
+.specialOffer__section {
+  background-color: #fff;
   padding: 40px 20px;
   display: flex;
   justify-content: center;
 }
 
-.specialOfferContainer {
+.specialOffer__container {
   max-width: 1200px;
   width: 100%;
   display: flex;
@@ -16,7 +16,7 @@
   gap: 40px;
 }
 
-.decorativeCircle {
+.specialOffer__circle {
   position: absolute;
   left: 0;
   top: 50%;
@@ -26,36 +26,36 @@
   height: 400px;
 }
 
-.decorativeCircle img {
+.specialOffer__circle img {
   width: 100%;
   height: auto;
   display: block;
 }
 
-.productImageSection {
+.specialOffer__imageWrapper {
   flex: 1 1 50%;
   z-index: 1;
   display: flex;
   justify-content: center;
 }
 
-.productImg {
+.specialOffer__image {
   max-width: 100%;
   height: auto;
   z-index: 1;
   position: relative;
 }
 
-.offerContentSection {
+.specialOffer__content {
   flex: 1 1 50%;
   z-index: 1;
 }
 
-.offerCard {
+.specialOffer__card {
   padding: 0 20px;
 }
 
-.specialBadge {
+.specialOffer__badge {
   color: #c92071;
   font-weight: 600;
   font-size: 14px;
@@ -63,14 +63,14 @@
   margin-bottom: 8px;
 }
 
-.specialTitle {
+.specialOffer__title {
   font-size: 32px;
   font-weight: 800;
   color: #333;
   margin-bottom: 16px;
 }
 
-.specialDescription {
+.specialOffer__description {
   font-size: 16px;
   color: #555;
   line-height: 1.6;
@@ -78,7 +78,7 @@
   max-width: 500px;
 }
 
-.specialButton {
+.specialOffer__button {
   display: inline-block;
   background-color: #c92071;
   color: white;
@@ -90,29 +90,29 @@
   transition: background-color 0.3s ease;
 }
 
-.specialButton:hover {
+.specialOffer__button:hover {
   background-color: #991956;
 }
 
 @media (max-width: 960px) {
-  .specialOfferContainer {
+  .specialOffer__container {
     flex-direction: column;
     text-align: center;
   }
 
-  .offerCard {
+  .specialOffer__card {
     padding: 0;
   }
 
-  .productImageSection {
+  .specialOffer__imageWrapper {
     order: 2;
   }
 
-  .offerContentSection {
+  .specialOffer__content {
     order: 1;
   }
 
-  .decorativeCircle {
+  .specialOffer__circle {
     position: absolute;
     top: 0;
     left: 50%;
