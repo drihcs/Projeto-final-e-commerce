@@ -25,6 +25,7 @@ try {
 } catch (err) {
   setErro(err)
 }
+  }
 
   return (
     <form onSubmit={handleSubmit} style={{ maxWidth: '300px', margin: 'auto' }}>
