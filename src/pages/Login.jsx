@@ -3,6 +3,10 @@ import FormLogin from '../components/FormLogin/FormLogin';
 import Footer from '../components/Footer/Footer';
 import styles from './Login.module.css';
 
+import faceIcon from '../../assets/face.svg'
+import gmailIcon from '../../assets/gmail.svg'
+
+
 // Não precisamos importar as imagens aqui se elas estiverem na pasta /public
 
 export default function Login() {
@@ -34,8 +38,12 @@ export default function Login() {
             <div className={styles.socialLogin}>
               <p>Ou faça login com:</p>
               <div className={styles.socialIcons}>
-                <button className={styles.socialButton} aria-label="Login com Google">G</button>
-                <button className={styles.socialButton} aria-label="Login com Facebook">F</button>
+                <button className={styles.socialButton} aria-label="Login com Google">
+                <img src={gmailIcon} alt="Gmail" />  
+                </button>
+                <button className={styles.socialButton} aria-label="Login com Facebook">
+                <img src={faceIcon} alt="Facebook" /> 
+                </button>
               </div>
             </div>
           </div>
