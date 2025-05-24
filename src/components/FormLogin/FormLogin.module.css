@@ -2,68 +2,86 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 18px; /* Espaço entre os grupos de formulário e o botão */
-  width: 100%; /* Para ocupar a largura do container pai */
+  gap: 20px;
+  width: 100%;
 }
 
 .formGroup {
   display: flex;
   flex-direction: column;
-  text-align: left; /* Alinha a label à esquerda */
+  text-align: left;
 }
 
 .label {
-  font-size: 0.95em;
-  color: #333;
-  margin-bottom: 6px;
-  font-weight: bold;
+  font-size: 14px;
+  color: #1f2937;
+  margin-bottom: 8px;
+  font-weight: 700;
+  letter-spacing: 0.025em;
 }
 
 .input {
-  padding: 12px 15px;
-  border: 1px solid #d1d1d1; /* Borda um pouco mais suave */
-  border-radius: 6px; /* Bordas levemente mais arredondadas */
-  font-size: 1em;
-  background-color: #f9f9f9; /* Fundo do input sutilmente diferente */
-  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  padding: 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: #f9fafb;
+  transition: all 0.2s ease;
+  color: #1f2937;
+}
+
+.input::placeholder {
+  color: #9ca3af;
+  font-weight: 400;
 }
 
 .input:focus {
   outline: none;
-  border-color: #ff007f; /* Cor rosa vibrante no foco */
-  box-shadow: 0 0 0 3px rgba(255, 0, 127, 0.15); /* Sombra no foco mais sutil */
+  border-color: #c92071;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(201, 32, 113, 0.1);
 }
 
 .submitButton {
-  background-color: #ff007f; /* Cor rosa do botão, como na imagem */
+  background-color: #c92071;
   color: white;
-  padding: 14px 20px; /* Botão um pouco maior */
+  padding: 16px 24px;
   border: none;
-  border-radius: 6px;
-  font-size: 1.05em; /* Fonte do botão um pouco maior */
-  font-weight: bold;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
-  margin-top: 10px; /* Espaço acima do botão */
+  transition: all 0.2s ease;
+  margin-top: 8px;
+  letter-spacing: 0.025em;
 }
 
-.submitButton:hover {
-  background-color: #e60073; /* Tom mais escuro de rosa no hover */
+.submitButton:hover:not(:disabled) {
+  background-color: #a91b60;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(201, 32, 113, 0.3);
+}
+
+.submitButton:active {
+  transform: translateY(0);
 }
 
 .submitButton:disabled {
-  background-color: #cccccc;
-  color: #666666;
+  background-color: #d1d5db;
+  color: #9ca3af;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .errorMessage {
-  color: #d93025; /* Cor vermelha para erro, padrão Google */
-  font-size: 0.9em;
-  text-align: center; /* Centraliza a mensagem de erro */
-  margin-top: 5px; /* Espaço acima da mensagem de erro, se ela aparecer */
-  padding: 8px;
-  background-color: rgba(217, 48, 37, 0.1);
-  border: 1px solid rgba(217, 48, 37, 0.2);
-  border-radius: 4px;
+  color: #dc2626;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 8px;
+  padding: 12px;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  font-weight: 500;
 }

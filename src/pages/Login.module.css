@@ -1,181 +1,257 @@
-/* src/pages/Login.module.css (ou o caminho correspondente) */
+/* src/pages/Login.module.css */
 
 .pageContainer {
-  display: flex; /* Permite alinhar header, main, footer verticalmente */
-  flex-direction: column; /* Itens empilhados verticalmente */
-  min-height: 100vh; /* Garante que a página ocupe pelo menos toda a altura da tela */
-  font-family: Arial, sans-serif; /* Defina sua fonte base, ajuste conforme necessário */
-  background-color: #E6E1FF; /* Cor de fundo principal da página, como na imagem */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #e6e1ff 0%, #d4c5ff 100%);
 }
 
 .header {
-  background-color: #fff; /* Cor de fundo do header, conforme imagem (parece ser branco) */
-  padding: 20px 40px; /* Espaçamento interno (vertical, horizontal) */
-  /* border-bottom: 1px solid #e0e0e0; Se quiser uma linha divisória */
+  background-color: #fff;
+  padding: 16px 40px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logoIcon {
+  width: 24px;
+  height: 24px;
+  background-color: #c92071;
+  border-radius: 4px;
+  position: relative;
+}
+
+.logoIcon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background-color: white;
+  border-radius: 2px;
 }
 
 .logoText {
-  color: #ff007f; /* Cor rosa do logo "Digital Store", ajuste se necessário */
-  font-size: 1.8em; /* Tamanho da fonte do logo */
-  font-weight: bold;
-  margin: 0; /* Remove margens padrão do h1 */
+  color: #c92071;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
 }
 
 .mainContent {
-  display: flex; /* Coloca loginSection e imageSection lado a lado */
-  flex: 1;       /* Faz esta seção ocupar o espaço vertical restante entre header e footer */
-  padding: 40px; /* Espaçamento interno geral para o conteúdo principal */
-  gap: 30px;     /* Espaço entre a loginSection e a imageSection */
+  display: flex;
+  flex: 1;
+  align-items: center;
+  padding: 60px 40px;
+  gap: 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .loginSection {
-  flex: 1; /* Ocupa uma parte do espaço disponível (pode ajustar para ser maior ou menor que a imageSection) */
+  flex: 1;
   display: flex;
-  /* Alinha o loginFormContainer. Você pode usar:
-     justify-content: center; para centralizar horizontalmente
-     justify-content: flex-end; se quiser alinhar mais à direita da sua coluna
-  */
-  justify-content: flex-end; /* Tentando replicar a imagem, onde o form está mais à direita da metade esquerda */
-  align-items: flex-start; /* Alinha no topo da sua coluna */
-  padding-right: 20px; /* Um pequeno espaço para não colar na imageSection */
+  justify-content: flex-end;
+  padding-right: 40px;
 }
 
 .loginFormContainer {
-  background-color: #fff; /* Fundo branco para o card do formulário */
-  padding: 30px 40px;   /* Espaçamento interno do card */
-  border-radius: 8px;   /* Bordas arredondadas */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   width: 100%;
-  max-width: 420px;     /* Largura máxima para o card do formulário */
+  max-width: 400px;
 }
 
 .loginFormContainer h2 {
-  font-size: 1.8em;     /* "Acesse sua conta" */
-  margin-top: 0;
-  margin-bottom: 10px;
-  color: #333;
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  color: #1f2937;
 }
 
 .registerPrompt {
-  font-size: 0.9em;
-  color: #555;
-  margin-bottom: 25px;
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 32px;
+  line-height: 1.5;
 }
 
 .registerPrompt a {
-  color: #ff007f; /* Cor rosa para o link */
-  text-decoration: none;
-  font-weight: bold;
+  color: #1f2937;
+  text-decoration: underline;
+  font-weight: 500;
 }
 
 .registerPrompt a:hover {
-  text-decoration: underline;
+  color: #c92071;
 }
 
 .forgotPasswordLink {
-  display: block; /* Para ocupar a linha toda e permitir margem */
-  margin-top: 15px;
-  margin-bottom: 25px;
-  font-size: 0.9em;
-  color: #ff007f; /* Cor rosa */
-  text-decoration: none;
-  text-align: left; /* Alinha o texto do link à esquerda dentro do seu container */
+  display: block;
+  margin: 16px 0 24px 0;
+  font-size: 14px;
+  color: #6b7280;
+  text-decoration: underline;
+  text-align: left;
 }
 
 .forgotPasswordLink:hover {
-  text-decoration: underline;
+  color: #1f2937;
 }
 
 .socialLogin {
-  margin-top: 20px;
-  text-align: center; /* Centraliza o "Ou faça login com:" */
+  margin-top: 32px;
+  text-align: center;
 }
 
 .socialLogin p {
-  margin-bottom: 15px;
-  font-size: 0.9em;
-  color: #555;
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: #6b7280;
 }
 
 .socialIcons {
   display: flex;
-  justify-content: center; /* Centraliza os ícones */
-  gap: 15px; /* Espaço entre os ícones */
+  justify-content: center;
+  gap: 12px;
 }
 
 .socialButton {
-  background-color: #f0f0f0; /* Cor de fundo para os botões sociais */
-  border: 1px solid #ddd;
-  border-radius: 50%; /* Para botões redondos, como na imagem */
+  background-color: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 50%;
   width: 40px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1em; /* Tamanho do texto/ícone dentro do botão */
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  color: #333; /* Cor do texto/ícone */
+  color: #6b7280;
+  transition: all 0.2s ease;
 }
 
 .socialButton:hover {
-  background-color: #e0e0e0;
+  background-color: #e5e7eb;
+  transform: translateY(-1px);
 }
 
 .imageSection {
-  flex: 1; /* Ocupa a outra parte do espaço */
-  display: flex;
-  align-items: center;    /* Centraliza a imagem verticalmente na sua coluna */
-  justify-content: flex-start; /* Centraliza a imagem horizontalmente na sua coluna */
-  padding-left: 20px; /* Um pequeno espaço */
-}
-
-.productImagePlaceholder { /* Estilo para o placeholder da imagem */
-  width: 90%; /* Ou um tamanho fixo, ex: 400px */
-  max-width: 450px; /* Garante que não fique excessivamente grande */
-  aspect-ratio: 1 / 1; /* Para manter uma proporção, se a imagem for quadrada, ajuste conforme necessário */
-  background-color: #ccc; /* Cor do placeholder */
+  flex: 1;
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 1.5em;
-  color: #fff;
-  border-radius: 8px;
-  /* Se você tiver a imagem:
-  .productImage {
-    width: 100%;
-    max-width: 450px;
-    height: auto;
-    border-radius: 8px;
-  }
-  */
+  justify-content: flex-start;
+  padding-left: 40px;
 }
 
-/* --- Media Queries para Responsividade (Exemplo) --- */
-/* Para telas menores, podemos querer que as colunas fiquem uma sobre a outra */
-@media (max-width: 900px) { /* Ajuste o valor de 900px conforme necessário */
+.shoeDisplayContainer {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  height: 400px;
+}
+
+.shoeImage {
+  position: absolute;
+  width: 350px;
+  height: auto;
+  filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.15));
+  transition: transform 0.3s ease;
+}
+
+.shoeImageBack {
+  top: 60px;
+  right: 0;
+  transform: rotate(15deg);
+  opacity: 0.8;
+  z-index: 1;
+}
+
+.shoeImageFront {
+  top: 0;
+  left: 0;
+  transform: rotate(-15deg);
+  z-index: 2;
+}
+
+.shoeImage:hover {
+  transform: rotate(-15deg) scale(1.05);
+}
+
+.shoeImageBack:hover {
+  transform: rotate(15deg) scale(1.05);
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 1024px) {
   .mainContent {
-    flex-direction: column-reverse; /* Coloca a imagem acima do formulário em telas menores */
+    gap: 40px;
+    padding: 40px 20px;
+  }
+
+  .shoeImage {
+    width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .mainContent {
+    flex-direction: column-reverse;
+    gap: 40px;
     padding: 20px;
-    align-items: center; /* Centraliza os blocos na vertical */
+    align-items: center;
   }
 
   .loginSection {
-    justify-content: center; /* Centraliza o formulário */
+    justify-content: center;
     width: 100%;
-    max-width: 450px; /* Limita a largura do formulário */
+    max-width: 400px;
     padding-right: 0;
   }
 
   .imageSection {
-    justify-content: center; /* Centraliza a imagem */
+    justify-content: center;
     width: 100%;
-    max-width: 400px; /* Limita a largura da imagem */
-    margin-bottom: 30px; /* Espaço entre a imagem e o formulário */
     padding-left: 0;
   }
 
-  .productImagePlaceholder {
-    width: 70%; /* Ajusta o tamanho do placeholder em telas menores */
+  .shoeDisplayContainer {
+    max-width: 350px;
+    height: 300px;
+  }
+
+  .shoeImage {
+    width: 250px;
+  }
+
+  .header {
+    padding: 16px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .loginFormContainer {
+    padding: 24px;
+  }
+
+  .loginFormContainer h2 {
+    font-size: 24px;
+  }
+
+  .shoeImage {
+    width: 200px;
   }
 }
