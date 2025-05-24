@@ -42,8 +42,8 @@
 
 .discountTag {
   position: absolute;
-  top: 12px;
-  left: 12px;
+  top: 0px;
+  left: 0px;
   background-color: #ecff36;
   color: #000;
   font-size: 12px;
@@ -53,6 +53,7 @@
   display: inline-block;
   z-index: 3;
 }
+
 
 .cardTitle {
   font-size: 20px;
