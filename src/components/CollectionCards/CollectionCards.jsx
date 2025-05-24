@@ -5,19 +5,19 @@ const colecoes = [
   {
     id: 'supreme',
     titulo: 'Novo drop Supreme',
-    imagemProduto: '/public/tshirt-card.png',
+    imagemProduto: '/tshirt-card.png',
     desconto: '30% OFF'
   },
   {
     id: 'adidas',
     titulo: 'Coleção Adidas',
-    imagemProduto: '/public/sneaker-card.png',
+    imagemProduto: '/sneaker-card.png',
     desconto: '30% OFF'
   },
   {
     id: 'beats',
     titulo: 'Novo Beats Bass',
-    imagemProduto: '/public/headphone-card.png',
+    imagemProduto: '/headphone-card.png',
     desconto: '30% OFF'
   }
 ]
