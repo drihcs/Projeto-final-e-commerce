@@ -13,13 +13,13 @@ export default function Footer() {
           </p>
           <div className={styles.footerSocial}>
             <a href="#" aria-label="Facebook">
-              <img src="/src/assets/facebook.svg" alt="Facebook" />
+              <img src="/facebook.svg" alt="Facebook" />
             </a>
             <a href="#" aria-label="Instagram">
-              <img src="/src/assets/instagram.svg" alt="Instagram" />
+              <img src="/instagram.svg" alt="Instagram" />
             </a>
             <a href="#" aria-label="Twitter">
-              <img src="/src/assets/twitter.svg" alt="Twitter" />
+              <img src="/twitter.svg" alt="Twitter" />
             </a>
           </div>
         </div>
