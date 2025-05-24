@@ -1,5 +1,8 @@
 import React from 'react'
 import styles from '../Footer/Footer.module.css'
+import facebookIcon from '../../assets/facebook.svg'
+import instagramIcon from '../../assets/instagram.svg'
+import twitterIcon from '../../assets/twitter.svg'
 
 export default function Footer() {
   return (
@@ -11,17 +14,17 @@ export default function Footer() {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
             dolore.
           </p>
-          <div className={styles.footerSocial}>
-            <a href="#" aria-label="Facebook">
-              <img src="/assets/facebook.svg" alt="Facebook" />
-            </a>
-            <a href="#" aria-label="Instagram">
-              <img src="/assets/instagram.svg" alt="Instagram" />
-            </a>
-            <a href="#" aria-label="Twitter">
-              <img src="/assets/twitter.svg" alt="Twitter" />
-            </a>
-          </div>
+         <div className={styles.footerSocial}>
+          <a href="#" aria-label="Facebook">
+            <img src={facebookIcon} alt="Facebook" />
+          </a>
+          <a href="#" aria-label="Instagram">
+            <img src={instagramIcon} alt="Instagram" />
+          </a>
+          <a href="#" aria-label="Twitter">
+            <img src={twitterIcon} alt="Twitter" />
+          </a>
+        </div>
         </div>
 
         <div className={styles.footerInfo}>
