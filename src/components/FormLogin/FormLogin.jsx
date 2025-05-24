@@ -18,16 +18,13 @@ export default function FormLogin() {
     setErro('')
     setCarregando(true)
 
-    try {
-      await login(email, senha)
-      alert('Login realizado com sucesso!')
-      navigate('/')
-    } catch (err) {
-      setErro(err)
-    } finally {
-      setCarregando(false)
-    }
-  }
+try {
+  await login(email, senha)
+  alert('Login realizado com sucesso!')
+  navigate('/') // Redireciona para home ou rota válida
+} catch (err) {
+  setErro(err)
+}
 
   return (
     <form onSubmit={handleSubmit} style={{ maxWidth: '300px', margin: 'auto' }}>
