@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './Pedidos.css'
+import './Pedidos.module.css'
 
 function Pedidos() {
   const [pedidos, setPedidos] = useState([])

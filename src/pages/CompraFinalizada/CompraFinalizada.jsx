@@ -1,7 +1,7 @@
 // src/pages/CompraFinalizada.jsx
 import React from 'react'
 import { Link } from 'react-router-dom'
-import './CompraFinalizada.css'
+import './CompraFinalizada.module.css'
 
 function CompraFinalizada() {
   return (

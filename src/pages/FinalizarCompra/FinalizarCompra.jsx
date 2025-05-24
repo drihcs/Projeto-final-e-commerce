@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
 import { useCarrinho } from '../../contexts/CarrinhoContext'
-import './FinalizarCompra.css'
+import './FinalizarCompra.module.css'
 
 function FinalizarCompra() {
   const { usuario } = useAuth()
