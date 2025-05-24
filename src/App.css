@@ -16,3 +16,11 @@
   --blue-light: #c7d2fe;
   --gray-light: #e6e6e6;
 }
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--light-gray-3); /* Cor de fundo clara */
+  color: var(--dark-gray); /* Cor de texto escuro */
+}
