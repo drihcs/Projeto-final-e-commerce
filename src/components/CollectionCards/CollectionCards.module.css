@@ -9,32 +9,43 @@
   font-size: 24px;
   font-weight: 700;
   margin-bottom: 24px;
-  color: var(--dark-gray);
+  color: #333;
 }
 
 .collectionGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 3rem;
+  gap: 20px;
 }
 
 .collectionCard {
-  height: 250px;
+  height: 180px;
   width: 100%;
   border-radius: 8px;
   overflow: hidden;
   position: relative;
-  background-size: cover;
-  background-position: center;
-  color: var(--white);
-  display: flex;
-  align-items: flex-end;
-  background-color: #d8e3f2;
   transition: transform 0.3s ease;
 }
 
 .collectionCard:hover {
   transform: translateY(-4px);
+}
+
+.cardBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #d8e3f2;
+  border-radius: 8px;
+}
+
+.cardContent {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 2;
 }
 
 .discountTag {
@@ -48,17 +59,24 @@
   margin-bottom: 12px;
 }
 
+.cardTitle {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  color: #000;
+  line-height: 1.2;
+}
+
 .buyButton {
   background-color: #fff;
   color: #c92071;
   border: none;
-  padding: 10px 20px;
+  padding: 8px 16px;
   border-radius: 8px;
   font-weight: 600;
   font-size: 14px;
   text-decoration: none;
   display: inline-block;
-  margin-top: 12px;
   transition: background-color 0.2s ease;
 }
 
@@ -66,10 +84,36 @@
   background-color: #fce4f1;
 }
 
-h3 {
-  font-size: 20px;
-  font-weight: 700;
-  margin: 0;
-  color: #fff;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+.productImageContainer {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  width: 150px;
+  height: 150px;
+  z-index: 1;
+}
+
+.productImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: rotate(-15deg);
+}
+
+@media (max-width: 768px) {
+  .collectionGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .collectionCard {
+    height: 160px;
+  }
+  
+  .productImageContainer {
+    width: 120px;
+    height: 120px;
+    bottom: -15px;
+    right: -15px;
+  }
 }

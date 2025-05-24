@@ -5,19 +5,19 @@ const colecoes = [
   {
     id: 'supreme',
     titulo: 'Novo drop Supreme',
-    imagem: '/assets/collection-1.png',
+    imagemProduto: '/assets/tshirt-card.png',
     desconto: '30% OFF'
   },
   {
     id: 'adidas',
     titulo: 'Coleção Adidas',
-    imagem: '/assets/collection-2.png',
+    imagemProduto: '/assets/sneaker-card.png',
     desconto: '30% OFF'
   },
   {
     id: 'beats',
     titulo: 'Novo Beats Bass',
-    imagem: '/assets/collection-3.png',
+    imagemProduto: '/assets/headphone-card.png',
     desconto: '30% OFF'
   }
 ]
@@ -29,17 +29,21 @@ export default function CollectionCards() {
         <h2 className={styles.sectionTitle}>Coleções em destaque</h2>
         <div className={styles.collectionGrid}>
           {colecoes.map(colecao => (
-            <div
-              key={colecao.id}
-              className={styles.collectionCard}
-              style={{
-                backgroundImage: `url(${colecao.imagem})`
-              }}
-            >
-              <div style={{ padding: '20px' }}>
+            <div key={colecao.id} className={styles.collectionCard}>
+              <div className={styles.cardBackground}></div>
+              <div className={styles.cardContent}>
                 <span className={styles.discountTag}>{colecao.desconto}</span>
-                <h3>{colecao.titulo}</h3>
-                <a className={styles.buyButton} href={`/colecao/${colecao.id}`}>Comprar</a>
+                <h3 className={styles.cardTitle}>{colecao.titulo}</h3>
+                <a className={styles.buyButton} href={`/colecao/${colecao.id}`}>
+                  Comprar
+                </a>
+              </div>
+              <div className={styles.productImageContainer}>
+                <img 
+                  src={colecao.imagemProduto || "/placeholder.svg"} 
+                  alt={colecao.titulo}
+                  className={styles.productImage}
+                />
               </div>
             </div>
           ))}
