@@ -1,7 +1,7 @@
 // src/components/FormLogin.jsx
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../contexts/AuthContext' 
+import { useAuth } from '../../contexts/AuthContext.jsx' 
 import styles from './FormLogin.module.css'
 
 export default function FormLogin() {
