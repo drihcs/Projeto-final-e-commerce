@@ -5,9 +5,6 @@ import FormLogin from '../components/FormLogin/FormLogin';
 import Footer from '../components/Footer/Footer';
 import styles from './Login.module.css';
 
-import { ReactComponent as FacebookIcon } from './src/assets/face.svg';
-import { ReactComponent as GmailIcon } from './src/assets/gmail.svg';
-
 // Não precisamos importar as imagens aqui se elas estiverem na pasta /public
 
 export default function Login() {
@@ -38,13 +35,10 @@ export default function Login() {
             </a>
             <div className={styles.socialLogin}>
               <p>Ou faça login com:</p>
-             <div className={styles.socialIcons}>
-                <button className={styles.socialButton} aria-label="Login com Google">
-                  <GmailIcon className={styles.svgIcon} /> {/* Ícone do Gmail */}
-                </button>
-                <button className={styles.socialButton} aria-label="Login com Facebook">
-                  <FacebookIcon className={styles.svgIcon} /> {/* Ícone do Facebook */}
-                </button>
+              <div className={styles.socialIcons}>
+                <button className={styles.socialButton} aria-label="Login com Microsoft">M</button>
+                <button className={styles.socialButton} aria-label="Login com Google">G</button>
+                <button className={styles.socialButton} aria-label="Login com Facebook">F</button>
               </div>
             </div>
           </div>
