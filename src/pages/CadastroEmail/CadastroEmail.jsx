@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './CadastroEmail.css'
+import './CadastroEmail.module.css'
 
 function CadastroEmail() {
   const [email, setEmail] = useState('')

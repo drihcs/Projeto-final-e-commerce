@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './CadastroFormulario.css'
+import './CadastroFormulario.module.css'
 
 function CadastroFormulario() {
   const [nome, setNome] = useState('')
