@@ -1,0 +1,181 @@
+/* src/pages/Login.module.css (ou o caminho correspondente) */
+
+.pageContainer {
+  display: flex; /* Permite alinhar header, main, footer verticalmente */
+  flex-direction: column; /* Itens empilhados verticalmente */
+  min-height: 100vh; /* Garante que a página ocupe pelo menos toda a altura da tela */
+  font-family: Arial, sans-serif; /* Defina sua fonte base, ajuste conforme necessário */
+  background-color: #E6E1FF; /* Cor de fundo principal da página, como na imagem */
+}
+
+.header {
+  background-color: #fff; /* Cor de fundo do header, conforme imagem (parece ser branco) */
+  padding: 20px 40px; /* Espaçamento interno (vertical, horizontal) */
+  /* border-bottom: 1px solid #e0e0e0; Se quiser uma linha divisória */
+}
+
+.logoText {
+  color: #ff007f; /* Cor rosa do logo "Digital Store", ajuste se necessário */
+  font-size: 1.8em; /* Tamanho da fonte do logo */
+  font-weight: bold;
+  margin: 0; /* Remove margens padrão do h1 */
+}
+
+.mainContent {
+  display: flex; /* Coloca loginSection e imageSection lado a lado */
+  flex: 1;       /* Faz esta seção ocupar o espaço vertical restante entre header e footer */
+  padding: 40px; /* Espaçamento interno geral para o conteúdo principal */
+  gap: 30px;     /* Espaço entre a loginSection e a imageSection */
+}
+
+.loginSection {
+  flex: 1; /* Ocupa uma parte do espaço disponível (pode ajustar para ser maior ou menor que a imageSection) */
+  display: flex;
+  /* Alinha o loginFormContainer. Você pode usar:
+     justify-content: center; para centralizar horizontalmente
+     justify-content: flex-end; se quiser alinhar mais à direita da sua coluna
+  */
+  justify-content: flex-end; /* Tentando replicar a imagem, onde o form está mais à direita da metade esquerda */
+  align-items: flex-start; /* Alinha no topo da sua coluna */
+  padding-right: 20px; /* Um pequeno espaço para não colar na imageSection */
+}
+
+.loginFormContainer {
+  background-color: #fff; /* Fundo branco para o card do formulário */
+  padding: 30px 40px;   /* Espaçamento interno do card */
+  border-radius: 8px;   /* Bordas arredondadas */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  width: 100%;
+  max-width: 420px;     /* Largura máxima para o card do formulário */
+}
+
+.loginFormContainer h2 {
+  font-size: 1.8em;     /* "Acesse sua conta" */
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.registerPrompt {
+  font-size: 0.9em;
+  color: #555;
+  margin-bottom: 25px;
+}
+
+.registerPrompt a {
+  color: #ff007f; /* Cor rosa para o link */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.registerPrompt a:hover {
+  text-decoration: underline;
+}
+
+.forgotPasswordLink {
+  display: block; /* Para ocupar a linha toda e permitir margem */
+  margin-top: 15px;
+  margin-bottom: 25px;
+  font-size: 0.9em;
+  color: #ff007f; /* Cor rosa */
+  text-decoration: none;
+  text-align: left; /* Alinha o texto do link à esquerda dentro do seu container */
+}
+
+.forgotPasswordLink:hover {
+  text-decoration: underline;
+}
+
+.socialLogin {
+  margin-top: 20px;
+  text-align: center; /* Centraliza o "Ou faça login com:" */
+}
+
+.socialLogin p {
+  margin-bottom: 15px;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.socialIcons {
+  display: flex;
+  justify-content: center; /* Centraliza os ícones */
+  gap: 15px; /* Espaço entre os ícones */
+}
+
+.socialButton {
+  background-color: #f0f0f0; /* Cor de fundo para os botões sociais */
+  border: 1px solid #ddd;
+  border-radius: 50%; /* Para botões redondos, como na imagem */
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1em; /* Tamanho do texto/ícone dentro do botão */
+  font-weight: bold;
+  cursor: pointer;
+  color: #333; /* Cor do texto/ícone */
+}
+
+.socialButton:hover {
+  background-color: #e0e0e0;
+}
+
+.imageSection {
+  flex: 1; /* Ocupa a outra parte do espaço */
+  display: flex;
+  align-items: center;    /* Centraliza a imagem verticalmente na sua coluna */
+  justify-content: flex-start; /* Centraliza a imagem horizontalmente na sua coluna */
+  padding-left: 20px; /* Um pequeno espaço */
+}
+
+.productImagePlaceholder { /* Estilo para o placeholder da imagem */
+  width: 90%; /* Ou um tamanho fixo, ex: 400px */
+  max-width: 450px; /* Garante que não fique excessivamente grande */
+  aspect-ratio: 1 / 1; /* Para manter uma proporção, se a imagem for quadrada, ajuste conforme necessário */
+  background-color: #ccc; /* Cor do placeholder */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  color: #fff;
+  border-radius: 8px;
+  /* Se você tiver a imagem:
+  .productImage {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    border-radius: 8px;
+  }
+  */
+}
+
+/* --- Media Queries para Responsividade (Exemplo) --- */
+/* Para telas menores, podemos querer que as colunas fiquem uma sobre a outra */
+@media (max-width: 900px) { /* Ajuste o valor de 900px conforme necessário */
+  .mainContent {
+    flex-direction: column-reverse; /* Coloca a imagem acima do formulário em telas menores */
+    padding: 20px;
+    align-items: center; /* Centraliza os blocos na vertical */
+  }
+
+  .loginSection {
+    justify-content: center; /* Centraliza o formulário */
+    width: 100%;
+    max-width: 450px; /* Limita a largura do formulário */
+    padding-right: 0;
+  }
+
+  .imageSection {
+    justify-content: center; /* Centraliza a imagem */
+    width: 100%;
+    max-width: 400px; /* Limita a largura da imagem */
+    margin-bottom: 30px; /* Espaço entre a imagem e o formulário */
+    padding-left: 0;
+  }
+
+  .productImagePlaceholder {
+    width: 70%; /* Ajusta o tamanho do placeholder em telas menores */
+  }
+}
