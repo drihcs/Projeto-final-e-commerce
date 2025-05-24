@@ -1,6 +1,30 @@
+import React from 'react'
+import styles from './CollectionCards.module.css'
+
+const colecoes = [
+  {
+    id: 'supreme',
+    titulo: 'Novo drop Supreme',
+    imagemProduto: '/tshirt-card.png',
+    desconto: '30% OFF'
+  },
+  {
+    id: 'adidas',
+    titulo: 'Coleção Adidas',
+    imagemProduto: '/sneaker-card.png',
+    desconto: '30% OFF'
+  },
+  {
+    id: 'beats',
+    titulo: 'Novo Beats Bass',
+    imagemProduto: '/headphone-card.png',
+    desconto: '30% OFF'
+  }
+]
+
 export default function CollectionCards() {
   return (
-    <section className={styles.section}>
+    <section>
       <div className={styles.container}>
         <h2 className={styles.sectionTitle}>Coleções em destaque</h2>
         <div className={styles.collectionGrid}>
@@ -15,8 +39,8 @@ export default function CollectionCards() {
                 </a>
               </div>
               <div className={styles.productImageContainer}>
-                <img
-                  src={colecao.imagemProduto || "/placeholder.svg"}
+                <img 
+                  src={colecao.imagemProduto || "/placeholder.svg"} 
                   alt={colecao.titulo}
                   className={styles.productImage}
                 />
@@ -26,5 +50,5 @@ export default function CollectionCards() {
         </div>
       </div>
     </section>
-  );
+  )
 }
