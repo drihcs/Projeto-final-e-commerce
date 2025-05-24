@@ -1,93 +1,272 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: var(--light-gray-3); /* Cor de fundo clara */
-  color: var(--dark-gray); /* Cor de texto escuro */
+.specialOffer {
+  width: 100%;
+  background: linear-gradient(180deg, #c92071 0%, #8b1a5c 50%, #6b1547 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 80px 0;
 }
 
-/* Container centralizado */
 .container {
-  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1rem;
-}
-
-/* Container das ofertas */
-.offer-container {
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-/* Estilos da imagem da oferta */
-.offer-image {
-  flex: 1;
-  min-width: 300px;
-  border-radius: 10px;
-  overflow: hidden;
+  padding: 0 20px;
   position: relative;
-  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 400px;
 }
 
-.offer-image img {
+/* Círculo gradiente decorativo */
+.gradientCircle {
   position: absolute;
-  height: 100%;
+  left: -100px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 600px;
+  height: 600px;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+.gradientCircle img {
   width: 100%;
-  inset: 0;
-  object-fit: cover;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Imagem do produto */
+.productImage {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 500px;
+}
+
+.sneakerImage {
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
 }
 
 /* Conteúdo da oferta */
-.offer-content {
+.offerContent {
   flex: 1;
-  min-width: 300px;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  max-width: 600px;
+}
+
+.contentWrapper {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 40px;
+  max-width: 500px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
 /* Badge de oferta */
-.offer-badge {
+.offerBadge {
   display: inline-block;
-  background-color: var(--primary);
-  color: var(--white);
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
-  font-size: 0.875rem;
+  background-color: #c92071;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 14px;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 /* Título da oferta */
-.offer-title {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  color: var(--dark-gray);
+.offerTitle {
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: #1f1f1f;
+  line-height: 1.2;
 }
 
 /* Descrição da oferta */
-.offer-description {
-  margin-bottom: 1.5rem;
-  opacity: 0.8;
-  color: var(--dark-gray-3);
+.offerDescription {
+  margin-bottom: 32px;
+  color: #666666;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
-/* Estilo do botão */
-.button {
+/* Botão da oferta */
+.offerButton {
   display: inline-flex;
-  background-color: var(--primary);
-  color: var(--white);
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.375rem;
-  font-weight: 500;
+  background-color: #c92071;
+  color: white;
+  padding: 16px 32px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
   text-decoration: none;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.button:hover {
-  background-color: var(--tertiary); /* Cor de foco no botão */
+.offerButton:hover {
+  background-color: #8b1a5c;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(201, 32, 113, 0.3);
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+    padding: 0 15px;
+  }
+
+  .gradientCircle {
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+  }
+
+  .productImage {
+    order: 1;
+    max-width: 400px;
+  }
+
+  .offerContent {
+    order: 2;
+    justify-content: center;
+    max-width: 100%;
+  }
+
+  .contentWrapper {
+    max-width: 600px;
+    padding: 35px;
+  }
+
+  .offerTitle {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 768px) {
+  .specialOffer {
+    padding: 60px 0;
+  }
+
+  .container {
+    gap: 30px;
+    min-height: 300px;
+  }
+
+  .gradientCircle {
+    width: 400px;
+    height: 400px;
+  }
+
+  .productImage {
+    max-width: 300px;
+  }
+
+  .sneakerImage {
+    max-width: 350px;
+  }
+
+  .contentWrapper {
+    padding: 30px;
+  }
+
+  .offerTitle {
+    font-size: 36px;
+    margin-bottom: 16px;
+  }
+
+  .offerDescription {
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+
+  .offerButton {
+    padding: 14px 28px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .specialOffer {
+    padding: 40px 0;
+  }
+
+  .container {
+    gap: 20px;
+    padding: 0 10px;
+  }
+
+  .gradientCircle {
+    width: 300px;
+    height: 300px;
+  }
+
+  .productImage {
+    max-width: 250px;
+  }
+
+  .sneakerImage {
+    max-width: 280px;
+  }
+
+  .contentWrapper {
+    padding: 24px;
+  }
+
+  .offerBadge {
+    font-size: 12px;
+    padding: 6px 16px;
+    margin-bottom: 12px;
+  }
+
+  .offerTitle {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .offerDescription {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .offerButton {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contentWrapper {
+    padding: 20px;
+  }
+
+  .offerTitle {
+    font-size: 24px;
+  }
+
+  .offerDescription {
+    font-size: 13px;
+  }
 }
