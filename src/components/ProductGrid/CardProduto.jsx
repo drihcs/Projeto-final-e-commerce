@@ -7,7 +7,7 @@ export default function CardProduto({ produto }) {
     <div className={styles.card}>
       <div className={styles.imagemContainer}>
         <div className={styles.desconto}>30% OFF</div>
-        <img src={produto.imagem || "/placeholder.svg"} alt={produto.nome} className={styles.imagem} />
+        <img src={produto.imagem || "./public/k-swiss-v8.png"} alt={produto.nome} className={styles.imagem} />
       </div>
       <div className={styles.infoContainer}>
         <div className={styles.categoria}>Tênis</div>
