@@ -136,10 +136,22 @@
   font-weight: bold;
 }
 
+/* Menu hambúrguer (oculto por padrão) */
+.menuToggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  color: var(--dark-gray-2);
+  font-size: 24px;
+}
+
 /* Navegação principal */
 .mainNav {
   background-color: var(--white);
   border-bottom: 1px solid var(--light-gray-3);
+  transition: all 0.3s ease;
 }
 
 .navList {
@@ -177,16 +189,6 @@
 
 .navList li a:hover {
   color: var(--primary);
-}
-
-/* Menu hambúrguer (oculto por padrão) */
-.menuToggle {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 5px;
-  color: var(--dark-gray-2);
 }
 
 /* Responsividade */
@@ -252,6 +254,38 @@
     background: var(--light-gray);
     border-radius: 3px;
   }
+
+  /* Menu hambúrguer visível */
+  .menuToggle {
+    display: block;
+  }
+
+  /* Menu mobile */
+  .mainNav {
+    max-height: 0;
+    overflow: hidden;
+    border-bottom: none;
+  }
+
+  .mainNav.mobileOpen {
+    max-height: 300px;
+    border-bottom: 1px solid var(--light-gray-3);
+  }
+
+  .mobileOpen .navList {
+    flex-direction: column;
+    gap: 0;
+    padding: 10px 20px;
+  }
+
+  .mobileOpen .navList li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--light-gray-3);
+  }
+
+  .mobileOpen .navList li:last-child {
+    border-bottom: none;
+  }
 }
 
 @media (max-width: 576px) {
@@ -299,6 +333,10 @@
     padding: 12px 0;
     font-size: 14px;
   }
+
+  .mobileOpen .navList {
+    padding: 10px 15px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -319,15 +357,8 @@
     padding-left: 10px;
     padding-right: 10px;
   }
-}
 
-/* Menu mobile alternativo (se necessário implementar menu hambúrguer completo) */
-@media (max-width: 576px) {
-  .menuToggle {
-    display: block;
-  }
-
-  .mainNav.mobileHidden {
-    display: none;
+  .mobileOpen .navList {
+    padding: 10px 10px;
   }
 }

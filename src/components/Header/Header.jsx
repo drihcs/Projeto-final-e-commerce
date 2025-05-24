@@ -5,6 +5,7 @@ import CartModal from '../CartModal/CartModal'
 
 export default function Header() {
   const [showCart, setShowCart] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const [cartItems, setCartItems] = useState([
     {
@@ -34,16 +35,20 @@ export default function Header() {
     }
   }
 
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen)
+  }
+
   return (
     <header className={styles.header}>
       <div className={styles.headerContainer}>
         {/* Logo */}
-   <div className={styles.logo}>
-    <img src="/logoDigitalCollege.png" alt="Logo Digital Store" className={styles.logoIcon} />
-   <h1 className={styles.logoText}>
-      <span className={styles.highlight}>Digital</span> Store
-     </h1>
-    </div>
+        <div className={styles.logo}>
+          <img src="/logoDigitalCollege.png" alt="Logo Digital Store" className={styles.logoIcon} />
+          <h1 className={styles.logoText}>
+            <span className={styles.highlight}>Digital</span> Store
+          </h1>
+        </div>
 
         {/* Search */}
         <div className={styles.searchBar}>
@@ -76,23 +81,34 @@ export default function Header() {
             <span className="material-symbols-outlined">shopping_cart</span>
             <div className={styles.cartCount}>{cartItems.length}</div>
           </button>
+
+          {/* Menu hambúrguer para mobile */}
+          <button
+            className={styles.menuToggle}
+            onClick={toggleMobileMenu}
+            aria-label="Menu"
+          >
+            <span className="material-symbols-outlined">
+              {mobileMenuOpen ? 'close' : 'menu'}
+            </span>
+          </button>
         </div>
       </div>
 
       {/* Navegação principal */}
-      <nav className={styles.mainNav}>
+      <nav className={`${styles.mainNav} ${mobileMenuOpen ? styles.mobileOpen : ''}`}>
         <ul className={styles.navList}>
           <li className={styles.active}>
-            <Link to="/">Home</Link>
+            <Link to="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
           </li>
           <li>
-            <Link to="/produtos">Produtos</Link>
+            <Link to="/produtos" onClick={() => setMobileMenuOpen(false)}>Produtos</Link>
           </li>
           <li>
-            <Link to="/categorias">Categorias</Link>
+            <Link to="/categorias" onClick={() => setMobileMenuOpen(false)}>Categorias</Link>
           </li>
           <li>
-            <Link to="/pedidos">Meus Pedidos</Link>
+            <Link to="/pedidos" onClick={() => setMobileMenuOpen(false)}>Meus Pedidos</Link>
           </li>
         </ul>
       </nav>
