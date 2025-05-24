@@ -31,16 +31,28 @@ export default function CollectionCards() {
           {colecoes.map(colecao => (
             <div key={colecao.id} className={styles.collectionCard}>
               <div className={styles.cardBackground}></div>
+
+              {/* Tag de desconto fora do cardContent */}
+              <span className={styles.discountTag}>{colecao.desconto}</span>
+
               <div className={styles.cardContent}>
-                <span className={styles.discountTag}>{colecao.desconto}</span>
-                <h3 className={styles.cardTitle}>{colecao.titulo}</h3>
+                <h3 className={styles.cardTitle}>
+                  {colecao.id === 'supreme' ? (
+                    <>
+                      Novo drop <br /> Supreme
+                    </>
+                  ) : (
+                    colecao.titulo
+                  )}
+                </h3>
                 <a className={styles.buyButton} href={`/colecao/${colecao.id}`}>
                   Comprar
                 </a>
               </div>
+
               <div className={styles.productImageContainer}>
-                <img 
-                  src={colecao.imagemProduto || "/placeholder.svg"} 
+                <img
+                  src={colecao.imagemProduto || "/placeholder.svg"}
                   alt={colecao.titulo}
                   className={styles.productImage}
                 />
