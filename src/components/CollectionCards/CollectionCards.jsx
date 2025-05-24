@@ -37,14 +37,24 @@ export default function CollectionCards() {
 
               <div className={styles.cardContent}>
                 <h3 className={styles.cardTitle}>
-                  {colecao.id === 'supreme' ? (
+                  {colecao.id === 'supreme' && (
                     <>
                       Novo drop <br /> Supreme
                     </>
-                  ) : (
-                    colecao.titulo
                   )}
+                  {colecao.id === 'adidas' && (
+                    <>
+                      Coleção <br /> Adidas
+                    </>
+                  )}
+                  {colecao.id === 'beats' && (
+                    <>
+                      Novo Beats <br /> Bass
+                    </>
+                  )}
+                  {!['supreme', 'adidas', 'beats'].includes(colecao.id) && colecao.titulo}
                 </h3>
+
                 <a className={styles.buyButton} href={`/colecao/${colecao.id}`}>
                   Comprar
                 </a>

@@ -42,21 +42,20 @@
 
 .discountTag {
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 16px;
+  left: 16px;
   background-color: #ecff36;
   color: #000;
   font-size: 12px;
   font-weight: 600;
   padding: 6px 12px;
   border-radius: 20px;
-  display: inline-block;
-  z-index: 3;
+  z-index: 2;
 }
 
 
 .cardTitle {
-  font-size: 20px;
+  font-size: 35px;
   font-weight: 700;
   margin: 0 0 12px 0;
   color: #000;
