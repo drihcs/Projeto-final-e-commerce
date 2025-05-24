@@ -1,6 +1,6 @@
 .specialOffer {
   width: 100%;
-  background: linear-gradient(180deg, #c92071 0%, #8b1a5c 50%, #6b1547 100%);
+  background: linear-gradient(180deg, #C92071 0%, #8B1A5C 50%, #6B1547 100%);
   position: relative;
   overflow: hidden;
   padding: 80px 0;
@@ -77,7 +77,7 @@
 /* Badge de oferta */
 .offerBadge {
   display: inline-block;
-  background-color: #c92071;
+  background-color: #C92071;
   color: white;
   padding: 8px 20px;
   border-radius: 20px;
@@ -93,7 +93,7 @@
   font-size: 48px;
   font-weight: 800;
   margin-bottom: 20px;
-  color: #1f1f1f;
+  color: #1F1F1F;
   line-height: 1.2;
 }
 
@@ -108,7 +108,7 @@
 /* Botão da oferta */
 .offerButton {
   display: inline-flex;
-  background-color: #c92071;
+  background-color: #C92071;
   color: white;
   padding: 16px 32px;
   border-radius: 8px;
@@ -123,7 +123,7 @@
 }
 
 .offerButton:hover {
-  background-color: #8b1a5c;
+  background-color: #8B1A5C;
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(201, 32, 113, 0.3);
 }
@@ -264,9 +264,3 @@
 
   .offerTitle {
     font-size: 24px;
-  }
-
-  .offerDescription {
-    font-size: 13px;
-  }
-}
