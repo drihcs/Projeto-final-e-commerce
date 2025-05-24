@@ -1,22 +1,26 @@
 // src/components/FormLogin.jsx
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../contexts/AuthContext' 
+import { useAuth } from '../../contexts/AuthContext'
 import '../FormLogin/FormLogin.module.css'
+
 
 export default function FormLogin() {
   const { login } = useAuth()
   const navigate = useNavigate()
+
 
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
   const [erro, setErro] = useState('')
   const [carregando, setCarregando] = useState(false)
 
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setErro('')
     setCarregando(true)
+
 
     try {
       await login(email, senha)
@@ -28,6 +32,7 @@ export default function FormLogin() {
       setCarregando(false)
     }
   }
+
 
   return (
     <form onSubmit={handleSubmit} style={{ maxWidth: '300px', margin: 'auto' }}>
