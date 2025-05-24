@@ -1,101 +1,75 @@
-.card {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.imageContainer {
+.sectionTitle {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--dark-gray);
+}
+
+.collectionGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+}
+
+.collectionCard {
+  height: 250px;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
   position: relative;
-  background-color: white;
-  border-radius: 4px;
-  padding: 20px;
-  margin-bottom: 16px;
-  height: 220px;
+  background-size: cover;
+  background-position: center;
+  color: var(--white);
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-end;
+  background-color: #d8e3f2;
+  transition: transform 0.3s ease;
+}
+
+.collectionCard:hover {
+  transform: translateY(-4px);
 }
 
 .discountTag {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  background-color: #e8ff54;
-  color: #333;
+  background-color: #ecff36;
+  color: #000;
   font-size: 12px;
   font-weight: 600;
   padding: 6px 12px;
   border-radius: 20px;
-  z-index: 2;
-}
-
-.imagem {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  transform: rotate(-15deg);
-  max-width: 180px;
-}
-
-.productInfo {
+  display: inline-block;
   margin-bottom: 12px;
 }
 
-.categoria {
-  color: #8f8f8f;
-  font-size: 12px;
-  font-weight: 500;
-  display: block;
-  margin-bottom: 4px;
+.buyButton {
+  background-color: #fff;
+  color: #c92071;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 12px;
+  transition: background-color 0.2s ease;
 }
 
-.nome {
-  color: #474747;
-  font-size: 24px;
+.buyButton:hover {
+  background-color: #fce4f1;
+}
+
+h3 {
+  font-size: 20px;
   font-weight: 700;
-  margin: 0 0 8px 0;
-  line-height: 1.2;
-}
-
-.precos {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.precoOriginal {
-  color: #8f8f8f;
-  font-size: 16px;
-  text-decoration: line-through;
-  font-weight: 400;
-}
-
-.precoAtual {
-  color: #1f1f1f;
-  font-size: 24px;
-  font-weight: 700;
-}
-
-.botao {
-  display: none; /* Oculto conforme o design */
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-  .imageContainer {
-    height: 180px;
-    padding: 15px;
-  }
-  
-  .imagem {
-    max-width: 140px;
-  }
-  
-  .nome {
-    font-size: 20px;
-  }
-  
-  .precoAtual {
-    font-size: 20px;
-  }
+  margin: 0;
+  color: #fff;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
 }

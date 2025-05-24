@@ -1,84 +1,77 @@
 .card {
-  background-color: white;
-  border-radius: 8px;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
-  position: relative;
-  padding: 0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.imagem {
   width: 100%;
-  height: 220px;
-  object-fit: contain;
+}
+
+.imagemContainer {
+  position: relative;
   background-color: white;
-  padding: 20px;
+  border-radius: 8px;
+  width: 100%;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
 }
 
-.card h3 {
-  font-size: 16px;
-  font-weight: 500;
-  margin: 0;
-  padding: 0 15px 5px;
-  color: #333;
-}
-
-.card p {
-  font-size: 16px;
-  margin: 0;
-  padding: 0 15px 5px;
-  color: #000;
-  font-weight: 600;
-}
-
-.botao {
-  display: none;
-}
-
-/* Estilo para a categoria */
-.card::after {
-  content: "Tênis";
-  display: block;
-  color: #9e9e9e;
-  font-size: 14px;
-  padding: 0 15px 15px;
-}
-
-/* Estilo para o preço original */
-.card h3::after {
-  content: "$200";
-  display: block;
-  color: #9e9e9e;
-  font-size: 14px;
-  font-weight: normal;
-  text-decoration: line-through;
-  margin-top: 5px;
-}
-
-/* Estilo para a etiqueta de desconto */
-.card::before {
-  content: "30% OFF";
+.desconto {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 15px;
+  left: 15px;
   background-color: #e8ff54;
   color: #333;
-  padding: 5px 10px;
+  padding: 6px 12px;
   border-radius: 20px;
   font-size: 12px;
   font-weight: 600;
   z-index: 1;
 }
 
-/* Adiciona o nome do produto no topo */
-.imagem::before {
-  content: "V8 - Masculino";
-  position: absolute;
-  top: 10px;
-  left: 110px;
-  font-size: 16px;
+.imagem {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+  transform: rotate(-15deg);
+}
+
+.infoContainer {
+  background: transparent;
+  padding: 0;
+}
+
+.categoria {
+  color: #9e9e9e;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.nome {
+  font-size: 18px;
   font-weight: 500;
+  margin: 0 0 8px 0;
   color: #333;
+}
+
+.precos {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.precoOriginal {
+  color: #9e9e9e;
+  font-size: 16px;
+  text-decoration: line-through;
+}
+
+.precoAtual {
+  color: #000;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.botao {
+  display: none;
 }
