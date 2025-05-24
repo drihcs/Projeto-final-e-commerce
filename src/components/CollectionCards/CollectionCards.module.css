@@ -6,22 +6,22 @@
 }
 
 .sectionTitle {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 700;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
   color: #333;
   text-align: left;
 }
 
 .collectionGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 32px;
 }
 
 .collectionCard {
   position: relative;
-  height: 170px;
+  height: 200px;
   border-radius: 12px;
   overflow: hidden;
   transition: transform 0.3s ease;
@@ -29,7 +29,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 24px;
+  padding: 32px;
 }
 
 .collectionCard:hover {
@@ -43,33 +43,33 @@
 
 .discountTag {
   position: absolute;
-  top: 16px;
-  left: 16px;
+  top: 20px;
+  left: 20px;
   background-color: #ecff36;
   color: #000;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
-  padding: 6px 12px;
+  padding: 8px 16px;
   border-radius: 20px;
   z-index: 2;
 }
 
 .cardTitle {
-  font-size: 35px;
+  font-size: 48px;
   font-weight: 700;
-  margin: 0 0 12px 0;
+  margin: 0 0 16px 0;
   color: #000;
-  line-height: 1.3;
+  line-height: 1.2;
 }
 
 .buyButton {
   background-color: #fff;
   color: #c92071;
   border: none;
-  padding: 8px 16px;
+  padding: 12px 24px;
   border-radius: 8px;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 16px;
   text-decoration: none;
   display: inline-block;
   transition: background-color 0.2s ease;
@@ -81,18 +81,23 @@
 
 .productImageContainer {
   position: absolute;
-  bottom: 60px;
-  right: 60px;
-  width: 150px;
-  height: 150px;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 200px;
+  height: 100%;
   z-index: 1;
   overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .productImage {
-  width: 150%;
-  height: 150%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
+  object-position: center;
 }
 
 /* Responsividade melhorada */
@@ -101,20 +106,39 @@
     padding: 35px 20px;
   }
 
+  .sectionTitle {
+    font-size: 26px;
+    margin-bottom: 28px;
+  }
+
   .collectionGrid {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 28px;
+  }
+
+  .collectionCard {
+    height: 180px;
+    padding: 28px;
   }
 
   .cardTitle {
-    font-size: 30px;
+    font-size: 42px;
+  }
+
+  .discountTag {
+    top: 18px;
+    left: 18px;
+    font-size: 13px;
+    padding: 7px 14px;
+  }
+
+  .buyButton {
+    padding: 10px 20px;
+    font-size: 15px;
   }
 
   .productImageContainer {
-    width: 130px;
-    height: 130px;
-    bottom: 50px;
-    right: 50px;
+    width: 180px;
   }
 }
 
@@ -124,13 +148,54 @@
   }
 
   .sectionTitle {
-    font-size: 22px;
-    margin-bottom: 20px;
+    font-size: 24px;
+    margin-bottom: 24px;
     text-align: center;
   }
 
   .collectionGrid {
     grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .collectionCard {
+    height: 160px;
+    padding: 24px;
+  }
+
+  .cardTitle {
+    font-size: 36px;
+    margin-bottom: 12px;
+  }
+
+  .discountTag {
+    top: 16px;
+    left: 16px;
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  .buyButton {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .productImageContainer {
+    width: 160px;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    padding: 25px 10px;
+  }
+
+  .sectionTitle {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  .collectionGrid {
     gap: 16px;
   }
 
@@ -140,13 +205,14 @@
   }
 
   .cardTitle {
-    font-size: 26px;
+    font-size: 32px;
     margin-bottom: 10px;
+    line-height: 1.1;
   }
 
   .discountTag {
-    top: 12px;
-    left: 12px;
+    top: 14px;
+    left: 14px;
     font-size: 11px;
     padding: 5px 10px;
   }
@@ -157,55 +223,7 @@
   }
 
   .productImageContainer {
-    width: 110px;
-    height: 110px;
-    bottom: 40px;
-    right: 40px;
-  }
-}
-
-@media (max-width: 576px) {
-  .container {
-    padding: 25px 10px;
-  }
-
-  .sectionTitle {
-    font-size: 20px;
-    margin-bottom: 16px;
-  }
-
-  .collectionGrid {
-    gap: 12px;
-  }
-
-  .collectionCard {
-    height: 140px;
-    padding: 16px;
-  }
-
-  .cardTitle {
-    font-size: 22px;
-    margin-bottom: 8px;
-    line-height: 1.2;
-  }
-
-  .discountTag {
-    top: 10px;
-    left: 10px;
-    font-size: 10px;
-    padding: 4px 8px;
-  }
-
-  .buyButton {
-    padding: 5px 12px;
-    font-size: 12px;
-  }
-
-  .productImageContainer {
-    width: 90px;
-    height: 90px;
-    bottom: 30px;
-    right: 30px;
+    width: 140px;
   }
 
   .productImage {
@@ -220,37 +238,34 @@
   }
 
   .sectionTitle {
-    font-size: 18px;
-    margin-bottom: 14px;
+    font-size: 20px;
+    margin-bottom: 16px;
   }
 
   .collectionCard {
-    height: 130px;
-    padding: 14px;
+    height: 140px;
+    padding: 18px;
   }
 
   .cardTitle {
-    font-size: 20px;
-    margin-bottom: 6px;
+    font-size: 28px;
+    margin-bottom: 8px;
   }
 
   .discountTag {
-    top: 8px;
-    left: 8px;
-    font-size: 9px;
-    padding: 3px 6px;
+    top: 12px;
+    left: 12px;
+    font-size: 10px;
+    padding: 4px 8px;
   }
 
   .buyButton {
-    padding: 4px 10px;
-    font-size: 11px;
+    padding: 5px 12px;
+    font-size: 12px;
   }
 
   .productImageContainer {
-    width: 80px;
-    height: 80px;
-    bottom: 25px;
-    right: 25px;
+    width: 120px;
   }
 
   .productImage {
@@ -266,17 +281,14 @@
   }
 
   .collectionCard {
-    height: 120px;
+    height: 140px;
   }
 
   .cardTitle {
-    font-size: 20px;
+    font-size: 28px;
   }
 
   .productImageContainer {
-    width: 80px;
-    height: 80px;
-    bottom: 20px;
-    right: 20px;
+    width: 120px;
   }
 }
