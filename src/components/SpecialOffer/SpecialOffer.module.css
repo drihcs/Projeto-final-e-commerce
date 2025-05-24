@@ -1,93 +1,123 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: var(--light-gray-3); /* Cor de fundo clara */
-  color: var(--dark-gray); /* Cor de texto escuro */
-}
-
-/* Container centralizado */
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-/* Container das ofertas */
-.offer-container {
+.specialOfferSection {
+  background-color: #ffffff;
+  padding: 40px 20px;
   display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-/* Estilos da imagem da oferta */
-.offer-image {
-  flex: 1;
-  min-width: 300px;
-  border-radius: 10px;
-  overflow: hidden;
-  position: relative;
-  height: 300px;
-}
-
-.offer-image img {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  inset: 0;
-  object-fit: cover;
-}
-
-/* Conteúdo da oferta */
-.offer-content {
-  flex: 1;
-  min-width: 300px;
-}
-
-/* Badge de oferta */
-.offer-badge {
-  display: inline-block;
-  background-color: var(--primary);
-  color: var(--white);
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-
-/* Título da oferta */
-.offer-title {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  color: var(--dark-gray);
-}
-
-/* Descrição da oferta */
-.offer-description {
-  margin-bottom: 1.5rem;
-  opacity: 0.8;
-  color: var(--dark-gray-3);
-}
-
-/* Estilo do botão */
-.button {
-  display: inline-flex;
-  background-color: var(--primary);
-  color: var(--white);
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.375rem;
-  font-weight: 500;
-  text-decoration: none;
-  align-items: center;
   justify-content: center;
+}
+
+.specialOfferContainer {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.decorativeCircle {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 0;
+  width: 400px;
+  height: 400px;
+}
+
+.decorativeCircle img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.productImageSection {
+  flex: 1 1 50%;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.productImg {
+  max-width: 100%;
+  height: auto;
+  z-index: 1;
+  position: relative;
+}
+
+.offerContentSection {
+  flex: 1 1 50%;
+  z-index: 1;
+}
+
+.offerCard {
+  padding: 0 20px;
+}
+
+.specialBadge {
+  color: #c92071;
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.specialTitle {
+  font-size: 32px;
+  font-weight: 800;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.specialDescription {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  max-width: 500px;
+}
+
+.specialButton {
+  display: inline-block;
+  background-color: #c92071;
+  color: white;
+  padding: 12px 24px;
+  font-weight: 600;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
   transition: background-color 0.3s ease;
 }
 
-.button:hover {
-  background-color: var(--tertiary); /* Cor de foco no botão */
+.specialButton:hover {
+  background-color: #991956;
+}
+
+@media (max-width: 960px) {
+  .specialOfferContainer {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .offerCard {
+    padding: 0;
+  }
+
+  .productImageSection {
+    order: 2;
+  }
+
+  .offerContentSection {
+    order: 1;
+  }
+
+  .decorativeCircle {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -30%);
+    width: 300px;
+    height: 300px;
+  }
 }
