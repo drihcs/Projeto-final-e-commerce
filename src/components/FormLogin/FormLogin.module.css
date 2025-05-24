@@ -1,18 +1,23 @@
-/* FormLogin.module.css */
+/* FormLogin.module.css (ajustado conforme solicitado) */
 
 .loginForm {
   max-width: 400px;
-  margin: 60px auto;
+  margin: 60px auto; /* Esta margem pode fazer o formulário parecer flutuar.
+                        No contexto da página Login.jsx que montamos,
+                        o posicionamento é controlado pelo container pai.
+                        Pode ser que esta margem não seja mais necessária ou precise de ajuste. */
   padding: 32px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background-color: #fff; /* Mantém o fundo branco do formulário */
+  border-radius: 8px;    /* Mantém as bordas arredondadas */
+  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); */ /* Removida a sombra */
+  border: none; /* Adicionado para garantir que não haja nenhuma borda */
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
-.loginTitle {
+.loginTitle { /* Este título não está sendo usado no FormLogin.jsx que montamos,
+                 pois o título "Acesse sua conta" está na página Login.jsx */
   font-size: 28px;
   font-weight: 700;
   color: #333;
@@ -28,7 +33,8 @@
 
 .inputLabel {
   font-size: 14px;
-  font-weight: 500;
+  /* font-weight: 500; */ /* Alterado de 500 */
+  font-weight: bold;   /* Para negrito */
   color: #555;
 }
 
@@ -72,5 +78,5 @@
   color: red;
   font-size: 14px;
   text-align: center;
-  margin-top: -12px;
+  margin-top: -12px; /* Pode precisar de ajuste dependendo do layout final */
 }
