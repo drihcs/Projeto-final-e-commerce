@@ -1,105 +1,54 @@
-import React, { useState } from 'react';
-import styles from './CadastroEmail.module.css'; // Usando CSS Modules
-import Footer from '../components/Footer/Footer'; // Assumindo que você tem o Footer aqui
-
-// Imagem do tênis (coloque na pasta /public ou ajuste o caminho)
-const tenisImageUrl1 = "/pexels-melvin-buezo-2529148 1 (1).png";
-const tenisImageUrl2 = "/pexels-melvin-buezo-2529148 2 (1).png";
- // Exemplo de nome de arquivo
-
-// Ícones para redes sociais (coloque na pasta /public/icons ou use uma lib)
-// const googleIconUrl = "/icons/google-icon.svg";
-// const metaIconUrl = "/icons/meta-icon.svg";
-// const microsoftIconUrl = "/icons/microsoft-icon.svg";
+import React, { useState } from 'react'
+import './CadastroEmail.module.css'
 
 function CadastroEmail() {
-  const [email, setEmail] = useState('');
-  const [mensagem, setMensagem] = useState('');
-  const [enviando, setEnviando] = useState(false);
+  const [email, setEmail] = useState('')
+  const [mensagem, setMensagem] = useState('')
+  const [enviando, setEnviando] = useState(false)
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
+
     if (!email) {
-      setMensagem('Por favor, informe um e-mail válido.');
-      return;
+      setMensagem('Por favor, informe um e-mail válido.')
+      return
     }
-    setEnviando(true);
-    setMensagem('');
+
+    setEnviando(true)
+    setMensagem('')
+
+    // Simula o envio com um "setTimeout"
     setTimeout(() => {
-      setMensagem(`Instruções de criação de conta enviadas para ${email}.`);
-      setEmail('');
-      setEnviando(false);
-    }, 1500);
-  };
+      setMensagem(`Instruções enviadas para ${email}.`)
+      setEmail('')
+      setEnviando(false)
+    }, 1500)
+  }
 
   return (
-    <div className={styles.pageContainer}>
-      <header className={styles.header}>
-        {/* Usando a mesma estrutura de logo da sua imagem */}
-        <h1 className={styles.logoText}><span className={styles.logoIcon}>❯</span> Digital Store</h1>
-      </header>
+    <div className="cadastro-container">
+      <div className="cadastro-card">
+        <h2>Crie sua conta</h2>
+        <p>Informe seu e-mail para receber as instruções de cadastro.</p>
 
-      <main className={styles.mainContent}>
-        <section className={styles.formSection}>
-          <div className={styles.formCard}>
-            <h2>Crie sua conta</h2>
-            <p className={styles.subLink}>
-              Já possui uma conta? <a href="/login">Entre aqui.</a>
-            </p>
-
-            <form onSubmit={handleSubmit}>
-              <label htmlFor="email" className={styles.inputLabel}>Email <span className={styles.required}>*</span></label>
-              <input
-                type="email"
-                id="email"
-                placeholder="Insira seu email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className={styles.emailInput}
-              />
-              <button type="submit" disabled={enviando} className={styles.submitButton}>
-                {enviando ? 'Criando...' : 'Criar Conta'}
-              </button>
-            </form>
-
-            <div className={styles.socialLoginDivider}>
-              <span className={styles.dividerLine}></span>
-              <span className={styles.socialLoginText}>Ou faça login com</span>
-              <span className={styles.dividerLine}></span>
-            </div>
-
-            <div className={styles.socialIconsContainer}>
-              {/* Para usar imagens:
-                <button className={styles.socialButton} aria-label="Login com Meta">
-                  <img src={metaIconUrl} alt="Meta" />
-                </button> 
-              */}
-              <button className={`${styles.socialButton} ${styles.metaButton}`} aria-label="Login com Meta">M</button>
-              <button className={`${styles.socialButton} ${styles.googleButton}`} aria-label="Login com Google">G</button>
-              <button className={`${styles.socialButton} ${styles.microsoftButton}`} aria-label="Login com Microsoft">M</button>
-            </div>
-            {mensagem && <p className={`${styles.mensagem} ${!email && enviando === false ? styles.mensagemErro : styles.mensagemSucesso}`}>{mensagem}</p>}
-          </div>
-        </section>
-
-        <section className={styles.imageSection}>
-          <img
-            src={tenisImageUrl1}
-            alt="Nike Dia SE QS Sneakers"
-            className={styles.sneakerImage}
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            placeholder="Digite seu e-mail"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
           />
-          <img
-            src={tenisImageUrl2}
-            alt="Nike Dia SE QS Sneakers"
-            className={styles.sneakerImage}
-          />
-        </section>
-      </main>
 
-      <Footer />
+          <button type="submit" disabled={enviando}>
+            {enviando ? 'Enviando...' : 'Enviar'}
+          </button>
+        </form>
+
+        {mensagem && <p className="mensagem">{mensagem}</p>}
+      </div>
     </div>
-  );
+  )
 }
 
-export default CadastroEmail;
+export default CadastroEmail

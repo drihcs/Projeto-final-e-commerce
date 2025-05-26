@@ -1,275 +1,57 @@
-/* CadastroEmail.module.css */
-
-.pageContainer {
+.cadastro-container {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
   min-height: 100vh;
-  background: linear-gradient(135deg, #4a00e0 0%, #8e2de2 70%, #c965e2 100%); /* Gradiente roxo/rosa da imagem */
-  color: #fff; /* Texto padrão branco para contraste com o fundo escuro */
+  background-color: #f8f8f8;
 }
 
-.header {
-  padding: 20px 40px; /* Ajuste o padding conforme necessário */
+.cadastro-card {
+  background-color: white;
+  border-radius: 8px;
+  padding: 30px;
   width: 100%;
-  box-sizing: border-box;
+  max-width: 400px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
-.logoText {
-  font-size: 1.75rem; /* Tamanho do logo */
-  font-weight: bold;
-  color: #ffffff;
-  margin: 0;
+.cadastro-card h2 {
+  margin-bottom: 10px;
+  font-size: 24px;
 }
 
-.logoIcon {
-  color: #f03a8d; /* Cor rosa/magenta para o ícone ">" */
-  margin-right: 8px;
-}
-
-.mainContent {
-  display: flex;
-  flex-grow: 1;
-  align-items: center; /* Tenta centralizar verticalmente */
-  justify-content: space-between; /* Espaça o formulário e a imagem */
-  padding: 20px 40px; /* Padding lateral */
-  gap: 40px; /* Espaço entre a seção do formulário e a imagem */
-  width: 100%;
-  max-width: 1200px; /* Limita a largura máxima do conteúdo principal */
-  margin: 0 auto; /* Centraliza o conteúdo na página */
-  box-sizing: border-box;
-}
-
-.formSection {
-  flex: 1 1 500px; /* Permite crescer e encolher, base de 500px */
-  display: flex;
-  justify-content: center; /* Centraliza o card se a seção for maior */
-  max-width: 480px; /* Largura máxima da seção do formulário */
-}
-
-.formCard {
-  background-color: #ffffff;
-  padding: 35px 40px;
-  border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  width: 100%;
-  color: #333; /* Texto escuro dentro do card */
-}
-
-.formCard h2 {
-  font-size: 1.8rem;
-  margin-top: 0;
-  margin-bottom: 8px;
-  color: #2c3e50;
-  font-weight: 600;
-}
-
-.subLink {
-  font-size: 0.95rem;
-  margin-bottom: 30px;
+.cadastro-card p {
+  margin-bottom: 20px;
   color: #555;
 }
 
-.subLink a {
-  color: #8e2de2; /* Cor roxa para o link, combine com o gradiente */
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.subLink a:hover {
-  text-decoration: underline;
-}
-
-.inputLabel {
-  display: block;
-  font-size: 0.9rem;
-  color: #444;
-  margin-bottom: 6px;
-  font-weight: 500;
-}
-
-.required {
-  color: #e74c3c; /* Vermelho para o asterisco */
-}
-
-.emailInput {
+.cadastro-card input {
   width: 100%;
-  padding: 14px 16px;
-  margin-bottom: 20px;
-  border: 1px solid #dcdcdc;
-  border-radius: 6px;
-  box-sizing: border-box;
-  font-size: 1rem;
-  background-color: #f7f7f7; /* Fundo levemente cinza para o input */
-  color: #333;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
-.emailInput::placeholder {
-  color: #999;
-}
-
-.emailInput:focus {
-  outline: none;
-  border-color: #8e2de2;
-  box-shadow: 0 0 0 2px rgba(142, 45, 226, 0.2);
-}
-
-.submitButton {
+.cadastro-card button {
   width: 100%;
-  padding: 14px;
-  background-color: #e83e8c; /* Rosa/magenta do botão "Criar Conta" */
+  padding: 10px;
+  background-color: #222;
   color: white;
   border: none;
-  border-radius: 6px;
-  font-size: 1.05rem;
-  font-weight: bold;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.1s ease;
 }
 
-.submitButton:hover {
-  background-color: #d13076;
-}
-
-.submitButton:active {
-  transform: translateY(1px);
-}
-
-.submitButton:disabled {
-  background-color: #f09dbb;
+.cadastro-card button:disabled {
+  background-color: #999;
   cursor: not-allowed;
 }
 
-.socialLoginDivider {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  margin: 30px 0;
-}
-
-.dividerLine {
-  flex-grow: 1;
-  height: 1px;
-  background-color: #cccccc;
-}
-
-.socialLoginText {
-  padding: 0 15px;
-  font-size: 0.9rem;
-  color: #777;
-  white-space: nowrap;
-}
-
-.socialIconsContainer {
-  display: flex;
-  justify-content: center;
-  gap: 20px; /* Espaço entre os ícones sociais */
-}
-
-.socialButton {
-  background-color: transparent;
-  border: 1px solid #d0d0d0;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.3rem; /* Ajuste se usar ícones de fonte */
-  font-weight: bold;
-  color: #555; /* Cor para os placeholders M, G, M */
-  cursor: pointer;
-  transition: background-color 0.2s, border-color 0.2s;
-}
-
-.socialButton:hover {
-  border-color: #888;
-  background-color: #f9f9f9;
-}
-
-.socialButton img { /* Se usar imagens dentro dos botões */
-  height: 20px; /* Ajuste o tamanho do ícone */
-  width: auto;
-}
-
-/* Cores específicas para os placeholders, se desejar */
-.metaButton { /* color: #1877F2; */ }
-.googleButton { /* color: #DB4437; */ }
-.microsoftButton { /* color: #00A4EF; */ }
-
-
 .mensagem {
-  margin-top: 20px;
-  padding: 12px;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  text-align: center;
-}
-
-.mensagemSucesso {
-  background-color: #e6ffed;
-  color: #2f6f2f;
-  border: 1px solid #c3e6cb;
-}
-
-.mensagemErro {
-  background-color: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
-}
-
-.imageSection {
-  flex: 1 1 60%; /* Ocupa mais espaço, se disponível */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 300px; /* Garante que a imagem tenha algum espaço */
-}
-
-.sneakerImage {
-  max-width: 100%;
-  max-height: 550px; /* Limita a altura da imagem */
-  height: auto;
-  object-fit: contain;
-}
-
-/* Media queries para responsividade */
-@media (max-width: 992px) {
-  .mainContent {
-    flex-direction: column-reverse; /* Imagem acima do formulário em telas menores */
-    padding: 20px;
-    gap: 30px;
-  }
-  .formSection {
-    max-width: 500px; /* Permite que o formulário ocupe mais largura em telas médias */
-    margin: 0 auto; /* Centraliza */
-  }
-  .imageSection {
-    width: 100%;
-    max-width: 450px; /* Limita o tamanho da imagem */
-    margin-bottom: 20px;
-  }
-  .sneakerImage {
-    max-height: 400px;
-  }
-}
-
-@media (max-width: 768px) {
-  .header {
-    padding: 15px 20px;
-    text-align: center; /* Centraliza o logo em mobile */
-  }
-  .formCard {
-    padding: 25px 20px;
-  }
-  .formCard h2 {
-    font-size: 1.6rem;
-  }
-  .socialIconsContainer {
-    gap: 15px;
-  }
-  .socialButton {
-    width: 40px;
-    height: 40px;
-    font-size: 1.1rem;
-  }
+  margin-top: 15px;
+  color: green;
+  font-weight: bold;
 }
