@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
-import './CadastroEmail.module.css'
+import  styles from './CadastroEmail.module.css'
 import Footer from '../components/Footer/Footer';
+
+const tenisImageUrl1 = "/pexels-melvin-buezo-2529148 1 (1).png";
+const tenisImageUrl2 = "/pexels-melvin-buezo-2529148 2 (1).png";
+
 
 
 function CadastroEmail() {
-  const tenisImageUrl1 = "/pexels-melvin-buezo-2529148 1 (1).png";
-  const tenisImageUrl2 = "/pexels-melvin-buezo-2529148 2 (1).png";
-
-
+  
   const [email, setEmail] = useState('')
   const [mensagem, setMensagem] = useState('')
   const [enviando, setEnviando] = useState(false)
@@ -31,10 +32,12 @@ function CadastroEmail() {
     }, 1500)
   }
 
-  <div className={styles.pageContainer}>
+   return (
+
+    <div className={styles.pageContainer}>
       <header className={styles.header}>
         {/* Usando a mesma estrutura de logo da sua imagem */}
-        <h1 className={styles.logoText}><span className={styles.logoIcon}>❯</span> Digital Store</h1>
+        <h1 className={styles.logoText}><span className={styles.logoIcon}></span> Digital Store</h1>
       </header>
 
       <main className={styles.mainContent}>
@@ -69,10 +72,10 @@ function CadastroEmail() {
 
             <div className={styles.socialIconsContainer}>
               {/* Para usar imagens:
-                <button className={styles.socialButton} aria-label="Login com Meta">
-                  <img src={metaIconUrl} alt="Meta" />
-                </button> 
-              */}
+                  <button className={styles.socialButton} aria-label="Login com Meta">
+                    <img src={metaIconUrl} alt="Meta" />
+                  </button> 
+                */}
               <button className={`${styles.socialButton} ${styles.metaButton}`} aria-label="Login com Meta">M</button>
               <button className={`${styles.socialButton} ${styles.googleButton}`} aria-label="Login com Google">G</button>
               <button className={`${styles.socialButton} ${styles.microsoftButton}`} aria-label="Login com Microsoft">M</button>
@@ -99,6 +102,8 @@ function CadastroEmail() {
 
       <Footer />
     </div>
+   )
 }
+
 
 export default CadastroEmail
