@@ -1,0 +1,40 @@
+.optionGroup {
+  margin-bottom: 20px;
+}
+
+.optionTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: var(--secondary-color); /* Definido em global.css */
+}
+
+.sizeOptions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.sizeButton {
+  padding: 10px 18px;
+  border: 1px solid var(--medium-gray); /* Definido em global.css */
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--secondary-color); /* Definido em global.css */
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out,
+    color 0.2s ease-in-out;
+}
+
+.sizeButton:hover {
+  border-color: var(--primary-color); /* Definido em global.css */
+  color: var(--primary-color);
+}
+
+.sizeButton.active {
+  background-color: var(--primary-color); /* Definido em global.css */
+  color: #fff;
+  border-color: var(--primary-color);
+}

@@ -1,0 +1,31 @@
+.optionGroup {
+  margin-bottom: 20px;
+}
+
+.optionTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: var(--secondary-color); /* Definido em global.css */
+}
+
+.colorOptions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.colorSwatch {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--medium-gray); /* Definido em global.css */
+  cursor: pointer;
+  transition: border-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+}
+
+.colorSwatch.active {
+  border-color: var(--primary-color); /* Definido em global.css */
+  box-shadow: 0 0 0 2px var(--primary-color);
+  transform: scale(1.05);
+}
