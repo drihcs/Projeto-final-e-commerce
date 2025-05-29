@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import headerLogo from '../../assets/logo-header.svg'
 import styles from './Header.module.css'
 import CartModal from '../CartModal/CartModal'
 
@@ -44,10 +45,9 @@ export default function Header() {
       <div className={styles.headerContainer}>
         {/* Logo */}
         <div className={styles.logo}>
-          <img src="/logoDigitalCollege.png" alt="Logo Digital Store" className={styles.logoIcon} />
-          <h1 className={styles.logoText}>
-            <span className={styles.highlight}>Digital</span> Store
-          </h1>
+           <Link to="/">
+              <img src={headerLogo} alt="Logo Digital Store" />
+           </Link>
         </div>
 
         {/* Search */}

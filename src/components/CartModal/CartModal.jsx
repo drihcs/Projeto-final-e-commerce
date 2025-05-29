@@ -43,7 +43,7 @@ const CartModal = ({ cartItems, onClose, onClear }) => {
         </button>
         <button
           className={styles['checkout-btn']}
-          onClick={() => navigate('/FinalizarCompra')}
+          onClick={() => navigate('/finalizar-compra')}
         >
           Ver Carrinho
         </button>

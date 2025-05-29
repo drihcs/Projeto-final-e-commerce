@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styles from "../SpecialOffer/SpecialOffer.module.css"
 
 export default function SpecialOffer() {
@@ -21,9 +22,9 @@ export default function SpecialOffer() {
               dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
               ea.
             </p>
-            <a className={styles.specialOffer__button} href="/oferta">
+            <Link to="/produto/:id" className={styles.specialOffer__button}>
               Ver Oferta
-            </a>
+            </Link>
           </div>
         </div>
       </div>

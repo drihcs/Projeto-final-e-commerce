@@ -12,7 +12,6 @@ import FinalizarCompra from './pages/FinalizarCompra/FinalizarCompra'
 import CompraFinalizada from './pages/CompraFinalizada/CompraFinalizada'
 import Usuario from './pages/Usuario'
 import Pedidos from './pages/Pedidos/Pedidos'
-
 import PrivateRoute from './routes/PrivateRoute'
 
 function App() {
@@ -24,7 +23,7 @@ function App() {
         <Route path="busca" element={<ProductListDesign />} />
 
         <Route
-          path="carrinho"
+          path="finalizar-compra"
           element={
             <PrivateRoute>
               <FinalizarCompra />
