@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../../utils/supabase";
-import "./ProductListDesign.module.css";
+import styles from "./ProductListDesign.module.css";
 
 export default function Busca() {
   const [produtos, setProdutos] = useState([]);
@@ -73,104 +73,100 @@ export default function Busca() {
   }
 
   return (
-    <div className="pagina-busca">
-      <aside className="filtros">
-        <h3>Filtrar por</h3>
+  <div className={styles.paginaBusca}>
+    <aside className={styles.filtros}>
+      <h3>Filtrar por</h3>
 
-        <div className="filtro">
-          <strong>Marca</strong>
-          {["Adidas", "Calçados", "K-Swiss", "Nike", "Puma"].map((marca) => (
-            <label key={marca}>
-              <input
-                type="checkbox"
-                checked={filtros.marcas.includes(marca)}
-                onChange={() => toggleFiltroArray("marcas", marca)}
-              />
-              {marca}
-            </label>
-          ))}
-        </div>
+      <div className={styles.filtro}>
+        <strong>Marca</strong>
+        {["Adidas", "Calçados", "K-Swiss", "Nike", "Puma"].map((marca) => (
+          <label key={marca}>
+            <input
+              type="checkbox"
+              checked={filtros.marcas.includes(marca)}
+              onChange={() => toggleFiltroArray("marcas", marca)}
+            />
+            {marca}
+          </label>
+        ))}
+      </div>
 
-        <div className="filtro">
-          <strong>Categoria</strong>
-          {["Esporte e lazer", "Casual", "Utilitária", "Corrida"].map((cat) => (
-            <label key={cat}>
-              <input
-                type="checkbox"
-                checked={filtros.categorias.includes(cat)}
-                onChange={() => toggleFiltroArray("categorias", cat)}
-              />
-              {cat}
-            </label>
-          ))}
-        </div>
+      <div className={styles.filtro}>
+        <strong>Categoria</strong>
+        {["Esporte e lazer", "Casual", "Utilitária", "Corrida"].map((cat) => (
+          <label key={cat}>
+            <input
+              type="checkbox"
+              checked={filtros.categorias.includes(cat)}
+              onChange={() => toggleFiltroArray("categorias", cat)}
+            />
+            {cat}
+          </label>
+        ))}
+      </div>
 
-        <div className="filtro">
-          <strong>Gênero</strong>
-          {["Masculino", "Feminino", "Unissex"].map((gen) => (
-            <label key={gen}>
-              <input
-                type="checkbox"
-                checked={filtros.generos.includes(gen)}
-                onChange={() => toggleFiltroArray("generos", gen)}
-              />
-              {gen}
-            </label>
-          ))}
-        </div>
+      <div className={styles.filtro}>
+        <strong>Gênero</strong>
+        {["Masculino", "Feminino", "Unissex"].map((gen) => (
+          <label key={gen}>
+            <input
+              type="checkbox"
+              checked={filtros.generos.includes(gen)}
+              onChange={() => toggleFiltroArray("generos", gen)}
+            />
+            {gen}
+          </label>
+        ))}
+      </div>
 
-        <div className="filtro filtro-estado">
-          <strong>Estado</strong>
-          {["Novo", "Usado"].map((estado) => (
-            <label key={estado}>
-              <input
-                type="radio"
-                name="estado"
-                checked={filtros.estado === estado}
-                onChange={() => setFiltroEstado(estado)}
-              />
-              {estado}
-            </label>
-          ))}
-        </div>
-      </aside>
+      <div className={`${styles.filtro} ${styles.filtroEstado}`}>
+        <strong>Estado</strong>
+        {["Novo", "Usado"].map((estado) => (
+          <label key={estado}>
+            <input
+              type="radio"
+              name="estado"
+              checked={filtros.estado === estado}
+              onChange={() => setFiltroEstado(estado)}
+            />
+            {estado}
+          </label>
+        ))}
+      </div>
+    </aside>
 
-      <section className="produtos">
-        <div className="top-bar">
-          <p>Resultados para “Tênis” – {produtosOrdenados.length} produtos</p>
-          <select value={filtros.ordenacao} onChange={setOrdenacao}>
-            <option value="mais relevantes">
-              Ordenar por: mais relevantes
-            </option>
-            <option value="Menor preço">Menor preço</option>
-            <option value="Maior preço">Maior preço</option>
-          </select>
-        </div>
+    <section className={styles.produtos}>
+      <div className={styles.topBar}>
+        <p>Resultados para “Tênis” – {produtosOrdenados.length} produtos</p>
+        <select value={filtros.ordenacao} onChange={setOrdenacao}>
+          <option value="mais relevantes">Ordenar por: mais relevantes</option>
+          <option value="Menor preço">Menor preço</option>
+          <option value="Maior preço">Maior preço</option>
+        </select>
+      </div>
 
-        <div className="gradeProdutos">
-          {produtosOrdenados.map((produto) => (
-            <div className="produto" key={produto.id}>
-              <span className="desconto">{produto.discount}</span>
-              <img src={produto.image} alt={`Imagem do ${produto.name}`} />
-              <h4>{produto.name}</h4>
-              <p>
-                <del>
-                  R$
-                  {Number(
-                    produto.original_price.replace("R$", "").replace(",", ".")
-                  ).toFixed(2)}
-                </del>
-                <strong>
-                  R$
-                  {Number(
-                    produto.price.replace("R$", "").replace(",", ".")
-                  ).toFixed(2)}
-                </strong>
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-    </div>
-  );
+      <div className={styles.gradeProdutos}>
+        {produtosOrdenados.map((produto) => (
+          <div className={styles.produto} key={produto.id}>
+            <span className={styles.desconto}>{produto.discount}</span>
+            <img src={produto.image} alt={`Imagem do ${produto.name}`} />
+            <h4>{produto.name}</h4>
+            <p>
+              <del>
+                R$
+                {Number(
+                  produto.original_price.replace("R$", "").replace(",", ".")
+                ).toFixed(2)}
+              </del>
+              <strong>
+                R$
+                {Number(produto.price.replace("R$", "").replace(",", ".")).toFixed(2)}
+              </strong>
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+  </div>
+);
 }
