@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './SeletorTamanhos.module.css';
+import styles from './SeletorTamanho.module.css';
 
 function SeletorTamanhos({ tamanhos, tamanhoSelecionado, setTamanhoSelecionado }) {
   return (

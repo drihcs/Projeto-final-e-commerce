@@ -1,51 +1,97 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { produtos } from '../../services/produtos'; // Seus dados de produtos
-import SeletorCores from '../SeletorCores/SeletorCores';
-import SeletorTamanhos from '../SeletorTamanhos/SeletorTamanhos';
-import styles from './ProdutoDetalhado.module.css'; // Importa o CSS Module
-import { FaStar, FaChevronLeft, FaChevronRight } from 'react-icons/fa'; // Para estrelas e navegação de imagem
+import { supabase } from '../../utils/supabase';  // import nomeado
+import SeletorCores from '../../components/SeletorCores/SeletorCores';
+import SeletorTamanhos from '../../components/SeletorTamanho/SeletorTamanho';
+import styles from './ProdutoDetalhado.module.css';
 
 export default function ProdutoDetalhado() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const produto = produtos.find(p => p.id === id);
+  const [produto, setProduto] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [corSelecionada, setCorSelecionada] = useState(null);
+  const [tamanhoSelecionado, setTamanhoSelecionado] = useState(null);
+  const [imagemPrincipal, setImagemPrincipal] = useState(null);
 
-  // Lida com produto não encontrado
+  useEffect(() => {
+    async function carregarProduto() {
+      setLoading(true);
+      console.log('ID recebido da URL:', id); // Para debug
+
+      if (!id) {
+        console.error('ID inválido ou ausente');
+        setLoading(false);
+        return;
+      }
+
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .eq('id', id)
+        .single();
+
+      if (error) {
+        console.error('Erro ao buscar produto:', error);
+        setProduto(null);
+      } else {
+        setProduto(data);
+        setCorSelecionada(data.cores?.[0] || null);
+        setTamanhoSelecionado(data.tamanhos?.[0] || null);
+        setImagemPrincipal(data.image || data.imagensThumb?.[0] || null);
+      }
+      setLoading(false);
+    }
+
+    carregarProduto();
+  }, [id]);
+
+  if (loading) {
+    return <p>Carregando produto...</p>;
+  }
+
   if (!produto) {
     return (
       <div className={styles.notFoundContainer}>
         <p>Produto não encontrado.</p>
-        <button onClick={() => navigate('/')} className={styles.backButton}>Voltar para a Home</button>
+        <button onClick={() => navigate('/')} className={styles.backButton}>
+          Voltar para a Home
+        </button>
       </div>
     );
   }
 
-  // Estados para as seleções
-  const [corSelecionada, setCorSelecionada] = useState(produto.cores[0]);
-  const [tamanhoSelecionado, setTamanhoSelecionado] = useState(produto.tamanhos[0]);
-  const [imagemPrincipal, setImagemPrincipal] = useState(produto.imagem); // Imagem principal exibida
-
-  // Lógica para adicionar ao carrinho
   const adicionarAoCarrinho = () => {
     const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    carrinho.push({
-      id: produto.id,
-      nome: produto.nome,
-      preco: produto.preco,
-      imagem: produto.imagem, // Ou imagemPrincipal se quiser a miniatura selecionada
-      cor: corSelecionada,
-      tamanho: tamanhoSelecionado,
-      quantidade: 1
-    });
+
+    const indexProduto = carrinho.findIndex(
+      item =>
+        item.id === produto.id &&
+        item.cor === corSelecionada &&
+        item.tamanho === tamanhoSelecionado
+    );
+
+    if (indexProduto >= 0) {
+      carrinho[indexProduto].quantidade += 1;
+    } else {
+      carrinho.push({
+        id: produto.id,
+        nome: produto.name || produto.nome,
+        preco: produto.price || produto.preco,
+        imagem: imagemPrincipal,
+        cor: corSelecionada,
+        tamanho: tamanhoSelecionado,
+        quantidade: 1,
+      });
+    }
+
     localStorage.setItem('carrinho', JSON.stringify(carrinho));
-    // Substitua o alert por uma notificação mais amigável em produção
-    alert(`"${produto.nome}" adicionado ao carrinho!`);
+    alert(`"${produto.name || produto.nome}" adicionado ao carrinho!`);
     navigate('/carrinho');
   };
 
-  // Lógica para navegação entre imagens (se houver mais de uma)
+  // Funções para navegar entre imagens
   const handleNextImage = () => {
     if (!produto.imagensThumb || produto.imagensThumb.length === 0) return;
     const currentIndex = produto.imagensThumb.indexOf(imagemPrincipal);
@@ -60,20 +106,34 @@ export default function ProdutoDetalhado() {
     setImagemPrincipal(produto.imagensThumb[prevIndex]);
   };
 
+  const renderStars = (rating) => {
+    const filledStars = Math.floor(rating || 0);
+    const totalStars = 5;
+    const stars = [];
+
+    for (let i = 0; i < totalStars; i++) {
+      if (i < filledStars) {
+        stars.push(<span key={i} className={styles.starIconFilled}>&#9733;</span>);
+      } else {
+        stars.push(<span key={i} className={styles.starIcon}>&#9733;</span>);
+      }
+    }
+    return stars;
+  };
+
   return (
     <div className={styles.produtoDetalhadoPage}>
       <div className={styles.contentWrapper}>
-        {/* Seção de Imagens do Produto */}
         <div className={styles.imageGallery}>
           <div className={styles.mainImageContainer}>
-            <img src={imagemPrincipal} alt={produto.nome} className={styles.mainImage} />
+            <img src={imagemPrincipal} alt={produto.name || produto.nome} className={styles.mainImage} />
             {produto.imagensThumb && produto.imagensThumb.length > 1 && (
               <>
                 <button className={`${styles.arrowButton} ${styles.left}`} onClick={handlePrevImage}>
-                  <FaChevronLeft />
+                  <img src="/assets/arrow-left.svg" alt="Seta Esquerda" className={styles.arrowIcon} />
                 </button>
                 <button className={`${styles.arrowButton} ${styles.right}`} onClick={handleNextImage}>
-                  <FaChevronRight />
+                  <img src="/assets/arrow-right.svg" alt="Seta Direita" className={styles.arrowIcon} />
                 </button>
               </>
             )}
@@ -85,9 +145,7 @@ export default function ProdutoDetalhado() {
                   key={index}
                   src={img}
                   alt={`Miniatura ${index + 1}`}
-                  className={`${styles.thumbnail} ${
-                    img === imagemPrincipal ? styles.active : ''
-                  }`}
+                  className={`${styles.thumbnail} ${img === imagemPrincipal ? styles.active : ''}`}
                   onClick={() => setImagemPrincipal(img)}
                 />
               ))}
@@ -95,38 +153,35 @@ export default function ProdutoDetalhado() {
           )}
         </div>
 
-        {/* Seção de Detalhes do Produto */}
         <div className={styles.detailsSection}>
-          <h1 className={styles.productName}>{produto.nome}</h1>
+          <h1 className={styles.productName}>{produto.name || produto.nome}</h1>
 
           <div className={styles.reviewSection}>
-            <div className={styles.stars}>
-              {[...Array(5)].map((_, i) => (
-                <FaStar key={i} className={i < Math.floor(produto.rating || 0) ? styles.starIconFilled : styles.starIcon} />
-              ))}
-            </div>
-            <span className={styles.reviewsCount}>
-              {produto.reviews} avaliações
-            </span>
+            <div className={styles.stars}>{renderStars(produto.rating)}</div>
+            <span className={styles.reviewsCount}>{produto.reviews || 0} avaliações</span>
           </div>
 
           <div className={styles.priceSection}>
-            {produto.precoOriginal && (
-              <span className={styles.originalPrice}>R$ {produto.precoOriginal.toFixed(2)}</span>
+            {(produto.precoOriginal || produto.original_price) && (
+              <span className={styles.originalPrice}>
+                R$ {(produto.precoOriginal || produto.original_price).toFixed(2)}
+              </span>
             )}
-            <span className={styles.currentPrice}>R$ {produto.preco.toFixed(2)}</span>
+            <span className={styles.currentPrice}>
+              R$ {(produto.price || produto.preco).toFixed(2)}
+            </span>
           </div>
 
-          <p className={styles.description}>{produto.descricao}</p>
+          <p className={styles.description}>{produto.descricao || produto.description}</p>
 
           <SeletorCores
-            cores={produto.cores}
+            cores={produto.cores || []}
             corSelecionada={corSelecionada}
             setCorSelecionada={setCorSelecionada}
           />
 
           <SeletorTamanhos
-            tamanhos={produto.tamanhos}
+            tamanhos={produto.tamanhos || []}
             tamanhoSelecionado={tamanhoSelecionado}
             setTamanhoSelecionado={setTamanhoSelecionado}
           />
