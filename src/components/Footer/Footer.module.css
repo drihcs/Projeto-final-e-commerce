@@ -22,7 +22,7 @@
   min-width: 220px;
 }
 
-.footerAbout h2,
+.footerlogo,
 .footerInfo h4,
 .footerCategories h4,
 .footerContact h4 {
@@ -177,7 +177,7 @@
     gap: 25px;
   }
 
-  .footerAbout h2,
+  .footerLogo,
   .footerInfo h4,
   .footerCategories h4,
   .footerContact h4 {
@@ -228,7 +228,7 @@
     gap: 20px;
   }
 
-  .footerAbout h2,
+  .footerLogo,
   .footerInfo h4,
   .footerCategories h4,
   .footerContact h4 {

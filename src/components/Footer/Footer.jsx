@@ -1,5 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import styles from '../Footer/Footer.module.css'
+import footerLogo from '../../assets/logo-footer.svg'
 import facebookIcon from '../../assets/facebook.svg'
 import instagramIcon from '../../assets/instagram.svg'
 import twitterIcon from '../../assets/twitter.svg'
@@ -9,7 +11,9 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={styles.footerContainer}>
         <div className={styles.footerAbout}>
-          <h2>Digital Store</h2>
+          <Link to="/">
+            <img src={footerLogo} alt="Logo" />
+          </Link>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
             dolore.
@@ -60,7 +64,7 @@ export default function Footer() {
       </div>
 
       <div className={styles.footerBottom}>
-        <p>@ 2025 Digital College</p>
+        <p>© 2025 Digital College</p>
       </div>
     </footer>
   )
