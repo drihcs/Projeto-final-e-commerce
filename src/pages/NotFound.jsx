@@ -14,7 +14,6 @@ export default function NotFound() {
         </p>
         <div>
           <Link to="/" className="btn">Voltar ao Início</Link>
-          <Link to="/sobre" className="btn btn-secondary">Sobre Nós</Link>
         </div>
         <div className="navigation-hint">
           <p>💡 Dica: Verifique se o endereço está correto ou use o menu de navegação</p>
