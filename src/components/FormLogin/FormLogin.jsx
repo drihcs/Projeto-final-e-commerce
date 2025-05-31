@@ -20,9 +20,10 @@ export default function FormLogin() {
     try {
       await login(email, senha)
       alert('Login realizado com sucesso!')
-      navigate('/usuario')
+      navigate('/usuario')  // redireciona após login bem sucedido
     } catch (err) {
-      setErro(err)
+      // Exibe mensagem clara do erro
+      setErro(err.message || 'Erro desconhecido ao entrar')
     } finally {
       setCarregando(false)
     }
@@ -30,7 +31,6 @@ export default function FormLogin() {
 
   return (
     <form onSubmit={handleSubmit} className={styles.loginForm}>
-    
       <div className={styles.inputGroup}>
         <label className={styles.inputLabel}>Login *</label>
         <input
@@ -39,6 +39,8 @@ export default function FormLogin() {
           onChange={e => setEmail(e.target.value)}
           className={styles.inputField}
           required
+          placeholder="Seu email"
+          autoComplete="username"
         />
       </div>
 
@@ -50,6 +52,8 @@ export default function FormLogin() {
           onChange={e => setSenha(e.target.value)}
           className={styles.inputField}
           required
+          placeholder="Sua senha"
+          autoComplete="current-password"
         />
       </div>
 

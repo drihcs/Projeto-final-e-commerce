@@ -1,47 +1,43 @@
-// src/contexts/AuthContext.jsx
 import React, { createContext, useState, useEffect, useContext } from 'react'
+import { supabase } from '../services/supabaseClient'
 
 const AuthContext = createContext()
-AuthContext.displayName = 'AuthContext' // ajuda em DevTools
+AuthContext.displayName = 'AuthContext'
 
 export function AuthProvider({ children }) {
   const [usuario, setUsuario] = useState(null)
   const [carregando, setCarregando] = useState(true)
 
   useEffect(() => {
-    const dadosSalvos = localStorage.getItem('usuario')
-    if (dadosSalvos) setUsuario(JSON.parse(dadosSalvos))
+    const session = supabase.auth.session()
+    if (session) setUsuario(session.user)
     setCarregando(false)
+
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUsuario(session?.user ?? null)
+    })
+
+    return () => {
+      authListener.unsubscribe()
+    }
   }, [])
 
-  const login = (email, senha) => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (email === 'cliente@exemplo.com' && senha === '123456') {
-          const usuarioMock = {
-            nome: 'João Cliente',
-            email,
-            cpf: '123.456.789-00',
-            celular: '(85) 99999-9999',
-            endereco: {
-              rua: 'Rua das Flores',
-              numero: '123',
-              bairro: 'Centro',
-              cidade: 'Fortaleza',
-              cep: '60000-000'
-            }
-          }
-          setUsuario(usuarioMock)
-          localStorage.setItem('usuario', JSON.stringify(usuarioMock))
-          resolve(usuarioMock)
-        } else {
-          reject('Credenciais inválidas')
-        }
-      }, 1000)
-    })
+  const login = async (email, senha) => {
+    setCarregando(true)
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password: senha })
+    setCarregando(false)
+
+    if (error) {
+      throw new Error(error.message)
+    } else {
+      setUsuario(data.user)
+      localStorage.setItem('usuario', JSON.stringify(data.user))
+      return data.user
+    }
   }
 
-  const logout = () => {
+  const logout = async () => {
+    await supabase.auth.signOut()
     setUsuario(null)
     localStorage.removeItem('usuario')
   }
