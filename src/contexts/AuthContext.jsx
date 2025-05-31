@@ -1,3 +1,4 @@
+// src/contexts/AuthContext.jsx
 import React, { createContext, useState, useEffect, useContext } from 'react'
 import { supabase } from '../utils/supabase'
 
@@ -9,30 +10,52 @@ export function AuthProvider({ children }) {
   const [carregando, setCarregando] = useState(true)
 
   useEffect(() => {
-    const session = supabase.auth.session()
-    if (session) setUsuario(session.user)
-    setCarregando(false)
-
-    const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUsuario(session?.user ?? null)
+    // Verifica sessão ativa ao montar o componente
+    const session = supabase.auth.getSession().then(({ data }) => {
+      if (data.session?.user) {
+        setUsuario(data.session.user)
+      }
+      setCarregando(false)
     })
 
+    // Escuta mudanças de autenticação para atualizar usuário
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        if (session?.user) {
+          setUsuario(session.user)
+          localStorage.setItem('usuario', JSON.stringify(session.user))
+        } else {
+          setUsuario(null)
+          localStorage.removeItem('usuario')
+        }
+      }
+    )
+
     return () => {
-      authListener.unsubscribe()
+      authListener.subscription.unsubscribe()
     }
   }, [])
 
   const login = async (email, senha) => {
     setCarregando(true)
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password: senha })
-    setCarregando(false)
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password: senha,
+      })
 
-    if (error) {
-      throw new Error(error.message)
-    } else {
-      setUsuario(data.user)
-      localStorage.setItem('usuario', JSON.stringify(data.user))
-      return data.user
+      if (error) throw error
+
+      if (!data.session) {
+        throw new Error('Falha ao fazer login: sessão não encontrada')
+      }
+
+      setUsuario(data.session.user)
+      localStorage.setItem('usuario', JSON.stringify(data.session.user))
+
+      return data.session.user
+    } finally {
+      setCarregando(false)
     }
   }
 
