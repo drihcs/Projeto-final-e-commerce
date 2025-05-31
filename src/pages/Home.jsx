@@ -10,7 +10,9 @@ export default function Home() {
     <main>
       <Slide />
       <CollectionCards />
-      <CollectionIcons />
+      <section id="categorias">
+        <CollectionIcons />
+      </section>
       <ProductGrid />
       <SpecialOffer />
     </main>

@@ -5,6 +5,8 @@ import headerLogo from '../../assets/logo-header.svg'
 import styles from './Header.module.css'
 import CartModal from '../CartModal/CartModal'
 import { useCarrinho } from '../../contexts/CarrinhoContext'
+import { HashLink } from 'react-router-hash-link';
+
 
 export default function Header() {
   const [showCart, setShowCart] = useState(false)
@@ -83,10 +85,10 @@ export default function Header() {
             <Link to="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
           </li>
           <li>
-            <Link to="/produtos" onClick={() => setMobileMenuOpen(false)}>Produtos</Link>
+            <Link to="/produtos" onClick={() => setMobileMenuOpen(false)}>Produtos</Link>          
           </li>
           <li>
-            <Link to="/categorias" onClick={() => setMobileMenuOpen(false)}>Categorias</Link>
+            <HashLink to="/#categorias" onClick={() => setMobileMenuOpen(false)}>Categorias</HashLink>           
           </li>
           <li>
             <Link to="/pedidos" onClick={() => setMobileMenuOpen(false)}>Meus Pedidos</Link>

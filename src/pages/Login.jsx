@@ -1,7 +1,9 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import FormLogin from '../components/FormLogin/FormLogin';
 import Footer from '../components/Footer/Footer';
 import styles from './Login.module.css';
+import headerLogo from '../assets/logo-header.svg'
 
 
 // Não precisamos importar as imagens aqui se elas estiverem na pasta /public
@@ -18,7 +20,12 @@ export default function Login() {
   return (
     <div className={styles.pageContainer}>
       <header className={styles.header}>
-        <h1 className={styles.logoText}>Digital Store</h1>
+        {/* Logo */}
+        <div className={styles.logo}>
+          <Link to="/">
+            <img src={headerLogo} alt="Logo Digital Store" />
+          </Link>
+        </div>
       </header>
 
       <main className={styles.mainContent}>
