@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { supabaseProducts } from '../../utils/supabaseProducts';
+import { supabaseProducts } from '../../utils/supabase';
 import { useCarrinho } from "../../contexts/CarrinhoContext";
 import styles from "./ProductGrid.module.css";
 
@@ -10,7 +10,7 @@ export default function ProductGrid() {
 
   useEffect(() => {
     async function carregarProdutos() {
-      const { data, error } = await supabaseProducts
+      const { data, error } = await supabase
         .from("productslist")
         .select("*")
         .limit(8);

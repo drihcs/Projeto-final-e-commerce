@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';  // para redirecionar
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import styles from './CadastroFormulario.module.css';
-import { supabaseUsuarios } from '/src/utils/supabaseUsers';
+import { supabaseUsuarios } from '/src/utils/supabase';
 
 function CadastroFormulario() {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ function CadastroFormulario() {
 
     try {
       // 1. Cria o usuário no Auth
-      const { data: signUpData, error: signUpError } = await supabaseUsuarios.auth.signUp({
+      const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.senha,
       });
@@ -43,7 +43,7 @@ function CadastroFormulario() {
       if (signUpError) throw signUpError;
 
       // 2. Insere dados extras na tabela 'usuarios' usando o ID do usuário Auth
-      const { error: insertError } = await supabaseUsuarios
+      const { error: insertError } = await supabase
         .from('usuarios')
         .insert([
           {
