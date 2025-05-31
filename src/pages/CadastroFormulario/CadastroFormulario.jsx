@@ -83,7 +83,7 @@ function CadastroFormulario() {
           cidade: formData.cidade,
           cep: formData.cep,
           complemento: formData.complemento,
-          receberNovidades: formData.receberNovidades,
+          recebernovidades: formData.recebernovidades,
         }]);
 
       if (insertError) throw insertError;
@@ -147,7 +147,7 @@ function CadastroFormulario() {
           </fieldset>
 
           <label className={styles.checkbox}>
-            <input type="checkbox" name="receberNovidades" checked={formData.receberNovidades} onChange={handleChange} />
+            <input type="checkbox" name="recebernovidades" checked={formData.receberNovidades} onChange={handleChange} />
             Quero receber por email ofertas e novidades das lojas da Digital Store.
           </label>
 
