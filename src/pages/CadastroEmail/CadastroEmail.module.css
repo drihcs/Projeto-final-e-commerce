@@ -1,21 +1,22 @@
+/* CadastroEmail.module.css */
 .pageContainer {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #F3EFFF; /* Lilás bem claro de fundo da página */
-  font-family: 'Inter', Arial, sans-serif; /* Fonte similar à da imagem */
+  background-color: #F3EFFF;
+  font-family: 'Inter', Arial, sans-serif;
 }
 
 .header {
-  background-color: #FFFFFF; /* Branco */
-  padding: 20px 5%; /* Espaçamento interno, 5% nas laterais */
+  background-color: #FFFFFF;
+  padding: 20px 5%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   width: 100%;
   box-sizing: border-box;
 }
 
 .logoText {
-  color: #C92071; /* Rosa */
+  color: #C92071;
   font-size: 24px;
   font-weight: bold;
   margin: 0;
@@ -23,33 +24,33 @@
 
 .mainContent {
   display: flex;
-  flex: 1; /* Ocupa o espaço restante */
+  flex: 1;
   width: 100%;
   box-sizing: border-box;
-  padding: 20px 5%; /* Espaçamento lateral para o conteúdo principal */
+  padding: 20px 5%;
 }
 
 .formSection {
-  flex: 1.2; /* Um pouco mais de espaço para o formulário no desktop */
+  flex: 1.2;
   display: flex;
-  justify-content: center; /* Centraliza o card na sua coluna */
+  justify-content: center;
   align-items: center;
-  padding: 20px 0; /* Espaçamento vertical */
+  padding: 20px 0;
 }
 
 .cadastroCard {
   background-color: white;
   border-radius: 8px;
-  padding: 35px 40px; /* Mais padding vertical */
+  padding: 35px 40px;
   width: 100%;
-  max-width: 450px; /* Largura máxima do card */
+  max-width: 450px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  text-align: left; /* Alinha texto à esquerda dentro do card */
+  text-align: left;
 }
 
 .cadastroCard h2 {
   margin-bottom: 10px;
-  font-size: 28px; /* "Crie sua conta" */
+  font-size: 28px;
   font-weight: 700;
   color: #333333;
   text-align: left;
@@ -63,7 +64,7 @@
 }
 
 .loginPrompt a {
-  color: #C92071; /* Rosa */
+  color: #C92071;
   font-weight: bold;
   text-decoration: none;
 }
@@ -80,17 +81,17 @@
   display: block;
   margin-bottom: 8px;
   font-size: 14px;
-  font-weight: bold; /* Label em negrito */
+  font-weight: bold;
   color: #474747;
 }
 
 .inputField {
   width: 100%;
   padding: 12px 16px;
-  border: 1px solid #EAEAEA; /* Borda cinza clara */
+  border: 1px solid #EAEAEA;
   border-radius: 8px;
   font-size: 16px;
-  background-color: #FAFAFA; /* Fundo cinza bem claro, quase branco */
+  background-color: #FAFAFA;
   color: #474747;
   box-sizing: border-box;
 }
@@ -100,7 +101,7 @@
 }
 
 .inputField:focus {
-  border-color: #C92071; /* Rosa ao focar */
+  border-color: #C92071;
   outline: none;
   box-shadow: 0 0 0 2px rgba(201, 32, 113, 0.2);
 }
@@ -108,7 +109,7 @@
 .submitButton {
   width: 100%;
   padding: 12px;
-  background-color: #C92071; /* Rosa */
+  background-color: #C92071;
   color: white;
   border: none;
   border-radius: 8px;
@@ -116,11 +117,11 @@
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-top: 10px; /* Espaço acima do botão */
+  margin-top: 10px;
 }
 
 .submitButton:disabled {
-  background-color: #E0A8C5; /* Rosa claro quando desabilitado */
+  background-color: #E0A8C5;
   cursor: not-allowed;
 }
 
@@ -134,12 +135,12 @@
 }
 
 .mensagemSuccess {
-  color: #28a745; /* Verde para sucesso */
+  color: #28a745;
   background-color: #e8f5e9;
   border: 1px solid #c8e6c9;
 }
 .mensagemError {
-  color: #dc3545; /* Vermelho para erro */
+  color: #dc3545;
   background-color: #fdecea;
   border: 1px solid #f5c6cb;
 }
@@ -147,7 +148,7 @@
 .socialLogin {
   margin-top: 30px;
   text-align: center;
-  border-top: 1px solid #EAEAEA; /* Linha divisória */
+  border-top: 1px solid #EAEAEA;
   padding-top: 25px;
 }
 
@@ -160,13 +161,13 @@
 .socialIcons {
   display: flex;
   justify-content: center;
-  gap: 20px; /* Espaço entre os ícones */
+  gap: 20px;
 }
 
 .socialButton {
   background-color: #FFFFFF;
   border: 1px solid #DDDDDD;
-  border-radius: 50%; /* Botões redondos */
+  border-radius: 50%;
   width: 44px;
   height: 44px;
   display: flex;
@@ -175,10 +176,9 @@
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
-.socialButton img, .socialButton svg { /* Para alinhar melhor os ícones dentro */
+.socialButton img, .socialButton svg {
   display: block;
 }
-
 
 .socialButton:hover {
   border-color: #C92071;
@@ -186,73 +186,67 @@
 }
 
 .imageSection {
-  flex: 1.8; /* Mais espaço para a imagem no desktop */
+  flex: 1.8;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative; /* Para posicionamento absoluto das imagens */
-  overflow: hidden; /* Para conter imagens rotacionadas */
-  padding: 20px; /* Um pouco de padding para não colar nas bordas */
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
 }
 
 .shoeDisplayContainer {
   position: relative;
   width: 90%;
-  max-width: 550px; /* Ajuste para o tamanho dos tênis */
-  aspect-ratio: 1.2 / 1; /* Proporção para o container das imagens */
+  max-width: 550px;
+  aspect-ratio: 1.2 / 1;
 }
 
 .shoeImage {
   position: absolute;
-  max-width: 80%; /* Tamanho relativo ao shoeDisplayContainer */
+  max-width: 80%;
   height: auto;
   object-fit: contain;
   transition: transform 0.3s ease-out;
 }
 
-/* Posicionamento dos tênis - ajuste fino pode ser necessário */
-.shoeImageFront { /* pexels-melvin-buezo-2529148 1 (1).png */
+.shoeImageFront {
   z-index: 2;
   top: 50%;
   left: 50%;
   transform: translate(-30%, -55%) rotate(-20deg) scale(1.1);
 }
 
-.shoeImageBack { /* pexels-melvin-buezo-2529148 2 (1).png */
+.shoeImageBack {
   z-index: 1;
   top: 50%;
   left: 50%;
   transform: translate(0%, -40%) rotate(15deg) scale(1);
 }
 
-
-/* --- Responsividade --- */
-@media (max-width: 992px) { /* Breakpoint para tablets e mobile */
+@media (max-width: 992px) {
   .mainContent {
     flex-direction: column;
-    padding: 20px 5%; /* Ajusta padding lateral para mobile */
+    padding: 20px 5%;
   }
-
   .formSection {
-    order: 1; /* Formulário primeiro no mobile */
+    order: 1;
     flex: none;
     width: 100%;
-    justify-content: center; /* Centraliza o card */
-    padding: 20px 0; /* Padding vertical para a seção do formulário */
+    justify-content: center;
+    padding: 20px 0;
   }
-
   .cadastroCard {
-    max-width: 480px; /* Um pouco maior em tablet */
-    margin: 0 auto; /* Garante centralização */
+    max-width: 480px;
+    margin: 0 auto;
     padding: 30px;
   }
-
   .imageSection {
-    display: none; /* Oculta a seção de imagens no mobile */
+    display: none;
   }
 }
 
-@media (max-width: 480px) { /* Ajustes finos para mobile pequeno */
+@media (max-width: 480px) {
   .header {
     padding: 15px 5%;
   }
@@ -261,7 +255,7 @@
   }
   .cadastroCard {
     padding: 25px 20px;
-    box-shadow: none; /* Remove sombra em telas muito pequenas se desejar */
+    box-shadow: none;
   }
   .cadastroCard h2 {
     font-size: 24px;
