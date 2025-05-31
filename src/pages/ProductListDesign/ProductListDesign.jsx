@@ -18,7 +18,7 @@ export default function Busca() {
 
   useEffect(() => {
     async function carregarProdutos() {
-      const { data, error } = await supabase.from("productslist").select("*");
+const { data, error } = await supabase.from("produtosList").select("*");
       if (error) {
         console.error("Erro ao buscar produtos:", error);
       } else {
