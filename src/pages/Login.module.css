@@ -1,78 +1,89 @@
+/* src/pages/Login.module.css (ou o caminho correspondente) */
+
 .pageContainer {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: #F3EFFF; /* Lilás bem claro para o fundo da página */
-  font-family: 'Inter', Arial, sans-serif; /* Usando Inter como sugerido, com fallback */
+  display: flex; /* Permite alinhar header, main, footer verticalmente */
+  flex-direction: column; /* Itens empilhados verticalmente */
+  min-height: 100vh; /* Garante que a página ocupe pelo menos toda a altura da tela */
+  font-family: Arial, sans-serif; /* Defina sua fonte base, ajuste conforme necessário */
+  background-color: #E6E1FF; /* Cor de fundo principal da página, como na imagem */
 }
 
 .header {
-  background-color: #FFFFFF; /* Branco */
-  padding: 20px 5%; /* Espaçamento interno, 5% nas laterais */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  width: 100%;
-  box-sizing: border-box;
+  background-color: #fff; /* Cor de fundo do header, conforme imagem (parece ser branco) */
+  padding: 20px 40px; /* Espaçamento interno (vertical, horizontal) */
+  /* border-bottom: 1px solid #e0e0e0; Se quiser uma linha divisória */
 }
 
 .logoText {
-  color: #C92071; /* Rosa */
-  font-size: 24px;
+  color: #ff007f; /* Cor rosa do logo "Digital Store", ajuste se necessário */
+  font-size: 1.8em; /* Tamanho da fonte do logo */
   font-weight: bold;
-  margin: 0;
+  margin: 0; /* Remove margens padrão do h1 */
 }
 
 .mainContent {
-  display: flex;
-  flex: 1; /* Ocupa o espaço restante */
-  width: 100%;
-  box-sizing: border-box;
+  display: flex; /* Coloca loginSection e imageSection lado a lado */
+  flex: 1;       /* Faz esta seção ocupar o espaço vertical restante entre header e footer */
+  padding: 40px; /* Espaçamento interno geral para o conteúdo principal */
+  gap: 30px;     /* Espaço entre a loginSection e a imageSection */
 }
 
 .loginSection {
-  flex: 1.2; /* Dá um pouco mais de espaço para a seção de login */
+  flex: 1; /* Ocupa uma parte do espaço disponível (pode ajustar para ser maior ou menor que a imageSection) */
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 20px; /* Espaçamento interno */
-  box-sizing: border-box;
+  /* Alinha o loginFormContainer. Você pode usar:
+     justify-content: center; para centralizar horizontalmente
+     justify-content: flex-end; se quiser alinhar mais à direita da sua coluna
+  */
+  justify-content: flex-end; /* Tentando replicar a imagem, onde o form está mais à direita da metade esquerda */
+  align-items: flex-start; /* Alinha no topo da sua coluna */
+  padding-right: 20px; /* Um pequeno espaço para não colar na imageSection */
 }
 
 .loginFormContainer {
-  background-color: #FFFFFF; /* Fundo branco para o card de login */
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background-color: #fff; /* Fundo branco para o card do formulário */
+  padding: 30px 40px;   /* Espaçamento interno do card */
+  border-radius: 8px;   /* Bordas arredondadas */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
   width: 100%;
-  max-width: 420px; /* Largura máxima do formulário */
-  text-align: center;
+  max-width: 420px;     /* Largura máxima para o card do formulário */
 }
 
 .loginFormContainer h2 {
-  font-size: 28px;
-  color: #333333;
+  font-size: 1.8em;     /* "Acesse sua conta" */
+  margin-top: 0;
   margin-bottom: 10px;
-  font-weight: 600;
+  color: #333;
 }
 
-.registerPrompt, .forgotPasswordLinkContainer {
-  font-size: 14px;
-  color: #555555;
+.registerPrompt {
+  font-size: 0.9em;
+  color: #555;
   margin-bottom: 25px;
 }
 
-.registerPrompt a, .forgotPasswordLink {
-  color: #C92071; /* Rosa */
-  font-weight: bold;
+.registerPrompt a {
+  color: #ff007f; /* Cor rosa para o link */
   text-decoration: none;
+  font-weight: bold;
 }
 
-.registerPrompt a:hover, .forgotPasswordLink:hover {
+.registerPrompt a:hover {
   text-decoration: underline;
 }
 
-.forgotPasswordLinkContainer {
-  margin-top: 20px; /* Espaço acima do "Esqueci minha senha" */
+.forgotPasswordLink {
+  display: block; /* Para ocupar a linha toda e permitir margem */
+  margin-top: 15px;
   margin-bottom: 25px;
+  font-size: 0.9em;
+  color: #ff007f; /* Cor rosa */
+  text-decoration: none;
+  text-align: left; /* Alinha o texto do link à esquerda dentro do seu container */
+}
+
+.forgotPasswordLink:hover {
+  text-decoration: underline;
 }
 
 .socialLogin {
@@ -82,166 +93,111 @@
 }
 
 .socialLogin p {
-  font-size: 14px;
-  color: #555555;
   margin-bottom: 15px;
+  font-size: 0.9em;
+  color: #555;
 }
 
 .socialIcons {
   display: flex;
-  justify-content: center;
-  gap: 20px;
+  justify-content: center; /* Centraliza os ícones */
+  gap: 15px; /* Espaço entre os ícones */
 }
 
 .socialButton {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 1px solid #DDDDDD;
-  background-color: #FFFFFF;
-  color: #333333;
-  font-size: 18px;
-  font-weight: bold;
+  background-color: #f0f0f0; /* Cor de fundo para os botões sociais */
+  border: 1px solid #ddd;
+  border-radius: 50%; /* Para botões redondos, como na imagem */
+  width: 40px;
+  height: 40px;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  font-size: 1.1em; /* Tamanho do texto/ícone dentro do botão */
+  font-weight: bold;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  color: #333; /* Cor do texto/ícone */
 }
 
 .socialButton:hover {
-  border-color: #C92071;
-  color: #C92071;
-  transform: translateY(-2px);
+  background-color: #e0e0e0;
 }
 
-
 .imageSection {
-  flex: 1.8; /* Dá mais espaço para a seção da imagem */
-  background-color: #E6E1FF; /* Lilás um pouco mais escuro para a seção da imagem */
+  flex: 1;
   display: flex;
-  justify-content: center;
   align-items: center;
-  position: relative; /* Para posicionamento absoluto das imagens */
-  overflow: hidden; /* Para evitar que as imagens rotacionadas causem scroll */
-  min-height: 400px; /* Altura mínima para visualização */
+  justify-content: center;
+  overflow: hidden; /* Ajuda a conter elementos rotacionados */
 }
 
 .shoeDisplayContainer {
-  position: relative;
-  width: 80%; /* Ajuste conforme necessário */
-  max-width: 600px; /* Ajuste conforme necessário */
-  aspect-ratio: 1.2 / 1; /* Proporção para o container das imagens */
+  position: relative; /* Essencial para o posicionamento absoluto das imagens */
+  width: 80%;         /* Largura do container onde os tênis serão arranjados */
+  max-width: 480px;   /* Limita o tamanho máximo */
+  aspect-ratio: 4 / 3;  /* Ajustei para um container um pouco mais largo, pode ajustar conforme necessário (ex: 1/1, 3/2) */
+  display: flex;        /* Usado para centralizar, mas as imagens internas são absolutas */
+  align-items: center;
+  justify-content: center;
+  /* Se precisar de debug para ver a área do container:
+  border: 1px dashed blue;
+  */
 }
 
+/* Estilo base para ambas as imagens de tênis */
 .shoeImage {
-  position: absolute;
-  max-width: 85%; /* Tamanho relativo ao shoeDisplayContainer */
+  position: absolute; /* Permite sobreposição e posicionamento preciso */
+  max-width: 75%;     /* Tamanho da imagem individual, ajuste para não ficarem muito grandes ou pequenas */
+  max-height: 75%;    /* Garante que a altura também seja controlada */
   height: auto;
-  object-fit: contain;
+  object-fit: contain; /* Mantém a proporção da imagem */
   transition: transform 0.3s ease-out;
 }
 
+/* Tênis que aparecerá mais à frente, geralmente o principal (tenisImageUrl1) */
 .shoeImageFront {
-  /* Imagem da frente (pexels-melvin-buezo-2529148 1 (1).png) */
-  z-index: 2;
-  top: 50%;
-  left: 45%;
-  transform: translate(-50%, -60%) rotate(-15deg) scale(1.1);
+  z-index: 2; /* Fica na frente */
+  /* Ajustes para "um ao lado do outro em alturas diferentes":
+     - translateX: move para a direita (positivo) ou esquerda (negativo)
+     - translateY: move para baixo (positivo) ou cima (negativo)
+     - rotate: gira a imagem
+     - scale: aumenta ou diminui
+  */
+  transform: translate(-65%) translateY(-48%) rotate(-7deg) scale(1.4);
+  /* Exemplo: 15% para a direita do centro do container, 10% para baixo, leve rotação e um pouco maior */
 }
 
+/* Tênis que aparecerá atrás/ao lado e em altura diferente (tenisImageUrl2) */
 .shoeImageBack {
-  /* Imagem de trás (pexels-melvin-buezo-2529148 2 (1).png) */
-  z-index: 1;
-  top: 50%;
-  left: 55%;
-  transform: translate(-45%, -40%) rotate(10deg) scale(1);
+  z-index: 1; /* Fica atrás */
+  /* Ajustes para posicionar ao lado e em altura diferente: */
+  transform: translate(70%) translateY(31%) rotate(6deg) scale(1.4);
 }
 
-/* --- Responsividade --- */
-@media (max-width: 992px) { /* Tablet e telas menores */
-  .mainContent {
-    flex-direction: column;
-  }
+/* ... (Restante do CSS, incluindo @media queries) ... */
 
-  .loginSection {
-    flex: none; /* Remove flex grow/shrink */
-    width: 100%;
-    order: 1; /* Formulário primeiro no mobile */
-    padding: 30px 20px;
-  }
+/* Lembre-se de ajustar as media queries também, se necessário, para o .shoeDisplayContainer e transforms */
+@media (max-width: 900px) {
+  /* ... (outras media queries) ... */
 
-  .loginFormContainer {
-    max-width: 450px; /* Pode ser um pouco maior em tablets */
-    margin: 0 auto; /* Centraliza */
-  }
-  
   .imageSection {
-    flex: none; /* Remove flex grow/shrink */
-    width: 100%;
-    order: 2; /* Imagens depois do formulário */
-    min-height: 350px; /* Altura ajustada para mobile */
-    padding: 30px 0;
-    background-color: #F3EFFF; /* Fundo da página, sem o lilás mais escuro */
+    /* ... (manter ou ajustar estilos anteriores) ... */
+    min-height: 350px; /* Pode precisar de mais altura para o arranjo */
   }
 
   .shoeDisplayContainer {
-    width: 70%;
-    max-width: 350px; /* Imagens menores no mobile */
-    aspect-ratio: 1 / 0.8; /* Ajusta proporção para mobile */
+    width: 90%; /* Pode precisar de mais largura em mobile para o arranjo lado a lado */
+    max-width: 400px;
+    aspect-ratio: 1 / 1; /* Em mobile, talvez um aspect-ratio mais quadrado funcione melhor */
   }
 
   .shoeImageFront {
-    transform: translate(-55%, -55%) rotate(-10deg) scale(0.9);
-    left: 50%;
+    /* Ajustar transforms para mobile se o arranjo acima não ficar bom */
+    transform: translateX(10%) translateY(5%) rotate(-8deg) scale(1);
   }
 
   .shoeImageBack {
-    transform: translate(-45%, -45%) rotate(5deg) scale(0.85);
-    left: 50%;
+    /* Ajustar transforms para mobile */
+    transform: translateX(-20%) translateY(-10%) rotate(15deg) scale(0.9);
   }
-}
-
-@media (max-width: 480px) { /* Mobile pequeno */
-  .header {
-    padding: 15px 5%;
-  }
-  .logoText {
-    font-size: 20px;
-  }
-  .loginFormContainer {
-    padding: 25px;
-    box-shadow: none; /* Remove sombra em telas muito pequenas */
-  }
-  .loginFormContainer h2 {
-    font-size: 24px;
-  }
-  .registerPrompt, .forgotPasswordLinkContainer, .socialLogin p {
-    font-size: 13px;
-  }
-  .socialButton {
-    width: 40px;
-    height: 40px;
-    font-size: 16px;
-  }
-   .shoeDisplayContainer {
-    width: 80%;
-    max-width: 300px;
-  }
-  .shoeImageFront {
-    transform: translate(-50%, -58%) rotate(-8deg) scale(0.8);
-  }
-
-  .shoeImageBack {
-    transform: translate(-50%, -42%) rotate(4deg) scale(0.75);
-  }
-}
-
-/* Mock Footer styles */
-.footer {
-  background-color: #333;
-  color: white;
-  text-align: center;
-  padding: 20px;
-  font-size: 14px;
 }
