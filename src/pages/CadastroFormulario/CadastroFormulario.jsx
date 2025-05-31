@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import styles from './CadastroFormulario.module.css';
@@ -9,6 +9,7 @@ function CadastroFormulario() {
     nome: '',
     cpf: '',
     email: '',
+    senha: '',
     celular: '',
     endereco: '',
     bairro: '',
@@ -20,7 +21,7 @@ function CadastroFormulario() {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value,
     }));
@@ -30,25 +31,39 @@ function CadastroFormulario() {
     e.preventDefault();
 
     try {
-      const { error } = await supabaseUsuarios
-        .from('usuarios') // Altere aqui se o nome da sua tabela for diferente
-        .insert([formData]);
+      // Cria o usuário no Supabase Auth
+      const { data: authData, error: authError } = await supabaseUsuarios.auth.signUp({
+        email: formData.email,
+        password: formData.senha,
+      });
 
-      if (error) throw error;
+      if (authError) throw authError;
+
+      const userId = authData.user.id;
+
+      // Insere os dados adicionais na tabela 'usuarios'
+      const { error: insertError } = await supabaseUsuarios
+        .from('usuarios')
+        .insert([
+          {
+            user_id: userId,
+            nome: formData.nome,
+            cpf: formData.cpf,
+            email: formData.email,
+            celular: formData.celular,
+            endereco: formData.endereco,
+            bairro: formData.bairro,
+            cidade: formData.cidade,
+            cep: formData.cep,
+            complemento: formData.complemento,
+            receberNovidades: formData.receberNovidades,
+          },
+        ]);
+
+      if (insertError) throw insertError;
 
       alert('Conta criada com sucesso!');
-      setFormData({
-        nome: '',
-        cpf: '',
-        email: '',
-        celular: '',
-        endereco: '',
-        bairro: '',
-        cidade: '',
-        cep: '',
-        complemento: '',
-        receberNovidades: false,
-      });
+      window.location.href = '/login';
     } catch (err) {
       alert('Erro ao criar conta: ' + err.message);
     }
@@ -84,6 +99,14 @@ function CadastroFormulario() {
               placeholder="Insira seu email"
               required
               value={formData.email}
+              onChange={handleChange}
+            />
+            <input
+              type="password"
+              name="senha"
+              placeholder="Crie uma senha"
+              required
+              value={formData.senha}
               onChange={handleChange}
             />
             <input
