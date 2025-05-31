@@ -163,7 +163,7 @@
      - rotate: gira a imagem
      - scale: aumenta ou diminui
   */
-  transform: translate(-65%) translateY(-48%) rotate(-7deg) scale(1.4);
+  transform: translate(-61%) translateY(-23%) rotate(-6deg) scale(1.6);
   /* Exemplo: 15% para a direita do centro do container, 10% para baixo, leve rotação e um pouco maior */
 }
 
@@ -171,7 +171,7 @@
 .shoeImageBack {
   z-index: 1; /* Fica atrás */
   /* Ajustes para posicionar ao lado e em altura diferente: */
-  transform: translate(70%) translateY(31%) rotate(6deg) scale(1.4);
+  transform: translate(70%) translateY(28%) rotate(5deg) scale(1.6);
 }
 
 /* ... (Restante do CSS, incluindo @media queries) ... */
