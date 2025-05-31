@@ -11,9 +11,9 @@ function CadastroEmail() {
   const [enviando, setEnviando] = useState(false);
 
   // URLs das imagens dos tênis
-  const tenisImageUrl1 = "https://raw.githubusercontent.com/dnc-cursos/drip-store-codelandia/main/public/shoes/shoe.png";
-  const tenisImageUrl2 = "https://raw.githubusercontent.com/dnc-cursos/drip-store-codelandia/main/public/shoes/shoe (1).png";
-
+    const tenisImageUrl1 = "/pexels-melvin-buezo-2529148 1 (1).png";
+    const tenisImageUrl2 = "/pexels-melvin-buezo-2529148 2 (1).png";
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!email) {
@@ -85,17 +85,14 @@ function CadastroEmail() {
           <section className={styles.imageSection}>
             <div className={styles.shoeDisplayContainer}>
               <img
-                src={tenisImageUrl2}
+                src={tenisImageUrl2} // Imagem que ficará mais ao fundo
                 alt="Tênis decorativo 2"
-                // Classes múltiplas usando template literals e o objeto styles
                 className={`${styles.shoeImage} ${styles.shoeImageBack}`}
-                onError={(e) => { e.target.style.display = 'none'; }}
               />
               <img
-                src={tenisImageUrl1}
+                src={tenisImageUrl1} // Imagem que ficará mais à frente
                 alt="Tênis decorativo 1"
                 className={`${styles.shoeImage} ${styles.shoeImageFront}`}
-                onError={(e) => { e.target.style.display = 'none'; }}
               />
             </div>
           </section>
