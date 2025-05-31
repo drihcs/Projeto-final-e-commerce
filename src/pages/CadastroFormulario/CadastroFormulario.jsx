@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import styles from './CadastroFormulario.module.css';
@@ -7,11 +7,13 @@ import { supabase } from '/src/utils/supabase';
 
 function CadastroFormulario() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const emailDoCadastro = location.state?.email || '';
 
   const [formData, setFormData] = useState({
     nome: '',
     cpf: '',
-    email: '',
+    email: emailDoCadastro,
     senha: '',
     celular: '',
     endereco: '',
@@ -100,14 +102,14 @@ function CadastroFormulario() {
             <label>Celular *</label>
             <input type="text" name="celular" placeholder="Insira seu celular" required value={formData.celular} onChange={handleChange} />
 
-            <label>Email *</label>
+            <label>E-mail *</label>
             <input type="email" name="email" placeholder="Insira seu email" required value={formData.email} onChange={handleChange} />
 
             <label>Senha *</label>
             <input type="password" name="senha" placeholder="Insira sua senha" required value={formData.senha} onChange={handleChange} />
 
             <label>Confirmar Senha *</label>
-            <input type="password" name="confirmarSenha" placeholder="Confirme a senha" required value={confirmarSenha} onChange={e => setConfirmarSenha(e.target.value)} />
+            <input type="password" name="confirmarSenha" placeholder="Confirme a senha" required value={confirmarSenha} onChange={(e) => setConfirmarSenha(e.target.value)} />
 
             <ul className={styles.requisitos}>
               {requisitosSenha.map((req, index) => (
