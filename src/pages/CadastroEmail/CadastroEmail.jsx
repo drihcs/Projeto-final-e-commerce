@@ -19,8 +19,8 @@ function CadastroEmail() {
       return;
     }
 
-    // Redireciona para a rota de cadastro
-    navigate('/cadastro/formulario');
+    // ✅ Redireciona passando o e-mail para o formulário
+    navigate('/cadastro/formulario', { state: { email } });
   };
 
   return (
@@ -47,7 +47,7 @@ function CadastroEmail() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className={styles.inputField} 
+                    className={styles.inputField}
                   />
                 </div>
                 <button type="submit" className={styles.submitButton}>
@@ -99,16 +99,4 @@ function CadastroEmail() {
   );
 }
 
-export default function App() {
-  useEffect(() => {
-    const link = document.createElement('link');
-    link.href = "https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap";
-    link.rel = 'stylesheet';
-    document.head.appendChild(link);
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
-
-  return <CadastroEmail />;
-}
+export default CadastroEmail;

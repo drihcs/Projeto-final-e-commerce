@@ -8,7 +8,7 @@
 }
 
 .title {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: bold;
   margin-bottom: 2rem;
   color: var(--dark-gray);
@@ -22,7 +22,8 @@
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .fieldset {
@@ -35,37 +36,69 @@
 .fieldset legend {
   font-weight: bold;
   margin-bottom: 0.5rem;
-  color: var(--dark-gray-3);
+  color: var(--dark-gray-2);
+  font-size: 1.1rem;
+}
+
+label {
+  font-weight: 600;
+  color: var(--dark-gray);
+  margin-top: 0.5rem;
 }
 
 input[type="text"],
-input[type="email"] {
+input[type="email"],
+input[type="password"] {
   padding: 0.75rem;
   border: 1px solid var(--light-gray-2);
   border-radius: 6px;
-  background-color: var(--white);
+  background-color: var(--light-gray-3);
   font-size: 0.95rem;
+  transition: border 0.2s ease;
+}
+
+input:focus {
+  border-color: var(--primary);
+  outline: none;
 }
 
 .checkbox {
-  font-size: 0.85rem;
-  color: var(--dark-gray-3);
+  font-size: 0.9rem;
   display: flex;
   align-items: flex-start;
   gap: 0.5rem;
+  color: var(--primary);
+  font-weight: 500;
 }
 
 .button {
   background-color: var(--primary);
   color: var(--white);
   border: none;
-  padding: 0.75rem;
+  padding: 0.9rem;
   border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-size: 1rem;
 }
 
 .button:hover {
   background-color: var(--tertiary);
+}
+
+.requisitos {
+  list-style: none;
+  padding-left: 1rem;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.ok {
+  color: var(--success);
+}
+
+.naoOk {
+  color: var(--error);
 }

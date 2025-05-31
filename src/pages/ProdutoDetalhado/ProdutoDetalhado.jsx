@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { supabaseProducts } from '../../utils/supabaseProducts';
+import { supabase } from '../../utils/supabase';
 import SeletorCores from '../../components/SeletorCores/SeletorCores';
 import SeletorTamanho from '../../components/SeletorTamanho/SeletorTamanho';
 import styles from './ProdutoDetalhado.module.css';
@@ -18,11 +18,11 @@ export default function ProdutoDetalhado() {
   useEffect(() => {
     async function buscarProduto() {
       setCarregando(true);
-      const { data, error } = await supabaseProducts
-        .from('productslist')
-        .select('*')
-        .eq('slug', slug)
-        .single();
+const { data, error } = await supabase
+  .from('produtosList')
+  .select('*')
+  .eq('slug', slug) // ou .eq('id', id), depende de como está implementado
+  .single();
 
       if (error) {
         console.error("Erro ao buscar produto:", error);
