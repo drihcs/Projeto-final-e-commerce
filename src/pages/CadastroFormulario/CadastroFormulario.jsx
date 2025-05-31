@@ -25,6 +25,7 @@ function CadastroFormulario() {
   });
 
   const [confirmarSenha, setConfirmarSenha] = useState('');
+  const [inputEmFoco, setInputEmFoco] = useState('');
 
   const requisitosSenha = [
     { regex: /.{8,}/, label: 'Mínimo de 8 caracteres' },
@@ -34,6 +35,8 @@ function CadastroFormulario() {
   ];
 
   const validarRequisito = (regex) => regex.test(formData.senha);
+
+  const todosRequisitosAtendidos = requisitosSenha.every(req => validarRequisito(req.regex));
 
   const formatarCPF = (cpf) => {
     return cpf
@@ -52,7 +55,6 @@ function CadastroFormulario() {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-
     let novoValor = value;
 
     if (name === 'cpf') novoValor = formatarCPF(value);
@@ -62,6 +64,18 @@ function CadastroFormulario() {
       ...prev,
       [name]: type === 'checkbox' ? checked : novoValor,
     }));
+  };
+
+  const handleFocus = (e) => {
+    setInputEmFoco(e.target.name);
+  };
+
+  const handleBlur = (e) => {
+    if (e.target.name === 'senha' && todosRequisitosAtendidos) {
+      setInputEmFoco('');
+    } else if (e.target.name !== 'senha') {
+      setInputEmFoco('');
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -122,6 +136,8 @@ function CadastroFormulario() {
               autoFocus
               value={formData.nome}
               onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
             />
 
             <label>CPF *</label>
@@ -132,6 +148,8 @@ function CadastroFormulario() {
               required
               value={formData.cpf}
               onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
             />
 
             <label>Celular *</label>
@@ -143,6 +161,8 @@ function CadastroFormulario() {
               value={formData.celular}
               onChange={handleChange}
               inputMode="numeric"
+              onFocus={handleFocus}
+              onBlur={handleBlur}
             />
 
             <label>E-mail *</label>
@@ -153,6 +173,8 @@ function CadastroFormulario() {
               required
               value={formData.email}
               onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
             />
 
             <label>Senha *</label>
@@ -163,19 +185,11 @@ function CadastroFormulario() {
               required
               value={formData.senha}
               onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
             />
 
-            <label>Confirmar Senha *</label>
-            <input
-              type="password"
-              name="confirmarSenha"
-              placeholder="Confirme a senha"
-              required
-              value={confirmarSenha}
-              onChange={(e) => setConfirmarSenha(e.target.value)}
-            />
-
-            {formData.senha.length > 0 && (
+            {formData.senha.length > 0 && inputEmFoco === 'senha' && (
               <ul className={styles.requisitos}>
                 {requisitosSenha.map((req, index) => {
                   const atendido = validarRequisito(req.regex);
@@ -187,6 +201,18 @@ function CadastroFormulario() {
                 })}
               </ul>
             )}
+
+            <label>Confirmar Senha *</label>
+            <input
+              type="password"
+              name="confirmarSenha"
+              placeholder="Confirme a senha"
+              required
+              value={confirmarSenha}
+              onChange={(e) => setConfirmarSenha(e.target.value)}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+            />
           </fieldset>
 
           <fieldset className={styles.fieldset}>
@@ -200,6 +226,8 @@ function CadastroFormulario() {
               required
               value={formData.endereco}
               onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
             />
 
             <label>Bairro *</label>
@@ -210,6 +238,8 @@ function CadastroFormulario() {
               required
               value={formData.bairro}
               onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
             />
 
             <label>Cidade *</label>
@@ -220,6 +250,8 @@ function CadastroFormulario() {
               required
               value={formData.cidade}
               onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
             />
 
             <label>CEP *</label>
@@ -230,6 +262,8 @@ function CadastroFormulario() {
               required
               value={formData.cep}
               onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
             />
 
             <label>Complemento</label>
@@ -239,6 +273,8 @@ function CadastroFormulario() {
               placeholder="Insira complemento"
               value={formData.complemento}
               onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
             />
           </fieldset>
 
