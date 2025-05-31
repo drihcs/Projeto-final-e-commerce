@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { supabase } from '';
+import { supabase } from '../../utils/supabase';
 import { useCarrinho } from "../../contexts/CarrinhoContext";
 import styles from "./ProductGrid.module.css";
 
