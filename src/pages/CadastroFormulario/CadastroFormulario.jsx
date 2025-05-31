@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
@@ -13,7 +13,7 @@ function CadastroFormulario() {
   const [formData, setFormData] = useState({
     nome: '',
     cpf: '',
-    email: emailDoCadastro,
+    email: '',
     senha: '',
     celular: '',
     endereco: '',
@@ -21,11 +21,17 @@ function CadastroFormulario() {
     cidade: '',
     cep: '',
     complemento: '',
-    recebernovidades: false,
+    receberNovidades: false,
   });
 
   const [confirmarSenha, setConfirmarSenha] = useState('');
   const [erroSenha, setErroSenha] = useState('');
+
+  useEffect(() => {
+    if (emailDoCadastro) {
+      setFormData(prev => ({ ...prev, email: emailDoCadastro }));
+    }
+  }, [emailDoCadastro]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -78,12 +84,13 @@ function CadastroFormulario() {
           nome: formData.nome,
           cpf: formData.cpf,
           celular: formData.celular,
+          email: formData.email,
           endereco: formData.endereco,
           bairro: formData.bairro,
           cidade: formData.cidade,
           cep: formData.cep,
           complemento: formData.complemento,
-          recebernovidades: formData.recebernovidades,
+          recebernovidades: formData.receberNovidades,
         }]);
 
       if (insertError) throw insertError;
@@ -102,52 +109,134 @@ function CadastroFormulario() {
       <div className={styles.container}>
         <h2 className={styles.title}>Criar Conta</h2>
         <form className={styles.form} onSubmit={handleSubmit}>
+
           <fieldset className={styles.fieldset}>
             <legend>Informações Pessoais</legend>
 
             <label>Nome Completo *</label>
-            <input type="text" name="nome" autoFocus placeholder="Insira seu nome" required value={formData.nome} onChange={handleChange} />
+            <input
+              type="text"
+              name="nome"
+              required
+              autoFocus
+              placeholder="Insira seu nome"
+              value={formData.nome}
+              onChange={handleChange}
+            />
 
             <label>CPF *</label>
-            <input type="text" name="cpf" placeholder="Insira seu CPF" required value={formData.cpf} onChange={handleChange} />
+            <input
+              type="text"
+              name="cpf"
+              required
+              placeholder="Insira seu CPF"
+              value={formData.cpf}
+              onChange={handleChange}
+            />
 
             <label>Celular *</label>
-            <input type="text" name="celular" placeholder="Insira seu celular" required value={formData.celular} onChange={handleChange} />
+            <input
+              type="text"
+              name="celular"
+              required
+              placeholder="Insira seu celular"
+              value={formData.celular}
+              onChange={handleChange}
+            />
 
             <label>E-mail *</label>
-            <input type="email" name="email" placeholder="Insira seu email" required value={formData.email} onChange={handleChange} />
+            <input
+              type="email"
+              name="email"
+              required
+              placeholder="Insira seu email"
+              value={formData.email}
+              onChange={handleChange}
+            />
 
             <label>Senha *</label>
-            <input type="password" name="senha" placeholder="Insira sua senha" required value={formData.senha} onChange={handleChange} />
+            <input
+              type="password"
+              name="senha"
+              required
+              placeholder="Insira sua senha"
+              value={formData.senha}
+              onChange={handleChange}
+            />
 
             <label>Confirmar Senha *</label>
-            <input type="password" name="confirmarSenha" placeholder="Confirme a senha" required value={confirmarSenha} onChange={(e) => setConfirmarSenha(e.target.value)} />
+            <input
+              type="password"
+              name="confirmarSenha"
+              required
+              placeholder="Confirme a senha"
+              value={confirmarSenha}
+              onChange={(e) => setConfirmarSenha(e.target.value)}
+            />
 
             {erroSenha && <p className={styles.erro}>{erroSenha}</p>}
-
           </fieldset>
 
           <fieldset className={styles.fieldset}>
             <legend>Informações de Entrega</legend>
 
             <label>Endereço *</label>
-            <input type="text" name="endereco" placeholder="Insira seu endereço" required value={formData.endereco} onChange={handleChange} />
+            <input
+              type="text"
+              name="endereco"
+              required
+              placeholder="Insira seu endereço"
+              value={formData.endereco}
+              onChange={handleChange}
+            />
 
             <label>Bairro *</label>
-            <input type="text" name="bairro" placeholder="Insira seu bairro" required value={formData.bairro} onChange={handleChange} />
+            <input
+              type="text"
+              name="bairro"
+              required
+              placeholder="Insira seu bairro"
+              value={formData.bairro}
+              onChange={handleChange}
+            />
 
             <label>Cidade *</label>
-            <input type="text" name="cidade" placeholder="Insira sua cidade" required value={formData.cidade} onChange={handleChange} />
+            <input
+              type="text"
+              name="cidade"
+              required
+              placeholder="Insira sua cidade"
+              value={formData.cidade}
+              onChange={handleChange}
+            />
 
             <label>CEP *</label>
-            <input type="text" name="cep" placeholder="Insira seu CEP" required value={formData.cep} onChange={handleChange} />
+            <input
+              type="text"
+              name="cep"
+              required
+              placeholder="Insira seu CEP"
+              value={formData.cep}
+              onChange={handleChange}
+            />
 
             <label>Complemento</label>
-            <input type="text" name="complemento" placeholder="Insira complemento" value={formData.complemento} onChange={handleChange} />
+            <input
+              type="text"
+              name="complemento"
+              placeholder="Insira complemento"
+              value={formData.complemento}
+              onChange={handleChange}
+            />
           </fieldset>
 
           <label className={styles.checkbox}>
-            <input type="checkbox" name="recebernovidades" checked={formData.receberNovidades} onChange={handleChange} />
+            <input
+              type="checkbox"
+              name="receberNovidades"
+              checked={formData.receberNovidades}
+              onChange={handleChange}
+            />
             Quero receber por email ofertas e novidades das lojas da Digital Store.
           </label>
 
