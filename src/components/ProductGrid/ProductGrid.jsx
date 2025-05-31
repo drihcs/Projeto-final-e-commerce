@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../../utils/supabase";
-import { useCarrinho } from "../../contexts/CarrinhoContext"; // ✅ importado
+import { useCarrinho } from "../../contexts/CarrinhoContext";
 import styles from "./ProductGrid.module.css";
 
 export default function ProductGrid() {
   const [produtos, setProdutos] = useState([]);
-  const { adicionarItem } = useCarrinho(); // ✅ usa o contexto
+  const { adicionarItem } = useCarrinho();
 
   useEffect(() => {
     async function carregarProdutos() {
@@ -26,7 +26,7 @@ export default function ProductGrid() {
   }, []);
 
   function adicionarAoCarrinho(produto) {
-    adicionarItem(produto); // ✅ insere no carrinho de verdade
+    adicionarItem(produto);
   }
 
   return (
