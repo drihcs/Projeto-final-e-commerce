@@ -1,4 +1,3 @@
-/* CadastroEmail.module.css */
 .pageContainer {
   display: flex;
   flex-direction: column;
@@ -125,26 +124,6 @@
 .submitButton:disabled {
   background-color: #E0A8C5;
   cursor: not-allowed;
-}
-
-.mensagemCommon {
-  margin-top: 20px;
-  padding: 10px;
-  border-radius: 4px;
-  font-weight: 500;
-  font-size: 14px;
-  text-align: center;
-}
-
-.mensagemSuccess {
-  color: #28a745;
-  background-color: #e8f5e9;
-  border: 1px solid #c8e6c9;
-}
-.mensagemError {
-  color: #dc3545;
-  background-color: #fdecea;
-  border: 1px solid #f5c6cb;
 }
 
 .socialLogin {
