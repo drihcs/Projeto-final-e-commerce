@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';  // para redirecionar
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import styles from './CadastroFormulario.module.css';
-import { supabaseUsuarios } from '/src/utils/supabase';
+import { supabase } from '/src/utils/supabase';
 
 function CadastroFormulario() {
   const navigate = useNavigate();
