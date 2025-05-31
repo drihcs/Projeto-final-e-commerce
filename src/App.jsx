@@ -13,7 +13,9 @@ import CompraFinalizada from './pages/CompraFinalizada/CompraFinalizada'
 import Usuario from './pages/Usuario'
 import Pedidos from './pages/Pedidos/Pedidos'
 import PrivateRoute from './routes/PrivateRoute'
-import { Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom'
+
+import NotFound from './pages/NotFound'
 
 function App() {
   return (
@@ -60,12 +62,18 @@ function App() {
             </PrivateRoute>
           }
         />
+
+        {/* Página 404 dentro das rotas do Layout */}
+        <Route path="*" element={<NotFound />} />
       </Route>
 
       {/* Rotas públicas */}
       <Route path="/login" element={<Login />} />
       <Route path="/cadastro" element={<CadastroEmail />} />
       <Route path="/cadastro/formulario" element={<CadastroFormulario />} />
+
+      {/* 👇 Página 404 fora do layout principal */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
   )
 }

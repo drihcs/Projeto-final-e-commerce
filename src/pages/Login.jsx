@@ -33,7 +33,7 @@ export default function Login() {
           <div className={styles.loginFormContainer}>
             <h2>Acesse sua conta</h2>
             <p className={styles.registerPrompt}>
-              Novo cliente? Então <a href="/registro">registre-se aqui</a>.
+              Novo cliente? Então <a href="/cadastro">registre-se aqui</a>.
             </p>
             <FormLogin />
             <a href="/esqueci-senha" className={styles.forgotPasswordLink}>

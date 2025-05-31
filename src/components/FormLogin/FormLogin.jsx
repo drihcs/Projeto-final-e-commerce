@@ -32,7 +32,7 @@ export default function FormLogin() {
     <form onSubmit={handleSubmit} className={styles.loginForm}>
     
       <div className={styles.inputGroup}>
-        <label className={styles.inputLabel}>Login*:</label>
+        <label className={styles.inputLabel}>Login *</label>
         <input
           type="email"
           value={email}
@@ -43,7 +43,7 @@ export default function FormLogin() {
       </div>
 
       <div className={styles.inputGroup}>
-        <label className={styles.inputLabel}>Senha*:</label>
+        <label className={styles.inputLabel}>Senha *</label>
         <input
           type="password"
           value={senha}

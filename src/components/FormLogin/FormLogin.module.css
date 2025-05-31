@@ -1,28 +1,11 @@
-/* FormLogin.module.css (ajustado conforme solicitado) */
-
 .loginForm {
-  max-width: 400px;
-  margin: 60px auto; /* Esta margem pode fazer o formulário parecer flutuar.
-                        No contexto da página Login.jsx que montamos,
-                        o posicionamento é controlado pelo container pai.
-                        Pode ser que esta margem não seja mais necessária ou precise de ajuste. */
-  padding: 32px;
-  background-color: #fff; /* Mantém o fundo branco do formulário */
-  border-radius: 8px;    /* Mantém as bordas arredondadas */
-  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); */ /* Removida a sombra */
-  border: none; /* Adicionado para garantir que não haja nenhuma borda */
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-}
-
-.loginTitle { /* Este título não está sendo usado no FormLogin.jsx que montamos,
-                 pois o título "Acesse sua conta" está na página Login.jsx */
-  font-size: 28px;
-  font-weight: 700;
-  color: #333;
-  text-align: center;
-  margin-bottom: 8px;
+  gap: 20px; /* Espaçamento entre os grupos de input e o botão */
+  background-color: transparent; /* O container pai terá o fundo branco */
+  padding: 0;
+  border: none;
 }
 
 .inputGroup {
@@ -33,44 +16,49 @@
 
 .inputLabel {
   font-size: 14px;
-  /* font-weight: 500; */ /* Alterado de 500 */
-  font-weight: bold;   /* Para negrito */
-  color: #555;
+  font-weight: bold;
+  color: #474747; /* Cinza escuro para o label */
+  text-align: left;
 }
 
 .inputField {
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  padding: 12px 16px;
+  border: 1px solid #EAEAEA; /* Borda cinza clara */
+  border-radius: 8px;
   font-size: 16px;
-  transition: border 0.3s ease;
-  background-color: #f9f9f9;
+  background-color: #F5F5F5; /* Fundo cinza bem claro */
+  color: #474747;
+  outline: none;
+}
+
+.inputField::placeholder {
+  color: #8F8F8F; /* Cinza mais claro para placeholder */
 }
 
 .inputField:focus {
-  border-color: #c92071;
-  outline: none;
-  background-color: #fff;
+  border-color: #C92071; /* Rosa ao focar */
+  box-shadow: 0 0 0 2px rgba(201, 32, 113, 0.2);
 }
 
 .loginButton {
+  background-color: #C92071; /* Rosa */
+  color: white;
   padding: 12px;
-  background-color: #c92071;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 600;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-top: 10px; /* Espaço acima do botão */
 }
 
 .loginButton:hover {
-  background-color: #a3185d;
+  background-color: #A51A5A; /* Rosa mais escuro no hover */
 }
 
 .loginButton:disabled {
-  background-color: #ccc;
+  background-color: #E0A8C5; /* Rosa claro quando desabilitado */
   cursor: not-allowed;
 }
 
@@ -78,5 +66,5 @@
   color: red;
   font-size: 14px;
   text-align: center;
-  margin-top: -12px; /* Pode precisar de ajuste dependendo do layout final */
+  margin-top: 10px;
 }

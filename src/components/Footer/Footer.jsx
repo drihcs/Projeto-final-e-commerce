@@ -34,11 +34,11 @@ export default function Footer() {
         <div className={styles.footerInfo}>
           <h4>Informação</h4>
           <ul>
-            <li><a href="#">Sobre Digital Store</a></li>
-            <li><a href="#">Segurança</a></li>
-            <li><a href="#">Wishlist</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Trabalhe conosco</a></li>
+            <li><a href="/sobre-digital">Sobre Digital Store</a></li>
+            <li><a href="/seguranca">Segurança</a></li>
+            <li><a href="/wishlist">Wishlist</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/trabalhe-conosco">Trabalhe conosco</a></li>
             <li><a href="#">Meus Pedidos</a></li>
           </ul>
         </div>
