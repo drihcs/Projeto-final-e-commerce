@@ -1,57 +1,284 @@
-.cadastro-container {
+.pageContainer {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 60px 20px;
+  flex-direction: column;
   min-height: 100vh;
-  background-color: #f8f8f8;
+  background-color: #F3EFFF; /* Lilás bem claro de fundo da página */
+  font-family: 'Inter', Arial, sans-serif; /* Fonte similar à da imagem */
 }
 
-.cadastro-card {
+.header {
+  background-color: #FFFFFF; /* Branco */
+  padding: 20px 5%; /* Espaçamento interno, 5% nas laterais */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.logoText {
+  color: #C92071; /* Rosa */
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.mainContent {
+  display: flex;
+  flex: 1; /* Ocupa o espaço restante */
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px 5%; /* Espaçamento lateral para o conteúdo principal */
+}
+
+.formSection {
+  flex: 1.2; /* Um pouco mais de espaço para o formulário no desktop */
+  display: flex;
+  justify-content: center; /* Centraliza o card na sua coluna */
+  align-items: center;
+  padding: 20px 0; /* Espaçamento vertical */
+}
+
+.cadastroCard {
   background-color: white;
   border-radius: 8px;
-  padding: 30px;
+  padding: 35px 40px; /* Mais padding vertical */
   width: 100%;
-  max-width: 400px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  max-width: 450px; /* Largura máxima do card */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: left; /* Alinha texto à esquerda dentro do card */
 }
 
-.cadastro-card h2 {
+.cadastroCard h2 {
   margin-bottom: 10px;
-  font-size: 24px;
+  font-size: 28px; /* "Crie sua conta" */
+  font-weight: 700;
+  color: #333333;
+  text-align: left;
 }
 
-.cadastro-card p {
+.loginPrompt {
+  margin-bottom: 30px;
+  color: #555555;
+  font-size: 14px;
+  text-align: left;
+}
+
+.loginPrompt a {
+  color: #C92071; /* Rosa */
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.loginPrompt a:hover {
+  text-decoration: underline;
+}
+
+.inputGroup {
   margin-bottom: 20px;
-  color: #555;
 }
 
-.cadastro-card input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+.inputLabel {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: bold; /* Label em negrito */
+  color: #474747;
 }
 
-.cadastro-card button {
+.inputField {
   width: 100%;
-  padding: 10px;
-  background-color: #222;
+  padding: 12px 16px;
+  border: 1px solid #EAEAEA; /* Borda cinza clara */
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #FAFAFA; /* Fundo cinza bem claro, quase branco */
+  color: #474747;
+  box-sizing: border-box;
+}
+
+.inputField::placeholder {
+  color: #8F8F8F;
+}
+
+.inputField:focus {
+  border-color: #C92071; /* Rosa ao focar */
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(201, 32, 113, 0.2);
+}
+
+.submitButton {
+  width: 100%;
+  padding: 12px;
+  background-color: #C92071; /* Rosa */
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px; /* Espaço acima do botão */
 }
 
-.cadastro-card button:disabled {
-  background-color: #999;
+.submitButton:disabled {
+  background-color: #E0A8C5; /* Rosa claro quando desabilitado */
   cursor: not-allowed;
 }
 
-.mensagem {
-  margin-top: 15px;
-  color: green;
-  font-weight: bold;
+.mensagemCommon {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 14px;
+  text-align: center;
+}
+
+.mensagemSuccess {
+  color: #28a745; /* Verde para sucesso */
+  background-color: #e8f5e9;
+  border: 1px solid #c8e6c9;
+}
+.mensagemError {
+  color: #dc3545; /* Vermelho para erro */
+  background-color: #fdecea;
+  border: 1px solid #f5c6cb;
+}
+
+.socialLogin {
+  margin-top: 30px;
+  text-align: center;
+  border-top: 1px solid #EAEAEA; /* Linha divisória */
+  padding-top: 25px;
+}
+
+.socialLogin p {
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #555555;
+}
+
+.socialIcons {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Espaço entre os ícones */
+}
+
+.socialButton {
+  background-color: #FFFFFF;
+  border: 1px solid #DDDDDD;
+  border-radius: 50%; /* Botões redondos */
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.socialButton img, .socialButton svg { /* Para alinhar melhor os ícones dentro */
+  display: block;
+}
+
+
+.socialButton:hover {
+  border-color: #C92071;
+  transform: translateY(-2px);
+}
+
+.imageSection {
+  flex: 1.8; /* Mais espaço para a imagem no desktop */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Para posicionamento absoluto das imagens */
+  overflow: hidden; /* Para conter imagens rotacionadas */
+  padding: 20px; /* Um pouco de padding para não colar nas bordas */
+}
+
+.shoeDisplayContainer {
+  position: relative;
+  width: 90%;
+  max-width: 550px; /* Ajuste para o tamanho dos tênis */
+  aspect-ratio: 1.2 / 1; /* Proporção para o container das imagens */
+}
+
+.shoeImage {
+  position: absolute;
+  max-width: 80%; /* Tamanho relativo ao shoeDisplayContainer */
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease-out;
+}
+
+/* Posicionamento dos tênis - ajuste fino pode ser necessário */
+.shoeImageFront { /* pexels-melvin-buezo-2529148 1 (1).png */
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-30%, -55%) rotate(-20deg) scale(1.1);
+}
+
+.shoeImageBack { /* pexels-melvin-buezo-2529148 2 (1).png */
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(0%, -40%) rotate(15deg) scale(1);
+}
+
+
+/* --- Responsividade --- */
+@media (max-width: 992px) { /* Breakpoint para tablets e mobile */
+  .mainContent {
+    flex-direction: column;
+    padding: 20px 5%; /* Ajusta padding lateral para mobile */
+  }
+
+  .formSection {
+    order: 1; /* Formulário primeiro no mobile */
+    flex: none;
+    width: 100%;
+    justify-content: center; /* Centraliza o card */
+    padding: 20px 0; /* Padding vertical para a seção do formulário */
+  }
+
+  .cadastroCard {
+    max-width: 480px; /* Um pouco maior em tablet */
+    margin: 0 auto; /* Garante centralização */
+    padding: 30px;
+  }
+
+  .imageSection {
+    display: none; /* Oculta a seção de imagens no mobile */
+  }
+}
+
+@media (max-width: 480px) { /* Ajustes finos para mobile pequeno */
+  .header {
+    padding: 15px 5%;
+  }
+  .logoText {
+    font-size: 20px;
+  }
+  .cadastroCard {
+    padding: 25px 20px;
+    box-shadow: none; /* Remove sombra em telas muito pequenas se desejar */
+  }
+  .cadastroCard h2 {
+    font-size: 24px;
+  }
+  .loginPrompt, .socialLogin p {
+    font-size: 13px;
+  }
+  .socialButton {
+    width: 40px;
+    height: 40px;
+  }
+  .inputField {
+    padding: 11px 14px;
+    font-size: 15px;
+  }
+  .submitButton {
+    padding: 11px;
+    font-size: 15px;
+  }
 }
