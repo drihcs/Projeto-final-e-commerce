@@ -90,6 +90,9 @@
   margin-top: 30px;
   border-top: 1px solid #EAEAEA;
   padding-top: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
 }
 
 .socialLogin p {
