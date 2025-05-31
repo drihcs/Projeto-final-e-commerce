@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import styles from './CadastroFormulario.module.css';
 import { supabaseUsuarios } from '/src/utils/supabaseUsers';
 
 function CadastroFormulario() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     nome: '',
     cpf: '',
@@ -21,7 +24,7 @@ function CadastroFormulario() {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
+    setFormData(prev => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value,
     }));
@@ -31,39 +34,39 @@ function CadastroFormulario() {
     e.preventDefault();
 
     try {
-      // Cria o usuário no Supabase Auth
-      const { data: authData, error: authError } = await supabaseUsuarios.auth.signUp({
+      // 1. Criar o usuário no Auth
+      const { data, error } = await supabaseUsuarios.auth.signUp({
         email: formData.email,
         password: formData.senha,
       });
 
-      if (authError) throw authError;
+      if (error) throw error;
 
-      const userId = authData.user.id;
+      // 2. Salvar dados adicionais na tabela 'usuarios'
+      if (data?.user) {
+        const { error: insertError } = await supabaseUsuarios
+          .from('usuarios')
+          .insert([
+            {
+              id_auth: data.user.id,
+              nome: formData.nome,
+              cpf: formData.cpf,
+              email: formData.email,
+              celular: formData.celular,
+              endereco: formData.endereco,
+              bairro: formData.bairro,
+              cidade: formData.cidade,
+              cep: formData.cep,
+              complemento: formData.complemento,
+              receberNovidades: formData.receberNovidades,
+            },
+          ]);
 
-      // Insere os dados adicionais na tabela 'usuarios'
-      const { error: insertError } = await supabaseUsuarios
-        .from('usuarios')
-        .insert([
-          {
-            user_id: userId,
-            nome: formData.nome,
-            cpf: formData.cpf,
-            email: formData.email,
-            celular: formData.celular,
-            endereco: formData.endereco,
-            bairro: formData.bairro,
-            cidade: formData.cidade,
-            cep: formData.cep,
-            complemento: formData.complemento,
-            receberNovidades: formData.receberNovidades,
-          },
-        ]);
+        if (insertError) throw insertError;
 
-      if (insertError) throw insertError;
-
-      alert('Conta criada com sucesso!');
-      window.location.href = '/login';
+        alert('Conta criada com sucesso!');
+        navigate('/login');
+      }
     } catch (err) {
       alert('Erro ao criar conta: ' + err.message);
     }
