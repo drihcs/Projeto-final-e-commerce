@@ -108,14 +108,14 @@
 /* Badge desconto */
 .badgeDesconto {
   position: absolute;
-  top: 8px;
-  left: 8px;
-  background-color: #e63946;
-  color: white;
-  padding: 0.25rem 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  border-radius: 3px;
+  top: 16px;
+  left: 16px;
+  background-color: #ecff36;
+  color: black;
+  padding: 6px 12px;
+  font-size: 12px;
+  border-radius: 20px;
+  font-weight: 600;
 }
 
 /* Título do produto */
@@ -140,7 +140,7 @@
 
 /* Botão adicionar */
 .produto button {
-  background-color: #2a9d8f;
+  background-color: var(--primary);
   color: white;
   border: none;
   padding: 0.6rem 1rem;
@@ -148,10 +148,8 @@
   cursor: pointer;
   font-weight: 600;
   transition: background-color 0.3s ease;
-  align-self: stretch; /* botão ocupa toda largura do card */
-  margin-top: auto; /* garante que o botão fique na base do card */
 }
 
 .produto button:hover {
-  background-color: #21867a;
+  background-color: var(--tertiary);
 }
