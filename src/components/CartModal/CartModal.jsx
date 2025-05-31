@@ -1,11 +1,10 @@
-// src/components/CartModal/CartModal.jsx
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import styles from './CartModal.module.css'
 
 const CartModal = ({ cartItems, onClose, onClear }) => {
   const navigate = useNavigate()
-  const total = cartItems.reduce((acc, item) => acc + item.price, 0)
+  const total = cartItems.reduce((acc, item) => acc + (item.price ?? 0), 0)
 
   return (
     <div className={styles['cart-modal']}>
@@ -24,11 +23,11 @@ const CartModal = ({ cartItems, onClose, onClear }) => {
               <div>
                 <p>{item.title}</p>
                 <p className={styles.price}>
-                  R$ {item.price.toFixed(2).replace('.', ',')}
+                  R$ {(item.price ?? 0).toFixed(2).replace('.', ',')}
                 </p>
                 {item.oldPrice !== undefined && (
                   <p className={styles['old-price']}>
-                    R$ {item.oldPrice.toFixed(2).replace('.', ',')}
+                    R$ {(item.oldPrice ?? 0).toFixed(2).replace('.', ',')}
                   </p>
                 )}
               </div>
