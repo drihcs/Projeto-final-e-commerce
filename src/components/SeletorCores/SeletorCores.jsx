@@ -1,7 +1,11 @@
 import React from 'react';
 import styles from './SeletorCores.module.css';
 
-function SeletorCores({ cores, corSelecionada, setCorSelecionada }) {
+function SeletorCores({ cores = [], corSelecionada, setCorSelecionada }) {
+  if (!Array.isArray(cores) || cores.length === 0) {
+    return null; // ou exibir uma mensagem tipo "Nenhuma cor disponível"
+  }
+
   return (
     <div className={styles.optionGroup}>
       <h3 className={styles.optionTitle}>Cores:</h3>

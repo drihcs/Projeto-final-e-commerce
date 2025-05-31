@@ -141,7 +141,7 @@ export default function ProdutoDetalhado() {
             {produto.precoOriginal && (
               <span className={styles.originalPrice}>R$ {produto.precoOriginal.toFixed(2)}</span>
             )}
-            <span className={styles.currentPrice}>R$ {produto.preco.toFixed(2)}</span>
+            <p>R$ {produto?.price !== undefined ? produto.price.toFixed(2) : "Carregando..."}</p>
           </div>
 
           <p className={styles.description}>{produto.descricao}</p>

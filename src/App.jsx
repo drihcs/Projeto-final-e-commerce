@@ -13,6 +13,7 @@ import CompraFinalizada from './pages/CompraFinalizada/CompraFinalizada'
 import Usuario from './pages/Usuario'
 import Pedidos from './pages/Pedidos/Pedidos'
 import PrivateRoute from './routes/PrivateRoute'
+import { Navigate } from 'react-router-dom';
 
 function App() {
   return (
@@ -20,8 +21,9 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="/produtos" element={<ProductListDesign />} />
-        <Route path="produto/:slug" element={<ProdutoDetalhado />} />        
+        <Route path="produto/:slug" element={<ProdutoDetalhado />} />
         <Route path="busca" element={<ProductListDesign />} />
+        <Route path="/carrinho" element={<Navigate to="/finalizar-compra" replace />} />
 
         <Route
           path="finalizar-compra"

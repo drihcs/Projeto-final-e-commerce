@@ -1,7 +1,11 @@
 import React from 'react';
 import styles from './SeletorTamanho.module.css';
 
-function SeletorTamanhos({ tamanhos, tamanhoSelecionado, setTamanhoSelecionado }) {
+function SeletorTamanhos({ tamanhos = [], tamanhoSelecionado, setTamanhoSelecionado }) {
+  if (!Array.isArray(tamanhos) || tamanhos.length === 0) {
+    return null; // ou uma mensagem do tipo "Tamanhos indisponíveis"
+  }
+
   return (
     <div className={styles.optionGroup}>
       <h3 className={styles.optionTitle}>Tamanhos:</h3>
