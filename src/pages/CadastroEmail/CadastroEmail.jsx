@@ -20,7 +20,7 @@ function CadastroEmail() {
     }
 
     // Redireciona para a rota de cadastro
-    navigate('/cadastro');
+    navigate('/cadastro/formulario');
   };
 
   return (
