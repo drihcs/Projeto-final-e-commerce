@@ -2,7 +2,36 @@ import React, { useState } from 'react';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import styles from './CadastroFormulario.module.css';
-import { supabaseUsers } from '../../utils/supabaseUsers';
+import { supabaseUsuarios } from '/src/utils/supabaseUsers';
+
+
+
+useEffect(() => {
+  async function inserirUsuarioTeste() {
+    const { error } = await supabaseUsuarios
+      .from('usuarios')
+      .insert([
+        {
+          nome: "Joana Silva",
+          cpf: "123.456.789-00",
+          email: "joana.silva@example.com",
+          celular: "(11) 91234-5678",
+          endereco: "Rua das Flores, 123",
+          bairro: "Jardim Primavera",
+          cidade: "São Paulo",
+          cep: "01234-567",
+          complemento: "Apto 101, Bloco B",
+          receberNovidades: true
+        }
+      ]);
+
+    if (error) console.error("Erro ao inserir:", error.message);
+    else console.log("Usuário de teste inserido com sucesso!");
+  }
+
+  inserirUsuarioTeste();
+}, []);
+
 
 function CadastroFormulario() {
   const [formData, setFormData] = useState({
@@ -30,7 +59,7 @@ function CadastroFormulario() {
     e.preventDefault();
 
     try {
-      const { error } = await supabaseUsers
+      const { error } = await supabaseUsuarios
         .from('users') // ou o nome da sua tabela
         .insert([formData]);
 
