@@ -1,83 +1,43 @@
-import React, { useState } from 'react'
-import './CadastroFormulario.module.css'
+import React from 'react';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import styles from './CadastroFormulario.module.css';
 
 function CadastroFormulario() {
-  const [nome, setNome] = useState('')
-  const [email, setEmail] = useState('')
-  const [senha, setSenha] = useState('')
-  const [confirmarSenha, setConfirmarSenha] = useState('')
-  const [mensagem, setMensagem] = useState('')
-  const [criando, setCriando] = useState(false)
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-
-    if (!nome || !email || !senha || !confirmarSenha) {
-      setMensagem('Preencha todos os campos.')
-      return
-    }
-
-    if (senha !== confirmarSenha) {
-      setMensagem('As senhas não coincidem.')
-      return
-    }
-
-    setCriando(true)
-    setMensagem('')
-
-    // Simula criação de conta
-    setTimeout(() => {
-      setMensagem('Conta criada com sucesso!')
-      setNome('')
-      setEmail('')
-      setSenha('')
-      setConfirmarSenha('')
-      setCriando(false)
-    }, 1500)
-  }
-
   return (
-    <div className="formulario-container">
-      <div className="formulario-card">
-        <h2>Cadastro de Novo Usuário</h2>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Nome completo"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
-          />
+    <>
+      <Header />
+      <div className={styles.container}>
+        <h2 className={styles.title}>Criar Conta</h2>
+        <form className={styles.form}>
+          <fieldset className={styles.fieldset}>
+            <legend>Informações Pessoais</legend>
+            <input type="text" placeholder="Insira seu nome" required />
+            <input type="text" placeholder="Insira seu CPF" required />
+            <input type="email" placeholder="Insira seu email" required />
+            <input type="text" placeholder="Insira seu celular" required />
+          </fieldset>
 
-          <input
-            type="email"
-            placeholder="E-mail"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <fieldset className={styles.fieldset}>
+            <legend>Informações de Entrega</legend>
+            <input type="text" placeholder="Insira seu endereço" required />
+            <input type="text" placeholder="Insira seu bairro" required />
+            <input type="text" placeholder="Insira sua cidade" required />
+            <input type="text" placeholder="Insira seu CEP" required />
+            <input type="text" placeholder="Insira complemento" />
+          </fieldset>
 
-          <input
-            type="password"
-            placeholder="Senha"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-          />
+          <label className={styles.checkbox}>
+            <input type="checkbox" />
+            Quero receber por email ofertas e novidades das lojas da Digital Store.
+          </label>
 
-          <input
-            type="password"
-            placeholder="Confirmar senha"
-            value={confirmarSenha}
-            onChange={(e) => setConfirmarSenha(e.target.value)}
-          />
-
-          <button type="submit" disabled={criando}>
-            {criando ? 'Criando...' : 'Criar Conta'}
-          </button>
+          <button type="submit" className={styles.button}>Criar Conta</button>
         </form>
-
-        {mensagem && <p className="mensagem">{mensagem}</p>}
       </div>
-    </div>
-  )
+      <Footer />
+    </>
+  );
 }
 
-export default CadastroFormulario
+export default CadastroFormulario;
