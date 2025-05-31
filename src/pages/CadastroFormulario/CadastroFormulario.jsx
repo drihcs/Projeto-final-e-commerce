@@ -21,7 +21,7 @@ function CadastroFormulario() {
     cidade: '',
     cep: '',
     complemento: '',
-    receberNovidades: false,
+    recebernovidades: false,
   });
 
   const [confirmarSenha, setConfirmarSenha] = useState('');
