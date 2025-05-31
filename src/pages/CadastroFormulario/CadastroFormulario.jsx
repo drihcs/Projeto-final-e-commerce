@@ -35,11 +35,32 @@ function CadastroFormulario() {
 
   const validarRequisito = (regex) => regex.test(formData.senha);
 
+  const formatarCPF = (cpf) => {
+    return cpf
+      .replace(/\D/g, '')
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+  };
+
+  const formatarCelular = (celular) => {
+    return celular
+      .replace(/\D/g, '')
+      .replace(/^(\d{2})(\d)/, '($1) $2')
+      .replace(/(\d{5})(\d{1,4})$/, '$1-$2');
+  };
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+
+    let novoValor = value;
+
+    if (name === 'cpf') novoValor = formatarCPF(value);
+    if (name === 'celular') novoValor = formatarCelular(value);
+
     setFormData(prev => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === 'checkbox' ? checked : novoValor,
     }));
   };
 
@@ -78,7 +99,6 @@ function CadastroFormulario() {
 
       alert('Conta criada com sucesso! Você será redirecionada para o login.');
       navigate('/login');
-
     } catch (error) {
       alert('Erro ao criar conta: ' + error.message);
     }
@@ -94,53 +114,141 @@ function CadastroFormulario() {
             <legend>Informações Pessoais</legend>
 
             <label>Nome Completo *</label>
-            <input type="text" name="nome" placeholder="Insira seu nome" required value={formData.nome} onChange={handleChange} />
+            <input
+              type="text"
+              name="nome"
+              placeholder="Insira seu nome"
+              required
+              autoFocus
+              value={formData.nome}
+              onChange={handleChange}
+            />
 
             <label>CPF *</label>
-            <input type="text" name="cpf" placeholder="Insira seu CPF" required value={formData.cpf} onChange={handleChange} />
+            <input
+              type="text"
+              name="cpf"
+              placeholder="Insira seu CPF"
+              required
+              value={formData.cpf}
+              onChange={handleChange}
+            />
 
             <label>Celular *</label>
-            <input type="text" name="celular" placeholder="Insira seu celular" required value={formData.celular} onChange={handleChange} />
+            <input
+              type="text"
+              name="celular"
+              placeholder="Insira seu celular"
+              required
+              value={formData.celular}
+              onChange={handleChange}
+              inputMode="numeric"
+            />
 
             <label>E-mail *</label>
-            <input type="email" name="email" placeholder="Insira seu email" required value={formData.email} onChange={handleChange} />
+            <input
+              type="email"
+              name="email"
+              placeholder="Insira seu email"
+              required
+              value={formData.email}
+              onChange={handleChange}
+            />
 
             <label>Senha *</label>
-            <input type="password" name="senha" placeholder="Insira sua senha" required value={formData.senha} onChange={handleChange} />
+            <input
+              type="password"
+              name="senha"
+              placeholder="Insira sua senha"
+              required
+              value={formData.senha}
+              onChange={handleChange}
+            />
 
             <label>Confirmar Senha *</label>
-            <input type="password" name="confirmarSenha" placeholder="Confirme a senha" required value={confirmarSenha} onChange={(e) => setConfirmarSenha(e.target.value)} />
+            <input
+              type="password"
+              name="confirmarSenha"
+              placeholder="Confirme a senha"
+              required
+              value={confirmarSenha}
+              onChange={(e) => setConfirmarSenha(e.target.value)}
+            />
 
-            <ul className={styles.requisitos}>
-              {requisitosSenha.map((req, index) => (
-                <li key={index} className={validarRequisito(req.regex) ? styles.ok : styles.naoOk}>
-                  {req.label}
-                </li>
-              ))}
-            </ul>
+            {formData.senha.length > 0 && (
+              <ul className={styles.requisitos}>
+                {requisitosSenha.map((req, index) => {
+                  const atendido = validarRequisito(req.regex);
+                  return (
+                    <li key={index} style={{ color: atendido ? '#000' : 'red' }}>
+                      {req.label}
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
           </fieldset>
 
           <fieldset className={styles.fieldset}>
             <legend>Informações de Entrega</legend>
 
             <label>Endereço *</label>
-            <input type="text" name="endereco" placeholder="Insira seu endereço" required value={formData.endereco} onChange={handleChange} />
+            <input
+              type="text"
+              name="endereco"
+              placeholder="Insira seu endereço"
+              required
+              value={formData.endereco}
+              onChange={handleChange}
+            />
 
             <label>Bairro *</label>
-            <input type="text" name="bairro" placeholder="Insira seu bairro" required value={formData.bairro} onChange={handleChange} />
+            <input
+              type="text"
+              name="bairro"
+              placeholder="Insira seu bairro"
+              required
+              value={formData.bairro}
+              onChange={handleChange}
+            />
 
             <label>Cidade *</label>
-            <input type="text" name="cidade" placeholder="Insira sua cidade" required value={formData.cidade} onChange={handleChange} />
+            <input
+              type="text"
+              name="cidade"
+              placeholder="Insira sua cidade"
+              required
+              value={formData.cidade}
+              onChange={handleChange}
+            />
 
             <label>CEP *</label>
-            <input type="text" name="cep" placeholder="Insira seu CEP" required value={formData.cep} onChange={handleChange} />
+            <input
+              type="text"
+              name="cep"
+              placeholder="Insira seu CEP"
+              required
+              value={formData.cep}
+              onChange={handleChange}
+            />
 
             <label>Complemento</label>
-            <input type="text" name="complemento" placeholder="Insira complemento" value={formData.complemento} onChange={handleChange} />
+            <input
+              type="text"
+              name="complemento"
+              placeholder="Insira complemento"
+              value={formData.complemento}
+              onChange={handleChange}
+            />
           </fieldset>
 
           <label className={styles.checkbox}>
-            <input type="checkbox" name="receberNovidades" checked={formData.receberNovidades} onChange={handleChange} />
+            <input
+              type="checkbox"
+              name="receberNovidades"
+              checked={formData.receberNovidades}
+              onChange={handleChange}
+            />
             Quero receber por email ofertas e novidades das lojas da Digital Store.
           </label>
 
