@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 import styles from './CadastroFormulario.module.css';
 
 function CadastroFormulario() {
