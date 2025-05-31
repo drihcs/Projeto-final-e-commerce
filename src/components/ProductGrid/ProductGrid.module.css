@@ -43,14 +43,14 @@
 
 .badgeDesconto {
   position: absolute;
-  top: 6px;
-  left: 6px;
-  background-color: #e63946;
-  color: white;
-  padding: 0.2rem 0.5rem;
-  font-size: 0.75rem;
-  border-radius: 3px;
-  font-weight: 700;
+  top: 16px;
+  left: 16px;
+  background-color: #ecff36;
+  color: black;
+  padding: 6px 12px;
+  font-size: 12px;
+  border-radius: 20px;
+  font-weight: 600;
 }
 
 h3 {
@@ -71,7 +71,7 @@ h3 {
 }
 
 .botao {
-  background-color: #2a9d8f;
+  background-color: var(--primary);
   color: white;
   border: none;
   padding: 0.6rem 1rem;
@@ -82,5 +82,5 @@ h3 {
 }
 
 .botao:hover {
-  background-color: #21867a;
+  background-color: var(--tertiary);
 }
