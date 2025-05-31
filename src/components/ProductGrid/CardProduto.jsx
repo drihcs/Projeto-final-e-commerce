@@ -10,7 +10,7 @@ export default function CardProduto({ produto }) {
           <div className={styles.desconto}>{produto.discount}</div>
         )}
         <img
-          src={produto.image}  // aqui puxando a imagem do produto
+          src={produto.image} 
           alt={produto.name}
           className={styles.imagem}
         />
@@ -19,10 +19,14 @@ export default function CardProduto({ produto }) {
         <div className={styles.categoria}>{produto.category || 'Categoria'}</div>
         <h3 className={styles.nome}>{produto.name}</h3>
         <div className={styles.precos}>
-          {produto.original_price && (
-            <span className={styles.precoOriginal}>${produto.original_price.toFixed(2)}</span>
-          )}
-          <span className={styles.precoAtual}>${produto.price.toFixed(2)}</span>
+          {produto.original_price ? (
+            <span className={styles.precoOriginal}>
+              ${Number(produto.original_price).toFixed(2)}
+            </span>
+          ) : null}
+          <span className={styles.precoAtual}>
+            ${Number(produto.price || 0).toFixed(2)}
+          </span>
         </div>
       </div>
       <Link to={`/produto/${produto.id}`} className={styles.botao}>
