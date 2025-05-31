@@ -41,8 +41,8 @@ export default function ProductGrid() {
               </div>
               <h3>{produto.name}</h3>
               <p className={styles.preco}>
-                <del>R${produto.original_price.toFixed(2)}</del>{" "}
-                <strong>R${produto.price.toFixed(2)}</strong>
+                <del>R${Number(produto.original_price || 0).toFixed(2)}</del>{" "}
+                <strong>R${Number(produto.price || 0).toFixed(2)}</strong>
               </p>
             </Link>
             <button

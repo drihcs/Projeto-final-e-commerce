@@ -18,7 +18,7 @@ export default function Busca() {
 
   useEffect(() => {
     async function carregarProdutos() {
-const { data, error } = await supabase.from("produtosList").select("*");
+      const { data, error } = await supabase.from("produtosList").select("*");
       if (error) {
         console.error("Erro ao buscar produtos:", error);
       } else {
@@ -178,8 +178,8 @@ const { data, error } = await supabase.from("produtosList").select("*");
               </div>
               <h4>{produto.name}</h4>
               <p>
-                <del>R${produto.original_price.toFixed(2)}</del>
-                <strong>R${produto.price.toFixed(2)}</strong>
+                <del>R${Number(produto.original_price || 0).toFixed(2)}</del>{" "}
+                <strong>R${Number(produto.price || 0).toFixed(2)}</strong>
               </p>
               <button
                 className={styles.botao}
