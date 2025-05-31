@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';  // para redirecionar
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import styles from './CadastroFormulario.module.css';
@@ -34,41 +34,39 @@ function CadastroFormulario() {
     e.preventDefault();
 
     try {
-      // 1. Criar o usuário no Auth
-      const { data, error } = await supabaseUsuarios.auth.signUp({
+      // 1. Cria o usuário no Auth
+      const { data: signUpData, error: signUpError } = await supabaseUsuarios.auth.signUp({
         email: formData.email,
         password: formData.senha,
       });
 
-      if (error) throw error;
+      if (signUpError) throw signUpError;
 
-      // 2. Salvar dados adicionais na tabela 'usuarios'
-      if (data?.user) {
-        const { error: insertError } = await supabaseUsuarios
-          .from('usuarios')
-          .insert([
-            {
-              id_auth: data.user.id,
-              nome: formData.nome,
-              cpf: formData.cpf,
-              email: formData.email,
-              celular: formData.celular,
-              endereco: formData.endereco,
-              bairro: formData.bairro,
-              cidade: formData.cidade,
-              cep: formData.cep,
-              complemento: formData.complemento,
-              receberNovidades: formData.receberNovidades,
-            },
-          ]);
+      // 2. Insere dados extras na tabela 'usuarios' usando o ID do usuário Auth
+      const { error: insertError } = await supabaseUsuarios
+        .from('usuarios')
+        .insert([
+          {
+            id: signUpData.user.id,  // chave primária igual ao user.id do Auth
+            nome: formData.nome,
+            cpf: formData.cpf,
+            celular: formData.celular,
+            endereco: formData.endereco,
+            bairro: formData.bairro,
+            cidade: formData.cidade,
+            cep: formData.cep,
+            complemento: formData.complemento,
+            receberNovidades: formData.receberNovidades,
+          }
+        ]);
 
-        if (insertError) throw insertError;
+      if (insertError) throw insertError;
 
-        alert('Conta criada com sucesso!');
-        navigate('/login');
-      }
-    } catch (err) {
-      alert('Erro ao criar conta: ' + err.message);
+      alert('Conta criada com sucesso! Você será redirecionada para o login.');
+      navigate('/login');  // redireciona para página de login
+
+    } catch (error) {
+      alert('Erro ao criar conta: ' + error.message);
     }
   };
 
@@ -107,7 +105,7 @@ function CadastroFormulario() {
             <input
               type="password"
               name="senha"
-              placeholder="Crie uma senha"
+              placeholder="Insira sua senha"
               required
               value={formData.senha}
               onChange={handleChange}
