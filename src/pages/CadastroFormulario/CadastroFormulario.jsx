@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
@@ -25,77 +25,41 @@ function CadastroFormulario() {
   });
 
   const [confirmarSenha, setConfirmarSenha] = useState('');
-  const [mostrarRequisitos, setMostrarRequisitos] = useState(false);
-  const [senhaValida, setSenhaValida] = useState(false);
-  const [senhasIguais, setSenhasIguais] = useState(true);
-
-  const requisitosSenha = [
-    { regex: /.{8,}/, label: 'Mínimo de 8 caracteres' },
-    { regex: /[A-Z]/, label: 'Ao menos uma letra maiúscula' },
-    { regex: /[a-z]/, label: 'Ao menos uma letra minúscula' },
-    { regex: /[^A-Za-z0-9]/, label: 'Ao menos um caractere especial' },
-  ];
-
-  const validarRequisito = (regex) => regex.test(formData.senha);
+  const [erroSenha, setErroSenha] = useState('');
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    let novoValor = value;
+    let newValue = value;
 
     if (name === 'cpf') {
-      novoValor = value
-        .replace(/\D/g, '')
-        .replace(/(\d{3})(\d)/, '$1.$2')
-        .replace(/(\d{3})(\d)/, '$1.$2')
-        .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+      newValue = value.replace(/\D/g, '').slice(0, 11);
+      newValue = newValue.replace(/(\d{3})(\d)/, '$1.$2')
+                         .replace(/(\d{3})(\d)/, '$1.$2')
+                         .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
     }
 
     if (name === 'celular') {
-      novoValor = value
-        .replace(/\D/g, '')
-        .replace(/(\d{2})(\d)/, '($1) $2')
-        .replace(/(\d{5})(\d)/, '$1-$2')
-        .replace(/(-\d{4})\d+?$/, '$1');
+      newValue = value.replace(/\D/g, '').slice(0, 11);
+      newValue = newValue.replace(/(\d{2})(\d)/, '($1) $2')
+                         .replace(/(\d{5})(\d)/, '$1-$2');
     }
 
     if (name === 'cep') {
-      novoValor = value
-        .replace(/\D/g, '')
-        .replace(/(\d{5})(\d)/, '$1-$2')
-        .slice(0, 9);
+      newValue = value.replace(/\D/g, '').slice(0, 8);
+      newValue = newValue.replace(/(\d{5})(\d)/, '$1-$2');
     }
 
     setFormData(prev => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : novoValor,
+      [name]: type === 'checkbox' ? checked : newValue,
     }));
-
-    if (name === 'senha') {
-      setMostrarRequisitos(true);
-    }
-  };
-
-  useEffect(() => {
-    const todosAtendidos = requisitosSenha.every(req => validarRequisito(req.regex));
-    setSenhaValida(todosAtendidos);
-    setSenhasIguais(formData.senha === confirmarSenha);
-  }, [formData.senha, confirmarSenha]);
-
-  const handleSenhaBlur = () => {
-    const todosAtendidos = requisitosSenha.every(req => validarRequisito(req.regex));
-    if (todosAtendidos) setMostrarRequisitos(false);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!senhaValida) {
-      alert('A senha não atende a todos os requisitos.');
-      return;
-    }
-
-    if (!senhasIguais) {
-      alert('As senhas não coincidem!');
+    if (formData.senha !== confirmarSenha) {
+      setErroSenha('As senhas não coincidem!');
       return;
     }
 
@@ -154,33 +118,13 @@ function CadastroFormulario() {
             <input type="email" name="email" placeholder="Insira seu email" required value={formData.email} onChange={handleChange} />
 
             <label>Senha *</label>
-            <input
-              type="password"
-              name="senha"
-              placeholder="Insira sua senha"
-              required
-              value={formData.senha}
-              onChange={handleChange}
-              onBlur={handleSenhaBlur}
-            />
-
-            {mostrarRequisitos && (
-              <ul className={styles.requisitos}>
-                {requisitosSenha.map((req, index) => (
-                  <li
-                    key={index}
-                    className={validarRequisito(req.regex) ? styles.ok : styles.naoOk}
-                  >
-                    {req.label}
-                  </li>
-                ))}
-              </ul>
-            )}
+            <input type="password" name="senha" placeholder="Insira sua senha" required value={formData.senha} onChange={handleChange} />
 
             <label>Confirmar Senha *</label>
             <input type="password" name="confirmarSenha" placeholder="Confirme a senha" required value={confirmarSenha} onChange={(e) => setConfirmarSenha(e.target.value)} />
 
-            {!senhasIguais && <p className={styles.naoOk}>As senhas não coincidem.</p>}
+            {erroSenha && <p className={styles.erro}>{erroSenha}</p>}
+
           </fieldset>
 
           <fieldset className={styles.fieldset}>
@@ -196,7 +140,7 @@ function CadastroFormulario() {
             <input type="text" name="cidade" placeholder="Insira sua cidade" required value={formData.cidade} onChange={handleChange} />
 
             <label>CEP *</label>
-            <input type="text" name="cep" placeholder="00000-000" required value={formData.cep} onChange={handleChange} />
+            <input type="text" name="cep" placeholder="Insira seu CEP" required value={formData.cep} onChange={handleChange} />
 
             <label>Complemento</label>
             <input type="text" name="complemento" placeholder="Insira complemento" value={formData.complemento} onChange={handleChange} />
