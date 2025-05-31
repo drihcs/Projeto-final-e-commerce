@@ -27,7 +27,7 @@
   font-size: 8rem;
   font-weight: bold;
   margin-bottom: 1rem;
-  color: var(--warning);
+  color: var(--error);
   text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
   animation: bounce 2s infinite;
 }
@@ -49,7 +49,7 @@
 .btn {
   display: inline-block;
   padding: 12px 30px;
-  background: var(--warning);
+  background: var(--error);
   color: var(--dark-gray);
   text-decoration: none;
   border-radius: 50px;
