@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { supabase } from "../../utils/supabase";
+import { supabaseProducts } from '../../utils/supabaseProducts';
 import styles from "./ProductListDesign.module.css";
 import { useCarrinho } from "../../contexts/CarrinhoContext";
 
@@ -18,7 +18,7 @@ export default function Busca() {
 
   useEffect(() => {
     async function carregarProdutos() {
-      const { data, error } = await supabase.from("productslist").select("*");
+      const { data, error } = await supabaseProducts.from("productslist").select("*");
       if (error) {
         console.error("Erro ao buscar produtos:", error);
       } else {
