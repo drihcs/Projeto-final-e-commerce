@@ -1,34 +1,18 @@
+// src/components/Header/Header.jsx
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import headerLogo from '../../assets/logo-header.svg'
 import styles from './Header.module.css'
 import CartModal from '../CartModal/CartModal'
+import { useCarrinho } from '../../contexts/CarrinhoContext'
 
 export default function Header() {
   const [showCart, setShowCart] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      title: 'Tênis Nike Revolution 6 Next Nature Masculino',
-      price: 219.0,
-      image: '/img/tenis-nike.jpg',
-    },
-    {
-      id: 2,
-      title: 'Tênis Nike Revolution 6 Next Nature Masculino',
-      price: 219.0,
-      image: '/img/tenis-nike.jpg',
-    },
-  ])
-
-  const clearCart = () => {
-    setCartItems([])
-  }
-
   const [searchTerm, setSearchTerm] = useState('')
   const navigate = useNavigate()
+
+  const { itens, limparCarrinho } = useCarrinho()
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && searchTerm.trim() !== '') {
@@ -45,12 +29,12 @@ export default function Header() {
       <div className={styles.headerContainer}>
         {/* Logo */}
         <div className={styles.logo}>
-           <Link to="/">
-              <img src={headerLogo} alt="Logo Digital Store" />
-           </Link>
+          <Link to="/">
+            <img src={headerLogo} alt="Logo Digital Store" />
+          </Link>
         </div>
 
-        {/* Search */}
+        {/* Barra de pesquisa */}
         <div className={styles.searchBar}>
           <input
             placeholder="Pesquisar produto..."
@@ -64,25 +48,22 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Ações: Cadastro / Entrar / Carrinho */}
+        {/* Ações */}
         <div className={styles.headerActions}>
-          <Link to="/cadastro" className={styles.linkText}>
-            Cadastre-se
-          </Link>
-          <Link to="/login" className={styles.btnPrimary}>
-            Entrar
-          </Link>
+          <Link to="/cadastro" className={styles.linkText}>Cadastre-se</Link>
+          <Link to="/login" className={styles.btnPrimary}>Entrar</Link>
 
+          {/* Botão do carrinho */}
           <button
             className={styles.cart}
             onClick={() => setShowCart(!showCart)}
             aria-label={showCart ? 'Fechar carrinho' : 'Abrir carrinho'}
           >
             <span className="material-symbols-outlined">shopping_cart</span>
-            <div className={styles.cartCount}>{cartItems.length}</div>
+            <div className={styles.cartCount}>{itens.length}</div>
           </button>
 
-          {/* Menu hambúrguer para mobile */}
+          {/* Menu hambúrguer */}
           <button
             className={styles.menuToggle}
             onClick={toggleMobileMenu}
@@ -116,9 +97,9 @@ export default function Header() {
       {/* Modal do carrinho */}
       {showCart && (
         <CartModal
-          cartItems={cartItems}
+          cartItems={itens}
           onClose={() => setShowCart(false)}
-          onClear={clearCart}
+          onClear={limparCarrinho}
         />
       )}
     </header>

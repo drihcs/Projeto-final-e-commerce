@@ -6,19 +6,23 @@ export default function CardProduto({ produto }) {
   return (
     <div className={styles.card}>
       <div className={styles.imagemContainer}>
-        <div className={styles.desconto}>30% OFF</div>
+        {produto.discount && (
+          <div className={styles.desconto}>{produto.discount}</div>
+        )}
         <img
-          src={`/k-swiss-v8.png`} // Substitua futuramente por produto.imagem_url
-          alt={produto.nome}
+          src={produto.image}  // aqui puxando a imagem do produto
+          alt={produto.name}
           className={styles.imagem}
         />
       </div>
       <div className={styles.infoContainer}>
-        <div className={styles.categoria}>Tênis</div>
-        <h3 className={styles.nome}>{produto.nome}</h3>
+        <div className={styles.categoria}>{produto.category || 'Categoria'}</div>
+        <h3 className={styles.nome}>{produto.name}</h3>
         <div className={styles.precos}>
-          <span className={styles.precoOriginal}>$200</span>
-          <span className={styles.precoAtual}>$100</span>
+          {produto.original_price && (
+            <span className={styles.precoOriginal}>${produto.original_price.toFixed(2)}</span>
+          )}
+          <span className={styles.precoAtual}>${produto.price.toFixed(2)}</span>
         </div>
       </div>
       <Link to={`/produto/${produto.id}`} className={styles.botao}>

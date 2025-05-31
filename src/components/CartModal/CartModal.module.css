@@ -1,3 +1,14 @@
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .cart-modal {
   width: 300px;
   background: white;
@@ -8,6 +19,7 @@
   right: 0;
   top: 60px;
   z-index: 10;
+  animation: slideIn 0.3s ease-out forwards;
 }
 
 .closeBtn {
@@ -34,7 +46,9 @@
 
 .cart-item img {
   width: 60px;
+  height: auto;
   border-radius: 5px;
+  object-fit: cover;
 }
 
 .price {
@@ -64,21 +78,21 @@
   justify-content: space-between;
 }
 
-.clear-btn,
+.clear-btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  background: transparent;
+  color: #d10060;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .checkout-btn {
   padding: 8px 12px;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
-}
-
-.clear-btn {
-  background: transparent;
-  color: #d10060;
-  text-decoration: underline;
-}
-
-.checkout-btn {
   background-color: #d10060;
   color: white;
+  cursor: pointer;
 }
