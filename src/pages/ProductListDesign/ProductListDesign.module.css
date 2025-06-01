@@ -18,7 +18,7 @@
   background-color: #fafafa;
   height: fit-content;
   font-family: Arial, sans-serif;
-  color: #222;
+  color: black;
 }
 
 /* Cada grupo de filtro */
@@ -31,7 +31,7 @@
   margin-bottom: 0.75rem;
   font-weight: 700;
   font-size: 1rem;
-  color: #111;
+  color: black;
 }
 
 .filtro label {
@@ -85,7 +85,7 @@
 .topBar p {
   margin: 0;
   font-weight: 600;
-  color: #555;
+  color: black;
 }
 
 .topBar select {
