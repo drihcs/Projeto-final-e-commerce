@@ -16,6 +16,7 @@ import PrivateRoute from './routes/PrivateRoute'
 import { Navigate } from 'react-router-dom'
 
 import NotFound from './pages/NotFound'
+import Carrinho from './pages/Carrinho/Carrinho'
 
 function App() {
   return (
@@ -25,13 +26,12 @@ function App() {
         <Route path="/produtos" element={<ProductListDesign />} />
         <Route path="produto/:slug" element={<ProdutoDetalhado />} />
         <Route path="busca" element={<ProductListDesign />} />
-        <Route path="/carrinho" element={<Navigate to="/finalizar-compra" replace />} />
 
         <Route
-          path="finalizar-compra"
+          path="/carrinho"
           element={
             <PrivateRoute>
-              <FinalizarCompra />
+              <Carrinho />
             </PrivateRoute>
           }
         />

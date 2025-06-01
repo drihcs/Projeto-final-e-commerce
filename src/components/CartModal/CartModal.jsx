@@ -52,7 +52,7 @@ const CartModal = ({ cartItems, onClose, onClear }) => {
               className={styles['checkout-btn']}
               onClick={() => {
                 onClose()
-                navigate('/finalizar-compra')
+                navigate('/carrinho')
               }}
             >
               Ver Carrinho
