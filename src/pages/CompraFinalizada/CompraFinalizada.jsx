@@ -3,6 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from './CompraFinalizada.module.css'
 import { MapPin, CreditCard, Phone, Mail, User } from 'lucide-react'
+import sucessoImg from '../../assets/party-popper.png'
 
 const ConfirmacaoCompra = () => {
   return (
@@ -11,7 +12,9 @@ const ConfirmacaoCompra = () => {
       <main className={styles.main}>
         {/* Success Section */}
         <section className={styles.successSection}>
-          <div className={styles.successIcon}>🎉</div>
+          <div className={styles.successIcon}>
+            <img src={sucessoImg} alt="Sucesso" className={styles.successImage} />
+          </div>
           <h1 className={styles.successTitle}>Compra Realizada</h1>
           <p className={styles.successSubtitle}>com sucesso!</p>
         </section>
