@@ -1,0 +1,41 @@
+.container {
+  max-width: 600px;
+  margin: 4rem auto;
+  padding: 2rem;
+  background-color: var(--light-gray-3);
+  border-radius: 8px;
+  text-align: center;
+  color: var(--dark-gray);
+}
+
+h2 {
+  color: var(--error);
+  margin-bottom: 1rem;
+}
+
+.botaoRosa {
+  background-color: var(--primary);
+  color: white;
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  margin: 1rem;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.botaoBranco {
+  background-color: white;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  margin: 1rem;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.botoes {
+  margin-top: 2rem;
+}
