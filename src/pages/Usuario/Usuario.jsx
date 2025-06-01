@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import styles from "./Usuario.module.css"; // ajuste conforme seu CSS
+import styles from "./Usuario.module.css";
 import InfoUsuario from "../../components/InfoUsuario/InfoUsuario";
 import InfoPedidos from "../../components/InfoPedidos/InfoPedidos";
 
 export default function UserPage() {
-  // Estado que controla a aba ativa
-  const [activeTab, setActiveTab] = useState("info"); // 'info' ou 'pedidos'
+  const [activeTab, setActiveTab] = useState("pedidos");
 
-  // Função para trocar aba
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };

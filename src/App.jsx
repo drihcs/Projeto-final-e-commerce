@@ -58,6 +58,15 @@ function App() {
         />
 
         <Route
+          path="usuario/pedidos"
+          element={
+            <PrivateRoute>
+              <Usuario />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
           path="finalizar-compra"
           element={
             <PrivateRoute>
