@@ -7,6 +7,7 @@ import ProdutoDetalhado from './pages/ProdutoDetalhado/ProdutoDetalhado'
 import ProductListDesign from './pages/ProductListDesign/ProductListDesign'
 import Login from './pages/Login'
 import CadastroEmail from './pages/CadastroEmail/CadastroEmail'
+import EmailConfirmado from './pages/EmailConfirmado/EmailConfirmado';
 import CadastroFormulario from './pages/CadastroFormulario/CadastroFormulario'
 import Carrinho from './pages/Carrinho/Carrinho'
 import FinalizarCompra from './pages/FinalizarCompra/FinalizarCompra'
@@ -71,6 +72,7 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route path="/email-confirmado" element={<EmailConfirmado />} />
 
         {/* Página 404 dentro das rotas do Layout */}
         <Route path="*" element={<NotFound />} />
