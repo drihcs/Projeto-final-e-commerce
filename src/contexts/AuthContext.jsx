@@ -8,6 +8,7 @@ AuthContext.displayName = 'AuthContext'
 export function AuthProvider({ children }) {
   const [usuario, setUsuario] = useState(null)
   const [carregando, setCarregando] = useState(true)
+  const [erroLogin, setErroLogin] = useState('') // Novo estado para mensagem
 
   useEffect(() => {
     // Verifica sessão ativa ao montar o componente
@@ -38,13 +39,21 @@ export function AuthProvider({ children }) {
 
   const login = async (email, senha) => {
     setCarregando(true)
+    setErroLogin('')
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password: senha,
       })
 
-      if (error) throw error
+      if (error) {
+        if (error.message === 'Email not confirmed') {
+          setErroLogin('Você precisa confirmar seu e-mail antes de entrar.')
+        } else {
+          setErroLogin('Erro ao fazer login: ' + error.message)
+        }
+        throw error
+      }
 
       if (!data.session) {
         throw new Error('Falha ao fazer login: sessão não encontrada')
@@ -66,7 +75,7 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ usuario, login, logout, carregando }}>
+    <AuthContext.Provider value={{ usuario, login, logout, carregando, erroLogin }}>
       {children}
     </AuthContext.Provider>
   )

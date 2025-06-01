@@ -13,10 +13,6 @@ export default function Login() {
   const tenisImageUrl1 = "/pexels-melvin-buezo-2529148 1 (1).png";
   const tenisImageUrl2 = "/pexels-melvin-buezo-2529148 2 (1).png";
 
-  // Se você renomear os arquivos na pasta public para, por exemplo:
-  // const tenisImageUrl1 = "/tenis_principal.png";
-  // const tenisImageUrl2 = "/tenis_secundario.png";
-
   return (
     <div className={styles.pageContainer}>
       <header className={styles.header}>
