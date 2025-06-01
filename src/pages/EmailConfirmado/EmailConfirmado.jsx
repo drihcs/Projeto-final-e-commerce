@@ -8,7 +8,6 @@ import styles from './EmailConfirmado.module.css';
 export default function EmailConfirmado() {
   return (
     <>
-      <Header />
       <div className={styles.container}>
         <h2>E-mail confirmado com sucesso!</h2>
         <p>Agora você pode fazer login com sua conta.</p>
@@ -17,7 +16,6 @@ export default function EmailConfirmado() {
           Voltar ao Início
         </Link>
       </div>
-      <Footer />
     </>
   );
 }
