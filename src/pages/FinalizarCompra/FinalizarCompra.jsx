@@ -59,7 +59,7 @@ function FinalizarCompra() {
     console.log('Dados do pedido:', formData);
 
     limparCarrinho()
-    navigate('/obrigado') // exemplo de redirecionamento pós-compra
+    navigate('/compra-finalizada')
   };
 
   const formatCPF = (value) => {
