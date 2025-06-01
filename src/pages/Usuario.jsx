@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAuth } from '../contexts/AuthContext'
-import './Usuario.css'
+import styles from './Usuario.module.css'
 
 function Usuario() {
   const { usuario, logout } = useAuth()
@@ -12,33 +12,35 @@ function Usuario() {
   }
 
   if (!usuario) {
-    return <p className="usuario-mensagem-erro">Usuário não encontrado.</p>
+    return <p className={styles.aviso}>Usuário não encontrado.</p>
   }
 
   const { nome, email, cpf, celular, endereco } = usuario
 
   return (
-    <div className="usuario-container">
-      <aside className="usuario-aside">
-        <h2>Minha Conta</h2>
-        <ul>
-          <li>Meus Dados</li>
-          <li>Endereço</li>
-          <li>Pedidos</li>
-          <li onClick={handleLogout} className="logout">Sair</li>
-        </ul>
+    <div className={styles.usuarioContainer}>
+      <aside className={styles.usuarioAside}>
+        <h2 className={styles.usuarioTitulo}>Minha Conta</h2>
+        <nav>
+          <ul className={styles.usuarioMenu}>
+            <li><a href="#">Dados Pessoais</a></li>
+            <li><a href="#">Endereço</a></li>
+            <li><a href="#">Pedidos</a></li>
+            <li><button onClick={handleLogout} className={styles.botaoSair}>Sair</button></li>
+          </ul>
+        </nav>
       </aside>
 
-      <main className="usuario-main">
-        <section className="usuario-card">
-          <h3>Meus Dados</h3>
+      <main className={styles.usuarioMain}>
+        <section className={styles.usuarioCard}>
+          <h3>Dados Pessoais</h3>
           <p><strong>Nome:</strong> {nome}</p>
           <p><strong>Email:</strong> {email}</p>
           <p><strong>CPF:</strong> {cpf}</p>
           <p><strong>Celular:</strong> {celular}</p>
         </section>
 
-        <section className="usuario-card">
+        <section className={styles.usuarioCard}>
           <h3>Endereço</h3>
           <p><strong>Rua:</strong> {endereco?.rua}</p>
           <p><strong>Número:</strong> {endereco?.numero}</p>
