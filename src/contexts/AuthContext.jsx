@@ -37,6 +37,8 @@ export function AuthProvider({ children }) {
   }, []);
 
   const login = async (email, senha) => {
+    console.log('[login] Tentando login com email:', email);  // LOG 1
+
     setCarregando(true);
     setErroLogin('');
 
@@ -47,6 +49,8 @@ export function AuthProvider({ children }) {
         email,
         password: senha,
       });
+
+      console.log('[login] Resposta do Supabase:', { data, error }); // LOG 2
 
       if (error) {
         if (error.message === 'Email not confirmed') {

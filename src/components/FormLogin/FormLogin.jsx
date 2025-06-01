@@ -1,33 +1,35 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../../contexts/AuthContext' 
-import styles from './FormLogin.module.css'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
+import styles from './FormLogin.module.css';
 
 export default function FormLogin() {
-  const { login } = useAuth()
-  const navigate = useNavigate()
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
-  const [email, setEmail] = useState('')
-  const [senha, setSenha] = useState('')
-  const [erro, setErro] = useState('')
-  const [carregando, setCarregando] = useState(false)
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+  const [erro, setErro] = useState('');
+  const [carregando, setCarregando] = useState(false);
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setErro('')
-    setCarregando(true)
+    e.preventDefault();
+
+    console.log('[handleSubmit] Enviando formulário com:', { email, senha });  // LOG 3
+
+    setErro('');
+    setCarregando(true);
 
     try {
-      await login(email, senha)
-      alert('Login realizado com sucesso!')
-      navigate('/usuario')  // redireciona após login bem sucedido
+      await login(email, senha);
+      alert('Login realizado com sucesso!');
+      navigate('/usuario');
     } catch (err) {
-      // Exibe mensagem clara do erro
-      setErro(err.message || 'Erro desconhecido ao entrar')
+      setErro(err.message || 'Erro desconhecido ao entrar');
     } finally {
-      setCarregando(false)
+      setCarregando(false);
     }
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit} className={styles.loginForm}>
@@ -67,5 +69,5 @@ export default function FormLogin() {
 
       {erro && <p className={styles.errorMessage}>{erro}</p>}
     </form>
-  )
+  );
 }
