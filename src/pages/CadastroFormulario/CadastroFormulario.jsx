@@ -71,20 +71,21 @@ function CadastroFormulario() {
 
       if (signUpError) throw signUpError;
 
-      const { error: insertError } = await supabase
-        .from('usuarios')
-        .insert([{
-          id: signUpData.user.id,
-          nome: formData.nome,
-          cpf: formData.cpf,
-          celular: formData.celular,
-          endereco: formData.endereco,
-          bairro: formData.bairro,
-          cidade: formData.cidade,
-          cep: formData.cep,
-          complemento: formData.complemento,
-          receberNovidades: formData.receberNovidades,
-        }]);
+const { error: insertError } = await supabase
+  .from('usuarios')
+  .insert([{
+    id: signUpData.user.id,
+    nome: formData.nome,
+    cpf: formData.cpf,
+    email: formData.email,
+    celular: formData.celular,
+    endereco: formData.endereco,
+    bairro: formData.bairro,
+    cidade: formData.cidade,
+    cep: formData.cep,
+    complemento: formData.complemento,
+    receberNovidades: formData.receberNovidades,
+  }]);
 
       if (insertError) throw insertError;
 
