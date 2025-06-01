@@ -1,6 +1,6 @@
 // src/components/Header/Header.jsx
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import headerLogo from '../../assets/logo-header.svg'
 import styles from './Header.module.css'
 import CartModal from '../CartModal/CartModal'
@@ -13,6 +13,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
   const navigate = useNavigate()
+  const location = useLocation()
 
   const { itens, limparCarrinho } = useCarrinho()
   const { user } = useAuth()
@@ -27,6 +28,8 @@ export default function Header() {
     setMobileMenuOpen(!mobileMenuOpen)
   }
 
+  const esconderSearchBar = location.pathname === '/produtos';
+
   return (
     <header className={styles.header}>
       <div className={styles.headerContainer}>
@@ -38,18 +41,20 @@ export default function Header() {
         </div>
 
         {/* Barra de pesquisa */}
-        <div className={styles.searchBar}>
-          <input
-            placeholder="Pesquisar produto..."
-            type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            onKeyDown={handleKeyDown}
-          />
-          <button className={styles.searchButton} disabled>
-            <span className="material-symbols-outlined">search</span>
-          </button>
-        </div>
+        {!esconderSearchBar && (
+          <div className={styles.searchBar}>
+            <input
+              placeholder="Pesquisar produto..."
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyDown={handleKeyDown}
+            />
+            <button className={styles.searchButton} disabled>
+              <span className="material-symbols-outlined">search</span>
+            </button>
+          </div>
+        )}
 
         {/* Ações */}
         <div className={styles.headerActions}>
