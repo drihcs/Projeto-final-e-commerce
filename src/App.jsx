@@ -13,7 +13,7 @@ import CadastroFormulario from './pages/CadastroFormulario/CadastroFormulario';
 import Carrinho from './pages/Carrinho/Carrinho';
 import FinalizarCompra from './pages/FinalizarCompra/FinalizarCompra';
 import CompraFinalizada from './pages/CompraFinalizada/CompraFinalizada';
-import Usuario from './pages/Usuario';
+import Usuario from './pages/Usuario/Usuario';
 import Pedidos from './pages/Pedidos/Pedidos';
 import PrivateRoute from './routes/PrivateRoute';
 
