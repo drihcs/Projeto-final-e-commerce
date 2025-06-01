@@ -8,7 +8,6 @@ import styles from './EmailExpirado.module.css';
 export default function EmailExpirado() {
   return (
     <>
-      <Header />
       <div className={styles.container}>
         <h2>Link expirado ou inválido</h2>
         <p>O link de confirmação do seu e-mail não é mais válido. Isso pode ter acontecido por tempo expirado ou uso repetido.</p>
@@ -19,7 +18,6 @@ export default function EmailExpirado() {
           <Link to="/" className={styles.botaoBranco}>Voltar ao Início</Link>
         </div>
       </div>
-      <Footer />
     </>
   );
 }
