@@ -1,42 +1,54 @@
-import React from 'react';
-import styles from './Usuario.module.css';
-import { useAuth } from '../../contexts/AuthContext';
+import React from 'react'
+import { useAuth } from '../contexts/AuthContext'
+import './Usuario.css'
 
 function Usuario() {
-  const { user } = useAuth();
+  const { usuario, logout } = useAuth()
+
+  const handleLogout = () => {
+    if (window.confirm('Deseja realmente sair?')) {
+      logout()
+    }
+  }
+
+  if (!usuario) {
+    return <p className="usuario-mensagem-erro">Usuário não encontrado.</p>
+  }
+
+  const { nome, email, cpf, celular, endereco } = usuario
 
   return (
-    <div className={styles.container}>
-      <aside className={styles.sidebar}>
-        <h3>Meu Perfil</h3>
+    <div className="usuario-container">
+      <aside className="usuario-aside">
+        <h2>Minha Conta</h2>
         <ul>
-          <li className={styles.active}>Minhas Informações</li>
-          <li>Meus Pedidos</li>
-          <li>Métodos de Pagamento</li>
+          <li>Meus Dados</li>
+          <li>Endereço</li>
+          <li>Pedidos</li>
+          <li onClick={handleLogout} className="logout">Sair</li>
         </ul>
       </aside>
 
-      <section className={styles.content}>
-        <h2 className={styles.sectionTitle}>Minhas Informações</h2>
+      <main className="usuario-main">
+        <section className="usuario-card">
+          <h3>Meus Dados</h3>
+          <p><strong>Nome:</strong> {nome}</p>
+          <p><strong>Email:</strong> {email}</p>
+          <p><strong>CPF:</strong> {cpf}</p>
+          <p><strong>Celular:</strong> {celular}</p>
+        </section>
 
-        <div className={styles.card}>
-          <h3>Informações Pessoais</h3>
-          <p><strong>Nome:</strong> {user?.nome || '-'}</p>
-          <p><strong>CPF:</strong> {user?.cpf || '-'}</p>
-          <p><strong>Email:</strong> {user?.email || '-'}</p>
-          <p><strong>Celular:</strong> {user?.celular || '-'}</p>
-        </div>
-
-        <div className={styles.card}>
-          <h3>Informações de Entrega</h3>
-          <p><strong>Endereço:</strong> {user?.endereco || '-'}</p>
-          <p><strong>Bairro:</strong> {user?.bairro || '-'}</p>
-          <p><strong>Cidade:</strong> {user?.cidade || '-'}</p>
-          <p><strong>CEP:</strong> {user?.cep || '-'}</p>
-        </div>
-      </section>
+        <section className="usuario-card">
+          <h3>Endereço</h3>
+          <p><strong>Rua:</strong> {endereco?.rua}</p>
+          <p><strong>Número:</strong> {endereco?.numero}</p>
+          <p><strong>Bairro:</strong> {endereco?.bairro}</p>
+          <p><strong>Cidade:</strong> {endereco?.cidade}</p>
+          <p><strong>CEP:</strong> {endereco?.cep}</p>
+        </section>
+      </main>
     </div>
-  );
+  )
 }
 
-export default Usuario;
+export default Usuario
