@@ -14,7 +14,6 @@ import Carrinho from './pages/Carrinho/Carrinho';
 import FinalizarCompra from './pages/FinalizarCompra/FinalizarCompra';
 import CompraFinalizada from './pages/CompraFinalizada/CompraFinalizada';
 import Usuario from './pages/Usuario/Usuario';
-import Pedidos from './pages/Pedidos/Pedidos';
 import PrivateRoute from './routes/PrivateRoute';
 
 import NotFound from './pages/NotFound';
@@ -54,15 +53,6 @@ function App() {
           element={
             <PrivateRoute>
               <Usuario />
-            </PrivateRoute>
-          }
-        />
-
-        <Route
-          path="pedidos"
-          element={
-            <PrivateRoute>
-              <Pedidos />
             </PrivateRoute>
           }
         />

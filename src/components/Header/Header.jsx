@@ -102,7 +102,7 @@ export default function Header() {
             <HashLink to="/#categorias" onClick={() => setMobileMenuOpen(false)}>Categorias</HashLink>           
           </li>
           <li>
-            <Link to="/pedidos" onClick={() => setMobileMenuOpen(false)}>Meus Pedidos</Link>
+            <Link to="/usuario" onClick={() => setMobileMenuOpen(false)}>Meus Pedidos</Link>
           </li>
         </ul>
       </nav>

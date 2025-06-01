@@ -48,8 +48,8 @@ export default function UserPage() {
       </div>
 
       <main className={styles.mainContent}>
-        {activeTab === "info" && <InfoUsuario />}
         {activeTab === "pedidos" && <InfoPedidos />}
+        {activeTab === "info" && <InfoUsuario />}        
       </main>
     </div>
   );
