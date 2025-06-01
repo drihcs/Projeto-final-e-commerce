@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { supabase } from '../../utils/supabase';
 import SeletorCores from '../../components/SeletorCores/SeletorCores';
 import SeletorTamanho from '../../components/SeletorTamanho/SeletorTamanho';
 import styles from './ProdutoDetalhado.module.css';
 
 export default function ProdutoDetalhado() {
-  const { slug } = useParams(); // ou useParams().id se for por ID
+  const { slug } = useParams();
   const navigate = useNavigate();
 
   const [produto, setProduto] = useState(null);
@@ -14,15 +14,16 @@ export default function ProdutoDetalhado() {
   const [corSelecionada, setCorSelecionada] = useState(null);
   const [tamanhoSelecionado, setTamanhoSelecionado] = useState(null);
   const [imagemPrincipal, setImagemPrincipal] = useState(null);
+  const [produtosRelacionados, setProdutosRelacionados] = useState([]);
 
   useEffect(() => {
     async function buscarProduto() {
       setCarregando(true);
-const { data, error } = await supabase
-  .from('produtosList')
-  .select('*')
-  .eq('slug', slug) // ou .eq('id', id), depende de como está implementado
-  .single();
+      const { data, error } = await supabase
+        .from('produtosList')
+        .select('*')
+        .eq('slug', slug)
+        .single();
 
       if (error) {
         console.error("Erro ao buscar produto:", error);
@@ -31,7 +32,7 @@ const { data, error } = await supabase
         setProduto(data);
         setCorSelecionada(data.cores?.[0] || null);
         setTamanhoSelecionado(data.tamanhos?.[0] || null);
-        setImagemPrincipal(data.imagem || null);
+        setImagemPrincipal(data.image || null);
       }
       setCarregando(false);
     }
@@ -39,44 +40,40 @@ const { data, error } = await supabase
     buscarProduto();
   }, [slug]);
 
+  useEffect(() => {
+    async function buscarProdutosRelacionados() {
+      if (!produto) return;
+
+      const { data, error } = await supabase
+        .from('produtosList')
+        .select('*')
+        .neq('id', produto.id)
+        .limit(4);
+
+      if (error) {
+        console.error('Erro ao buscar produtos relacionados:', error);
+      } else {
+        setProdutosRelacionados(data);
+      }
+    }
+
+    buscarProdutosRelacionados();
+  }, [produto]);
+
   const adicionarAoCarrinho = () => {
     const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     carrinho.push({
       id: produto.id,
-      nome: produto.nome,
-      preco: produto.preco,
+      nome: produto.name,
+      preco: produto.price,
       imagem: imagemPrincipal,
       cor: corSelecionada,
       tamanho: tamanhoSelecionado,
-      quantidade: 1
+      quantidade: 1,
     });
     localStorage.setItem('carrinho', JSON.stringify(carrinho));
-    alert(`"${produto.nome}" adicionado ao carrinho!`);
+    alert(`"${produto.name}" adicionado ao carrinho!`);
     navigate('/carrinho');
-  };
-
-  const handleNextImage = () => {
-    if (!produto?.imagensThumb?.length) return;
-    const currentIndex = produto.imagensThumb.indexOf(imagemPrincipal);
-    const nextIndex = (currentIndex + 1) % produto.imagensThumb.length;
-    setImagemPrincipal(produto.imagensThumb[nextIndex]);
-  };
-
-  const handlePrevImage = () => {
-    if (!produto?.imagensThumb?.length) return;
-    const currentIndex = produto.imagensThumb.indexOf(imagemPrincipal);
-    const prevIndex = (currentIndex - 1 + produto.imagensThumb.length) % produto.imagensThumb.length;
-    setImagemPrincipal(produto.imagensThumb[prevIndex]);
-  };
-
-  const renderStars = (rating) => {
-    const filledStars = Math.floor(rating || 0);
-    const totalStars = 5;
-    return Array.from({ length: totalStars }, (_, i) => (
-      <span key={i} className={i < filledStars ? styles.starIconFilled : styles.starIcon}>
-        &#9733;
-      </span>
-    ));
   };
 
   if (carregando) {
@@ -95,74 +92,97 @@ const { data, error } = await supabase
   }
 
   return (
-    <div className={styles.produtoDetalhadoPage}>
-      <div className={styles.contentWrapper}>
-        {/* Galeria de imagens */}
-        <div className={styles.imageGallery}>
-          <div className={styles.mainImageContainer}>
-            <img src={imagemPrincipal} alt={produto.nome} className={styles.mainImage} />
-            {produto.imagensThumb?.length > 1 && (
-              <>
-                <button className={`${styles.arrowButton} ${styles.left}`} onClick={handlePrevImage}>
-                  <img src="/images/arrow-left.svg" alt="Anterior" className={styles.arrowIcon} />
-                </button>
-                <button className={`${styles.arrowButton} ${styles.right}`} onClick={handleNextImage}>
-                  <img src="/images/arrow-right.svg" alt="Próxima" className={styles.arrowIcon} />
-                </button>
-              </>
-            )}
-          </div>
-
-          {produto.imagensThumb?.length > 0 && (
-            <div className={styles.thumbnails}>
-              {produto.imagensThumb.map((img, index) => (
-                <img
-                  key={index}
-                  src={img}
-                  alt={`Thumb ${index + 1}`}
-                  className={`${styles.thumbnail} ${img === imagemPrincipal ? styles.active : ''}`}
-                  onClick={() => setImagemPrincipal(img)}
-                />
-              ))}
+    <>
+      <div className={styles.produtoDetalhadoPage}>
+        <div className={styles.contentWrapper}>
+          <div className={styles.imageGallery}>
+            <div className={styles.mainImageContainer}>
+              <img src={imagemPrincipal} alt={produto.name} className={styles.mainImage} />
             </div>
-          )}
-        </div>
-
-        {/* Detalhes */}
-        <div className={styles.detailsSection}>
-          <h1 className={styles.productName}>{produto.nome}</h1>
-
-          <div className={styles.reviewSection}>
-            <div className={styles.stars}>{renderStars(produto.rating)}</div>
-            <span className={styles.reviewsCount}>{produto.reviews} avaliações</span>
           </div>
 
-          <div className={styles.priceSection}>
-            {produto.precoOriginal && (
-              <span className={styles.originalPrice}>R$ {produto.precoOriginal.toFixed(2)}</span>
-            )}
-            <p>R$ {produto?.price !== undefined ? produto.price.toFixed(2) : "Carregando..."}</p>
+          <div className={styles.detailsSection}>
+            <h1 className={styles.productName}>{produto.name}</h1>
+
+            <p className={styles.priceSection}>
+              {produto.original_price && (
+                <span className={styles.originalPrice}>R$ {produto.original_price.toFixed(2)}</span>
+              )}
+              <strong>R$ {produto.price.toFixed(2)}</strong>
+            </p>
+
+            <p className={styles.description}>{produto.description}</p>
+
+            <SeletorCores
+              cores={produto.cores}
+              corSelecionada={corSelecionada}
+              setCorSelecionada={setCorSelecionada}
+            />
+
+            <SeletorTamanho
+              tamanhos={produto.tamanhos}
+              tamanhoSelecionado={tamanhoSelecionado}
+              setTamanhoSelecionado={setTamanhoSelecionado}
+            />
+
+            <button onClick={adicionarAoCarrinho} className={styles.buyButton}>
+              ADICIONAR AO CARRINHO
+            </button>
           </div>
-
-          <p className={styles.description}>{produto.descricao}</p>
-
-          <SeletorCores
-            cores={produto.cores}
-            corSelecionada={corSelecionada}
-            setCorSelecionada={setCorSelecionada}
-          />
-
-          <SeletorTamanho
-            tamanhos={produto.tamanhos}
-            tamanhoSelecionado={tamanhoSelecionado}
-            setTamanhoSelecionado={setTamanhoSelecionado}
-          />
-
-          <button onClick={adicionarAoCarrinho} className={styles.buyButton}>
-            ADICIONAR AO CARRINHO
-          </button>
         </div>
       </div>
-    </div>
+
+      <section className={styles.produtosRelacionadosSection}>
+        <h3>Produtos Relacionados</h3>
+        <div className={styles.produtosRelacionadosGrid}>
+          {produtosRelacionados.map((produtoRelacionado) => (
+            <div
+              key={produtoRelacionado.id}
+              className={styles.produtoRelacionadoCard}
+              onClick={() => navigate(`/produto/${produtoRelacionado.slug}`)}
+            >
+              <div className={styles.produtoRelacionadoImagemContainer}>
+                {produtoRelacionado.desconto && (
+                  <div className={styles.badgeDesconto}>
+                    {produtoRelacionado.desconto}% OFF
+                  </div>
+                )}
+                <img src={produtoRelacionado.image} alt={produtoRelacionado.name} />
+              </div>
+
+              <p className={styles.produtoRelacionadoNome}>{produtoRelacionado.name}</p>
+
+              <p className={styles.produtoRelacionadoPreco}>
+                {produtoRelacionado.original_price && (
+                  <del>R$ {produtoRelacionado.original_price.toFixed(2)}</del>
+                )}
+                <strong>R$ {produtoRelacionado.price.toFixed(2)}</strong>
+              </p>
+
+              <button
+                className={styles.produtoRelacionadoBotao}
+                onClick={(e) => {
+                  e.stopPropagation(); // evita que clique no botão dispare o click do card
+                  // Função para adicionar ao carrinho - ajuste conforme sua lógica:
+                  const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+                  carrinho.push({
+                    id: produtoRelacionado.id,
+                    nome: produtoRelacionado.name,
+                    preco: produtoRelacionado.price,
+                    imagem: produtoRelacionado.image,
+                    quantidade: 1,
+                  });
+                  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+                  alert(`"${produtoRelacionado.name}" adicionado ao carrinho!`);
+                  navigate('/carrinho');
+                }}
+              >
+                Comprar
+              </button>
+            </div>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }
