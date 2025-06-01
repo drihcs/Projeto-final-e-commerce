@@ -69,8 +69,12 @@ input:focus {
   display: flex;
   align-items: flex-start;
   gap: 0.5rem;
-  color: var(--primary);
+  color: #000; /* texto preto */
   font-weight: 500;
+}
+
+.checkbox input[type="checkbox"] {
+  accent-color: var(--primary); /* check rosa */
 }
 
 .button {
