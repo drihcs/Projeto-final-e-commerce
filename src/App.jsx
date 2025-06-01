@@ -8,6 +8,7 @@ import ProductListDesign from './pages/ProductListDesign/ProductListDesign'
 import Login from './pages/Login'
 import CadastroEmail from './pages/CadastroEmail/CadastroEmail'
 import CadastroFormulario from './pages/CadastroFormulario/CadastroFormulario'
+import Carrinho from './pages/Carrinho/Carrinho'
 import FinalizarCompra from './pages/FinalizarCompra/FinalizarCompra'
 import CompraFinalizada from './pages/CompraFinalizada/CompraFinalizada'
 import Usuario from './pages/Usuario'
@@ -16,7 +17,6 @@ import PrivateRoute from './routes/PrivateRoute'
 import { Navigate } from 'react-router-dom'
 
 import NotFound from './pages/NotFound'
-import Carrinho from './pages/Carrinho/Carrinho'
 
 function App() {
   return (
@@ -50,6 +50,15 @@ function App() {
           element={
             <PrivateRoute>
               <Pedidos />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="finalizar-compra"
+          element={
+            <PrivateRoute>
+              <FinalizarCompra />
             </PrivateRoute>
           }
         />

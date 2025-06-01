@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom'
 import { supabase } from "../../utils/supabase";
 import styles from "./Carrinho.module.css";
 
@@ -7,6 +8,8 @@ const Carrinho = () => {
   const [discountCode, setDiscountCode] = useState('');
   const [shippingCode, setShippingCode] = useState('');
   const [relatedProducts, setRelatedProducts] = useState([]);
+
+  const navigate = useNavigate()
 
   const productPrice = 219.00;
   const discount = 30.00;
@@ -155,7 +158,11 @@ const Carrinho = () => {
           </p>
         </div>
 
-        <button className={styles.continueButton}>Continuar</button>
+        <button className={styles.continueButton}
+          onClick={() => navigate('/finalizar-compra')}
+        >
+          Continuar
+        </button>
       </section>
 
       {/* Produtos Relacionados */}

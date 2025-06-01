@@ -1,5 +1,4 @@
-// src/pages/FinalizarCompra.jsx
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
 import { useCarrinho } from '../../contexts/CarrinhoContext'
@@ -11,18 +10,19 @@ function FinalizarCompra() {
   const navigate = useNavigate()
   const [carregando, setCarregando] = useState(false)
 
-  const total = carrinho.reduce((acc, item) => acc + item.preco * item.qtd, 0)
+  const itensCarrinho = Array.isArray(carrinho) ? carrinho : []
+
+  const total = itensCarrinho.reduce((acc, item) => acc + item.preco * item.qtd, 0)
 
   const handleConfirmar = () => {
     setCarregando(true)
     setTimeout(() => {
-      // simula o envio do pedido
       limparCarrinho()
       navigate('/compra-finalizada')
     }, 1500)
   }
 
-  if (!usuario) return null // fallback de segurança
+  if (!usuario) return null
 
   return (
     <div className="finalizar-container">
@@ -40,7 +40,7 @@ function FinalizarCompra() {
       <section className="resumo-compra">
         <h3>Itens do Carrinho</h3>
         <ul>
-          {carrinho.map(item => (
+          {itensCarrinho.map(item => (
             <li key={item.id}>
               {item.nome} - {item.qtd} x R${item.preco.toFixed(2)}
             </li>
