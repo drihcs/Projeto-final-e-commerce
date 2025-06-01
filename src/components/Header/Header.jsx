@@ -5,8 +5,8 @@ import headerLogo from '../../assets/logo-header.svg'
 import styles from './Header.module.css'
 import CartModal from '../CartModal/CartModal'
 import { useCarrinho } from '../../contexts/CarrinhoContext'
+import { useAuth } from '../../contexts/AuthContext'
 import { HashLink } from 'react-router-hash-link';
-
 
 export default function Header() {
   const [showCart, setShowCart] = useState(false)
@@ -15,6 +15,7 @@ export default function Header() {
   const navigate = useNavigate()
 
   const { itens, limparCarrinho } = useCarrinho()
+  const { user } = useAuth()
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && searchTerm.trim() !== '') {
@@ -53,7 +54,12 @@ export default function Header() {
         {/* Ações */}
         <div className={styles.headerActions}>
           <Link to="/cadastro" className={styles.linkText}>Cadastre-se</Link>
-          <Link to="/login" className={styles.btnPrimary}>Entrar</Link>
+
+          {user ? (
+            <span className={styles.userGreeting}>Olá, {user.nome}</span>
+          ) : (
+            <Link to="/login" className={styles.btnPrimary}>Entrar</Link>
+          )}
 
           {/* Botão do carrinho */}
           <button
