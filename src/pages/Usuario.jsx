@@ -1,52 +1,42 @@
-import React from 'react'
-import { useAuth } from '../contexts/AuthContext'
+import React from 'react';
+import styles from './Usuario.module.css';
+import { useAuth } from '../../contexts/AuthContext';
 
 function Usuario() {
-  const { usuario, logout } = useAuth()
-
-  const handleLogout = () => {
-    if (window.confirm('Deseja realmente sair?')) {
-      logout()
-    }
-  }
-
-  if (!usuario) {
-    return <p>Usuário não encontrado.</p>
-  }
-
-  const { nome, email, cpf, celular, endereco } = usuario
+  const { user } = useAuth();
 
   return (
-    <div style={{ maxWidth: 600, margin: '2rem auto', padding: '1rem', border: '1px solid #ccc', borderRadius: 8 }}>
-      <h2>Área do Usuário</h2>
-      <p><strong>Nome:</strong> {nome}</p>
-      <p><strong>Email:</strong> {email}</p>
-      <p><strong>CPF:</strong> {cpf}</p>
-      <p><strong>Celular:</strong> {celular}</p>
+    <div className={styles.container}>
+      <aside className={styles.sidebar}>
+        <h3>Meu Perfil</h3>
+        <ul>
+          <li className={styles.active}>Minhas Informações</li>
+          <li>Meus Pedidos</li>
+          <li>Métodos de Pagamento</li>
+        </ul>
+      </aside>
 
-      <h3>Endereço</h3>
-      <p><strong>Rua:</strong> {endereco?.rua}</p>
-      <p><strong>Número:</strong> {endereco?.numero}</p>
-      <p><strong>Bairro:</strong> {endereco?.bairro}</p>
-      <p><strong>Cidade:</strong> {endereco?.cidade}</p>
-      <p><strong>CEP:</strong> {endereco?.cep}</p>
+      <section className={styles.content}>
+        <h2 className={styles.sectionTitle}>Minhas Informações</h2>
 
-      <button
-        onClick={handleLogout}
-        style={{
-          marginTop: '1.5rem',
-          padding: '0.5rem 1rem',
-          backgroundColor: '#d9534f',
-          color: '#fff',
-          border: 'none',
-          borderRadius: 4,
-          cursor: 'pointer',
-        }}
-      >
-        Sair
-      </button>
+        <div className={styles.card}>
+          <h3>Informações Pessoais</h3>
+          <p><strong>Nome:</strong> {user?.nome || '-'}</p>
+          <p><strong>CPF:</strong> {user?.cpf || '-'}</p>
+          <p><strong>Email:</strong> {user?.email || '-'}</p>
+          <p><strong>Celular:</strong> {user?.celular || '-'}</p>
+        </div>
+
+        <div className={styles.card}>
+          <h3>Informações de Entrega</h3>
+          <p><strong>Endereço:</strong> {user?.endereco || '-'}</p>
+          <p><strong>Bairro:</strong> {user?.bairro || '-'}</p>
+          <p><strong>Cidade:</strong> {user?.cidade || '-'}</p>
+          <p><strong>CEP:</strong> {user?.cep || '-'}</p>
+        </div>
+      </section>
     </div>
-  )
+  );
 }
 
-export default Usuario
+export default Usuario;
