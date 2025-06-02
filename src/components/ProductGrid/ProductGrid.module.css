@@ -84,3 +84,8 @@ h3 {
 .botao:hover {
   background-color: var(--tertiary);
 }
+
+.cardLink {
+  text-decoration: none;
+  color: inherit;
+}
