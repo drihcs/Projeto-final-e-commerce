@@ -25,17 +25,18 @@ export default function ProdutoDetalhado() {
         .eq('slug', slug)
         .single();
 
-      if (error) {
-        const tamanhosArray = data.sizes ? data.sizes.split(',') : [];
-
-        const produtoFormatado = { ...data, sizes: tamanhosArray };
-
+      if (error || !data) {
         console.error("Erro ao buscar produto:", error);
         setProduto(null);
       } else {
-        setProduto(data);
-        setCorSelecionada(data.cores?.[0] || null);
-        setTamanhoSelecionado(data.tamanhos?.[0] || null);
+        const coresArray = data.colors ? data.colors.split(',') : [];
+        const tamanhosArray = data.sizes ? data.sizes.split(',') : [];
+
+        const produtoFormatado = { ...data, colors: coresArray, sizes: tamanhosArray };
+
+        setProduto(produtoFormatado);
+        setCorSelecionada(coresArray[0] || null);
+        setTamanhoSelecionado(tamanhosArray[0] || null);
         setImagemPrincipal(data.image || null);
       }
       setCarregando(false);
@@ -118,7 +119,10 @@ export default function ProdutoDetalhado() {
       <div className={styles.produtoDetalhadoPage}>
         <div className={styles.contentWrapper}>
           <div className={styles.imageGallery}>
-            <div className={styles.mainImageContainer}>
+            <div
+              className={styles.mainImageContainer}
+              style={{ backgroundColor: corSelecionada || 'transparent' }}
+            >
               <img src={imagemPrincipal} alt={produto.name} className={styles.mainImage} />
             </div>
           </div>
