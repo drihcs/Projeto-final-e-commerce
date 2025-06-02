@@ -37,12 +37,38 @@
   background-color: #e91e63;
 }
 
-/* Conteúdo em destaque sobre o slide */
-.carouselContent {
+/* Posições específicas para o conteúdo do slide */
+/* Parte superior central */
+.position1 {
   position: absolute;
-  top: 50%;
-  left: 100px;
+  top: 10%;
+  left: 20%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+/* Lado direito superior */
+.position2 {
+  position: absolute;
+  top: 18%;
+  right: 5%;
+  left: auto;
   transform: translateY(-50%);
+  text-align: right;
+}
+
+/* Canto inferior esquerdo */
+.position3 {
+  position: absolute;
+  bottom: 37%;
+  left: 5%;
+  top: auto;
+  transform: none;
+  text-align: left;
+}
+
+/* Estilo comum para o conteúdo dos slides */
+.carouselContent {
   z-index: 10;
   max-width: 800px;
   color: #fff;
@@ -52,11 +78,11 @@
   padding: 4px 8px;
   border-radius: 4px;
   font-weight: bold;
-  color: orange;
+  color: #C2F261;
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
   display: inline-block;
   margin-bottom: 10px;
-  font-size: 14px;
+  font-size: 20px;
 }
 
 .carouselContent h1 {
@@ -68,7 +94,7 @@
 }
 
 .carouselContent p {
-  font-size: 16px;
+  font-size: 14px;
   color: #f5f5f5;
   margin-bottom: 20px;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 1);
@@ -95,7 +121,6 @@
 /* Ajustes responsivos */
 @media (max-width: 1024px) {
   .carouselContent {
-    left: 60px;
     max-width: 500px;
   }
 
@@ -119,8 +144,6 @@
   }
 
   .carouselContent {
-    left: 30px;
-    top: 45%;
     max-width: 350px;
   }
 
@@ -156,8 +179,6 @@
   }
 
   .carouselContent {
-    left: 20px;
-    top: 40%;
     max-width: 280px;
   }
 
@@ -185,7 +206,6 @@
 
 @media (max-width: 480px) {
   .carouselContent {
-    left: 15px;
     max-width: 250px;
   }
 
