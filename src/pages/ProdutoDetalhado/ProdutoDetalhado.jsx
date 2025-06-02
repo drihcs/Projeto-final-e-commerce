@@ -146,7 +146,7 @@ export default function ProdutoDetalhado() {
               <strong>R$ {produto.price.toFixed(2)}</strong>
             </p>
 
-            <p className={styles.description}>{produto.description}</p>
+            <p className={styles.description}>Descrição do produto: {produto.description}</p>
 
             <SeletorCores
               cores={produto.colors}
