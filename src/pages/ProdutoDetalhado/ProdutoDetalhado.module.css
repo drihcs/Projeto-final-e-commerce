@@ -8,7 +8,7 @@
   display: flex;
   flex-direction: row;
   gap: 2rem;
-  align-items: flex-start;
+  align-items: stretch;
   flex-wrap: wrap;
 }
 
@@ -21,7 +21,7 @@
 
 .mainImageContainer {
   width: 100%;
-  max-width: 400px;
+  max-width: 500px;
   border: 1px solid #ddd;
   border-radius: 1rem;
   overflow: hidden;
@@ -38,12 +38,14 @@
   flex: 1 1 50%;
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 0.6rem;
+  height: 100%;
 }
 
 .productName {
   font-size: 2rem;
   margin-bottom: 0.5rem;
+  color: var(--text-color);
 }
 
 .priceSection {
@@ -72,10 +74,14 @@
   cursor: pointer;
   font-weight: bold;
   transition: background 0.3s ease;
+  width: fit-content;
 }
 
-.buyButton:hover {
+.buyButton:hover,
+.buyButton:focus-visible {
   background-color: #991956;
+  outline: 3px solid #FFC0CB; /* foco visível para acessibilidade */
+  outline-offset: 2px;
 }
 
 /* Produtos relacionados */
@@ -90,6 +96,22 @@
   margin-top: 1rem;
 }
 
+/* Grid responsiva para telas pequenas */
+@media (max-width: 768px) {
+  .produtosRelacionadosGrid {
+    grid-template-columns: repeat(2, minmax(140px, 1fr));
+  }
+
+  .contentWrapper {
+    flex-direction: column;
+  }
+
+  .imageGallery,
+  .detailsSection {
+    flex: 1 1 100%;
+  }
+}
+
 .produtoRelacionadoCard {
   border: 1px solid #ccc;
   border-radius: 1rem;
@@ -102,15 +124,17 @@
   transition: transform 0.2s;
 }
 
-.produtoRelacionadoCard:hover {
+.produtoRelacionadoCard:hover,
+.produtoRelacionadoCard:focus-within {
   transform: scale(1.02);
+  outline: none;
 }
 
 .produtoRelacionadoImagemContainer {
   position: relative;
-  height: 200px;
   overflow: hidden;
   border-radius: 0.5rem;
+  aspect-ratio: 4 / 3; /* ou 1 / 1, conforme a proporção da imagem */
 }
 
 .produtoRelacionadoImagemContainer img {
@@ -153,10 +177,14 @@
   border-radius: 0.5rem;
   font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.produtoRelacionadoBotao:hover {
+.produtoRelacionadoBotao:hover,
+.produtoRelacionadoBotao:focus-visible {
   background-color: #991956;
+  outline: 3px solid #FFC0CB;
+  outline-offset: 2px;
 }
 
 /* Estados de carregamento e erro */
@@ -174,4 +202,11 @@
   border: none;
   border-radius: 0.5rem;
   cursor: pointer;
+}
+
+.backButton:hover,
+.backButton:focus-visible {
+  background-color: #555;
+  outline: 3px solid #FFC0CB;
+  outline-offset: 2px;
 }

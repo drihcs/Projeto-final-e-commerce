@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../../utils/supabase';
 import SeletorCores from '../../components/SeletorCores/SeletorCores';
 import SeletorTamanho from '../../components/SeletorTamanho/SeletorTamanho';
@@ -26,6 +26,10 @@ export default function ProdutoDetalhado() {
         .single();
 
       if (error) {
+        const tamanhosArray = data.sizes ? data.sizes.split(',') : [];
+
+        const produtoFormatado = { ...data, sizes: tamanhosArray };
+
         console.error("Erro ao buscar produto:", error);
         setProduto(null);
       } else {
@@ -91,6 +95,24 @@ export default function ProdutoDetalhado() {
     );
   }
 
+  // Função para renderizar estrelas preenchidas e vazias conforme avaliação
+  function renderStars(rating) {
+    const stars = [];
+    const roundedRating = Math.round(rating);
+    for (let i = 1; i <= 5; i++) {
+      stars.push(
+        <span
+          key={i}
+          className={i <= roundedRating ? styles.starFilled : styles.starEmpty}
+          aria-label={i <= roundedRating ? 'Estrela preenchida' : 'Estrela vazia'}
+        >
+          &#9733;
+        </span>
+      );
+    }
+    return stars;
+  }
+
   return (
     <>
       <div className={styles.produtoDetalhadoPage}>
@@ -104,6 +126,15 @@ export default function ProdutoDetalhado() {
           <div className={styles.detailsSection}>
             <h1 className={styles.productName}>{produto.name}</h1>
 
+            <div className={styles.reviews}>
+              {typeof produto.rating === 'number'
+                ? renderStars(produto.rating)
+                : <p>Sem avaliações</p>}
+              <span className={styles.reviewCount}>
+                ({produto.reviewCount || 34} avaliações)
+              </span>
+            </div>
+
             <p className={styles.priceSection}>
               {produto.original_price && (
                 <span className={styles.originalPrice}>R$ {produto.original_price.toFixed(2)}</span>
@@ -114,13 +145,13 @@ export default function ProdutoDetalhado() {
             <p className={styles.description}>{produto.description}</p>
 
             <SeletorCores
-              cores={produto.cores}
+              cores={produto.colors}
               corSelecionada={corSelecionada}
               setCorSelecionada={setCorSelecionada}
             />
 
             <SeletorTamanho
-              tamanhos={produto.tamanhos}
+              tamanhos={produto.sizes}
               tamanhoSelecionado={tamanhoSelecionado}
               setTamanhoSelecionado={setTamanhoSelecionado}
             />
@@ -162,8 +193,7 @@ export default function ProdutoDetalhado() {
               <button
                 className={styles.produtoRelacionadoBotao}
                 onClick={(e) => {
-                  e.stopPropagation(); // evita que clique no botão dispare o click do card
-                  // Função para adicionar ao carrinho - ajuste conforme sua lógica:
+                  e.stopPropagation();
                   const carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
                   carrinho.push({
                     id: produtoRelacionado.id,
