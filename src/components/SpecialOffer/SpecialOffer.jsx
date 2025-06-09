@@ -22,7 +22,7 @@ export default function SpecialOffer() {
               dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
               ea.
             </p>
-            <Link to="/produto/:id" className={styles.specialOffer__button}>
+            <Link to="/pages/NotFound" className={styles.specialOffer__button}>
               Ver Oferta
             </Link>
           </div>
