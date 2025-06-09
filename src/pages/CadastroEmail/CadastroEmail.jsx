@@ -7,7 +7,6 @@ function CadastroEmail() {
   const [email, setEmail] = useState('');
   const navigate = useNavigate();
 
-  // URLs das imagens dos tênis
   const tenisImageUrl1 = "/pexels-melvin-buezo-2529148 1 (1).png";
   const tenisImageUrl2 = "/pexels-melvin-buezo-2529148 2 (1).png";
 
@@ -19,7 +18,6 @@ function CadastroEmail() {
       return;
     }
 
-    // ✅ Redireciona passando o e-mail para o formulário
     navigate('/cadastro/formulario', { state: { email } });
   };
 

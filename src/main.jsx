@@ -1,4 +1,3 @@
-// main.jsx
 window.alert = function () {};
 
 import React from 'react'

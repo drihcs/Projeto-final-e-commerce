@@ -36,7 +36,6 @@ function FinalizarCompra() {
   };
 
   const handleSubmit = () => {
-    // Validação básica
     const requiredFields = ['nome', 'cpf', 'email', 'celular', 'endereco', 'bairro', 'cidade', 'cep'];
     const missingFields = requiredFields.filter(field => !formData[field].trim());
     

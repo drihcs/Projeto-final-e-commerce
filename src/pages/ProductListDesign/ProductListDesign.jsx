@@ -5,7 +5,7 @@ import { useCarrinho } from "../../contexts/CarrinhoContext";
 
 export default function Busca() {
   const [produtos, setProdutos] = useState([]);
-  const [busca, setBusca] = useState(""); // Campo de busca do usuário
+  const [busca, setBusca] = useState("");
   const [filtros, setFiltros] = useState({
     marcas: [],
     categorias: [],
@@ -49,12 +49,10 @@ export default function Busca() {
     setFiltros((prev) => ({ ...prev, ordenacao: event.target.value }));
   }
 
-  // Função para adicionar ao carrinho
   function adicionarAoCarrinho(produto) {
     adicionarItem(produto);
   }
 
-  // Filtrar produtos por campos selecionados e texto digitado
   const produtosFiltrados = produtos.filter((prod) => {
     const termoBusca = busca.toLowerCase();
     const nomeDoProduto = prod.name?.toLowerCase() || "";
@@ -74,7 +72,6 @@ export default function Busca() {
     return true;
   });
 
-  // Ordenar produtos
   const produtosOrdenados = [...produtosFiltrados];
   if (filtros.ordenacao === "Menor preço") {
     produtosOrdenados.sort((a, b) => a.price - b.price);

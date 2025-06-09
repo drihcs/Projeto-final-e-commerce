@@ -96,7 +96,6 @@ export default function ProdutoDetalhado() {
     );
   }
 
-  // Função para renderizar estrelas preenchidas e vazias conforme avaliação
   function renderStars(rating) {
     const stars = [];
     const roundedRating = Math.round(rating);

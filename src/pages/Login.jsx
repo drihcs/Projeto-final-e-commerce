@@ -6,10 +6,8 @@ import styles from './Login.module.css';
 import headerLogo from '../assets/logo-header.svg'
 
 
-// Não precisamos importar as imagens aqui se elas estiverem na pasta /public
 
 export default function Login() {
-  // Nomes dos arquivos como fornecidos
   const tenisImageUrl1 = "/pexels-melvin-buezo-2529148 1 (1).png";
   const tenisImageUrl2 = "/pexels-melvin-buezo-2529148 2 (1).png";
 
@@ -45,16 +43,16 @@ export default function Login() {
           </div>
         </section>
 
-        {/* Seção da Imagem ATUALIZADA */}
+        {/* Seção da Imagem */}
         <section className={styles.imageSection}>
-          <div className={styles.shoeDisplayContainer}> {/* Novo container para as imagens */}
+          <div className={styles.shoeDisplayContainer}> {/*container para as imagens */}
             <img
-              src={tenisImageUrl2} // Imagem que ficará mais ao fundo
+              src={tenisImageUrl2} 
               alt="Tênis decorativo 2"
               className={`${styles.shoeImage} ${styles.shoeImageBack}`}
             />
             <img
-              src={tenisImageUrl1} // Imagem que ficará mais à frente
+              src={tenisImageUrl1}
               alt="Tênis decorativo 1"
               className={`${styles.shoeImage} ${styles.shoeImageFront}`}
             />
