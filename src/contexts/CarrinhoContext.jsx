@@ -1,4 +1,3 @@
-// src/contexts/CarrinhoContext.jsx
 import React, { createContext, useState, useContext, useEffect } from 'react'
 
 const CarrinhoContext = createContext()

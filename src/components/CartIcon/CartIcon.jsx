@@ -1,8 +1,7 @@
-// src/components/CartIcon/CartIcon.jsx
 import React, { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCart } from '../../contexts/CartContext'
-import styles from './CartIcon.module.css' // CSS Module para estilo
+import styles from './CartIcon.module.css'
 
 export default function CartIcon() {
   const [modalAberto, setModalAberto] = useState(false)
@@ -10,17 +9,16 @@ export default function CartIcon() {
   const navigate = useNavigate()
   const { carrinho, removerItem } = useCart()
 
-  // Função para lidar com clique simples e duplo clique
   function handleClickIcone() {
     if (clickTimeout.current) {
       clearTimeout(clickTimeout.current)
       clickTimeout.current = null
-      navigate('/finalizar') // Redireciona para a página Finalizar Compra
+      navigate('/finalizar')
     } else {
       clickTimeout.current = setTimeout(() => {
-        setModalAberto((aberto) => !aberto) // Abre ou fecha o modal
+        setModalAberto((aberto) => !aberto) 
         clickTimeout.current = null
-      }, 250) // Timeout para diferenciar clique duplo de simples
+      }, 250) 
     }
   }
 

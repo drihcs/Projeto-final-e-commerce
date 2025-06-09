@@ -3,7 +3,7 @@ import styles from './SeletorCores.module.css';
 
 function SeletorCores({ cores = [], corSelecionada, setCorSelecionada }) {
   if (!Array.isArray(cores) || cores.length === 0) {
-    return null; // ou exibir uma mensagem tipo "Nenhuma cor disponível"
+    return null; 
   }
 
   return (

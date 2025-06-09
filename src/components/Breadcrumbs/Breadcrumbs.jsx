@@ -7,7 +7,6 @@ function Breadcrumbs() {
   const location = useLocation();
   const pathnames = location.pathname.split('/').filter(x => x);
 
-  // Se estiver na Home (URL "/"), não renderiza o breadcrumb
   if (pathnames.length === 0) return null;
 
   const formatBreadcrumbText = (text) => {

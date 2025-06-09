@@ -3,7 +3,7 @@ import styles from './SeletorTamanho.module.css';
 
 function SeletorTamanhos({ tamanhos = [], tamanhoSelecionado, setTamanhoSelecionado }) {
   if (!Array.isArray(tamanhos) || tamanhos.length === 0) {
-    return null; // ou uma mensagem do tipo "Tamanhos indisponíveis"
+    return null; 
   }
 
   return (

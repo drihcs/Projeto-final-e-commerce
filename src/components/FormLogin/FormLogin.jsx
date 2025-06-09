@@ -15,7 +15,7 @@ export default function FormLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log('[handleSubmit] Enviando formulário com:', { email, senha });  // LOG 3
+    console.log('[handleSubmit] Enviando formulário com:', { email, senha });  
 
     setErro('');
     setCarregando(true);

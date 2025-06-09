@@ -10,7 +10,6 @@ export function AuthProvider({ children }) {
   const [erroLogin, setErroLogin] = useState('');
 
   useEffect(() => {
-    // Verifica sessão ativa
     supabase.auth.getSession().then(({ data }) => {
       if (data.session?.user) {
         setUsuario(data.session.user);
@@ -18,7 +17,6 @@ export function AuthProvider({ children }) {
       setCarregando(false);
     });
 
-    // Listener para mudanças de autenticação
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (event, session) => {
         if (session?.user) {
@@ -37,20 +35,20 @@ export function AuthProvider({ children }) {
   }, []);
 
   const login = async (email, senha) => {
-    console.log('[login] Tentando login com email:', email);  // LOG 1
+    console.log('[login] Tentando login com email:', email); 
 
     setCarregando(true);
     setErroLogin('');
 
     try {
-      await supabase.auth.signOut(); // força limpar sessões anteriores
+      await supabase.auth.signOut(); 
 
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password: senha,
       });
 
-      console.log('[login] Resposta do Supabase:', { data, error }); // LOG 2
+      console.log('[login] Resposta do Supabase:', { data, error });
 
       if (error) {
         if (error.message === 'Email not confirmed') {

@@ -1,4 +1,3 @@
-// src/components/Header/Header.jsx
 import React, { useState } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import headerLogo from '../../assets/logo-header.svg'
