@@ -5,7 +5,7 @@ Projeto de e-commerce desenvolvido como trabalho final do curso de Desenvolvedor
 
 ## 🎯 Objetivo do Projeto
 
-Criar uma aplicação web de e-commerce onde o usuário pode:
+Este projeto tem como objetivo oferecer uma loja virtual funcional que permita aos usuários realizar as seguintes ações:
 
 - Visualizar produtos por coleção
 - Pesquisar produtos com filtros simples
@@ -19,41 +19,32 @@ Criar uma aplicação web de e-commerce onde o usuário pode:
 
 ### 🧱 Front-End
 - **HTML5**  
-- **CSS3**  
+- **CSS3** *(com CSS Modules para estilização isolada)*
 - **JavaScript (ES6+)**
 - **React**  
-  - Uso de componentes reutilizáveis
+  - Uso de componentes reutilizáveis  
   - Estrutura modularizada por páginas
-- **Tailwind CSS** *(estilização rápida e responsiva)*
 - **Lucide React** *(ícones)*
-- **ShadCN UI** *(componentes prontos com estilização Tailwind)*
+- **Modal com carrinho de compras*  
+- **React Router** *(navegação entre páginas)*
 
-### 🧰 Outros Recursos
+### 🧰 Back-End e Deploy
+- **Supabase** *(banco de dados e autenticação)*
+- **Vercel** *(deploy e preview online)*
 - **Vite** *(build tool leve para projetos em React)*
-- **Modal com carrinho de compras** (navegação para nova página sendo finalizada)
-- **Layout responsivo** planejado para desktop inicialmente, sendo adaptado para outras telas
 
 ---
 
 ## 🧩 Estrutura da Aplicação
 
-- `index.html` – Ponto inicial do projeto.
-- `main.js` – Entrada da aplicação React.
-- `app.js` – (Inicialmente usado para lógicas gerais, substituído pela estrutura React).
-- `README.md` – Documentação do projeto.
-- Páginas:
-  - `Home`: com slide, ícones de coleções, produtos organizados por coleção, e oferta especial.
-  - `Carrinho`: exibe os pedidos em modal.
-  - `Lista de Pedidos`: com os itens já comprados.
-  - `Busca de Produtos`: com filtros simples aplicados a uma grade de produtos fixos (15 itens do mesmo produto, exibidos em grid de 3x5).
-
----
-
-## 📁 Organização do Projeto
-
-```
+```plaintext
 /public
   index.html
+  /assets
+    home.png
+    search.png
+    cart-modal.png
+    login.png
 
 /src
   /components
@@ -67,9 +58,9 @@ Criar uma aplicação web de e-commerce onde o usuário pode:
     Search.jsx
     Cart.jsx
     Orders.jsx
+    Login.jsx
   main.js
   App.jsx
-  ...
 README.md
 ```
 
@@ -77,37 +68,75 @@ README.md
 
 ## 🧪 Funcionalidades Implementadas
 
-- [x] Slide rotativo com imagem destaque
-- [x] Ícones de navegação por coleções
-- [x] Grade de produtos
-- [x] Modal com visualização do carrinho
-- [x] Página de busca com filtros simples
-- [x] Página com lista de pedidos
+- [x] Slide rotativo com imagem destaque  
+- [x] Ícones de navegação por coleções  
+- [x] Grade de produtos  
+- [x] Modal com visualização do carrinho  
+- [x] Página de busca com filtros simples  
+- [x] Página com lista de pedidos  
+- [x] Tela de login integrada ao Supabase  
 
 ---
 
-## 📌 Considerações
+## 📸 Preview da Aplicação
 
-- O projeto é focado inicialmente para **uso em desktop**.
-- A lógica dos produtos está estática por enquanto (dados "mockados").
-- A navegação está sendo feita com React Router.
-- O escopo será expandido futuramente para incluir consumo de API, autenticação e mais interações dinâmicas.
+| Página Inicial          | Página de Busca            |
+|------------------------|---------------------------|
+| ![Página Home](public/assets/home.png) | ![Busca de produtos](public/assets/search.png) |
+
+| Modal do Carrinho       | Tela de Login              |
+|------------------------|---------------------------|
+| ![Carrinho](public/assets/cart-modal.png) | ![Login](public/assets/login.png) |
+
+> As imagens acima mostram as telas principais da aplicação, ilustrando a interface e funcionalidades em ação.
+
+---
+
+## 🎨 Protótipo de Design (Figma)
+
+O layout da aplicação foi planejado com base em um protótipo visual, para guiar a estrutura e identidade do projeto.
+
+🔗 [Visualizar protótipo no Figma](https://www.figma.com/file/SEU-LINK-AQUI/DigitalStore)
+
+> *Nota: O design final pode conter adaptações feitas durante o desenvolvimento para melhor responsividade e usabilidade.*
 
 ---
 
 ## 👥 Equipe de Desenvolvimento
 
-| Nome               | GitHub                              
-|--------------------|-------------------------------------
-| Adriana Cruz       | [@drihcs](https://github.com/drihcs)        
-| Letícia Farias     | [@leticiafariasn](https://github.com/leticiafariasn)              
-| Sara Soares        | [@sarasmorais](https://github.com/sarasmorais)           
+| Nome           | GitHub                                         |
+|----------------|------------------------------------------------|
+| Adriana Cruz   | [@drihcs](https://github.com/drihcs)          |
+| Letícia Farias | [@leticiafariasn](https://github.com/leticiafariasn) |
+| Sara Morais    | [@sarasmorais](https://github.com/sarasmorais) |
 
 ---
 
 ## ✨ Próximos Passos
 
-- Integração com backend (cadastro real de produtos e pedidos) no Supabase.
-- Autenticação de usuários
-- Responsividade plena para dispositivos móveis
-- Deploy em ambiente online
+1. Integração completa com Supabase para cadastrar produtos e pedidos  
+2. Finalizar autenticação de usuários com redirecionamentos  
+3. Tornar o layout responsivo para dispositivos móveis  
+4. Criar página de detalhes dos produtos  
+5. Otimização e testes
+
+---
+
+## 🌐 Deploy Online
+
+🔗 [Acesse o projeto no Vercel](https://digitalstore.vercel.app) *(substitua com o link real)*
+
+---
+
+## 🏃‍♂️ Como rodar localmente
+
+Se desejar rodar o projeto localmente, siga os passos abaixo:
+
+```bash
+git clone https://github.com/drihcs/digital-store.git
+cd digital-store
+npm install
+npm run dev
+```
+
+---
