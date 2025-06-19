@@ -295,10 +295,12 @@
 /* Preço estilizado */
 .price {
   font-weight: 700;
-  color: #e91e63; /* Rosa para destaque */
-  font-size: 1rem;
+  color: #666;
+  font-size: 0,9rem;
   white-space: nowrap;
   flex-shrink: 0;
+  text-align: right;
+  min-width: 80px;
 }
 
 /* Linhas resumo: Subtotal, Frete, Desconto */

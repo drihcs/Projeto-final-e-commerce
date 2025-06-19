@@ -1,0 +1,30 @@
+.quantityControl {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.quantityControl button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ddd;
+  background-color: white;
+  cursor: pointer;
+  font-size: 1.2rem;
+  line-height: 1;
+  border-radius: 4px;
+}
+
+.quantityControl button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.quantityControl input {
+  width: 50px;
+  text-align: center;
+  padding: 0.3rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}

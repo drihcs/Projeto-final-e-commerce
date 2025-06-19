@@ -4,6 +4,7 @@ import { ShoppingCart, User, MapPin, CreditCard } from 'lucide-react'
 import { useAuth } from '../../contexts/AuthContext'
 import { useCarrinho } from '../../contexts/CarrinhoContext'
 import { supabase } from '../../utils/supabase'
+import QuantityControl from '../../components/QuantityControl/QuantityControl'
 import styles from './FinalizarCompra.module.css'
 
 function FinalizarCompra() {
@@ -377,20 +378,15 @@ function FinalizarCompra() {
                   </div>
                   <div className={styles.productInfo}>
                     <p className={styles.productName}>{item.name}</p>
-                    <div className={styles.quantidadePrecoWrapper}>
-                      <label htmlFor={`quantidade-${item.id}`} className={styles.quantidadeLabel}>Qtd:</label>
-                      <input
-                        id={`quantidade-${item.id}`}
-                        type="number"
-                        min="1"
-                        value={item.quantidade || 1}
-                        onChange={(e) => handleQuantidadeChange(item.id, Number(e.target.value))}
-                        className={styles.quantidadeInput}
-                      />
-                      <span className={styles.price}>
-                        R$ {(item.price * (item.quantidade || 1)).toFixed(2).replace('.', ',')}
-                      </span>
+
+
+                    <div className={styles.quantityControl}>
+                    <QuantityControl
+                      quantidade={item.quantidade || 1}
+                      onChange={(novaQtd) => handleQuantidadeChange(item.id, novaQtd)}
+                    />
                     </div>
+ 
                   </div>
                 </div>
               ))}
