@@ -36,7 +36,10 @@ export function CarrinhoProvider({ children }) {
 
   // 👉 Alterar quantidade
   function alterarQuantidade(id, novaQuantidade) {
-    if (novaQuantidade < 1) return
+    if (novaQuantidade < 1) {
+      removerItem(id)
+      return
+    }
     setItens(itens.map(item =>
       item.id === id ? { ...item, quantidade: novaQuantidade } : item
     ))

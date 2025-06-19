@@ -9,7 +9,7 @@ import styles from './FinalizarCompra.module.css'
 
 function FinalizarCompra() {
   const { usuario } = useAuth()
-  const { itens, alterarQuantidade, limparCarrinho } = useCarrinho()
+  const { itens, alterarQuantidade, limparCarrinho, removerItem } = useCarrinho()
   const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
@@ -379,7 +379,7 @@ function FinalizarCompra() {
                           onChange={novaQtd => handleQuantidadeChange(item.id, novaQtd)}
                           onRemove={() => removerItem(item.id)}
                           min={1}
-                        />
+                        />                                              
                       </div>
 
                       <span className={styles.price}>
