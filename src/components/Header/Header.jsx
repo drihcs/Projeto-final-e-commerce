@@ -15,7 +15,9 @@ export default function Header() {
   const location = useLocation()
 
   const { itens, limparCarrinho } = useCarrinho()
-  const { usuario } = useAuth()  // <== aqui está o ajuste
+  const { usuario } = useAuth()
+
+  const primeiroNome = usuario?.nome?.split(' ')[0] || ''
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && searchTerm.trim() !== '') {
@@ -60,7 +62,7 @@ export default function Header() {
           <Link to="/cadastro" className={styles.linkText}>Cadastre-se</Link>
 
           {usuario ? (
-            <span className={styles.userGreeting}>Olá, {usuario.nome}</span>
+            <span className={styles.userGreeting}>Olá, {primeiroNome}</span>
           ) : (
             <Link to="/login" className={styles.btnPrimary}>Entrar</Link>
           )}
