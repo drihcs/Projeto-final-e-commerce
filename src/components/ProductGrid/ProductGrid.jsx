@@ -23,7 +23,14 @@ export default function ProductGrid() {
   }, []);
 
   function adicionarAoCarrinho(produto) {
-    adicionarItem(produto);
+    adicionarItem({
+      id: produto.id,
+      nome: produto.name,
+      preco: Number(produto.price),
+      quantidade: 1,
+      imagem: produto.image,
+      slug: produto.slug,
+    });
   }
 
   return (

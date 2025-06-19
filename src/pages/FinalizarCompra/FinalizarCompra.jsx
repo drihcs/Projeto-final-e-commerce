@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom'
 import { ShoppingCart, User, MapPin, CreditCard } from 'lucide-react'
 import { useAuth } from '../../contexts/AuthContext'
 import { useCarrinho } from '../../contexts/CarrinhoContext'
-import { supabase } from '../../utils/supabase' // ajuste o caminho conforme seu projeto
+import { supabase } from '../../utils/supabase'
 import styles from './FinalizarCompra.module.css'
 
 function FinalizarCompra() {
   const { usuario } = useAuth()
-  const { carrinho, limparCarrinho } = useCarrinho()
+  const { itens, limparCarrinho } = useCarrinho()
   const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
@@ -31,6 +31,13 @@ function FinalizarCompra() {
   const [loadingUserData, setLoadingUserData] = useState(false)
   const [errorUserData, setErrorUserData] = useState(null)
 
+  // 🛒 Calcular total do carrinho
+  const total = itens.reduce(
+    (acc, item) => acc + Number(item.price) * (item.quantidade || 1),
+    0
+  )
+
+  // 🧠 Buscar dados do usuário no Supabase
   useEffect(() => {
     async function fetchUserData() {
       if (!usuario?.id) return
@@ -68,6 +75,7 @@ function FinalizarCompra() {
     fetchUserData()
   }, [usuario])
 
+  // 🎯 Controle dos inputs
   const handleInputChange = (e) => {
     const { name, value } = e.target
     setFormData(prev => ({
@@ -76,33 +84,34 @@ function FinalizarCompra() {
     }))
   }
 
+  // ✅ Validação e Finalização
   const handleSubmit = () => {
-    const requiredFields = ['nome', 'cpf', 'email', 'celular', 'endereco', 'bairro', 'cidade', 'cep']
-    const missingFields = requiredFields.filter(field => !formData[field].trim())
+    const obrigatorios = ['nome', 'cpf', 'email', 'celular', 'endereco', 'bairro', 'cidade', 'cep']
+    const faltando = obrigatorios.filter(field => !formData[field].trim())
 
-    if (missingFields.length > 0) {
-      alert('Por favor, preencha todos os campos obrigatórios.')
+    if (faltando.length > 0) {
+      alert('Preencha todos os campos obrigatórios.')
       return
     }
 
     if (formData.paymentMethod === 'credit') {
-      const cardFields = ['cardName', 'cardNumber', 'cardExpiry', 'cvv']
-      const missingCardFields = cardFields.filter(field => !formData[field].trim())
+      const cartaoCampos = ['cardName', 'cardNumber', 'cardExpiry', 'cvv']
+      const faltandoCartao = cartaoCampos.filter(field => !formData[field].trim())
 
-      if (missingCardFields.length > 0) {
-        alert('Por favor, preencha todos os dados do cartão.')
+      if (faltandoCartao.length > 0) {
+        alert('Preencha todos os dados do cartão.')
         return
       }
     }
 
     alert('Pedido finalizado com sucesso!')
-    console.log('Dados do pedido:', formData)
+    console.log('Pedido:', { formData, itens, total })
 
     limparCarrinho()
     navigate('/compra-finalizada')
   }
 
-  // Formatação dos campos (CPF, telefone, CEP, cartão)
+  // 🔢 Formatações
   const formatCPF = (value) => {
     const numbers = value.replace(/\D/g, '')
     return numbers.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4')
@@ -132,316 +141,88 @@ function FinalizarCompra() {
     <div className={styles.container}>
       <main className={styles.main}>
         <div className={styles.checkoutForm}>
-          <h1 style={{ fontSize: '1.5rem', marginBottom: '2rem', color: '#333' }}>
-            Finalizar Compra
-          </h1>
+          <h1>Finalizar Compra</h1>
 
           {loadingUserData && <p>Carregando seus dados...</p>}
-          {errorUserData && <p style={{ color: 'red' }}>{errorUserData}</p>}
+          {errorUserData && <p className={styles.error}>{errorUserData}</p>}
 
-          <div>
-            {/* Informações Pessoais */}
-            <section className={styles.section}>
-              <h2 className={styles.sectionTitle}>
-                <User size={20} />
-                Informações Pessoais
-              </h2>
+          {/* 🧍 Dados Pessoais */}
+          <section className={styles.section}>
+            <h2><User size={20} /> Informações Pessoais</h2>
+            <div className={styles.formGrid}>
+              <input type="text" name="nome" placeholder="Nome Completo *" value={formData.nome} onChange={handleInputChange} required />
+              <input type="text" name="cpf" placeholder="CPF *" value={formData.cpf} onChange={(e) => setFormData(prev => ({ ...prev, cpf: formatCPF(e.target.value) }))} maxLength="14" required />
+              <input type="email" name="email" placeholder="Email *" value={formData.email} onChange={handleInputChange} required />
+              <input type="tel" name="celular" placeholder="Celular *" value={formData.celular} onChange={(e) => setFormData(prev => ({ ...prev, celular: formatPhone(e.target.value) }))} maxLength="15" required />
+            </div>
+          </section>
 
-              <div className={styles.formGrid}>
-                <div className={styles.formGroup}>
-                  <label className={styles.label}>
-                    Nome Completo <span className={styles.required}>*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="nome"
-                    placeholder="Insira seu nome"
-                    value={formData.nome}
-                    onChange={handleInputChange}
-                    className={styles.input}
-                    required
-                  />
+          {/* 🚚 Entrega */}
+          <section className={styles.section}>
+            <h2><MapPin size={20} /> Informações de Entrega</h2>
+            <div className={styles.formGrid}>
+              <input type="text" name="endereco" placeholder="Endereço *" value={formData.endereco} onChange={handleInputChange} required />
+              <input type="text" name="bairro" placeholder="Bairro *" value={formData.bairro} onChange={handleInputChange} required />
+              <input type="text" name="cidade" placeholder="Cidade *" value={formData.cidade} onChange={handleInputChange} required />
+              <input type="text" name="cep" placeholder="CEP *" value={formData.cep} onChange={(e) => setFormData(prev => ({ ...prev, cep: formatCEP(e.target.value) }))} maxLength="9" required />
+              <input type="text" name="complemento" placeholder="Complemento" value={formData.complemento} onChange={handleInputChange} />
+            </div>
+          </section>
+
+          {/* 💳 Pagamento */}
+          <section className={styles.section}>
+            <h2><CreditCard size={20} /> Pagamento</h2>
+            <div className={styles.radioGroup}>
+              <label>
+                <input type="radio" name="paymentMethod" value="credit" checked={formData.paymentMethod === 'credit'} onChange={handleInputChange} /> Cartão de Crédito
+              </label>
+              <label>
+                <input type="radio" name="paymentMethod" value="pix" checked={formData.paymentMethod === 'pix'} onChange={handleInputChange} /> Pix
+              </label>
+              <label>
+                <input type="radio" name="paymentMethod" value="boleto" checked={formData.paymentMethod === 'boleto'} onChange={handleInputChange} /> Boleto
+              </label>
+            </div>
+
+            {formData.paymentMethod === 'credit' && (
+              <>
+                <input type="text" name="cardName" placeholder="Nome no Cartão" value={formData.cardName} onChange={handleInputChange} />
+                <input type="text" name="cardNumber" placeholder="Número do Cartão" value={formData.cardNumber} onChange={(e) => setFormData(prev => ({ ...prev, cardNumber: formatCardNumber(e.target.value) }))} maxLength="19" />
+                <div className={styles.formGrid}>
+                  <input type="text" name="cardExpiry" placeholder="Validade (MM/AA)" value={formData.cardExpiry} onChange={(e) => setFormData(prev => ({ ...prev, cardExpiry: formatCardExpiry(e.target.value) }))} maxLength="5" />
+                  <input type="password" name="cvv" placeholder="CVV" value={formData.cvv} onChange={handleInputChange} maxLength="3" />
                 </div>
-
-                <div className={styles.formGroup}>
-                  <label className={styles.label}>
-                    CPF <span className={styles.required}>*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="cpf"
-                    placeholder="Insira seu CPF"
-                    value={formData.cpf}
-                    onChange={(e) => {
-                      const formatted = formatCPF(e.target.value)
-                      if (formatted.length <= 14) {
-                        setFormData(prev => ({ ...prev, cpf: formatted }))
-                      }
-                    }}
-                    className={styles.input}
-                    maxLength="14"
-                    required
-                  />
-                </div>
-
-                <div className={styles.formGroup}>
-                  <label className={styles.label}>
-                    E-mail <span className={styles.required}>*</span>
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Insira seu email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className={styles.input}
-                    required
-                  />
-                </div>
-
-                <div className={styles.formGroup}>
-                  <label className={styles.label}>
-                    Celular <span className={styles.required}>*</span>
-                  </label>
-                  <input
-                    type="tel"
-                    name="celular"
-                    placeholder="Insira seu celular"
-                    value={formData.celular}
-                    onChange={(e) => {
-                      const formatted = formatPhone(e.target.value)
-                      if (formatted.length <= 15) {
-                        setFormData(prev => ({ ...prev, celular: formatted }))
-                      }
-                    }}
-                    className={styles.input}
-                    maxLength="15"
-                    required
-                  />
-                </div>
-              </div>
-            </section>
-
-            {/* Informações de Entrega */}
-            <section className={styles.section}>
-              <h2 className={styles.sectionTitle}>
-                <MapPin size={20} />
-                Informações de Entrega
-              </h2>
-
-              <div className={styles.formGrid}>
-                <div className={`${styles.formGroup} ${styles.formGroupFull}`}>
-                  <label className={styles.label}>
-                    Endereço <span className={styles.required}>*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="endereco"
-                    placeholder="Insira seu endereço"
-                    value={formData.endereco}
-                    onChange={handleInputChange}
-                    className={styles.input}
-                    required
-                  />
-                </div>
-
-                <div className={styles.formGroup}>
-                  <label className={styles.label}>
-                    Bairro <span className={styles.required}>*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="bairro"
-                    placeholder="Insira seu bairro"
-                    value={formData.bairro}
-                    onChange={handleInputChange}
-                    className={styles.input}
-                    required
-                  />
-                </div>
-
-                <div className={styles.formGroup}>
-                  <label className={styles.label}>
-                    Cidade <span className={styles.required}>*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="cidade"
-                    placeholder="Insira sua cidade"
-                    value={formData.cidade}
-                    onChange={handleInputChange}
-                    className={styles.input}
-                    required
-                  />
-                </div>
-
-                <div className={styles.formGroup}>
-                  <label className={styles.label}>
-                    CEP <span className={styles.required}>*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="cep"
-                    placeholder="Insira seu CEP"
-                    value={formData.cep}
-                    onChange={(e) => {
-                      const formatted = formatCEP(e.target.value)
-                      if (formatted.length <= 9) {
-                        setFormData(prev => ({ ...prev, cep: formatted }))
-                      }
-                    }}
-                    className={styles.input}
-                    maxLength="9"
-                    required
-                  />
-                </div>
-
-                <div className={`${styles.formGroup} ${styles.formGroupFull}`}>
-                  <label className={styles.label}>Complemento</label>
-                  <input
-                    type="text"
-                    name="complemento"
-                    placeholder="Insira complemento"
-                    value={formData.complemento}
-                    onChange={handleInputChange}
-                    className={styles.input}
-                  />
-                </div>
-              </div>
-            </section>
-
-            {/* Informações de Pagamento */}
-            <section className={styles.section}>
-              <h2 className={styles.sectionTitle}>
-                <CreditCard size={20} />
-                Informações de Pagamento
-              </h2>
-
-              <div className={styles.formGroup}>
-                <label className={styles.label}>Forma de Pagamento</label>
-                <div className={styles.radioGroup}>
-                  <div className={styles.radioOption}>
-                    <input
-                      type="radio"
-                      name="paymentMethod"
-                      value="credit"
-                      checked={formData.paymentMethod === 'credit'}
-                      onChange={handleInputChange}
-                      id="credit"
-                    />
-                    <label htmlFor="credit">Cartão de Crédito</label>
-                  </div>
-                  <div className={styles.radioOption}>
-                    <input
-                      type="radio"
-                      name="paymentMethod"
-                      value="pix"
-                      checked={formData.paymentMethod === 'pix'}
-                      onChange={handleInputChange}
-                      id="pix"
-                    />
-                    <label htmlFor="pix">Pix</label>
-                  </div>
-                  <div className={styles.radioOption}>
-                    <input
-                      type="radio"
-                      name="paymentMethod"
-                      value="boleto"
-                      checked={formData.paymentMethod === 'boleto'}
-                      onChange={handleInputChange}
-                      id="boleto"
-                    />
-                    <label htmlFor="boleto">Boleto</label>
-                  </div>
-                </div>
-              </div>
-
-              {formData.paymentMethod === 'credit' && (
-                <>
-                  <div className={styles.formGroup}>
-                    <label className={styles.label}>Nome no Cartão</label>
-                    <input
-                      type="text"
-                      name="cardName"
-                      placeholder="Nome impresso no cartão"
-                      value={formData.cardName}
-                      onChange={handleInputChange}
-                      className={styles.input}
-                    />
-                  </div>
-
-                  <div className={styles.formGroup}>
-                    <label className={styles.label}>Número do Cartão</label>
-                    <input
-                      type="text"
-                      name="cardNumber"
-                      placeholder="0000 0000 0000 0000"
-                      value={formData.cardNumber}
-                      onChange={(e) => {
-                        const formatted = formatCardNumber(e.target.value)
-                        if (formatted.length <= 19) {
-                          setFormData(prev => ({ ...prev, cardNumber: formatted }))
-                        }
-                      }}
-                      className={styles.input}
-                      maxLength="19"
-                    />
-                  </div>
-
-                  <div className={styles.formRow}>
-                    <div className={`${styles.formGroup} ${styles.formGroupHalf}`}>
-                      <label className={styles.label}>Validade</label>
-                      <input
-                        type="text"
-                        name="cardExpiry"
-                        placeholder="MM/AA"
-                        value={formData.cardExpiry}
-                        onChange={(e) => {
-                          const formatted = formatCardExpiry(e.target.value)
-                          if (formatted.length <= 5) {
-                            setFormData(prev => ({ ...prev, cardExpiry: formatted }))
-                          }
-                        }}
-                        className={styles.input}
-                        maxLength="5"
-                      />
-                    </div>
-
-                    <div className={`${styles.formGroup} ${styles.formGroupHalf}`}>
-                      <label className={styles.label}>CVV</label>
-                      <input
-                        type="password"
-                        name="cvv"
-                        placeholder="000"
-                        value={formData.cvv}
-                        onChange={handleInputChange}
-                        className={styles.input}
-                        maxLength="3"
-                      />
-                    </div>
-                  </div>
-                </>
-              )}
-            </section>
-          </div>
+              </>
+            )}
+          </section>
         </div>
 
-        {/* Resumo do Pedido */}
+        {/* 🛒 Resumo do Pedido */}
         <div className={styles.orderSummary}>
-          <h2 className={styles.sectionTitle}>
-            <ShoppingCart size={20} />
-            Resumo do Pedido
-          </h2>
+          <h2><ShoppingCart size={20} /> Resumo do Pedido</h2>
+
+          {itens.length === 0 ? (
+            <p>Carrinho vazio.</p>
+          ) : (
+            <div className={styles.orderItems}>
+              {itens.map(item => (
+                <div key={item.id} className={styles.orderItem}>
+                  <span>{item.name} x{item.quantidade || 1}</span>
+                  <span>R$ {(item.price * (item.quantidade || 1)).toFixed(2).replace('.', ',')}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
           <p className={styles.orderValue}>
-            Valor total: <span>R$ 219,00</span>
+            Total: <span>R$ {total.toFixed(2).replace('.', ',')}</span>
           </p>
-          <p className={styles.installments}>6x de R$ 36,50 sem juros</p>
-          <button
-            type="button"
-            onClick={handleSubmit}
-            className={styles.submitButton}
-          >
-            Realizar Pagamento
+          <p className={styles.installments}>
+            ou 6x de R$ {(total / 6).toFixed(2).replace('.', ',')} sem juros
+          </p>
+
+          <button type="button" onClick={handleSubmit} className={styles.submitButton}>
+            Finalizar Pedido
           </button>
         </div>
       </main>
