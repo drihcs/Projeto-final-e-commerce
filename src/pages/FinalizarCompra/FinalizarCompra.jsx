@@ -324,7 +324,7 @@ function FinalizarCompra() {
             <h2 className={styles.sectionTitle}>Finalizar pagamento</h2>
             <div className={styles.finalizarCompra}>
               <div className={styles.summaryTotal}>
-                <span>Total a pagar:</span>
+                <span>Total</span>
                 <span className={styles.totalHighlight}>
                   R$ {total.toFixed(2).replace('.', ',')}
                 </span>
