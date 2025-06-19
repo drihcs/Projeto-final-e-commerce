@@ -181,3 +181,9 @@
 .homeButton:hover {
   background-color: #f59e0b;
 }
+
+@media print {
+  .actionButtons {
+    display: none;
+  }
+}
