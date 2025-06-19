@@ -65,9 +65,8 @@ export default function Header() {
             <Link to="/login" className={styles.btnPrimary}>Entrar</Link>
           )}
 
-          
+          {/* Botão do carrinho e modal juntos */}
           <div className={styles.cartWrapper}>
-          {/* Botão do carrinho */}
             <button
               className={styles.cart}
               onClick={() => setShowCart(!showCart)}
@@ -76,7 +75,7 @@ export default function Header() {
               <span className="material-symbols-outlined">shopping_cart</span>
               <div className={styles.cartCount}>{itens.length}</div>
             </button>
-          {/* Modal */}
+
             {showCart && (
               <CartModal
                 cartItems={itens}
@@ -106,10 +105,10 @@ export default function Header() {
             <Link to="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
           </li>
           <li>
-            <Link to="/produtos" onClick={() => setMobileMenuOpen(false)}>Produtos</Link>          
+            <Link to="/produtos" onClick={() => setMobileMenuOpen(false)}>Produtos</Link>
           </li>
           <li>
-            <HashLink to="/#categorias" onClick={() => setMobileMenuOpen(false)}>Categorias</HashLink>           
+            <HashLink to="/#categorias" onClick={() => setMobileMenuOpen(false)}>Categorias</HashLink>
           </li>
           <li>
             <Link to="/usuario/pedidos" onClick={() => setMobileMenuOpen(false)}>Meus Pedidos</Link>

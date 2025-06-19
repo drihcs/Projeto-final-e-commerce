@@ -108,6 +108,10 @@
   background-color: var(--tertiary);
 }
 
+.cartWrapper {
+  position: relative;
+}
+
 .cart {
   position: relative;
   background: none;
