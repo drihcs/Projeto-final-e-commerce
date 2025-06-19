@@ -3,6 +3,8 @@
 
 Projeto de e-commerce desenvolvido como trabalho final do curso de Desenvolvedor Full Stack. A proposta é construir uma loja virtual funcional, com foco em experiência do usuário, estruturação clara e boas práticas de desenvolvimento web.
 
+---
+
 ## 🎯 Objetivo do Projeto
 
 Este projeto tem como objetivo oferecer uma loja virtual funcional que permita aos usuários realizar as seguintes ações:
@@ -12,6 +14,7 @@ Este projeto tem como objetivo oferecer uma loja virtual funcional que permita a
 - Adicionar produtos ao carrinho
 - Visualizar pedidos no carrinho através de um modal
 - Acessar uma lista de pedidos realizados
+- Realizar login para acesso aos pedidos
 
 ---
 
@@ -96,9 +99,63 @@ README.md
 
 O layout da aplicação foi planejado com base em um protótipo visual, para guiar a estrutura e identidade do projeto.
 
-🔗 [Visualizar protótipo no Figma](https://www.figma.com/file/SEU-LINK-AQUI/DigitalStore)
+🔗 [Visualizar protótipo no Figma](https://www.figma.com/design/Tk1Wc4vTNMCZDWkIwAQTxC/DRIP-STORE---DIGITAL-COLLEGE?node-id=101-2&p=f&t=4J3ScYI7KD59Is8L-0)
 
 > *Nota: O design final pode conter adaptações feitas durante o desenvolvimento para melhor responsividade e usabilidade.*
+
+---
+
+## 🔑 Acesso ao Backend (Supabase)
+
+> A banca pode acessar o Supabase para análise do backend, incluindo visualização de tabelas, autenticação e armazenamento.
+
+- 🔗 **URL do Supabase:** [https://app.supabase.com/](https://app.supabase.com/)
+- 📧 **Email:** `digitalstore.supabase@gmail.com`
+- 🔐 **Senha:** `Drip@supabase10`
+
+✅ *Permissão de acesso para análise das tabelas, dados de usuários, pedidos e produtos utilizados neste projeto.*
+
+---
+
+## 👥 Usuário de Teste (Frontend)
+
+> Utilize este usuário para testar o fluxo de login, carrinho e pedidos no site.
+
+- 📧 **Email:** `fco.ant.pereira@email.com`
+- 🔐 **Senha:** `123456`
+
+✔️ Esse usuário foi criado exclusivamente para testes da banca, permitindo navegar nas áreas restritas e testar as funcionalidades de pedidos, carrinho e autenticação.
+
+---
+
+## 📝 Observações
+
+- O backend foi desenvolvido utilizando o **Supabase**, que oferece serviços de:
+  - Banco de dados PostgreSQL  
+  - Autenticação de usuários  
+  - API RESTful automática  
+  - Armazenamento de arquivos (Storage)
+
+- Toda comunicação do frontend com o backend é feita via API do Supabase.
+
+---
+
+## 🌐 Deploy Online
+
+🔗 [Acesse o projeto no Vercel](https://vercel.com/drih1502-gmailcoms-projects/projeto-final-e-commerce)
+
+---
+
+## 🏃‍♂️ Como rodar localmente
+
+Se desejar rodar o projeto localmente, siga os passos abaixo:
+
+```bash
+git clone https://github.com/drihcs/Projeto-final-e-commerce.git
+cd projeto-final-e-commerce
+npm install
+npm run dev
+```
 
 ---
 
@@ -114,29 +171,10 @@ O layout da aplicação foi planejado com base em um protótipo visual, para gui
 
 ## ✨ Próximos Passos
 
-1. Integração completa com Supabase para cadastrar produtos e pedidos  
-2. Finalizar autenticação de usuários com redirecionamentos  
-3. Tornar o layout responsivo para dispositivos móveis  
-4. Criar página de detalhes dos produtos  
-5. Otimização e testes
-
----
-
-## 🌐 Deploy Online
-
-🔗 [Acesse o projeto no Vercel](https://digitalstore.vercel.app) *(substitua com o link real)*
-
----
-
-## 🏃‍♂️ Como rodar localmente
-
-Se desejar rodar o projeto localmente, siga os passos abaixo:
-
-```bash
-git clone https://github.com/drihcs/digital-store.git
-cd digital-store
-npm install
-npm run dev
-```
+1. Finalizar páginas da rota privada de usuário.  
+2. Finalizar autenticação de usuários com redirecionamentos.  
+3. Tornar o layout responsivo para dispositivos móveis.  
+4. Aperfeiçoar detalhes na página de detalhes dos produtos.  
+5. Otimização e testes.
 
 ---
