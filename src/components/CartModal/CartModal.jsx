@@ -1,10 +1,11 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import styles from './CartModal.module.css'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import styles from './CartModal.module.css';
 
 const CartModal = ({ cartItems, onClose, onClear }) => {
-  const navigate = useNavigate()
-  const total = cartItems.reduce((acc, item) => acc + (item.price ?? 0), 0)
+  const navigate = useNavigate();
+
+  const total = cartItems.reduce((acc, item) => acc + (item.price ?? 0), 0);
 
   return (
     <div className={styles['cart-modal']}>
@@ -19,15 +20,15 @@ const CartModal = ({ cartItems, onClose, onClear }) => {
         ) : (
           cartItems.map((item, index) => (
             <li key={index} className={styles['cart-item']}>
-              <img src={item.image} alt={item.title} />
+              <img src={item.image} alt={item.name} />
               <div>
-                <p>{item.title}</p>
+                <p>{item.name}</p>
                 <p className={styles.price}>
                   R$ {(item.price ?? 0).toFixed(2).replace('.', ',')}
                 </p>
-                {item.oldPrice !== undefined && (
+                {item.original_price !== undefined && item.original_price > 0 && (
                   <p className={styles['old-price']}>
-                    R$ {(item.oldPrice ?? 0).toFixed(2).replace('.', ',')}
+                    R$ {(item.original_price ?? 0).toFixed(2).replace('.', ',')}
                   </p>
                 )}
               </div>
@@ -51,8 +52,8 @@ const CartModal = ({ cartItems, onClose, onClear }) => {
             <button
               className={styles['checkout-btn']}
               onClick={() => {
-                onClose()
-                navigate('/carrinho')
+                onClose();
+                navigate('/carrinho');
               }}
             >
               Ver Carrinho
@@ -61,7 +62,7 @@ const CartModal = ({ cartItems, onClose, onClear }) => {
         </>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default CartModal
+export default CartModal;
