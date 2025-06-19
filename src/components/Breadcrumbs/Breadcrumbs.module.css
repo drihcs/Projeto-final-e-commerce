@@ -1,47 +1,49 @@
 .breadcrumbs {
-  background-color: #fff;
-  padding: 15px 20px;
-  border-radius: 5px;
-  margin-top: 20px;
-  width: 90%;
-  max-width: 1200px;
-  margin: 20px auto 0 auto;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  background-color: transparent;
+  padding: 0 20px; /* ⬅️ Alinhamento lateral apenas no breadcrumbs */
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .breadcrumbs ul {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  font-size: 0.9rem;
+  gap: 6px;
+  font-size: 0.95rem;
+  color: var(--dark-gray);
 }
 
 .breadcrumbs li {
   display: flex;
   align-items: center;
-  color: var(--dark-gray);
+  gap: 6px;
 }
 
 .breadcrumbs li a {
   color: var(--dark-gray);
+  text-decoration: none;
   transition: color 0.2s ease-in-out;
   white-space: nowrap;
+  font-weight: 500;
 }
 
 .breadcrumbs li a:hover {
   color: var(--primary-color);
 }
 
-/* Novo estilo para o último item (ativo) */
 .activeLink {
-  color: var(--primary-color); /* Mesma cor do seu exemplo original para o último item */
-  font-weight: 500;
+  color: var(--primary-color);
+  font-weight: 600;
   white-space: nowrap;
 }
 
-
 .separator {
-  margin: 0 8px;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--medium-gray);
+  display: flex;
+  align-items: center;
 }
