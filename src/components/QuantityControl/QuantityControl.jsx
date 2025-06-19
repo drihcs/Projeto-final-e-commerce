@@ -1,3 +1,5 @@
+import styles from './QuantityControl.module.css'
+
 export default function QuantityControl({ quantidade, onChange, onRemove, min = 1 }) {
   const handleDecrease = () => {
     if (quantidade <= min) {
