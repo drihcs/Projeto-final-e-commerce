@@ -32,16 +32,15 @@ const ConfirmacaoCompra = () => {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <section className={styles.successSection}>
-          <div className={styles.successIcon}>
-            <img src={sucessoImg} alt="Sucesso" className={styles.successImage} />
-          </div>
-          <h1 className={styles.successTitle}>Compra Realizada</h1>
-          <p className={styles.successSubtitle}>com sucesso!</p>
-        </section>
-
-        {/* Card único com todas as informações */}
         <div className={styles.infoCard}>
+          {/* Título e sucesso */}
+          <section className={styles.successSection}>
+            <div className={styles.successIcon}>
+              <img src={sucessoImg} alt="Sucesso" className={styles.successImage} />
+            </div>
+            <h1 className={styles.successTitle}>Compra Realizada</h1>
+            <p className={styles.successSubtitle}>com sucesso!</p>
+          </section>
 
           {/* Informações Pessoais */}
           <section>
@@ -144,7 +143,6 @@ const ConfirmacaoCompra = () => {
               Voltar para Home
             </Link>
           </div>
-
         </div>
       </main>
     </div>
