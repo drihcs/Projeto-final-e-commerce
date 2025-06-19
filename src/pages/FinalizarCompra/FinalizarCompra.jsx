@@ -31,11 +31,18 @@ function FinalizarCompra() {
   const [loadingUserData, setLoadingUserData] = useState(false)
   const [errorUserData, setErrorUserData] = useState(null)
 
-  // Calcular total do carrinho
-  const total = itens.reduce(
+  // Calcular subtotal do carrinho
+  const subtotal = itens.reduce(
     (acc, item) => acc + Number(item.price) * (item.quantidade || 1),
     0
   )
+
+  // Para exemplo, frete e desconto fixos — pode mudar para dinâmicos
+  const frete = 15.0
+  const desconto = 10.0
+
+  // Total final considerando frete e desconto
+  const totalFinal = subtotal + frete - desconto
 
   // Buscar dados do usuário no Supabase
   useEffect(() => {
@@ -86,10 +93,10 @@ function FinalizarCompra() {
 
   // Validação e Finalização do pedido
   const handleSubmit = (e) => {
-    e.preventDefault()
+    if (e) e.preventDefault()
 
     const obrigatorios = ['nome', 'cpf', 'email', 'celular', 'endereco', 'bairro', 'cidade', 'cep']
-    const faltando = obrigatorios.filter(field => !formData[field].trim())
+    const faltando = obrigatorios.filter(field => !formData[field]?.trim())
 
     if (faltando.length > 0) {
       alert('Preencha todos os campos obrigatórios.')
@@ -98,7 +105,7 @@ function FinalizarCompra() {
 
     if (formData.paymentMethod === 'credit') {
       const cartaoCampos = ['cardName', 'cardNumber', 'cardExpiry', 'cvv']
-      const faltandoCartao = cartaoCampos.filter(field => !formData[field].trim())
+      const faltandoCartao = cartaoCampos.filter(field => !formData[field]?.trim())
 
       if (faltandoCartao.length > 0) {
         alert('Preencha todos os dados do cartão.')
@@ -107,7 +114,7 @@ function FinalizarCompra() {
     }
 
     alert('Pedido finalizado com sucesso!')
-    console.log('Pedido:', { formData, itens, total })
+    console.log('Pedido:', { formData, itens, totalFinal })
 
     limparCarrinho()
     navigate('/compra-finalizada')
@@ -246,7 +253,7 @@ function FinalizarCompra() {
             <h2 className={styles.sectionTitle}><CreditCard size={20} /> Informações de Pagamento</h2>
             <div className={styles.radioGroup}>
               <p className={styles.radioLabel}>Formas de pagamento:</p>
-              <label className={styles.radioOption}>                
+              <label className={styles.radioOption}>
                 <input
                   type="radio"
                   name="paymentMethod"
@@ -319,63 +326,72 @@ function FinalizarCompra() {
           </section>
 
           {/* Finalizar Compra (botão e total) */}
-
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>Finalizar pagamento</h2>
             <div className={styles.finalizarCompra}>
               <div className={styles.summaryTotal}>
                 <span>Total</span>
                 <span className={styles.totalHighlight}>
-                  R$ {total.toFixed(2).replace('.', ',')}
+                  R$ {totalFinal.toFixed(2).replace('.', ',')}
                 </span>
               </div>
               <p className={styles.installments}>
-                ou 6x de R$ {(total / 6).toFixed(2).replace('.', ',')} sem juros
+                ou 6x de R$ {(totalFinal / 6).toFixed(2).replace('.', ',')} sem juros
               </p>
               <button type="submit" className={styles.btnComplete}>
                 Realizar Pagamento
               </button>
             </div>
-          </section>         
+          </section>
         </form>
 
-        {/* Box lateral Resumo */}
         <aside className={styles.orderSummary}>
-          <h2 className={styles.summaryTitle}><ShoppingCart size={20} /> Resumo</h2>
+          <h2 className={styles.summaryTitle}><ShoppingCart size={20} /> RESUMO</h2>
 
           {itens.length === 0 ? (
             <p>Carrinho vazio.</p>
           ) : (
-            itens.map(item => (
-              <div key={item.id} className={styles.productItem}>
-                <div className={styles.productImage}>
-                  {item.image ? (
-                    <img src={item.image} alt={item.name} />
-                  ) : (
-                    <div>Sem imagem</div>
-                  )}
-                </div>
-                <div className={styles.productInfo}>
-                  <p className={styles.productName}>{item.name}</p>
-                  <p>Quantidade: {item.quantidade || 1}</p>
-                  <p className={styles.price}>
-                    R$ {(item.price * (item.quantidade || 1)).toFixed(2).replace('.', ',')}
-                  </p>
-                </div>
-              </div>
-            ))
-          )}
-
-          {itens.length > 0 && (
             <>
+              {itens.map(item => (
+                <div key={item.id} className={styles.productItem}>
+                  <div className={styles.productImage}>
+                    {item.image ? (
+                      <img src={item.image} alt={item.name} />
+                    ) : (
+                      <div>Sem imagem</div>
+                    )}
+                  </div>
+                  <div className={styles.productInfo}>
+                    <p className={styles.productName}>{item.name}</p>
+                    <p>Quantidade: {item.quantidade || 1}</p>
+                    <p className={styles.price}>
+                      R$ {(item.price * (item.quantidade || 1)).toFixed(2).replace('.', ',')}
+                    </p>
+                  </div>
+                </div>
+              ))}
+
+              {/* Subtotal, Frete, Desconto e Total */}
+              <div className={styles.summaryLine}>
+                <span>Subtotal:</span>
+                <span>R$ {subtotal.toFixed(2).replace('.', ',')}</span>
+              </div>
+              <div className={styles.summaryLine}>
+                <span>Frete:</span>
+                <span>R$ {frete.toFixed(2).replace('.', ',')}</span>
+              </div>
+              <div className={styles.summaryLine}>
+                <span>Desconto:</span>
+                <span>- R$ {desconto.toFixed(2).replace('.', ',')}</span>
+              </div>
               <div className={styles.summaryTotal}>
                 <span>Total:</span>
                 <span className={styles.totalHighlight}>
-                  R$ {total.toFixed(2).replace('.', ',')}
+                  R$ {totalFinal.toFixed(2).replace('.', ',')}
                 </span>
               </div>
               <p className={styles.installments}>
-                ou 6x de R$ {(total / 6).toFixed(2).replace('.', ',')} sem juros
+                ou 6x de R$ {(totalFinal / 6).toFixed(2).replace('.', ',')} sem juros
               </p>
               <button type="button" className={styles.btnComplete} onClick={handleSubmit}>
                 Realizar Pagamento
