@@ -319,12 +319,15 @@ function FinalizarCompra() {
           </section>
 
           {/* Finalizar Compra (botão e total) */}
+
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>Finalizar pagamento</h2>
             <div className={styles.finalizarCompra}>
-              <div className={styles.totalRow}>
-                <p className={styles.totalLabel}>Total a pagar:</p>
-                <p className={styles.totalValue}>R$ {total.toFixed(2).replace('.', ',')}</p>
+              <div className={styles.summaryTotal}>
+                <span>Total a pagar:</span>
+                <span className={styles.totalHighlight}>
+                  R$ {total.toFixed(2).replace('.', ',')}
+                </span>
               </div>
               <p className={styles.installments}>
                 ou 6x de R$ {(total / 6).toFixed(2).replace('.', ',')} sem juros
@@ -333,7 +336,7 @@ function FinalizarCompra() {
                 Realizar Pagamento
               </button>
             </div>
-          </section>
+          </section>         
         </form>
 
         {/* Box lateral Resumo */}
