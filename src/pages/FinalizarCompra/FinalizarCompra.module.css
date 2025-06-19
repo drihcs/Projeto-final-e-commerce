@@ -251,34 +251,23 @@
 
 .productInfo {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
+  display: flex;        /* mudar de column para flex (linha) */
+  align-items: center;  /* alinhar verticalmente */
+  gap: 1rem;            /* espaço entre nome e preço */
 }
 
 .productName {
   font-weight: 600;
   color: #333;
   font-size: 1rem;
+  flex-grow: 1;         /* para ocupar espaço e empurrar preço à direita */
 }
 
 .price {
   color: #666;
   font-size: 0.9rem;
-}
-
-.summaryLine {
-  display: flex;
-  justify-content: space-between;
-  font-size: 1rem;
-  color: #333;
-  padding: 0.3rem 0;
-  border-bottom: 1px solid #eee;
-  font-weight: 600;
-}
-
-.summaryLine:last-of-type {
-  border-bottom: none;
+  white-space: nowrap;  /* para não quebrar linha */
+  flex-shrink: 0;       /* para o preço não encolher */
 }
 
 /* Total no resumo com fundo amarelo pastel e total em rosa */
