@@ -8,7 +8,7 @@ import styles from './FinalizarCompra.module.css'
 
 function FinalizarCompra() {
   const { usuario } = useAuth()
-  const { itens, limparCarrinho } = useCarrinho()
+  const { itens, setItens, limparCarrinho } = useCarrinho() // precisa setItens para atualizar quantidades
   const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
@@ -31,20 +31,16 @@ function FinalizarCompra() {
   const [loadingUserData, setLoadingUserData] = useState(false)
   const [errorUserData, setErrorUserData] = useState(null)
 
-  // Calcular subtotal do carrinho
+  // Atualiza subtotal automaticamente
   const subtotal = itens.reduce(
     (acc, item) => acc + Number(item.price) * (item.quantidade || 1),
     0
   )
 
-  // Para exemplo, frete e desconto fixos — pode mudar para dinâmicos
   const frete = 15.0
   const desconto = 10.0
-
-  // Total final considerando frete e desconto
   const totalFinal = subtotal + frete - desconto
 
-  // Buscar dados do usuário no Supabase
   useEffect(() => {
     async function fetchUserData() {
       if (!usuario?.id) return
@@ -82,13 +78,26 @@ function FinalizarCompra() {
     fetchUserData()
   }, [usuario])
 
-  // Controle dos inputs
+  // Controle dos inputs do formulário principal
   const handleInputChange = (e) => {
     const { name, value } = e.target
     setFormData(prev => ({
       ...prev,
       [name]: value
     }))
+  }
+
+  // Controle da alteração da quantidade no resumo do carrinho
+  const handleQuantidadeChange = (id, value) => {
+    if (value < 1) return // não aceitar valores menores que 1
+
+    const novaLista = itens.map(item => {
+      if (item.id === id) {
+        return { ...item, quantidade: Number(value) }
+      }
+      return item
+    })
+    setItens(novaLista)
   }
 
   // Validação e Finalização do pedido
@@ -120,7 +129,7 @@ function FinalizarCompra() {
     navigate('/compra-finalizada')
   }
 
-  // Formatações
+  // Formatações (mesmos do seu código)
   const formatCPF = (value) => {
     const numbers = value.replace(/\D/g, '')
     return numbers.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4')
@@ -363,7 +372,14 @@ function FinalizarCompra() {
                   </div>
                   <div className={styles.productInfo}>
                     <p className={styles.productName}>{item.name}</p>
-                    <p>Quantidade: {item.quantidade || 1}</p>
+                    <input
+                      type="number"
+                      min="1"
+                      value={item.quantidade || 1}
+                      onChange={(e) => handleQuantidadeChange(item.id, e.target.value)}
+                      className={styles.inputQuantidade}
+                      aria-label={`Quantidade de ${item.name}`}
+                    />
                     <p className={styles.price}>
                       R$ {(item.price * (item.quantidade || 1)).toFixed(2).replace('.', ',')}
                     </p>
