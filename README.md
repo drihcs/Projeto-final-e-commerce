@@ -85,11 +85,11 @@ README.md
 
 | Página Inicial          | Página de Busca            |
 |------------------------|---------------------------|
-| ![Página Home](public/assets/home.png) | ![Busca de produtos](public/assets/search.png) |
+| ![Página Home](src/assets/home.png) | ![Busca de produtos](src/assets/search.png) |
 
 | Modal do Carrinho       | Tela de Login              |
 |------------------------|---------------------------|
-| ![Carrinho](public/assets/cart-modal.png) | ![Login](public/assets/login.png) |
+| ![Carrinho](src/assets/cart-modal.png) | ![Login](src/assets/login.png) |
 
 > As imagens acima mostram as telas principais da aplicação, ilustrando a interface e funcionalidades em ação.
 
