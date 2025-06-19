@@ -1,105 +1,74 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useCarrinho } from '../../contexts/CarrinhoContext'
-import styles from './Carrinho.module.css'
+import React, { createContext, useState, useContext, useEffect } from 'react'
 
-const Carrinho = () => {
-  const {
-    itens,
-    alterarQuantidade,
-    removerItem,
-    calcularTotal,
-    limparCarrinho
-  } = useCarrinho()
+const CarrinhoContext = createContext()
+CarrinhoContext.displayName = 'CarrinhoContext'
 
-  const navigate = useNavigate()
+export function CarrinhoProvider({ children }) {
+  const [itens, setItens] = useState(() => {
+    const itensSalvos = localStorage.getItem('carrinho')
+    return itensSalvos ? JSON.parse(itensSalvos) : []
+  })
 
-  const subtotal = calcularTotal()
+  // Salvar no localStorage sempre que itens mudar
+  useEffect(() => {
+    localStorage.setItem('carrinho', JSON.stringify(itens))
+  }, [itens])
+
+  // 👉 Adicionar item
+  function adicionarItem(produto) {
+    const existe = itens.find(item => item.id === produto.id)
+
+    if (existe) {
+      setItens(itens.map(item =>
+        item.id === produto.id
+          ? { ...item, quantidade: item.quantidade + (produto.quantidade || 1) }
+          : item
+      ))
+    } else {
+      setItens([...itens, { ...produto, quantidade: produto.quantidade || 1 }])
+    }
+  }
+
+  // 👉 Remover item
+  function removerItem(id) {
+    setItens(itens.filter(item => item.id !== id))
+  }
+
+  // 👉 Alterar quantidade
+  function alterarQuantidade(id, novaQuantidade) {
+    if (novaQuantidade < 1) return
+    setItens(itens.map(item =>
+      item.id === id ? { ...item, quantidade: novaQuantidade } : item
+    ))
+  }
+
+  // 👉 Limpar carrinho
+  function limparCarrinho() {
+    setItens([])
+  }
+
+  // 👉 Calcular total
+  function calcularTotal() {
+    return itens.reduce((total, item) => total + item.preco * item.quantidade, 0)
+  }
 
   return (
-    <div className={styles.container}>
-      <section className={styles.cartSection}>
-        <h2 className={styles.sectionTitle}>MEU CARRINHO</h2>
-
-        {itens.length === 0 ? (
-          <p>Seu carrinho está vazio.</p>
-        ) : (
-          itens.map((item) => (
-            <div key={item.id} className={styles.cartItem}>
-              <div className={styles.productImage}>
-                <div className={styles.productIcon}>👟</div>
-              </div>
-
-              <div className={styles.productInfo}>
-                <h3 className={styles.productTitle}>{item.nome}</h3>
-                <p className={styles.productDetail}>Cor: {item.cor}</p>
-                <p className={styles.productDetail}>Tamanho: {item.tamanho}</p>
-              </div>
-
-              <div className={styles.quantityControl}>
-                <button onClick={() => alterarQuantidade(item.id, item.quantidade - 1)}>-</button>
-                <span>{item.quantidade}</span>
-                <button onClick={() => alterarQuantidade(item.id, item.quantidade + 1)}>+</button>
-              </div>
-
-              <div className={styles.priceColumn}>
-                <p>R$ {(item.preco * item.quantidade).toFixed(2).replace('.', ',')}</p>
-              </div>
-
-              <div className={styles.removeItem}>
-                <button onClick={() => removerItem(item.id)}>Remover</button>
-              </div>
-            </div>
-          ))
-        )}
-      </section>
-
-      {/* Resumo */}
-      {itens.length > 0 && (
-        <section className={styles.summary}>
-          <h2 className={styles.sectionTitle}>RESUMO</h2>
-
-          <div className={styles.summaryContent}>
-            <div className={styles.summaryRow}>
-              <span>Subtotal:</span>
-              <span>R$ {subtotal.toFixed(2).replace('.', ',')}</span>
-            </div>
-
-            <div className={styles.summaryRow}>
-              <span>Frete:</span>
-              <span>R$ 0,00</span>
-            </div>
-
-            <hr className={styles.divider} />
-
-            <div className={styles.totalRow}>
-              <span>Total</span>
-              <span className={styles.totalPrice}>R$ {subtotal.toFixed(2).replace('.', ',')}</span>
-            </div>
-
-            <p className={styles.installments}>
-              ou 10x de R$ {(subtotal / 10).toFixed(2).replace('.', ',')} sem juros
-            </p>
-          </div>
-
-          <div className={styles.buttons}>
-            <button
-              className={styles.continueButton}
-              onClick={() => navigate('/finalizar-compra')}
-            >
-              Continuar
-            </button>
-            <button
-              className={styles.clearButton}
-              onClick={() => limparCarrinho()}
-            >
-              Limpar Carrinho
-            </button>
-          </div>
-        </section>
-      )}
-    </div>
+    <CarrinhoContext.Provider
+      value={{
+        itens,
+        adicionarItem,
+        removerItem,
+        alterarQuantidade,
+        limparCarrinho,
+        calcularTotal,
+      }}
+    >
+      {children}
+    </CarrinhoContext.Provider>
   )
 }
 
-export default Carrinho
+// Hook personalizado para usar mais fácil
+export function useCarrinho() {
+  return useContext(CarrinhoContext)
+}
