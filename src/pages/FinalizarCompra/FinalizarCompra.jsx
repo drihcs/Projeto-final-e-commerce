@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ShoppingCart, User, MapPin, CreditCard } from 'lucide-react';
-import { useAuth } from '../../contexts/AuthContext';
-import { useCarrinho } from '../../contexts/CarrinhoContext';
-import { supabase } from '../../utils/supabase';
-import styles from './FinalizarCompra.module.css';
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { ShoppingCart, User, MapPin, CreditCard } from 'lucide-react'
+import { useAuth } from '../../contexts/AuthContext'
+import { useCarrinho } from '../../contexts/CarrinhoContext'
+import { supabase } from '../../utils/supabase'
+import styles from './FinalizarCompra.module.css'
 
 function FinalizarCompra() {
-  const { usuario } = useAuth();
-  const { itens, limparCarrinho } = useCarrinho();
-  const navigate = useNavigate();
+  const { usuario } = useAuth()
+  const { itens, limparCarrinho } = useCarrinho()
+  const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
     nome: '',
@@ -25,34 +25,37 @@ function FinalizarCompra() {
     cardName: '',
     cardNumber: '',
     cardExpiry: '',
-    cvv: '',
-  });
+    cvv: ''
+  })
 
-  const [loadingUserData, setLoadingUserData] = useState(false);
-  const [errorUserData, setErrorUserData] = useState(null);
+  const [loadingUserData, setLoadingUserData] = useState(false)
+  const [errorUserData, setErrorUserData] = useState(null)
 
+  // Calcular total do carrinho
   const total = itens.reduce(
     (acc, item) => acc + Number(item.price) * (item.quantidade || 1),
     0
-  );
+  )
 
+  // Buscar dados do usuário no Supabase
   useEffect(() => {
     async function fetchUserData() {
-      if (!usuario?.id) return;
+      if (!usuario?.id) return
 
-      setLoadingUserData(true);
-      setErrorUserData(null);
+      setLoadingUserData(true)
+      setErrorUserData(null)
 
       const { data, error } = await supabase
         .from('usuarios')
         .select('*')
         .eq('id', usuario.id)
-        .single();
+        .single()
 
       if (error) {
-        setErrorUserData('Não foi possível carregar seus dados.');
+        console.error('Erro ao buscar dados do usuário:', error)
+        setErrorUserData('Não foi possível carregar seus dados.')
       } else if (data) {
-        setFormData((prev) => ({
+        setFormData(prev => ({
           ...prev,
           nome: data.nome || '',
           cpf: data.cpf || '',
@@ -62,364 +65,318 @@ function FinalizarCompra() {
           bairro: data.bairro || '',
           cidade: data.cidade || '',
           cep: data.cep || '',
-          complemento: data.complemento || '',
-        }));
+          complemento: data.complemento || ''
+        }))
       }
 
-      setLoadingUserData(false);
+      setLoadingUserData(false)
     }
 
-    fetchUserData();
-  }, [usuario]);
+    fetchUserData()
+  }, [usuario])
 
+  // Controle dos inputs
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
+    const { name, value } = e.target
+    setFormData(prev => ({
       ...prev,
-      [name]: value,
-    }));
-  };
+      [name]: value
+    }))
+  }
 
-  const handleSubmit = () => {
-    const obrigatorios = [
-      'nome',
-      'cpf',
-      'email',
-      'celular',
-      'endereco',
-      'bairro',
-      'cidade',
-      'cep',
-    ];
-    const faltando = obrigatorios.filter((field) => !formData[field].trim());
+  // Validação e Finalização do pedido
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    const obrigatorios = ['nome', 'cpf', 'email', 'celular', 'endereco', 'bairro', 'cidade', 'cep']
+    const faltando = obrigatorios.filter(field => !formData[field].trim())
 
     if (faltando.length > 0) {
-      alert('Preencha todos os campos obrigatórios.');
-      return;
+      alert('Preencha todos os campos obrigatórios.')
+      return
     }
 
     if (formData.paymentMethod === 'credit') {
-      const cartaoCampos = ['cardName', 'cardNumber', 'cardExpiry', 'cvv'];
-      const faltandoCartao = cartaoCampos.filter(
-        (field) => !formData[field].trim()
-      );
+      const cartaoCampos = ['cardName', 'cardNumber', 'cardExpiry', 'cvv']
+      const faltandoCartao = cartaoCampos.filter(field => !formData[field].trim())
 
       if (faltandoCartao.length > 0) {
-        alert('Preencha todos os dados do cartão.');
-        return;
+        alert('Preencha todos os dados do cartão.')
+        return
       }
     }
 
-    alert('Pedido finalizado com sucesso!');
-    console.log('Pedido:', { formData, itens, total });
+    alert('Pedido finalizado com sucesso!')
+    console.log('Pedido:', { formData, itens, total })
 
-    limparCarrinho();
-    navigate('/compra-finalizada');
-  };
+    limparCarrinho()
+    navigate('/compra-finalizada')
+  }
 
   // Formatações
   const formatCPF = (value) => {
-    const numbers = value.replace(/\D/g, '');
-    return numbers.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-  };
+    const numbers = value.replace(/\D/g, '')
+    return numbers.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4')
+  }
 
   const formatPhone = (value) => {
-    const numbers = value.replace(/\D/g, '');
-    return numbers.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
-  };
+    const numbers = value.replace(/\D/g, '')
+    return numbers.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3')
+  }
 
   const formatCEP = (value) => {
-    const numbers = value.replace(/\D/g, '');
-    return numbers.replace(/(\d{5})(\d{3})/, '$1-$2');
-  };
+    const numbers = value.replace(/\D/g, '')
+    return numbers.replace(/(\d{5})(\d{3})/, '$1-$2')
+  }
 
   const formatCardNumber = (value) => {
-    const numbers = value.replace(/\D/g, '');
-    return numbers.replace(/(\d{4})(\d{4})(\d{4})(\d{4})/, '$1 $2 $3 $4');
-  };
+    const numbers = value.replace(/\D/g, '')
+    return numbers.replace(/(\d{4})(\d{4})(\d{4})(\d{4})/, '$1 $2 $3 $4')
+  }
 
   const formatCardExpiry = (value) => {
-    const numbers = value.replace(/\D/g, '');
-    return numbers.replace(/(\d{2})(\d{2})/, '$1/$2');
-  };
+    const numbers = value.replace(/\D/g, '')
+    return numbers.replace(/(\d{2})(\d{2})/, '$1/$2')
+  }
 
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <div className={styles.checkoutForm}>
+        <form onSubmit={handleSubmit} className={styles.checkoutForm} noValidate>
+          <h1 className={styles.pageTitle}>Finalizar Compra</h1>
+
           {loadingUserData && <p>Carregando seus dados...</p>}
           {errorUserData && <p className={styles.error}>{errorUserData}</p>}
 
-          {/* Sessão 1 - Dados Pessoais */}
+          {/* Dados Pessoais */}
           <section className={styles.section}>
-            <h2>
-              <User size={20} /> Dados Pessoais
-            </h2>
-            <div className={styles.formColumn}>
-              <input
-                type="text"
-                name="nome"
-                placeholder="Nome Completo *"
-                value={formData.nome}
-                onChange={handleInputChange}
-                required
-              />
-              <input
-                type="text"
-                name="cpf"
-                placeholder="CPF *"
-                value={formData.cpf}
-                onChange={(e) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    cpf: formatCPF(e.target.value),
-                  }))
-                }
-                maxLength="14"
-                required
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder="Email *"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-              />
-              <input
-                type="tel"
-                name="celular"
-                placeholder="Celular *"
-                value={formData.celular}
-                onChange={(e) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    celular: formatPhone(e.target.value),
-                  }))
-                }
-                maxLength="15"
-                required
-              />
-            </div>
+            <h2 className={styles.sectionTitle}><User size={20} /> Dados Pessoais</h2>
+            <input
+              type="text"
+              name="nome"
+              placeholder="Nome Completo *"
+              value={formData.nome}
+              onChange={handleInputChange}
+              className={styles.input}
+              required
+            />
+            <input
+              type="text"
+              name="cpf"
+              placeholder="CPF *"
+              value={formData.cpf}
+              onChange={(e) => setFormData(prev => ({ ...prev, cpf: formatCPF(e.target.value) }))}
+              maxLength="14"
+              className={styles.input}
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email *"
+              value={formData.email}
+              onChange={handleInputChange}
+              className={styles.input}
+              required
+            />
+            <input
+              type="tel"
+              name="celular"
+              placeholder="Celular *"
+              value={formData.celular}
+              onChange={(e) => setFormData(prev => ({ ...prev, celular: formatPhone(e.target.value) }))}
+              maxLength="15"
+              className={styles.input}
+              required
+            />
           </section>
 
-          {/* Sessão 2 - Entrega */}
+          {/* Informações de Entrega */}
           <section className={styles.section}>
-            <h2>
-              <MapPin size={20} /> Informações de Entrega
-            </h2>
-            <div className={styles.formColumn}>
-              <input
-                type="text"
-                name="endereco"
-                placeholder="Endereço *"
-                value={formData.endereco}
-                onChange={handleInputChange}
-                required
-              />
-              <input
-                type="text"
-                name="bairro"
-                placeholder="Bairro *"
-                value={formData.bairro}
-                onChange={handleInputChange}
-                required
-              />
-              <input
-                type="text"
-                name="cidade"
-                placeholder="Cidade *"
-                value={formData.cidade}
-                onChange={handleInputChange}
-                required
-              />
-              <input
-                type="text"
-                name="cep"
-                placeholder="CEP *"
-                value={formData.cep}
-                onChange={(e) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    cep: formatCEP(e.target.value),
-                  }))
-                }
-                maxLength="9"
-                required
-              />
-              <input
-                type="text"
-                name="complemento"
-                placeholder="Complemento"
-                value={formData.complemento}
-                onChange={handleInputChange}
-              />
-            </div>
+            <h2 className={styles.sectionTitle}><MapPin size={20} /> Informações de Entrega</h2>
+            <input
+              type="text"
+              name="endereco"
+              placeholder="Endereço *"
+              value={formData.endereco}
+              onChange={handleInputChange}
+              className={styles.input}
+              required
+            />
+            <input
+              type="text"
+              name="bairro"
+              placeholder="Bairro *"
+              value={formData.bairro}
+              onChange={handleInputChange}
+              className={styles.input}
+              required
+            />
+            <input
+              type="text"
+              name="cidade"
+              placeholder="Cidade *"
+              value={formData.cidade}
+              onChange={handleInputChange}
+              className={styles.input}
+              required
+            />
+            <input
+              type="text"
+              name="cep"
+              placeholder="CEP *"
+              value={formData.cep}
+              onChange={(e) => setFormData(prev => ({ ...prev, cep: formatCEP(e.target.value) }))}
+              maxLength="9"
+              className={styles.input}
+              required
+            />
+            <input
+              type="text"
+              name="complemento"
+              placeholder="Complemento"
+              value={formData.complemento}
+              onChange={handleInputChange}
+              className={styles.input}
+            />
           </section>
 
-          {/* Sessão 3 - Pagamento */}
+          {/* Formas de Pagamento */}
           <section className={styles.section}>
-            <h2>
-              <CreditCard size={20} /> Formas de Pagamento
-            </h2>
+            <h2 className={styles.sectionTitle}><CreditCard size={20} /> Formas de Pagamento</h2>
             <div className={styles.radioGroup}>
-              <label>
+              <label className={styles.radioOption}>
                 <input
                   type="radio"
                   name="paymentMethod"
                   value="credit"
                   checked={formData.paymentMethod === 'credit'}
                   onChange={handleInputChange}
-                />{' '}
-                Cartão de Crédito
+                /> Cartão de Crédito
               </label>
-              <label>
+              <label className={styles.radioOption}>
                 <input
                   type="radio"
                   name="paymentMethod"
                   value="pix"
                   checked={formData.paymentMethod === 'pix'}
                   onChange={handleInputChange}
-                />{' '}
-                Pix
+                /> Pix
               </label>
-              <label>
+              <label className={styles.radioOption}>
                 <input
                   type="radio"
                   name="paymentMethod"
                   value="boleto"
                   checked={formData.paymentMethod === 'boleto'}
                   onChange={handleInputChange}
-                />{' '}
-                Boleto
+                /> Boleto
               </label>
             </div>
 
             {formData.paymentMethod === 'credit' && (
-              <div className={styles.formColumn}>
+              <>
                 <input
                   type="text"
                   name="cardName"
                   placeholder="Nome no Cartão"
                   value={formData.cardName}
                   onChange={handleInputChange}
+                  className={styles.input}
                 />
                 <input
                   type="text"
                   name="cardNumber"
                   placeholder="Número do Cartão"
                   value={formData.cardNumber}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      cardNumber: formatCardNumber(e.target.value),
-                    }))
-                  }
+                  onChange={(e) => setFormData(prev => ({ ...prev, cardNumber: formatCardNumber(e.target.value) }))}
                   maxLength="19"
+                  className={styles.input}
                 />
-                <input
-                  type="text"
-                  name="cardExpiry"
-                  placeholder="Validade (MM/AA)"
-                  value={formData.cardExpiry}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      cardExpiry: formatCardExpiry(e.target.value),
-                    }))
-                  }
-                  maxLength="5"
-                />
-                <input
-                  type="password"
-                  name="cvv"
-                  placeholder="CVV"
-                  value={formData.cvv}
-                  onChange={handleInputChange}
-                  maxLength="3"
-                />
-              </div>
+                <div className={styles.formGrid}>
+                  <input
+                    type="text"
+                    name="cardExpiry"
+                    placeholder="Validade (MM/AA)"
+                    value={formData.cardExpiry}
+                    onChange={(e) => setFormData(prev => ({ ...prev, cardExpiry: formatCardExpiry(e.target.value) }))}
+                    maxLength="5"
+                    className={styles.input}
+                  />
+                  <input
+                    type="password"
+                    name="cvv"
+                    placeholder="CVV"
+                    value={formData.cvv}
+                    onChange={handleInputChange}
+                    maxLength="3"
+                    className={styles.input}
+                  />
+                </div>
+              </>
             )}
           </section>
 
-          {/* Sessão 4 - Finalizar pagamento */}
-          <section className={styles.section}>
-            <h2>Finalizar pagamento</h2>
-            <div className={styles.finalSection}>
-              <p className={styles.summaryTotal}>
-                Total:{' '}
-                <span className={styles.totalValue}>
-                  R$ {total.toFixed(2).replace('.', ',')}
-                </span>
-              </p>
-              <p className={styles.installments}>
-                ou 6x de R$ {(total / 6).toFixed(2).replace('.', ',')} sem juros
-              </p>
-              <button
-                type="button"
-                className={styles.btnComplete}
-                onClick={handleSubmit}
-              >
-                Realizar Pagamento
-              </button>
-            </div>
+          {/* Finalizar Compra (botão e total) */}
+          <section className={styles.finalizarCompra}>
+            <p className={styles.totalLabel}>Total a pagar:</p>
+            <p className={styles.totalValue}>R$ {total.toFixed(2).replace('.', ',')}</p>
+            <p className={styles.installments}>
+              ou 6x de R$ {(total / 6).toFixed(2).replace('.', ',')} sem juros
+            </p>
+            <button type="submit" className={styles.btnComplete}>
+              Realizar Pagamento
+            </button>
           </section>
-        </div>
+        </form>
 
-        {/* Box lateral - Resumo */}
+        {/* Box lateral Resumo */}
         <aside className={styles.orderSummary}>
-          <h2 className={styles.summaryTitle}>
-            <ShoppingCart size={20} /> Resumo
-          </h2>
+          <h2 className={styles.summaryTitle}><ShoppingCart size={20} /> Resumo</h2>
 
           {itens.length === 0 ? (
             <p>Carrinho vazio.</p>
           ) : (
-            <div>
-              {itens.map((item) => (
-                <div key={item.id} className={styles.productItem}>
-                  {item.image && (
-                    <div className={styles.productImage}>
-                      <img src={item.image} alt={item.name} />
-                    </div>
+            itens.map(item => (
+              <div key={item.id} className={styles.productItem}>
+                <div className={styles.productImage}>
+                  {item.image ? (
+                    <img src={item.image} alt={item.name} />
+                  ) : (
+                    <div>Sem imagem</div>
                   )}
-                  <div className={styles.productInfo}>
-                    <p className={styles.productName}>
-                      {item.name} x{item.quantidade || 1}
-                    </p>
-                    <p>
-                      R${' '}
-                      {(item.price * (item.quantidade || 1))
-                        .toFixed(2)
-                        .replace('.', ',')}
-                    </p>
-                  </div>
                 </div>
-              ))}
+                <div className={styles.productInfo}>
+                  <p className={styles.productName}>{item.name}</p>
+                  <p>Quantidade: {item.quantidade || 1}</p>
+                  <p className={styles.price}>
+                    R$ {(item.price * (item.quantidade || 1)).toFixed(2).replace('.', ',')}
+                  </p>
+                </div>
+              </div>
+            ))
+          )}
 
+          {itens.length > 0 && (
+            <>
               <div className={styles.summaryTotal}>
                 <span>Total:</span>
-                <span className={styles.totalValue}>
+                <span className={styles.totalHighlight}>
                   R$ {total.toFixed(2).replace('.', ',')}
                 </span>
               </div>
-
               <p className={styles.installments}>
                 ou 6x de R$ {(total / 6).toFixed(2).replace('.', ',')} sem juros
               </p>
-
-              <button
-                className={styles.btnComplete}
-                onClick={handleSubmit}
-              >
+              <button type="button" className={styles.btnComplete} onClick={handleSubmit}>
                 Realizar Pagamento
               </button>
-            </div>
+            </>
           )}
         </aside>
       </main>
     </div>
-  );
+  )
 }
 
-export default FinalizarCompra;
+export default FinalizarCompra
