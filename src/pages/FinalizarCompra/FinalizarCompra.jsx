@@ -9,7 +9,7 @@ import styles from './FinalizarCompra.module.css'
 
 function FinalizarCompra() {
   const { usuario } = useAuth()
-  const { itens, setItens, limparCarrinho } = useCarrinho() // ADICIONE setItens no contexto para atualizar o carrinho
+  const { itens, alterarQuantidade, limparCarrinho } = useCarrinho()
   const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
@@ -34,16 +34,7 @@ function FinalizarCompra() {
 
   // Função para atualizar a quantidade de um item no carrinho
   const handleQuantidadeChange = (itemId, novaQuantidade) => {
-    if (novaQuantidade < 1) return // Não permite quantidade menor que 1
-
-    const itensAtualizados = itens.map(item => {
-      if (item.id === itemId) {
-        return { ...item, quantidade: novaQuantidade }
-      }
-      return item
-    })
-
-    setItens(itensAtualizados)
+  alterarQuantidade(itemId, novaQuantidade)
   }
 
   // Calcular subtotal do carrinho baseado na quantidade atualizada
@@ -367,7 +358,7 @@ function FinalizarCompra() {
             <p>Carrinho vazio.</p>
           ) : (
             <>
-              {itens.map(item => (
+             {itens.map(item => (
                 <div key={item.id} className={styles.productItem}>
                   <div className={styles.productImage}>
                     {item.image ? (
@@ -376,20 +367,23 @@ function FinalizarCompra() {
                       <div>Sem imagem</div>
                     )}
                   </div>
+
                   <div className={styles.productInfo}>
                     <p className={styles.productName}>{item.name}</p>
 
-                    <div className={styles.quantityControl}>
-                      <QuantityControl
-                        quantidade={item.quantidade || 1}
-                        onChange={(novaQtd) => handleQuantidadeChange(item.id, novaQtd)}
-                      />
-                    </div>
+                    <div className={styles.infoBottom}>
+                      <div className={styles.quantityControl}>
+                        <span className={styles.qtdLabel}>Qtd:</span>
+                        <QuantityControl
+                          quantidade={item.quantidade || 1}
+                          onChange={(novaQtd) => handleQuantidadeChange(item.id, novaQtd)}
+                        />
+                      </div>
 
-                    {/* Aqui exibe o preço total do item com quantidade */}
-                    <span className={styles.price}>
-                      R$ {(item.price * (item.quantidade || 1)).toFixed(2).replace('.', ',')}
-                    </span>
+                      <span className={styles.price}>
+                        R$ {(item.price * (item.quantidade || 1)).toFixed(2).replace('.', ',')}
+                      </span>
+                    </div>
                   </div>
                 </div>
               ))}
