@@ -169,7 +169,7 @@
 .totalValue {
   font-size: 1.6rem;
   font-weight: 700;
-  color: #e91e63; /* Rosa */
+  color: #222;
 }
 
 .installments {
@@ -178,10 +178,9 @@
   font-style: italic;
 }
 
-/* Botão Realizar Pagamento laranja */
 .btnComplete {
   width: 100%;
-  background-color: #ffa726; /* Laranja */
+  background-color: #ffa726;
   border: none;
   color: white;
   padding: 1rem 1.2rem;
@@ -263,11 +262,10 @@
   flex-grow: 1;
 }
 
-/* Valor do produto com mesma ênfase e tamanho do subtotal */
 .price {
   color: #666;
-  font-size: 1rem;       /* mesmo tamanho que subtotal */
-  font-weight: 700;      /* negrito */
+  font-size: 1rem;
+  font-weight: 700;
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -280,7 +278,7 @@
   color: #333;
   padding: 0.3rem 0;
   border-bottom: 1px solid #eee;
-  font-weight: 700;  /* Negrito aplicado */
+  font-weight: 700;
 }
 
 .summaryLine:last-of-type {
@@ -294,14 +292,14 @@
   font-weight: 700;
   font-size: 1.2rem;
   padding: 1rem;
-  background-color: #fff8e1; /* Amarelo pastel */
+  background-color: #fff8e1;
   border-radius: 8px;
   margin-top: 1rem;
   align-items: center;
 }
 
 .totalHighlight {
-  color: #e91e63; /* Rosa */
+  color: #222;
   font-weight: 700;
 }
 
