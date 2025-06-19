@@ -379,14 +379,17 @@ function FinalizarCompra() {
                   <div className={styles.productInfo}>
                     <p className={styles.productName}>{item.name}</p>
 
-
                     <div className={styles.quantityControl}>
-                    <QuantityControl
-                      quantidade={item.quantidade || 1}
-                      onChange={(novaQtd) => handleQuantidadeChange(item.id, novaQtd)}
-                    />
+                      <QuantityControl
+                        quantidade={item.quantidade || 1}
+                        onChange={(novaQtd) => handleQuantidadeChange(item.id, novaQtd)}
+                      />
                     </div>
- 
+
+                    {/* Aqui exibe o preço total do item com quantidade */}
+                    <span className={styles.price}>
+                      R$ {(item.price * (item.quantidade || 1)).toFixed(2).replace('.', ',')}
+                    </span>
                   </div>
                 </div>
               ))}
