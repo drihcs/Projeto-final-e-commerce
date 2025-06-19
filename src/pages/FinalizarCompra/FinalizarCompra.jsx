@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { ShoppingCart, User, MapPin, CreditCard } from 'lucide-react'
-import { useAuth } from '../../contexts/AuthContext'
-import { useCarrinho } from '../../contexts/CarrinhoContext'
-import { supabase } from '../../utils/supabase'
-import styles from './FinalizarCompra.module.css'
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ShoppingCart, User, MapPin, CreditCard } from 'lucide-react';
+import { useAuth } from '../../contexts/AuthContext';
+import { useCarrinho } from '../../contexts/CarrinhoContext';
+import { supabase } from '../../utils/supabase';
+import styles from './FinalizarCompra.module.css';
 
 function FinalizarCompra() {
-  const { usuario } = useAuth()
-  const { itens, limparCarrinho } = useCarrinho()
-  const navigate = useNavigate()
+  const { usuario } = useAuth();
+  const { itens, limparCarrinho } = useCarrinho();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     nome: '',
@@ -25,37 +25,34 @@ function FinalizarCompra() {
     cardName: '',
     cardNumber: '',
     cardExpiry: '',
-    cvv: ''
-  })
+    cvv: '',
+  });
 
-  const [loadingUserData, setLoadingUserData] = useState(false)
-  const [errorUserData, setErrorUserData] = useState(null)
+  const [loadingUserData, setLoadingUserData] = useState(false);
+  const [errorUserData, setErrorUserData] = useState(null);
 
-  // 🛒 Calcular total do carrinho
   const total = itens.reduce(
     (acc, item) => acc + Number(item.price) * (item.quantidade || 1),
     0
-  )
+  );
 
-  // 🧠 Buscar dados do usuário no Supabase
   useEffect(() => {
     async function fetchUserData() {
-      if (!usuario?.id) return
+      if (!usuario?.id) return;
 
-      setLoadingUserData(true)
-      setErrorUserData(null)
+      setLoadingUserData(true);
+      setErrorUserData(null);
 
       const { data, error } = await supabase
         .from('usuarios')
         .select('*')
         .eq('id', usuario.id)
-        .single()
+        .single();
 
       if (error) {
-        console.error('Erro ao buscar dados do usuário:', error)
-        setErrorUserData('Não foi possível carregar seus dados.')
+        setErrorUserData('Não foi possível carregar seus dados.');
       } else if (data) {
-        setFormData(prev => ({
+        setFormData((prev) => ({
           ...prev,
           nome: data.nome || '',
           cpf: data.cpf || '',
@@ -65,87 +62,100 @@ function FinalizarCompra() {
           bairro: data.bairro || '',
           cidade: data.cidade || '',
           cep: data.cep || '',
-          complemento: data.complemento || ''
-        }))
+          complemento: data.complemento || '',
+        }));
       }
 
-      setLoadingUserData(false)
+      setLoadingUserData(false);
     }
 
-    fetchUserData()
-  }, [usuario])
+    fetchUserData();
+  }, [usuario]);
 
-  // 🎯 Controle dos inputs
   const handleInputChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
+    const { name, value } = e.target;
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
-    }))
-  }
+      [name]: value,
+    }));
+  };
 
-  // ✅ Validação e Finalização
   const handleSubmit = () => {
-    const obrigatorios = ['nome', 'cpf', 'email', 'celular', 'endereco', 'bairro', 'cidade', 'cep']
-    const faltando = obrigatorios.filter(field => !formData[field].trim())
+    const obrigatorios = [
+      'nome',
+      'cpf',
+      'email',
+      'celular',
+      'endereco',
+      'bairro',
+      'cidade',
+      'cep',
+    ];
+    const faltando = obrigatorios.filter((field) => !formData[field].trim());
 
     if (faltando.length > 0) {
-      alert('Preencha todos os campos obrigatórios.')
-      return
+      alert('Preencha todos os campos obrigatórios.');
+      return;
     }
 
     if (formData.paymentMethod === 'credit') {
-      const cartaoCampos = ['cardName', 'cardNumber', 'cardExpiry', 'cvv']
-      const faltandoCartao = cartaoCampos.filter(field => !formData[field].trim())
+      const cartaoCampos = ['cardName', 'cardNumber', 'cardExpiry', 'cvv'];
+      const faltandoCartao = cartaoCampos.filter(
+        (field) => !formData[field].trim()
+      );
 
       if (faltandoCartao.length > 0) {
-        alert('Preencha todos os dados do cartão.')
-        return
+        alert('Preencha todos os dados do cartão.');
+        return;
       }
     }
 
-    alert('Pedido finalizado com sucesso!')
-    console.log('Pedido:', { formData, itens, total })
+    alert('Pedido finalizado com sucesso!');
+    console.log('Pedido:', { formData, itens, total });
 
-    limparCarrinho()
-    navigate('/compra-finalizada')
-  }
+    limparCarrinho();
+    navigate('/compra-finalizada');
+  };
 
-  // 🔢 Formatações
+  // Formatações
   const formatCPF = (value) => {
-    const numbers = value.replace(/\D/g, '')
-    return numbers.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4')
-  }
+    const numbers = value.replace(/\D/g, '');
+    return numbers.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+  };
 
   const formatPhone = (value) => {
-    const numbers = value.replace(/\D/g, '')
-    return numbers.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3')
-  }
+    const numbers = value.replace(/\D/g, '');
+    return numbers.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+  };
 
   const formatCEP = (value) => {
-    const numbers = value.replace(/\D/g, '')
-    return numbers.replace(/(\d{5})(\d{3})/, '$1-$2')
-  }
+    const numbers = value.replace(/\D/g, '');
+    return numbers.replace(/(\d{5})(\d{3})/, '$1-$2');
+  };
 
   const formatCardNumber = (value) => {
-    const numbers = value.replace(/\D/g, '')
-    return numbers.replace(/(\d{4})(\d{4})(\d{4})(\d{4})/, '$1 $2 $3 $4')
-  }
+    const numbers = value.replace(/\D/g, '');
+    return numbers.replace(/(\d{4})(\d{4})(\d{4})(\d{4})/, '$1 $2 $3 $4');
+  };
 
   const formatCardExpiry = (value) => {
-    const numbers = value.replace(/\D/g, '')
-    return numbers.replace(/(\d{2})(\d{2})/, '$1/$2')
-  }
+    const numbers = value.replace(/\D/g, '');
+    return numbers.replace(/(\d{2})(\d{2})/, '$1/$2');
+  };
 
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        {/* Formulário */}
-        <form className={styles.checkoutForm} onSubmit={(e) => { e.preventDefault(); handleSubmit() }}>
-          {/* Sessão Dados Pessoais */}
+        <div className={styles.checkoutForm}>
+          {loadingUserData && <p>Carregando seus dados...</p>}
+          {errorUserData && <p className={styles.error}>{errorUserData}</p>}
+
+          {/* Sessão 1 - Dados Pessoais */}
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}><User size={20} /> Dados Pessoais</h2>
-            <div className={styles.formGridColumn}>
+            <h2>
+              <User size={20} /> Dados Pessoais
+            </h2>
+            <div className={styles.formColumn}>
               <input
                 type="text"
                 name="nome"
@@ -159,7 +169,12 @@ function FinalizarCompra() {
                 name="cpf"
                 placeholder="CPF *"
                 value={formData.cpf}
-                onChange={(e) => setFormData(prev => ({ ...prev, cpf: formatCPF(e.target.value) }))}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    cpf: formatCPF(e.target.value),
+                  }))
+                }
                 maxLength="14"
                 required
               />
@@ -176,17 +191,24 @@ function FinalizarCompra() {
                 name="celular"
                 placeholder="Celular *"
                 value={formData.celular}
-                onChange={(e) => setFormData(prev => ({ ...prev, celular: formatPhone(e.target.value) }))}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    celular: formatPhone(e.target.value),
+                  }))
+                }
                 maxLength="15"
                 required
               />
             </div>
           </section>
 
-          {/* Sessão Informações de Entrega */}
+          {/* Sessão 2 - Entrega */}
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}><MapPin size={20} /> Informações de Entrega</h2>
-            <div className={styles.formGridColumn}>
+            <h2>
+              <MapPin size={20} /> Informações de Entrega
+            </h2>
+            <div className={styles.formColumn}>
               <input
                 type="text"
                 name="endereco"
@@ -216,7 +238,12 @@ function FinalizarCompra() {
                 name="cep"
                 placeholder="CEP *"
                 value={formData.cep}
-                onChange={(e) => setFormData(prev => ({ ...prev, cep: formatCEP(e.target.value) }))}
+                onChange={(e) =>
+                  setFormData((prev) => ({
+                    ...prev,
+                    cep: formatCEP(e.target.value),
+                  }))
+                }
                 maxLength="9"
                 required
               />
@@ -230,41 +257,46 @@ function FinalizarCompra() {
             </div>
           </section>
 
-          {/* Sessão Formas de Pagamento */}
+          {/* Sessão 3 - Pagamento */}
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}><CreditCard size={20} /> Formas de Pagamento</h2>
+            <h2>
+              <CreditCard size={20} /> Formas de Pagamento
+            </h2>
             <div className={styles.radioGroup}>
-              <label className={styles.radioOption}>
+              <label>
                 <input
                   type="radio"
                   name="paymentMethod"
                   value="credit"
                   checked={formData.paymentMethod === 'credit'}
                   onChange={handleInputChange}
-                /> Cartão de Crédito
+                />{' '}
+                Cartão de Crédito
               </label>
-              <label className={styles.radioOption}>
+              <label>
                 <input
                   type="radio"
                   name="paymentMethod"
                   value="pix"
                   checked={formData.paymentMethod === 'pix'}
                   onChange={handleInputChange}
-                /> Pix
+                />{' '}
+                Pix
               </label>
-              <label className={styles.radioOption}>
+              <label>
                 <input
                   type="radio"
                   name="paymentMethod"
                   value="boleto"
                   checked={formData.paymentMethod === 'boleto'}
                   onChange={handleInputChange}
-                /> Boleto
+                />{' '}
+                Boleto
               </label>
             </div>
 
             {formData.paymentMethod === 'credit' && (
-              <>
+              <div className={styles.formColumn}>
                 <input
                   type="text"
                   name="cardName"
@@ -277,61 +309,74 @@ function FinalizarCompra() {
                   name="cardNumber"
                   placeholder="Número do Cartão"
                   value={formData.cardNumber}
-                  onChange={(e) => setFormData(prev => ({ ...prev, cardNumber: formatCardNumber(e.target.value) }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      cardNumber: formatCardNumber(e.target.value),
+                    }))
+                  }
                   maxLength="19"
                 />
-                <div className={styles.formGridColumn}>
-                  <input
-                    type="text"
-                    name="cardExpiry"
-                    placeholder="Validade (MM/AA)"
-                    value={formData.cardExpiry}
-                    onChange={(e) => setFormData(prev => ({ ...prev, cardExpiry: formatCardExpiry(e.target.value) }))}
-                    maxLength="5"
-                  />
-                  <input
-                    type="password"
-                    name="cvv"
-                    placeholder="CVV"
-                    value={formData.cvv}
-                    onChange={handleInputChange}
-                    maxLength="3"
-                  />
-                </div>
-              </>
+                <input
+                  type="text"
+                  name="cardExpiry"
+                  placeholder="Validade (MM/AA)"
+                  value={formData.cardExpiry}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      cardExpiry: formatCardExpiry(e.target.value),
+                    }))
+                  }
+                  maxLength="5"
+                />
+                <input
+                  type="password"
+                  name="cvv"
+                  placeholder="CVV"
+                  value={formData.cvv}
+                  onChange={handleInputChange}
+                  maxLength="3"
+                />
+              </div>
             )}
           </section>
 
-          {/* Sessão Finalizar Pagamento */}
-          <section className={styles.sectionFinal}>
-            <h2 className={styles.sectionTitleFinal}>Finalizar Pagamento</h2>
-
-            <div className={styles.summaryRow}>
-              <span>Total:</span>
-              <span className={styles.totalValue}>R$ {total.toFixed(2).replace('.', ',')}</span>
+          {/* Sessão 4 - Finalizar pagamento */}
+          <section className={styles.section}>
+            <h2>Finalizar pagamento</h2>
+            <div className={styles.finalSection}>
+              <p className={styles.summaryTotal}>
+                Total:{' '}
+                <span className={styles.totalValue}>
+                  R$ {total.toFixed(2).replace('.', ',')}
+                </span>
+              </p>
+              <p className={styles.installments}>
+                ou 6x de R$ {(total / 6).toFixed(2).replace('.', ',')} sem juros
+              </p>
+              <button
+                type="button"
+                className={styles.btnComplete}
+                onClick={handleSubmit}
+              >
+                Realizar Pagamento
+              </button>
             </div>
-            <p className={styles.installments}>
-              ou 6x de R$ {(total / 6).toFixed(2).replace('.', ',')} sem juros
-            </p>
-
-            <button
-              type="submit"
-              className={styles.btnComplete}
-            >
-              Realizar Pagamento
-            </button>
           </section>
-        </form>
+        </div>
 
-        {/* Box Resumo */}
+        {/* Box lateral - Resumo */}
         <aside className={styles.orderSummary}>
-          <h2 className={styles.summaryTitle}><ShoppingCart size={20} /> Resumo</h2>
+          <h2 className={styles.summaryTitle}>
+            <ShoppingCart size={20} /> Resumo
+          </h2>
 
           {itens.length === 0 ? (
             <p>Carrinho vazio.</p>
           ) : (
-            <div className={styles.orderItems}>
-              {itens.map(item => (
+            <div>
+              {itens.map((item) => (
                 <div key={item.id} className={styles.productItem}>
                   {item.image && (
                     <div className={styles.productImage}>
@@ -339,17 +384,42 @@ function FinalizarCompra() {
                     </div>
                   )}
                   <div className={styles.productInfo}>
-                    <p className={styles.productName}>{item.name} x{item.quantidade || 1}</p>
-                    <p>R$ {(item.price * (item.quantidade || 1)).toFixed(2).replace('.', ',')}</p>
+                    <p className={styles.productName}>
+                      {item.name} x{item.quantidade || 1}
+                    </p>
+                    <p>
+                      R${' '}
+                      {(item.price * (item.quantidade || 1))
+                        .toFixed(2)
+                        .replace('.', ',')}
+                    </p>
                   </div>
                 </div>
               ))}
+
+              <div className={styles.summaryTotal}>
+                <span>Total:</span>
+                <span className={styles.totalValue}>
+                  R$ {total.toFixed(2).replace('.', ',')}
+                </span>
+              </div>
+
+              <p className={styles.installments}>
+                ou 6x de R$ {(total / 6).toFixed(2).replace('.', ',')} sem juros
+              </p>
+
+              <button
+                className={styles.btnComplete}
+                onClick={handleSubmit}
+              >
+                Realizar Pagamento
+              </button>
             </div>
           )}
         </aside>
       </main>
     </div>
-  )
+  );
 }
 
-export default FinalizarCompra
+export default FinalizarCompra;
