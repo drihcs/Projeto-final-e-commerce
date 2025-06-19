@@ -243,9 +243,10 @@ function FinalizarCompra() {
 
           {/* Formas de Pagamento */}
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}><CreditCard size={20} /> Formas de Pagamento</h2>
+            <h2 className={styles.sectionTitle}><CreditCard size={20} /> Informações de Pagamento</h2>
             <div className={styles.radioGroup}>
-              <label className={styles.radioOption}>
+              <p className={styles.radioLabel}>Formas de pagamento:</p>
+              <label className={styles.radioOption}>                
                 <input
                   type="radio"
                   name="paymentMethod"
