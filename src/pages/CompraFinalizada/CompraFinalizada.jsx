@@ -8,10 +8,8 @@ import { useAuth } from '../../contexts/AuthContext'
 const ConfirmacaoCompra = () => {
   const { usuario } = useAuth()
 
-  // Para evitar erro caso usuario ou endereço estejam undefined
   const endereco = usuario?.endereco || {}
 
-  // Funções simples para formatar CPF, telefone e CEP (adaptar se quiser)
   const formatCPF = (value) => {
     if (!value) return '-'
     const numbers = value.replace(/\D/g, '')
@@ -96,7 +94,6 @@ const ConfirmacaoCompra = () => {
         </div>
 
         {/* Informações de Pagamento */}
-        {/* Aqui você pode adaptar para puxar os dados de pagamento do contexto se tiver */}
         <div className={styles.infoCard}>
           <h2 className={styles.sectionTitle}>Informações de Pagamento</h2>
           <div className={styles.infoGrid}>
@@ -136,7 +133,9 @@ const ConfirmacaoCompra = () => {
           </div>
 
           <div className={styles.actionButtons}>
-            <button className={styles.printButton}>Imprimir Recibo</button>
+            <button className={styles.printButton} onClick={() => window.print()}>
+              Imprimir Recibo
+            </button>
             <Link to="/" className={styles.homeButton}>
               Voltar para Home
             </Link>
