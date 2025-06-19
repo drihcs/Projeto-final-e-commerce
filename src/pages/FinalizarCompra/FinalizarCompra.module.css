@@ -251,23 +251,40 @@
 
 .productInfo {
   flex: 1;
-  display: flex;        /* mudar de column para flex (linha) */
-  align-items: center;  /* alinhar verticalmente */
-  gap: 1rem;            /* espaço entre nome e preço */
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .productName {
   font-weight: 600;
   color: #333;
   font-size: 1rem;
-  flex-grow: 1;         /* para ocupar espaço e empurrar preço à direita */
+  flex-grow: 1;
 }
 
+/* Valor do produto com mesma ênfase e tamanho do subtotal */
 .price {
   color: #666;
-  font-size: 0.9rem;
-  white-space: nowrap;  /* para não quebrar linha */
-  flex-shrink: 0;       /* para o preço não encolher */
+  font-size: 1rem;       /* mesmo tamanho que subtotal */
+  font-weight: 700;      /* negrito */
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Linhas resumo: Subtotal, Frete, Desconto */
+.summaryLine {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  color: #333;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid #eee;
+  font-weight: 700;  /* Negrito aplicado */
+}
+
+.summaryLine:last-of-type {
+  border-bottom: none;
 }
 
 /* Total no resumo com fundo amarelo pastel e total em rosa */
@@ -285,6 +302,7 @@
 
 .totalHighlight {
   color: #e91e63; /* Rosa */
+  font-weight: 700;
 }
 
 /* Botão no resumo */
@@ -318,4 +336,4 @@
 
 .input:valid {
   border-color: #28a745;
-    }
+}
