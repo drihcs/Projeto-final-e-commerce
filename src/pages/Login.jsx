@@ -5,8 +5,6 @@ import Footer from '../components/Footer/Footer';
 import styles from './Login.module.css';
 import headerLogo from '../assets/logo-header.svg'
 
-
-
 export default function Login() {
   const tenisImageUrl1 = "/pexels-melvin-buezo-2529148 1 (1).png";
   const tenisImageUrl2 = "/pexels-melvin-buezo-2529148 2 (1).png";

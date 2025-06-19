@@ -5,7 +5,7 @@ import styles from './Header.module.css'
 import CartModal from '../CartModal/CartModal'
 import { useCarrinho } from '../../contexts/CarrinhoContext'
 import { useAuth } from '../../contexts/AuthContext'
-import { HashLink } from 'react-router-hash-link';
+import { HashLink } from 'react-router-hash-link'
 
 export default function Header() {
   const [showCart, setShowCart] = useState(false)
@@ -15,7 +15,7 @@ export default function Header() {
   const location = useLocation()
 
   const { itens, limparCarrinho } = useCarrinho()
-  const { user } = useAuth()
+  const { usuario } = useAuth()  // <== aqui está o ajuste
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && searchTerm.trim() !== '') {
@@ -27,7 +27,7 @@ export default function Header() {
     setMobileMenuOpen(!mobileMenuOpen)
   }
 
-  const esconderSearchBar = location.pathname === '/produtos';
+  const esconderSearchBar = location.pathname === '/produtos'
 
   return (
     <header className={styles.header}>
@@ -59,8 +59,8 @@ export default function Header() {
         <div className={styles.headerActions}>
           <Link to="/cadastro" className={styles.linkText}>Cadastre-se</Link>
 
-          {user ? (
-            <span className={styles.userGreeting}>Olá, {user.nome}</span>
+          {usuario ? (
+            <span className={styles.userGreeting}>Olá, {usuario.nome}</span>
           ) : (
             <Link to="/login" className={styles.btnPrimary}>Entrar</Link>
           )}
