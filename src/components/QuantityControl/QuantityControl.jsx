@@ -1,20 +1,17 @@
-import React from 'react'
-import styles from './QuantityControl.module.css' // Vou sugerir um CSS separado para o componente
-
-export default function QuantityControl({ quantidade, onChange, min = 1 }) {
-  // Função para diminuir a quantidade
+export default function QuantityControl({ quantidade, onChange, onRemove, min = 1 }) {
   const handleDecrease = () => {
-    if (quantidade > min) {
+    if (quantidade <= min) {
+      // Se chegou no mínimo (ex: 1) e diminuir, dispara remoção
+      if (onRemove) onRemove()
+    } else {
       onChange(quantidade - 1)
     }
   }
 
-  // Função para aumentar a quantidade
   const handleIncrease = () => {
     onChange(quantidade + 1)
   }
 
-  // Função para input direto
   const handleInputChange = (e) => {
     let value = Number(e.target.value)
     if (isNaN(value) || value < min) {
@@ -28,7 +25,6 @@ export default function QuantityControl({ quantidade, onChange, min = 1 }) {
       <button
         type="button"
         onClick={handleDecrease}
-        disabled={quantidade <= min}
         aria-label="Diminuir quantidade"
       >
         -

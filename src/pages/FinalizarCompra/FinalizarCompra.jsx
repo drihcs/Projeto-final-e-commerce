@@ -371,12 +371,14 @@ function FinalizarCompra() {
                   <div className={styles.productInfo}>
                     <p className={styles.productName}>{item.name}</p>
 
-                    <div className={styles.infoBottom}>
+                    <div className={styles.infoBottom}>                      
                       <div className={styles.quantityControl}>
                         <span className={styles.qtdLabel}>Qtd:</span>
                         <QuantityControl
-                          quantidade={item.quantidade || 1}
-                          onChange={(novaQtd) => handleQuantidadeChange(item.id, novaQtd)}
+                          quantidade={item.quantidade}
+                          onChange={novaQtd => handleQuantidadeChange(item.id, novaQtd)}
+                          onRemove={() => removerItem(item.id)}
+                          min={1}
                         />
                       </div>
 
