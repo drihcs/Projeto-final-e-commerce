@@ -267,6 +267,20 @@
   font-size: 0.9rem;
 }
 
+.summaryLine {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  color: #333;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid #eee;
+  font-weight: 600;
+}
+
+.summaryLine:last-of-type {
+  border-bottom: none;
+}
+
 /* Total no resumo com fundo amarelo pastel e total em rosa */
 .summaryTotal {
   display: flex;
