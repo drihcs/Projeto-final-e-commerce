@@ -65,15 +65,26 @@ export default function Header() {
             <Link to="/login" className={styles.btnPrimary}>Entrar</Link>
           )}
 
+          
+          <div className={styles.cartWrapper}>
           {/* Botão do carrinho */}
-          <button
-            className={styles.cart}
-            onClick={() => setShowCart(!showCart)}
-            aria-label={showCart ? 'Fechar carrinho' : 'Abrir carrinho'}
-          >
-            <span className="material-symbols-outlined">shopping_cart</span>
-            <div className={styles.cartCount}>{itens.length}</div>
-          </button>
+            <button
+              className={styles.cart}
+              onClick={() => setShowCart(!showCart)}
+              aria-label={showCart ? 'Fechar carrinho' : 'Abrir carrinho'}
+            >
+              <span className="material-symbols-outlined">shopping_cart</span>
+              <div className={styles.cartCount}>{itens.length}</div>
+            </button>
+          {/* Modal */}
+            {showCart && (
+              <CartModal
+                cartItems={itens}
+                onClose={() => setShowCart(false)}
+                onClear={limparCarrinho}
+              />
+            )}
+          </div>
 
           {/* Menu hambúrguer */}
           <button
@@ -105,15 +116,6 @@ export default function Header() {
           </li>
         </ul>
       </nav>
-
-      {/* Modal do carrinho */}
-      {showCart && (
-        <CartModal
-          cartItems={itens}
-          onClose={() => setShowCart(false)}
-          onClear={limparCarrinho}
-        />
-      )}
     </header>
   )
 }
