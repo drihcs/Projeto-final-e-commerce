@@ -38,6 +38,8 @@
   margin: 0 0 15px;
 }
 
+
+
 .cart-item {
   display: flex;
   gap: 10px;
@@ -45,10 +47,11 @@
 }
 
 .cart-item img {
-  width: 60px;
-  height: auto;
+  width: 90px;
+  height: 90px;
   border-radius: 5px;
-  object-fit: cover;
+  object-fit: contain;
+  background-color: #f9f9f9;
 }
 
 .price {
