@@ -1,20 +1,24 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import styles from './CompraFinalizada.module.css'
 import { MapPin, CreditCard, Phone, Mail, User } from 'lucide-react'
 import sucessoImg from '../../assets/party-popper.png'
 import { useAuth } from '../../contexts/AuthContext'
 
-const ConfirmacaoCompra = () => {
+const CompraFinalizada = () => {
   const { usuario } = useAuth()
   const endereco = usuario?.endereco || {}
+  const location = useLocation()
+  const pedido = location.state?.pedido
 
+  // Formatação CPF
   const formatCPF = (value) => {
     if (!value) return '-'
     const numbers = value.replace(/\D/g, '')
     return numbers.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4')
   }
 
+  // Formatação telefone
   const formatPhone = (value) => {
     if (!value) return '-'
     const numbers = value.replace(/\D/g, '')
@@ -23,10 +27,22 @@ const ConfirmacaoCompra = () => {
       : value
   }
 
+  // Formatação CEP
   const formatCEP = (value) => {
     if (!value) return '-'
     const numbers = value.replace(/\D/g, '')
     return numbers.replace(/(\d{5})(\d{3})/, '$1-$2')
+  }
+
+  if (!pedido) {
+    return (
+      <div className={styles.container}>
+        <main className={styles.main}>
+          <p>Nenhum pedido encontrado.</p>
+          <Link to="/" className={styles.homeButton}>Voltar para Home</Link>
+        </main>
+      </div>
+    )
   }
 
   return (
@@ -114,21 +130,24 @@ const ConfirmacaoCompra = () => {
           <section>
             <h2 className={styles.sectionTitle}>Resumo da compra</h2>
 
-            <div className={styles.productSummary}>
-              <div className={styles.productImage}>👟</div>
-              <div className={styles.productInfo}>
-                <div className={styles.productName}>
-                  Tênis Nike Revolution 6 Next Nature Masculino
+            {pedido.itens.map((item) => (
+              <div key={item.id} className={styles.productSummary}>
+                <div className={styles.productImage}>👟</div>
+                <div className={styles.productInfo}>
+                  <div className={styles.productName}>{item.nome}</div>
+                  <div>Quantidade: {item.quantidade}</div>
+                  <div>Preço unitário: R$ {item.preco.toFixed(2).replace('.', ',')}</div>
+                  <div>Subtotal: R$ {(item.preco * item.quantidade).toFixed(2).replace('.', ',')}</div>
                 </div>
               </div>
-            </div>
+            ))}
 
             <div className={styles.totalSection}>
               <span className={styles.totalLabel}>Total</span>
               <div>
-                <div className={styles.totalValue}>R$ 219,00</div>
+                <div className={styles.totalValue}>R$ {pedido.total.toFixed(2).replace('.', ',')}</div>
                 <div className={styles.totalSubtext}>
-                  ou 10x de R$ 21,90 sem juros
+                  ou 10x de R$ {(pedido.total / 10).toFixed(2).replace('.', ',')} sem juros
                 </div>
               </div>
             </div>
@@ -149,4 +168,4 @@ const ConfirmacaoCompra = () => {
   )
 }
 
-export default ConfirmacaoCompra
+export default CompraFinalizada

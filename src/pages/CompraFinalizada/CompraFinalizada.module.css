@@ -1,189 +1,61 @@
 .container {
-  min-height: 100vh;
-  background-color: #f8fafc;
-  font-family: system-ui, -apple-system, sans-serif;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #1f2937;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
 }
 
 .main {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-}
-
-.successSection {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.successIcon {
-  width: 4rem;
-  height: 4rem;
-  margin: 2rem auto 1rem;
-  border-radius: 50%;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.successImage {
-  width: 10vw;
-  max-width: 80px;
-  height: auto;
-}
-
-.successTitle {
-  font-size: 1.875rem;
-  font-weight: bold;
-  color: #374151;
-  margin-bottom: 0.5rem;
-}
-
-.successSubtitle {
-  font-size: 1.125rem;
-  color: #6b7280;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .infoCard {
-  background-color: white;
-  border-radius: 0.5rem;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
 }
 
-.sectionTitle {
-  font-size: 1.125rem;
+.actionButtons {
+  margin-top: 24px;
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+}
+
+.printButton,
+.homeButton {
+  cursor: pointer;
+  padding: 10px 20px;
   font-weight: 600;
-  color: #374151;
-  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  color: white;
 }
 
-.infoGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+.printButton {
+  background-color: #10b981;
 }
 
-.infoItem {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0;
+.printButton:hover {
+  background-color: #059669;
 }
 
-.infoLabel {
-  font-size: 0.875rem;
-  color: #6b7280;
-  font-weight: 500;
-  min-width: 80px;
-}
-
-.infoValue {
-  font-size: 0.875rem;
-  color: #374151;
-  font-weight: 500;
-}
-
-.productSummary {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background-color: #f8fafc;
-  border-radius: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.productImage {
-  width: 60px;
-  height: 60px;
-  background-color: #e5e7eb;
-  border-radius: 0.5rem;
-  display: flex;
+.homeButton {
+  background-color: #3b82f6;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 
-.productInfo {
-  flex: 1;
-}
-
-.productName {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #374151;
-  margin-bottom: 0.25rem;
-}
-
-.totalSection {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 0;
-  border-top: 1px solid #e5e7eb;
-  margin-top: 1rem;
-}
-
-.totalLabel {
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: #374151;
-}
-
-.totalValue {
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: #374151;
-}
-
-.totalSubtext {
-  font-size: 0.75rem;
-  color: #6b7280;
-  text-align: right;
-}
-
-.actionButtons {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-
-.printButton {
-  flex: 1;
-  padding: 0.75rem;
-  background-color: white;
-  border: 1px solid #d1d5db;
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.printButton:hover {
-  background-color: #f3f4f6;
-}
-
-.homeButton {
-  flex: 2;
-  padding: 0.75rem;
-  background-color: #fbbf24;
-  color: white;
-  border: none;
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
 .homeButton:hover {
-  background-color: #f59e0b;
-}
-
-@media print {
-  .actionButtons {
-    display: none;
-  }
+  background-color: #2563eb;
 }
