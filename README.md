@@ -109,7 +109,7 @@ O layout da aplicação foi planejado com base em um protótipo visual, para gui
 
 > A banca pode acessar o Supabase para análise do backend, incluindo visualização de tabelas, autenticação e armazenamento.
 
-- 🔗 **URL do Supabase:** [https://app.supabase.com/](https://app.supabase.com/)
+- 🔗 **URL do Supabase:** [https://app.supabase.com/](https://supabase.com/dashboard/project/pdevuhebbhawqsosrmhi)
 - 📧 **Email:** `digitalstore.supabase@gmail.com`
 - 🔐 **Senha:** `Drip@supabase10`
 
