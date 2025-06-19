@@ -219,11 +219,8 @@ function FinalizarCompra() {
           </p>
           <p className={styles.installments}>
             ou 6x de R$ {(total / 6).toFixed(2).replace('.', ',')} sem juros
-          </p>
-
-          <button type="button" onClick={handleSubmit} className={styles.submitButton}>
-            Finalizar Pedido
-          </button>
+          </p
+          <button type="button" onClick={handleSubmit} className={styles.btnComplete}>Realizar Pagamento</button>
         </div>
       </main>
     </div>
