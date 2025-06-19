@@ -8,7 +8,7 @@ import styles from './FinalizarCompra.module.css'
 
 function FinalizarCompra() {
   const { usuario } = useAuth()
-  const { itens, setItens, limparCarrinho } = useCarrinho() // precisa setItens para atualizar quantidades
+  const { itens, setItens, limparCarrinho } = useCarrinho() // ADICIONE setItens no contexto para atualizar o carrinho
   const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
@@ -31,16 +31,34 @@ function FinalizarCompra() {
   const [loadingUserData, setLoadingUserData] = useState(false)
   const [errorUserData, setErrorUserData] = useState(null)
 
-  // Atualiza subtotal automaticamente
+  // Função para atualizar a quantidade de um item no carrinho
+  const handleQuantidadeChange = (itemId, novaQuantidade) => {
+    if (novaQuantidade < 1) return // Não permite quantidade menor que 1
+
+    const itensAtualizados = itens.map(item => {
+      if (item.id === itemId) {
+        return { ...item, quantidade: novaQuantidade }
+      }
+      return item
+    })
+
+    setItens(itensAtualizados)
+  }
+
+  // Calcular subtotal do carrinho baseado na quantidade atualizada
   const subtotal = itens.reduce(
     (acc, item) => acc + Number(item.price) * (item.quantidade || 1),
     0
   )
 
+  // Para exemplo, frete e desconto fixos — pode mudar para dinâmicos
   const frete = 15.0
   const desconto = 10.0
+
+  // Total final considerando frete e desconto
   const totalFinal = subtotal + frete - desconto
 
+  // Buscar dados do usuário no Supabase
   useEffect(() => {
     async function fetchUserData() {
       if (!usuario?.id) return
@@ -78,26 +96,13 @@ function FinalizarCompra() {
     fetchUserData()
   }, [usuario])
 
-  // Controle dos inputs do formulário principal
+  // Controle dos inputs do formulário
   const handleInputChange = (e) => {
     const { name, value } = e.target
     setFormData(prev => ({
       ...prev,
       [name]: value
     }))
-  }
-
-  // Controle da alteração da quantidade no resumo do carrinho
-  const handleQuantidadeChange = (id, value) => {
-    if (value < 1) return // não aceitar valores menores que 1
-
-    const novaLista = itens.map(item => {
-      if (item.id === id) {
-        return { ...item, quantidade: Number(value) }
-      }
-      return item
-    })
-    setItens(novaLista)
   }
 
   // Validação e Finalização do pedido
@@ -129,7 +134,7 @@ function FinalizarCompra() {
     navigate('/compra-finalizada')
   }
 
-  // Formatações (mesmos do seu código)
+  // Formatações para inputs especiais
   const formatCPF = (value) => {
     const numbers = value.replace(/\D/g, '')
     return numbers.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4')
@@ -372,17 +377,20 @@ function FinalizarCompra() {
                   </div>
                   <div className={styles.productInfo}>
                     <p className={styles.productName}>{item.name}</p>
-                    <input
-                      type="number"
-                      min="1"
-                      value={item.quantidade || 1}
-                      onChange={(e) => handleQuantidadeChange(item.id, e.target.value)}
-                      className={styles.inputQuantidade}
-                      aria-label={`Quantidade de ${item.name}`}
-                    />
-                    <p className={styles.price}>
-                      R$ {(item.price * (item.quantidade || 1)).toFixed(2).replace('.', ',')}
-                    </p>
+                    <div className={styles.quantidadePrecoWrapper}>
+                      <label htmlFor={`quantidade-${item.id}`} className={styles.quantidadeLabel}>Qtd:</label>
+                      <input
+                        id={`quantidade-${item.id}`}
+                        type="number"
+                        min="1"
+                        value={item.quantidade || 1}
+                        onChange={(e) => handleQuantidadeChange(item.id, Number(e.target.value))}
+                        className={styles.quantidadeInput}
+                      />
+                      <span className={styles.price}>
+                        R$ {(item.price * (item.quantidade || 1)).toFixed(2).replace('.', ',')}
+                      </span>
+                    </div>
                   </div>
                 </div>
               ))}

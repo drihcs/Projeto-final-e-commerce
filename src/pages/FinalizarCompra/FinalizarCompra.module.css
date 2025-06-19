@@ -115,18 +115,13 @@
   width: auto;
   margin: 0;
   cursor: pointer;
-}
-
-.radioOption input[type="radio"] {
   appearance: none;
   -webkit-appearance: none;
   width: 18px;
   height: 18px;
   border: 2px solid #e91e63;
   border-radius: 50%;
-  cursor: pointer;
   position: relative;
-  margin: 0;
   outline: none;
 }
 
@@ -257,24 +252,51 @@
   object-fit: cover;
 }
 
+/* Informações do produto organizadas para nome em cima e quantidade + preço embaixo */
 .productInfo {
-  flex: 1;
   display: flex;
-  align-items: center;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0.4rem; /* Espaço entre nome e quantidade/preço */
+  flex: 1;
 }
 
 .productName {
   font-weight: 600;
   color: #333;
   font-size: 1rem;
-  flex-grow: 1;
 }
 
+/* Wrapper para alinhar quantidade e preço lado a lado */
+.quantidadePrecoWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+/* Label "Qtd:" */
+.quantidadeLabel {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #555;
+  min-width: 30px; /* espaço fixo para alinhar */
+}
+
+/* Input quantidade */
+.quantidadeInput {
+  width: 50px;
+  padding: 0.2rem 0.4rem;
+  font-size: 0.95rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* Preço estilizado */
 .price {
-  color: #666;
-  font-size: 1rem;
   font-weight: 700;
+  color: #e91e63; /* Rosa para destaque */
+  font-size: 1rem;
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -294,7 +316,7 @@
   border-bottom: none;
 }
 
-/* Total no resumo com fundo amarelo pastel e total em rosa */
+/* Total no resumo com fundo amarelo pastel e total em destaque */
 .summaryTotal {
   display: flex;
   justify-content: space-between;
