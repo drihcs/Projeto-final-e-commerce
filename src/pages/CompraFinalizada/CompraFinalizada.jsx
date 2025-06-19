@@ -3,13 +3,38 @@ import { Link } from 'react-router-dom'
 import styles from './CompraFinalizada.module.css'
 import { MapPin, CreditCard, Phone, Mail, User } from 'lucide-react'
 import sucessoImg from '../../assets/party-popper.png'
+import { useAuth } from '../../contexts/AuthContext'
 
 const ConfirmacaoCompra = () => {
+  const { usuario } = useAuth()
+
+  // Para evitar erro caso usuario ou endereço estejam undefined
+  const endereco = usuario?.endereco || {}
+
+  // Funções simples para formatar CPF, telefone e CEP (adaptar se quiser)
+  const formatCPF = (value) => {
+    if (!value) return '-'
+    const numbers = value.replace(/\D/g, '')
+    return numbers.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4')
+  }
+
+  const formatPhone = (value) => {
+    if (!value) return '-'
+    const numbers = value.replace(/\D/g, '')
+    return numbers.length === 11
+      ? numbers.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3')
+      : value
+  }
+
+  const formatCEP = (value) => {
+    if (!value) return '-'
+    const numbers = value.replace(/\D/g, '')
+    return numbers.replace(/(\d{5})(\d{3})/, '$1-$2')
+  }
+
   return (
     <div className={styles.container}>
-      {/* Main Content */}
       <main className={styles.main}>
-        {/* Success Section */}
         <section className={styles.successSection}>
           <div className={styles.successIcon}>
             <img src={sucessoImg} alt="Sucesso" className={styles.successImage} />
@@ -18,57 +43,60 @@ const ConfirmacaoCompra = () => {
           <p className={styles.successSubtitle}>com sucesso!</p>
         </section>
 
-        {/* Personal Information */}
+        {/* Informações Pessoais */}
         <div className={styles.infoCard}>
           <h2 className={styles.sectionTitle}>Informações Pessoais</h2>
           <div className={styles.infoGrid}>
             <div className={styles.infoItem}>
               <User size={16} color="#6b7280" />
               <span className={styles.infoLabel}>Nome:</span>
-              <span className={styles.infoValue}>Francisco Antonio Pereira</span>
+              <span className={styles.infoValue}>{usuario?.nome || '-'}</span>
             </div>
             <div className={styles.infoItem}>
               <span className={styles.infoLabel}>CPF:</span>
-              <span className={styles.infoValue}>123485913-35</span>
+              <span className={styles.infoValue}>{formatCPF(usuario?.cpf)}</span>
             </div>
             <div className={styles.infoItem}>
               <Mail size={16} color="#6b7280" />
               <span className={styles.infoLabel}>Email:</span>
-              <span className={styles.infoValue}>francisco@gmail.com</span>
+              <span className={styles.infoValue}>{usuario?.email || '-'}</span>
             </div>
             <div className={styles.infoItem}>
               <Phone size={16} color="#6b7280" />
               <span className={styles.infoLabel}>Celular:</span>
-              <span className={styles.infoValue}>(85) 5555-5555</span>
+              <span className={styles.infoValue}>{formatPhone(usuario?.celular)}</span>
             </div>
           </div>
         </div>
 
-        {/* Delivery Information */}
+        {/* Informações de Entrega */}
         <div className={styles.infoCard}>
           <h2 className={styles.sectionTitle}>Informações de Entrega</h2>
           <div className={styles.infoGrid}>
             <div className={styles.infoItem}>
               <MapPin size={16} color="#6b7280" />
               <span className={styles.infoLabel}>Endereço:</span>
-              <span className={styles.infoValue}>Rua João Pessoa, 333</span>
+              <span className={styles.infoValue}>{endereco.rua || endereco.logradouro || '-'}</span>
             </div>
             <div className={styles.infoItem}>
               <span className={styles.infoLabel}>Bairro:</span>
-              <span className={styles.infoValue}>Centro</span>
+              <span className={styles.infoValue}>{endereco.bairro || '-'}</span>
             </div>
             <div className={styles.infoItem}>
               <span className={styles.infoLabel}>Cidade:</span>
-              <span className={styles.infoValue}>Fortaleza, Ceará</span>
+              <span className={styles.infoValue}>
+                {endereco.cidade || endereco.localidade || '-'}, {endereco.estado || endereco.uf || '-'}
+              </span>
             </div>
             <div className={styles.infoItem}>
               <span className={styles.infoLabel}>CEP:</span>
-              <span className={styles.infoValue}>433-8800</span>
+              <span className={styles.infoValue}>{formatCEP(endereco.cep)}</span>
             </div>
           </div>
         </div>
 
-        {/* Payment Information */}
+        {/* Informações de Pagamento */}
+        {/* Aqui você pode adaptar para puxar os dados de pagamento do contexto se tiver */}
         <div className={styles.infoCard}>
           <h2 className={styles.sectionTitle}>Informações de Pagamento</h2>
           <div className={styles.infoGrid}>
@@ -84,7 +112,7 @@ const ConfirmacaoCompra = () => {
           </div>
         </div>
 
-        {/* Order Summary */}
+        {/* Resumo da compra */}
         <div className={styles.infoCard}>
           <h2 className={styles.sectionTitle}>Resumo da compra</h2>
 
