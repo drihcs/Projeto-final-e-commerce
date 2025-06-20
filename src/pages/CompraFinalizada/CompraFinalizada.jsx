@@ -131,7 +131,7 @@ const CompraFinalizada = () => {
               <div key={item.id} className={styles.productSummary}>
                 <div className={styles.productImage}>
                   {item.image ? (
-                    <img src={item.image} alt={item.nome} />
+                    <img src={item.imagem} alt={item.nome} />
                   ) : (
                     <div>Sem imagem</div>
                   )}
