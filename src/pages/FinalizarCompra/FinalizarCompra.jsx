@@ -118,9 +118,10 @@ function FinalizarCompra() {
   // Mapeia os itens para as propriedades usadas na página de confirmação (nome, preco, quantidade)
   const itensFormatados = itens.map(item => ({
     id: item.id,
-    nome: item.name,    // ajuste para 'name' se seus itens usam esse campo
-    preco: item.price,  // ajuste para 'price' se seus itens usam esse campo
+    nome: item.name,
+    preco: item.price,
     quantidade: item.quantidade,
+    image: item.image,
   }))
 
   const pedido = {
