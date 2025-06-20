@@ -152,9 +152,13 @@
   footer,
   .actionButtons,
   .printButton,
-  .homeButton {
+  .homeButton,
+  .breadcrumbs, /* 🔥 Adiciona essa linha */
+  .breadcrumbsContainer /* Caso use outro nome */
+  {
     display: none !important;
   }
+}
 
   body {
     margin: 0;
