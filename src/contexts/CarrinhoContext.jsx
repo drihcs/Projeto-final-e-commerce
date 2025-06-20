@@ -3,18 +3,24 @@ import React, { createContext, useState, useContext, useEffect } from 'react'
 const CarrinhoContext = createContext()
 CarrinhoContext.displayName = 'CarrinhoContext'
 
+// 👉 Cupons válidos com desconto percentual
+const cuponsValidos = {
+  'NAMORADOS12': 12, // 12% de desconto
+}
+
 export function CarrinhoProvider({ children }) {
   const [itens, setItens] = useState(() => {
     const itensSalvos = localStorage.getItem('carrinho')
     return itensSalvos ? JSON.parse(itensSalvos) : []
   })
 
-  // Salvar no localStorage sempre que itens mudar
+  const [cupom, setCupom] = useState('')
+  const [descontoPercentual, setDescontoPercentual] = useState(0)
+
   useEffect(() => {
     localStorage.setItem('carrinho', JSON.stringify(itens))
   }, [itens])
 
-  // 👉 Adicionar item
   function adicionarItem(produto) {
     const existe = itens.find(item => item.id === produto.id)
 
@@ -29,12 +35,10 @@ export function CarrinhoProvider({ children }) {
     }
   }
 
-  // 👉 Remover item
   function removerItem(id) {
     setItens(itens.filter(item => item.id !== id))
   }
 
-  // 👉 Alterar quantidade
   function alterarQuantidade(id, novaQuantidade) {
     if (novaQuantidade < 1) {
       removerItem(id)
@@ -45,14 +49,38 @@ export function CarrinhoProvider({ children }) {
     ))
   }
 
-  // 👉 Limpar carrinho
   function limparCarrinho() {
     setItens([])
+    setCupom('')
+    setDescontoPercentual(0)
   }
 
-  // 👉 Calcular total
-  function calcularTotal() {
+  function calcularSubtotal() {
     return itens.reduce((total, item) => total + item.preco * item.quantidade, 0)
+  }
+
+  function aplicarCupom(codigo) {
+    const desconto = cuponsValidos[codigo.toUpperCase()]
+    if (desconto) {
+      setCupom(codigo.toUpperCase())
+      setDescontoPercentual(desconto)
+      return { valido: true, percentual: desconto }
+    } else {
+      setCupom('')
+      setDescontoPercentual(0)
+      return { valido: false }
+    }
+  }
+
+  function calcularDesconto() {
+    const subtotal = calcularSubtotal()
+    return (subtotal * descontoPercentual) / 100
+  }
+
+  function calcularTotal() {
+    const subtotal = calcularSubtotal()
+    const desconto = calcularDesconto()
+    return Math.max(subtotal - desconto, 0)
   }
 
   return (
@@ -63,7 +91,12 @@ export function CarrinhoProvider({ children }) {
         removerItem,
         alterarQuantidade,
         limparCarrinho,
+        calcularSubtotal,
+        calcularDesconto,
         calcularTotal,
+        cupom,
+        descontoPercentual,
+        aplicarCupom,
       }}
     >
       {children}
@@ -71,7 +104,6 @@ export function CarrinhoProvider({ children }) {
   )
 }
 
-// Hook personalizado para usar mais fácil
 export function useCarrinho() {
   return useContext(CarrinhoContext)
 }

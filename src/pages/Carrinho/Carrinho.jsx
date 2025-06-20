@@ -1,121 +1,189 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCarrinho } from '../../contexts/CarrinhoContext'
-import QuantityControl from '../../components/QuantityControl/QuantityControl'
+import { supabase } from '../../utils/supabase'
 import styles from './Carrinho.module.css'
 
 const formatarPreco = (valor) =>
-  new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valor)
+  new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(valor)
 
 const Carrinho = () => {
-  const {
-    itens,
-    alterarQuantidade,
-    removerItem,
-    calcularTotal,
-    limparCarrinho
-  } = useCarrinho()
-
   const navigate = useNavigate()
+  const { itens, alterarQuantidade, removerItem, calcularTotal } = useCarrinho()
+
+  const [cupom, setCupom] = useState('')
+  const [desconto, setDesconto] = useState(0)
+  const [frete, setFrete] = useState(0)
+  const [cep, setCep] = useState('')
+  const [produtosSugeridos, setProdutosSugeridos] = useState([])
+
+  // 🎯 Buscar produtos do Supabase para sugestão
+  useEffect(() => {
+    async function fetchProdutos() {
+      const { data, error } = await supabase
+        .from('productslist')
+        .select('*')
+        .limit(4)
+
+      if (error) {
+        console.error('Erro ao buscar produtos sugeridos:', error)
+      } else {
+        setProdutosSugeridos(data)
+      }
+    }
+
+    fetchProdutos()
+  }, [])
+
+  // 🎟️ Aplicar cupom de desconto
+  const aplicarCupom = () => {
+    if (cupom.toUpperCase() === 'NAMORADOS12') {
+      const descontoCalculado = calcularTotal() * 0.12
+      setDesconto(descontoCalculado)
+      alert('Cupom aplicado com sucesso!')
+    } else {
+      setDesconto(0)
+      alert('Cupom inválido!')
+    }
+  }
+
+  // 🚚 Calcular frete (simulado)
+  const calcularFrete = () => {
+    if (cep.length === 8) {
+      setFrete(25) // valor fixo simulado
+      alert('Frete calculado com sucesso!')
+    } else {
+      alert('Digite um CEP válido (8 dígitos)')
+    }
+  }
 
   const subtotal = calcularTotal()
-
-  // Funções para manipular quantidade via QuantityControl
-  const handleQuantidadeChange = (itemId, novaQuantidade) => {
-    if (novaQuantidade >= 1) {
-      alterarQuantidade(itemId, novaQuantidade)
-    }
-  }
-
-  const handleRemoverItem = (itemId) => {
-    if (window.confirm('Tem certeza que deseja remover este item?')) {
-      removerItem(itemId)
-    }
-  }
-
-  const handleLimparCarrinho = () => {
-    if (window.confirm('Tem certeza que deseja limpar todo o carrinho?')) {
-      limparCarrinho()
-    }
-  }
+  const total = subtotal + frete - desconto
 
   return (
     <div className={styles.container}>
-      <section className={styles.cartSection}>
-        <h2 className={styles.sectionTitle}>MEU CARRINHO</h2>
-        {itens.length === 0 ? (
-          <p>Seu carrinho está vazio.</p>
-        ) : (
-          <>
-            {itens.map((item) => (
-              <div key={item.id} className={styles.cartItem}>
-                <div className={styles.productImage}>
-                  <div className={styles.productIcon}>👟</div>
+      <main className={styles.main}>
+        {/* Carrinho */}
+        <div className={styles.carrinho}>
+          <h2>MEU CARRINHO</h2>
+
+          {itens.length === 0 ? (
+            <p>Seu carrinho está vazio.</p>
+          ) : (
+            itens.map(item => (
+              <div key={item.id} className={styles.item}>
+                <img src={item.imagem} alt={item.nome} className={styles.imagem} />
+
+                <div className={styles.info}>
+                  <h3>{item.nome}</h3>
+                  <p>Cor: {item.cor || 'Única'}</p>
+                  <p>Tamanho: {item.tamanho || 'Único'}</p>
                 </div>
 
-                <div className={styles.productInfo}>
-                  <h3 className={styles.productTitle}>{item.nome}</h3>
-                  <p className={styles.productDetail}>Cor: {item.cor}</p>
-                  <p className={styles.productDetail}>Tamanho: {item.tamanho}</p>
-                </div>
-
-                <div className={styles.quantityControl}>
+                <div className={styles.quantidade}>
                   <button onClick={() => alterarQuantidade(item.id, item.quantidade - 1)}>-</button>
                   <span>{item.quantidade}</span>
                   <button onClick={() => alterarQuantidade(item.id, item.quantidade + 1)}>+</button>
                 </div>
 
-                <div className={styles.priceColumn}>
-                  <p>R$ {(item.preco * item.quantidade).toFixed(2).replace('.', ',')}</p>
+                <div className={styles.preco}>
+                  <p>{formatarPreco(item.preco)}</p>
+                  <p>{formatarPreco(item.preco * item.quantidade)}</p>
                 </div>
+
+                <button className={styles.remover} onClick={() => removerItem(item.id)}>
+                  Remover
+                </button>
               </div>
-            ))}
+            ))
+          )}
 
-            {/* Botão limpar carrinho - discreto */}
-            <div className={styles.clearCart}>
-              <button onClick={limparCarrinho}>Limpar carrinho</button>
+          {/* Cupom e Frete */}
+          <div className={styles.cupomFrete}>
+            <div>
+              <h3>Cupom de desconto</h3>
+              <div className={styles.inputGroup}>
+                <input
+                  type="text"
+                  placeholder="Digite o cupom"
+                  value={cupom}
+                  onChange={(e) => setCupom(e.target.value)}
+                />
+                <button onClick={aplicarCupom}>OK</button>
+              </div>
             </div>
-          </>
-        )}
+
+            <div>
+              <h3>Calcular Frete</h3>
+              <div className={styles.inputGroup}>
+                <input
+                  type="text"
+                  placeholder="Digite seu CEP"
+                  value={cep}
+                  onChange={(e) => setCep(e.target.value)}
+                />
+                <button onClick={calcularFrete}>OK</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Resumo */}
+        <div className={styles.resumo}>
+          <h2>RESUMO</h2>
+
+          <div className={styles.linha}>
+            <span>Subtotal:</span>
+            <span>{formatarPreco(subtotal)}</span>
+          </div>
+
+          <div className={styles.linha}>
+            <span>Frete:</span>
+            <span>{frete > 0 ? formatarPreco(frete) : 'R$ 0,00'}</span>
+          </div>
+
+          <div className={styles.linha}>
+            <span>Desconto:</span>
+            <span>-{formatarPreco(desconto)}</span>
+          </div>
+
+          <hr />
+
+          <div className={styles.total}>
+            <span>Total</span>
+            <span>{formatarPreco(total)}</span>
+          </div>
+
+          <p className={styles.parcelas}>
+            ou 10x de {formatarPreco(total / 10)} sem juros
+          </p>
+
+          <button className={styles.botao} onClick={() => navigate('/finalizar')}>
+            Continuar
+          </button>
+        </div>
+      </main>
+
+      {/* Produtos Sugeridos */}
+      <section className={styles.sugestoes}>
+        <h2>VOCÊ TAMBÉM PODE GOSTAR</h2>
+
+        <div className={styles.grid}>
+          {produtosSugeridos.map(prod => (
+            <div key={prod.id} className={styles.card}>
+              <img src={prod.imagem} alt={prod.nome} />
+              <h3>{prod.nome}</h3>
+              <p>{formatarPreco(prod.preco)}</p>
+              <button onClick={() => navigate(`/produto/${prod.id}`)}>
+                Ver Produto
+              </button>
+            </div>
+          ))}
+        </div>
       </section>
-
-      {itens.length > 0 && (
-        <section className={styles.summary}>
-          <h2 className={styles.sectionTitle}>RESUMO</h2>
-
-          <div className={styles.summaryContent}>
-            <div className={styles.summaryRow}>
-              <span>Subtotal:</span>
-              <span>{formatarPreco(subtotal)}</span>
-            </div>
-
-            <div className={styles.summaryRow}>
-              <span>Frete:</span>
-              <span>R$ 0,00</span>
-            </div>
-
-            <hr className={styles.divider} />
-
-            <div className={styles.totalRow}>
-              <span>Total</span>
-              <span className={styles.totalPrice}>{formatarPreco(subtotal)}</span>
-            </div>
-
-            <p className={styles.installments}>
-              ou 10x de {formatarPreco(subtotal / 10)} sem juros
-            </p>
-          </div>
-
-          <div className={styles.buttons}>
-            <button
-              className={styles.continueButton}
-              onClick={() => navigate('/finalizar-compra')}
-            >
-              Continuar
-            </button>
-          </div>
-        </section>
-      )}
     </div>
   )
 }
