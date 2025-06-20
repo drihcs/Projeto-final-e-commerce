@@ -71,7 +71,6 @@ const CompraFinalizada = () => {
             <h2 className={styles.sectionTitle}>Informações Pessoais</h2>
             <div className={styles.infoGrid}>
               <div className={styles.infoItem}>
-                <User size={16} color="#6b7280" />
                 <span className={styles.infoLabel}>Nome:</span>
                 <span className={styles.infoValue}>{dadosCliente.nome || '-'}</span>
               </div>
@@ -80,12 +79,10 @@ const CompraFinalizada = () => {
                 <span className={styles.infoValue}>{formatCPF(dadosCliente.cpf)}</span>
               </div>
               <div className={styles.infoItem}>
-                <Mail size={16} color="#6b7280" />
                 <span className={styles.infoLabel}>Email:</span>
                 <span className={styles.infoValue}>{dadosCliente.email || '-'}</span>
               </div>
               <div className={styles.infoItem}>
-                <Phone size={16} color="#6b7280" />
                 <span className={styles.infoLabel}>Celular:</span>
                 <span className={styles.infoValue}>{formatPhone(dadosCliente.celular)}</span>
               </div>
@@ -97,7 +94,6 @@ const CompraFinalizada = () => {
             <h2 className={styles.sectionTitle}>Informações de Entrega</h2>
             <div className={styles.infoGrid}>
               <div className={styles.infoItem}>
-                <MapPin size={16} color="#6b7280" />
                 <span className={styles.infoLabel}>Endereço:</span>
                 <span className={styles.infoValue}>{endereco.rua || '-'}</span>
               </div>
@@ -140,15 +136,21 @@ const CompraFinalizada = () => {
             <h2 className={styles.sectionTitle}>Resumo da compra</h2>
 
             {pedido.itens.map((item) => (
-              <div key={item.id} className={styles.productSummary}>
-                <div className={styles.productImage}>👟</div>
-                <div className={styles.productInfo}>
-                  <div className={styles.productName}>{item.nome}</div>
-                  <div>Quantidade: {item.quantidade}</div>
-                  <div>Preço unitário: R$ {item.preco.toFixed(2).replace('.', ',')}</div>
-                  <div>Subtotal: R$ {(item.preco * item.quantidade).toFixed(2).replace('.', ',')}</div>
-                </div>
+            <div key={item.id} className={styles.productSummary}>
+              <div className={styles.productImage}>
+                {item.image ? (
+                  <img src={item.image} alt={item.nome} />
+                ) : (
+                  <div>Sem imagem</div>
+                )}
               </div>
+              <div className={styles.productInfo}>
+                <div className={styles.productName}>{item.nome}</div>
+                <div>Quantidade: {item.quantidade}</div>
+                <div>Preço unitário: R$ {item.preco.toFixed(2).replace('.', ',')}</div>
+                <div>Subtotal: R$ {(item.preco * item.quantidade).toFixed(2).replace('.', ',')}</div>
+              </div>
+            </div>
             ))}
 
             <div className={styles.totalSection}>
