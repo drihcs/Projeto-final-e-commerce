@@ -63,7 +63,7 @@ const CompraFinalizada = () => {
               <img src={sucessoImg} alt="Sucesso" className={styles.successImage} />
             </div>
             <h1 className={styles.successTitle}>Compra Realizada</h1>
-            <p className={styles.successSubtitle}>com sucesso!</p>
+            <h1 className={styles.successSubtitle}>com sucesso!</h1>
           </section>
 
           {/* Informações Pessoais */}
