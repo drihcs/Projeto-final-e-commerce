@@ -1,21 +1,18 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import styles from './CompraFinalizada.module.css'
-import { MapPin, CreditCard, Phone, Mail, User } from 'lucide-react'
 import sucessoImg from '../../assets/party-popper.png'
 
 const CompraFinalizada = () => {
   const location = useLocation()
   const pedido = location.state?.pedido
 
-  // Formatação CPF
   const formatCPF = (value) => {
     if (!value) return '-'
     const numbers = value.replace(/\D/g, '')
     return numbers.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4')
   }
 
-  // Formatação telefone
   const formatPhone = (value) => {
     if (!value) return '-'
     const numbers = value.replace(/\D/g, '')
@@ -24,7 +21,6 @@ const CompraFinalizada = () => {
       : value
   }
 
-  // Formatação CEP
   const formatCEP = (value) => {
     if (!value) return '-'
     const numbers = value.replace(/\D/g, '')
@@ -36,13 +32,14 @@ const CompraFinalizada = () => {
       <div className={styles.container}>
         <main className={styles.main}>
           <p>Nenhum pedido encontrado.</p>
-          <Link to="/" className={styles.homeButton}>Voltar para Home</Link>
+          <Link to="/" className={styles.homeButton}>
+            Voltar para Home
+          </Link>
         </main>
       </div>
     )
   }
 
-  // Dados do cliente vindo do pedido
   const dadosCliente = pedido.dadosCliente || {}
   const endereco = {
     rua: dadosCliente.endereco,
@@ -57,13 +54,10 @@ const CompraFinalizada = () => {
     <div className={styles.container}>
       <main className={styles.main}>
         <div className={styles.infoCard}>
-          {/* Título e sucesso */}
+          {/* Título */}
           <section className={styles.successSection}>
-            <div className={styles.successIcon}>
-              <img src={sucessoImg} alt="Sucesso" className={styles.successImage} />
-            </div>
-            <h1 className={styles.successTitle}>Compra Realizada</h1>
-            <h1 className={styles.successTitle}>com sucesso!</h1>
+            <img src={sucessoImg} alt="Sucesso" className={styles.successImage} />
+            <h1 className={styles.successTitle}>Compra Realizada com Sucesso!</h1>
           </section>
 
           {/* Informações Pessoais */}
@@ -89,23 +83,22 @@ const CompraFinalizada = () => {
             </div>
           </section>
 
-          {/* Informações de Entrega */}
+          {/* Entrega */}
           <section>
             <h2 className={styles.sectionTitle}>Informações de Entrega</h2>
             <div className={styles.infoGrid}>
               <div className={styles.infoItem}>
                 <span className={styles.infoLabel}>Endereço:</span>
-                <span className={styles.infoValue}>{endereco.rua || '-'}</span>
+                <span className={styles.infoValue}>{endereco.rua}</span>
               </div>
               <div className={styles.infoItem}>
                 <span className={styles.infoLabel}>Bairro:</span>
-                <span className={styles.infoValue}>{endereco.bairro || '-'}</span>
+                <span className={styles.infoValue}>{endereco.bairro}</span>
               </div>
               <div className={styles.infoItem}>
                 <span className={styles.infoLabel}>Cidade:</span>
                 <span className={styles.infoValue}>
-                  {endereco.cidade || '-'}
-                  {endereco.estado ? `, ${endereco.estado}` : ''}
+                  {endereco.cidade} {endereco.estado ? `, ${endereco.estado}` : ''}
                 </span>
               </div>
               <div className={styles.infoItem}>
@@ -115,12 +108,11 @@ const CompraFinalizada = () => {
             </div>
           </section>
 
-          {/* Informações de Pagamento */}
+          {/* Pagamento */}
           <section>
             <h2 className={styles.sectionTitle}>Informações de Pagamento</h2>
             <div className={styles.infoGrid}>
               <div className={styles.infoItem}>
-                <CreditCard size={16} color="#6b7280" />
                 <span className={styles.infoLabel}>Forma de Pagamento:</span>
                 <span className={styles.infoValue}>
                   {dadosCliente.paymentMethod === 'credit' ? 'Cartão de Crédito' :
@@ -131,26 +123,26 @@ const CompraFinalizada = () => {
             </div>
           </section>
 
-          {/* Resumo da compra */}
+          {/* Resumo da Compra */}
           <section>
-            <h2 className={styles.sectionTitle}>Resumo da compra</h2>
+            <h2 className={styles.sectionTitle}>Resumo da Compra</h2>
 
             {pedido.itens.map((item) => (
-            <div key={item.id} className={styles.productSummary}>
-              <div className={styles.productImage}>
-                {item.image ? (
-                  <img src={item.image} alt={item.nome} />
-                ) : (
-                  <div>Sem imagem</div>
-                )}
+              <div key={item.id} className={styles.productSummary}>
+                <div className={styles.productImage}>
+                  {item.image ? (
+                    <img src={item.image} alt={item.nome} />
+                  ) : (
+                    <div>Sem imagem</div>
+                  )}
+                </div>
+                <div className={styles.productInfo}>
+                  <div className={styles.productName}>{item.nome}</div>
+                  <div>Quantidade: {item.quantidade}</div>
+                  <div>Preço unitário: R$ {item.preco.toFixed(2).replace('.', ',')}</div>
+                  <div>Subtotal: R$ {(item.preco * item.quantidade).toFixed(2).replace('.', ',')}</div>
+                </div>
               </div>
-              <div className={styles.productInfo}>
-                <div className={styles.productName}>{item.nome}</div>
-                <div>Quantidade: {item.quantidade}</div>
-                <div>Preço unitário: R$ {item.preco.toFixed(2).replace('.', ',')}</div>
-                <div>Subtotal: R$ {(item.preco * item.quantidade).toFixed(2).replace('.', ',')}</div>
-              </div>
-            </div>
             ))}
 
             <div className={styles.totalSection}>

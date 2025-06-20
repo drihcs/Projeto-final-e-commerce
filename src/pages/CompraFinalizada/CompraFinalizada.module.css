@@ -3,7 +3,7 @@
   margin: 40px auto;
   padding: 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #000000; /* texto preto padrão */
+  color: #1f2937;
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
@@ -21,128 +21,93 @@
   border-radius: 8px;
 }
 
-/* Títulos das seções - alinhados à esquerda e com ênfase */
-.sectionTitle {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #000000;
-  text-align: left;
-  margin-bottom: 16px;
-}
-
-/* Grid vertical das informações */
-.infoGrid {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-/* Cada linha com label e valor lado a lado */
-.infoItem {
-  display: flex;
-  justify-content: flex-start;
-  gap: 12px;
-  font-size: 0.85rem;
-  align-items: center;
-  color: #000000; /* valor em preto */
-}
-
-/* Labels com largura fixa, cor cinza médio e ênfase */
-.infoLabel {
-  min-width: 120px; /* largura fixa para alinhar as labels */
-  font-weight: 700; /* negrito */
-  color: #6b7280; /* cinza médio */
-  text-align: left;
-}
-
-/* Valores preenchendo o espaço restante, texto preto normal */
-.infoValue {
-  flex: 1;
-  color: #000000;
-  font-weight: 400;
-  text-align: left;
-  word-break: break-word;
-}
-
-/* Sucesso - título centralizado e imagem */
 .successSection {
   text-align: center;
-  margin-bottom: 24px;
-}
-
-.successIcon {
-  margin-bottom: 16px;
-}
-
-.successImage {
-  width: 64px;
-  height: 64px;
 }
 
 .successTitle {
   font-size: 2rem;
-  font-weight: 700;
-  margin: 0;
-  color: #000000;
+  margin: 8px 0;
+  color: #1f2937;
 }
 
-.successSubtitle {
+.successImage {
+  width: 80px;
+}
+
+.sectionTitle {
   font-size: 1.2rem;
-  margin: 0;
-  color: #000000;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #111827;
+  border-bottom: 1px solid #e5e7eb;
 }
 
-/* Resumo da compra: produto, nome e valores alinhados */
+.infoGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.infoItem {
+  display: flex;
+  gap: 8px;
+  font-size: 0.95rem;
+}
+
+.infoLabel {
+  width: 120px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.infoValue {
+  color: #111827;
+}
+
 .productSummary {
   display: flex;
-  gap: 16px;
-  margin-bottom: 16px;
-  font-size: 0.9rem;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f3f4f6;
 }
 
-.productImage {
-  width: 48px;
-  height: 48px;
-  font-size: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.productImage img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
 }
 
 .productInfo {
-  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
 .productName {
-  font-weight: 700;
-  color: #000000;
+  font-weight: 600;
 }
 
 .totalSection {
+  margin-top: 16px;
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  font-weight: 700;
-  font-size: 1.25rem;
-  color: #000000;
-  margin-top: 24px;
+  align-items: center;
 }
 
 .totalLabel {
-  /* deixa em negrito e alinhado à esquerda */
+  font-weight: 600;
 }
 
 .totalValue {
-  /* texto em preto e tamanho maior */
+  font-size: 1.3rem;
+  font-weight: bold;
 }
 
 .totalSubtext {
-  font-weight: 400;
   font-size: 0.85rem;
-  color: #6b7280; /* cinza médio */
+  color: #6b7280;
 }
 
 .actionButtons {
@@ -175,30 +140,42 @@
 
 .homeButton {
   background-color: #3b82f6;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .homeButton:hover {
   background-color: #2563eb;
 }
 
+/* 🖨️ Estilo de impressão */
 @media print {
-  body * {
-    visibility: hidden; /* Esconde tudo */
+  header,
+  footer,
+  .actionButtons,
+  .printButton,
+  .homeButton {
+    display: none !important;
   }
-  .infoCard, .infoCard * {
-    visibility: visible; /* Mostra só o conteúdo do recibo */
-  }
-  .infoCard {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    /* Remove margens, sombra e background para imprimir só o essencial */
+
+  body {
     margin: 0;
+    background: white !important;
+    color: black !important;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 100%;
     box-shadow: none;
-    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .productSummary {
+    page-break-inside: avoid;
+  }
+
+  @page {
+    margin: 10mm;
   }
 }
