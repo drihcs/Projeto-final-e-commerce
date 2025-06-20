@@ -183,3 +183,22 @@
 .homeButton:hover {
   background-color: #2563eb;
 }
+
+@media print {
+  body * {
+    visibility: hidden; /* Esconde tudo */
+  }
+  .infoCard, .infoCard * {
+    visibility: visible; /* Mostra só o conteúdo do recibo */
+  }
+  .infoCard {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Remove margens, sombra e background para imprimir só o essencial */
+    margin: 0;
+    box-shadow: none;
+    background: none;
+  }
+}

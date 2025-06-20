@@ -1,10 +1,12 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import styles from './CompraFinalizada.module.css'
-import { MapPin, CreditCard, Phone, Mail, User } from 'lucide-react'
 import sucessoImg from '../../assets/party-popper.png'
+import { useAuth } from '../../contexts/AuthContext'
 
 const CompraFinalizada = () => {
+  const { usuario } = useAuth()
+  const endereco = usuario?.endereco || {}
   const location = useLocation()
   const pedido = location.state?.pedido
 
@@ -42,28 +44,18 @@ const CompraFinalizada = () => {
     )
   }
 
-  // Dados do cliente vindo do pedido
-  const dadosCliente = pedido.dadosCliente || {}
-  const endereco = {
-    rua: dadosCliente.endereco,
-    bairro: dadosCliente.bairro,
-    cidade: dadosCliente.cidade,
-    estado: dadosCliente.estado || '',
-    cep: dadosCliente.cep,
-    complemento: dadosCliente.complemento
-  }
-
   return (
     <div className={styles.container}>
       <main className={styles.main}>
         <div className={styles.infoCard}>
+
           {/* Título e sucesso */}
           <section className={styles.successSection}>
             <div className={styles.successIcon}>
               <img src={sucessoImg} alt="Sucesso" className={styles.successImage} />
             </div>
             <h1 className={styles.successTitle}>Compra Realizada</h1>
-            <h1 className={styles.successSubtitle}>com sucesso!</h1>
+            <p className={styles.successSubtitle}>com sucesso!</p>
           </section>
 
           {/* Informações Pessoais */}
@@ -71,23 +63,20 @@ const CompraFinalizada = () => {
             <h2 className={styles.sectionTitle}>Informações Pessoais</h2>
             <div className={styles.infoGrid}>
               <div className={styles.infoItem}>
-                <User size={16} color="#6b7280" />
                 <span className={styles.infoLabel}>Nome:</span>
-                <span className={styles.infoValue}>{dadosCliente.nome || '-'}</span>
+                <span className={styles.infoValue}>{usuario?.nome || '-'}</span>
               </div>
               <div className={styles.infoItem}>
                 <span className={styles.infoLabel}>CPF:</span>
-                <span className={styles.infoValue}>{formatCPF(dadosCliente.cpf)}</span>
+                <span className={styles.infoValue}>{formatCPF(usuario?.cpf)}</span>
               </div>
               <div className={styles.infoItem}>
-                <Mail size={16} color="#6b7280" />
                 <span className={styles.infoLabel}>Email:</span>
-                <span className={styles.infoValue}>{dadosCliente.email || '-'}</span>
+                <span className={styles.infoValue}>{usuario?.email || '-'}</span>
               </div>
               <div className={styles.infoItem}>
-                <Phone size={16} color="#6b7280" />
                 <span className={styles.infoLabel}>Celular:</span>
-                <span className={styles.infoValue}>{formatPhone(dadosCliente.celular)}</span>
+                <span className={styles.infoValue}>{formatPhone(usuario?.celular)}</span>
               </div>
             </div>
           </section>
@@ -97,9 +86,8 @@ const CompraFinalizada = () => {
             <h2 className={styles.sectionTitle}>Informações de Entrega</h2>
             <div className={styles.infoGrid}>
               <div className={styles.infoItem}>
-                <MapPin size={16} color="#6b7280" />
                 <span className={styles.infoLabel}>Endereço:</span>
-                <span className={styles.infoValue}>{endereco.rua || '-'}</span>
+                <span className={styles.infoValue}>{endereco.rua || endereco.logradouro || '-'}</span>
               </div>
               <div className={styles.infoItem}>
                 <span className={styles.infoLabel}>Bairro:</span>
@@ -108,8 +96,7 @@ const CompraFinalizada = () => {
               <div className={styles.infoItem}>
                 <span className={styles.infoLabel}>Cidade:</span>
                 <span className={styles.infoValue}>
-                  {endereco.cidade || '-'}
-                  {endereco.estado ? `, ${endereco.estado}` : ''}
+                  {endereco.cidade || endereco.localidade || '-'}, {endereco.estado || endereco.uf || '-'}
                 </span>
               </div>
               <div className={styles.infoItem}>
@@ -124,13 +111,12 @@ const CompraFinalizada = () => {
             <h2 className={styles.sectionTitle}>Informações de Pagamento</h2>
             <div className={styles.infoGrid}>
               <div className={styles.infoItem}>
-                <CreditCard size={16} color="#6b7280" />
-                <span className={styles.infoLabel}>Forma de Pagamento:</span>
-                <span className={styles.infoValue}>
-                  {dadosCliente.paymentMethod === 'credit' ? 'Cartão de Crédito' :
-                   dadosCliente.paymentMethod === 'pix' ? 'Pix' :
-                   dadosCliente.paymentMethod === 'boleto' ? 'Boleto' : '-'}
-                </span>
+                <span className={styles.infoLabel}>Titular do Cartão:</span>
+                <span className={styles.infoValue}>FRANCISCO A P</span>
+              </div>
+              <div className={styles.infoItem}>
+                <span className={styles.infoLabel}>Final:</span>
+                <span className={styles.infoValue}>************2020</span>
               </div>
             </div>
           </section>
@@ -138,7 +124,6 @@ const CompraFinalizada = () => {
           {/* Resumo da compra */}
           <section>
             <h2 className={styles.sectionTitle}>Resumo da compra</h2>
-
             {pedido.itens.map((item) => (
               <div key={item.id} className={styles.productSummary}>
                 <div className={styles.productImage}>👟</div>
@@ -150,7 +135,6 @@ const CompraFinalizada = () => {
                 </div>
               </div>
             ))}
-
             <div className={styles.totalSection}>
               <span className={styles.totalLabel}>Total</span>
               <div>
