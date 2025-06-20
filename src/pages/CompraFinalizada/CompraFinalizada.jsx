@@ -3,11 +3,8 @@ import { Link, useLocation } from 'react-router-dom'
 import styles from './CompraFinalizada.module.css'
 import { MapPin, CreditCard, Phone, Mail, User } from 'lucide-react'
 import sucessoImg from '../../assets/party-popper.png'
-import { useAuth } from '../../contexts/AuthContext'
 
 const CompraFinalizada = () => {
-  const { usuario } = useAuth()
-  const endereco = usuario?.endereco || {}
   const location = useLocation()
   const pedido = location.state?.pedido
 
@@ -45,6 +42,17 @@ const CompraFinalizada = () => {
     )
   }
 
+  // Dados do cliente vindo do pedido
+  const dadosCliente = pedido.dadosCliente || {}
+  const endereco = {
+    rua: dadosCliente.endereco,
+    bairro: dadosCliente.bairro,
+    cidade: dadosCliente.cidade,
+    estado: dadosCliente.estado || '',
+    cep: dadosCliente.cep,
+    complemento: dadosCliente.complemento
+  }
+
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -65,21 +73,21 @@ const CompraFinalizada = () => {
               <div className={styles.infoItem}>
                 <User size={16} color="#6b7280" />
                 <span className={styles.infoLabel}>Nome:</span>
-                <span className={styles.infoValue}>{usuario?.nome || '-'}</span>
+                <span className={styles.infoValue}>{dadosCliente.nome || '-'}</span>
               </div>
               <div className={styles.infoItem}>
                 <span className={styles.infoLabel}>CPF:</span>
-                <span className={styles.infoValue}>{formatCPF(usuario?.cpf)}</span>
+                <span className={styles.infoValue}>{formatCPF(dadosCliente.cpf)}</span>
               </div>
               <div className={styles.infoItem}>
                 <Mail size={16} color="#6b7280" />
                 <span className={styles.infoLabel}>Email:</span>
-                <span className={styles.infoValue}>{usuario?.email || '-'}</span>
+                <span className={styles.infoValue}>{dadosCliente.email || '-'}</span>
               </div>
               <div className={styles.infoItem}>
                 <Phone size={16} color="#6b7280" />
                 <span className={styles.infoLabel}>Celular:</span>
-                <span className={styles.infoValue}>{formatPhone(usuario?.celular)}</span>
+                <span className={styles.infoValue}>{formatPhone(dadosCliente.celular)}</span>
               </div>
             </div>
           </section>
@@ -91,7 +99,7 @@ const CompraFinalizada = () => {
               <div className={styles.infoItem}>
                 <MapPin size={16} color="#6b7280" />
                 <span className={styles.infoLabel}>Endereço:</span>
-                <span className={styles.infoValue}>{endereco.rua || endereco.logradouro || '-'}</span>
+                <span className={styles.infoValue}>{endereco.rua || '-'}</span>
               </div>
               <div className={styles.infoItem}>
                 <span className={styles.infoLabel}>Bairro:</span>
@@ -100,7 +108,8 @@ const CompraFinalizada = () => {
               <div className={styles.infoItem}>
                 <span className={styles.infoLabel}>Cidade:</span>
                 <span className={styles.infoValue}>
-                  {endereco.cidade || endereco.localidade || '-'}, {endereco.estado || endereco.uf || '-'}
+                  {endereco.cidade || '-'}
+                  {endereco.estado ? `, ${endereco.estado}` : ''}
                 </span>
               </div>
               <div className={styles.infoItem}>
@@ -116,12 +125,12 @@ const CompraFinalizada = () => {
             <div className={styles.infoGrid}>
               <div className={styles.infoItem}>
                 <CreditCard size={16} color="#6b7280" />
-                <span className={styles.infoLabel}>Titular do Cartão:</span>
-                <span className={styles.infoValue}>FRANCISCO A P</span>
-              </div>
-              <div className={styles.infoItem}>
-                <span className={styles.infoLabel}>Final:</span>
-                <span className={styles.infoValue}>************2020</span>
+                <span className={styles.infoLabel}>Forma de Pagamento:</span>
+                <span className={styles.infoValue}>
+                  {dadosCliente.paymentMethod === 'credit' ? 'Cartão de Crédito' :
+                   dadosCliente.paymentMethod === 'pix' ? 'Pix' :
+                   dadosCliente.paymentMethod === 'boleto' ? 'Boleto' : '-'}
+                </span>
               </div>
             </div>
           </section>
