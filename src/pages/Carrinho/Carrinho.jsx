@@ -43,36 +43,39 @@ const Carrinho = () => {
     <div className={styles.container}>
       <section className={styles.cartSection}>
         <h2 className={styles.sectionTitle}>MEU CARRINHO</h2>
-
         {itens.length === 0 ? (
           <p>Seu carrinho está vazio.</p>
         ) : (
-          itens.map(item => (
-            <div key={item.id} className={styles.cartItem}>
-              <div className={styles.productImage}>
-                <div className={styles.productIcon}>👟</div>
-              </div>
+          <>
+            {itens.map((item) => (
+              <div key={item.id} className={styles.cartItem}>
+                <div className={styles.productImage}>
+                  <div className={styles.productIcon}>👟</div>
+                </div>
 
-              <div className={styles.productInfo}>
-                <h3 className={styles.productTitle}>{item.nome}</h3>
-                <p className={styles.productDetail}>Cor: {item.cor}</p>
-                <p className={styles.productDetail}>Tamanho: {item.tamanho}</p>
-              </div>
+                <div className={styles.productInfo}>
+                  <h3 className={styles.productTitle}>{item.nome}</h3>
+                  <p className={styles.productDetail}>Cor: {item.cor}</p>
+                  <p className={styles.productDetail}>Tamanho: {item.tamanho}</p>
+                </div>
 
-              <div className={styles.quantityControl}>
-                <QuantityControl
-                  quantidade={item.quantidade}
-                  onChange={(novaQtd) => handleQuantidadeChange(item.id, novaQtd)}
-                  onRemove={() => handleRemoverItem(item.id)}
-                  min={1}
-                />
-              </div>
+                <div className={styles.quantityControl}>
+                  <button onClick={() => alterarQuantidade(item.id, item.quantidade - 1)}>-</button>
+                  <span>{item.quantidade}</span>
+                  <button onClick={() => alterarQuantidade(item.id, item.quantidade + 1)}>+</button>
+                </div>
 
-              <div className={styles.priceColumn}>
-                <p>{formatarPreco(item.preco * item.quantidade)}</p>
+                <div className={styles.priceColumn}>
+                  <p>R$ {(item.preco * item.quantidade).toFixed(2).replace('.', ',')}</p>
+                </div>
               </div>
+            ))}
+
+            {/* Botão limpar carrinho - discreto */}
+            <div className={styles.clearCart}>
+              <button onClick={limparCarrinho}>Limpar carrinho</button>
             </div>
-          ))
+          </>
         )}
       </section>
 
@@ -109,12 +112,6 @@ const Carrinho = () => {
               onClick={() => navigate('/finalizar-compra')}
             >
               Continuar
-            </button>
-            <button
-              className={styles.clearButton}
-              onClick={handleLimparCarrinho}
-            >
-              Limpar Carrinho
             </button>
           </div>
         </section>

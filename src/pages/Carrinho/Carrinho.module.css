@@ -4,13 +4,17 @@
   background-color: #f8f9fa;
   min-height: 100vh;
   padding: 2rem;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
 }
 
+/* ============ Seção do Carrinho ============ */
 .cartSection {
   background-color: white;
   border-radius: 8px;
   padding: 2rem;
-  margin-bottom: 2rem;
+  flex: 2;
 }
 
 .sectionTitle {
@@ -64,7 +68,7 @@
   background-color: #fafafa;
 }
 
-.quantityButton {
+.quantityControl button {
   border: none;
   background: none;
   cursor: pointer;
@@ -74,11 +78,11 @@
   transition: color 0.2s;
 }
 
-.quantityButton:hover {
+.quantityControl button:hover {
   color: #e91e63;
 }
 
-.quantityDisplay {
+.quantityControl span {
   min-width: 24px;
   text-align: center;
   font-weight: bold;
@@ -92,12 +96,33 @@
   color: #333;
 }
 
-/* ============ Resumo ============ */
+/* ============ Botão Limpar Carrinho ============ */
+.clearCart {
+  text-align: right;
+  margin-top: 1rem;
+}
+
+.clearCart button {
+  background-color: transparent;
+  color: #e91e63;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.clearCart button:hover {
+  color: #d81b60;
+}
+
+/* ============ Resumo do Pedido ============ */
 .summary {
   background-color: white;
   border-radius: 8px;
   padding: 2rem;
   height: fit-content;
+  flex: 1;
 }
 
 .summaryContent {
@@ -160,24 +185,18 @@
   background-color: #fb8c00;
 }
 
-.clearButton {
-  width: 100%;
-  background-color: #e91e63;
-  color: white;
-  border: none;
-  padding: 1rem;
-  border-radius: 4px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.clearButton:hover {
-  background-color: #d81b60;
-}
-
 /* ============ Responsividade ============ */
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .cartSection,
+  .summary {
+    width: 100%;
+  }
+}
+
 @media (max-width: 768px) {
   .cartItem {
     grid-template-columns: 1fr;
@@ -196,5 +215,9 @@
 
   .buttons {
     flex-direction: column;
+  }
+
+  .clearCart {
+    text-align: left;
   }
 }
