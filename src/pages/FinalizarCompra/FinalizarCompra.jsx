@@ -32,25 +32,23 @@ function FinalizarCompra() {
   const [loadingUserData, setLoadingUserData] = useState(false)
   const [errorUserData, setErrorUserData] = useState(null)
 
-  // Função para atualizar a quantidade de um item no carrinho
   const handleQuantidadeChange = (itemId, novaQuantidade) => {
-  alterarQuantidade(itemId, novaQuantidade)
+    alterarQuantidade(itemId, novaQuantidade)
   }
 
-  // Calcular subtotal do carrinho baseado na quantidade atualizada
+  // Calcular subtotal
   const subtotal = itens.reduce(
     (acc, item) => acc + Number(item.price) * (item.quantidade || 1),
     0
   )
 
-  // Para exemplo, frete e desconto fixos — pode mudar para dinâmicos
+  // Exemplo fixo de frete e desconto
   const frete = 15.0
   const desconto = 10.0
 
-  // Total final considerando frete e desconto
+  // Total final
   const totalFinal = subtotal + frete - desconto
 
-  // Buscar dados do usuário no Supabase
   useEffect(() => {
     async function fetchUserData() {
       if (!usuario?.id) return
@@ -88,7 +86,6 @@ function FinalizarCompra() {
     fetchUserData()
   }, [usuario])
 
-  // Controle dos inputs do formulário
   const handleInputChange = (e) => {
     const { name, value } = e.target
     setFormData(prev => ({
@@ -97,7 +94,6 @@ function FinalizarCompra() {
     }))
   }
 
-  // Validação e Finalização do pedido
   const handleSubmit = (e) => {
     if (e) e.preventDefault()
 
@@ -126,7 +122,7 @@ function FinalizarCompra() {
     navigate('/compra-finalizada')
   }
 
-  // Formatações para inputs especiais
+  // Formatação inputs especiais
   const formatCPF = (value) => {
     const numbers = value.replace(/\D/g, '')
     return numbers.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4')
@@ -331,7 +327,7 @@ function FinalizarCompra() {
             )}
           </section>
 
-          {/* Finalizar Compra (botão e total) */}
+          {/* Finalizar Compra */}
           <section className={styles.section}>
             <h2 className={styles.sectionTitle}>Finalizar pagamento</h2>
             <div className={styles.finalizarCompra}>
@@ -358,7 +354,7 @@ function FinalizarCompra() {
             <p>Carrinho vazio.</p>
           ) : (
             <>
-             {itens.map(item => (
+              {itens.map(item => (
                 <div key={item.id} className={styles.productItem}>
                   <div className={styles.productImage}>
                     {item.image ? (
@@ -371,7 +367,7 @@ function FinalizarCompra() {
                   <div className={styles.productInfo}>
                     <p className={styles.productName}>{item.name}</p>
 
-                    <div className={styles.infoBottom}>                      
+                    <div className={styles.infoBottom}>
                       <div className={styles.quantityControl}>
                         <span className={styles.qtdLabel}>Qtd:</span>
                         <QuantityControl
@@ -379,7 +375,7 @@ function FinalizarCompra() {
                           onChange={novaQtd => handleQuantidadeChange(item.id, novaQtd)}
                           onRemove={() => removerItem(item.id)}
                           min={1}
-                        />                                              
+                        />
                       </div>
 
                       <span className={styles.price}>
@@ -390,7 +386,6 @@ function FinalizarCompra() {
                 </div>
               ))}
 
-              {/* Subtotal, Frete, Desconto e Total */}
               <div className={styles.summaryLine}>
                 <span>Subtotal:</span>
                 <span>R$ {subtotal.toFixed(2).replace('.', ',')}</span>
