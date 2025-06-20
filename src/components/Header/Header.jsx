@@ -17,7 +17,7 @@ export default function Header() {
   const { itens, limparCarrinho } = useCarrinho()
   const { usuario } = useAuth()
 
-  const primeiroNome = usuario?.nome?.split(' ')[0] || ''
+  const primeiroNome = usuario?.user_metadata?.nome?.split(' ')[0] || '';
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && searchTerm.trim() !== '') {
