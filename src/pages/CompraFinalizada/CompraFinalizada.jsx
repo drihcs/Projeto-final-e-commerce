@@ -129,9 +129,10 @@ const CompraFinalizada = () => {
 
             {pedido.itens.map((item) => (
               <div key={item.id} className={styles.productSummary}>
+                
                 <div className={styles.productImage}>
                   {item.image ? (
-                    <img src={item.imagem} alt={item.nome} />
+                  <img src={item.image || item.imagem} alt={item.nome} />
                   ) : (
                     <div>Sem imagem</div>
                   )}
