@@ -21,12 +21,11 @@ const Carrinho = () => {
   const [produtosSugeridos, setProdutosSugeridos] = useState([])
   const [carregandoSugestoes, setCarregandoSugestoes] = useState(true)
 
-  // 🎯 Buscar produtos do Supabase para sugestão
   useEffect(() => {
     async function fetchProdutos() {
       setCarregandoSugestoes(true)
       const { data, error } = await supabase
-        .from('produtosList') // ⚠️ Confere se é esse o nome correto da tabela
+        .from('produtosList')
         .select('*')
         .limit(4)
 
@@ -41,7 +40,6 @@ const Carrinho = () => {
     fetchProdutos()
   }, [])
 
-  // 🎟️ Aplicar cupom de desconto
   const aplicarCupom = () => {
     if (cupom.trim().toUpperCase() === 'NAMORADOS12') {
       const descontoCalculado = calcularTotal() * 0.12
@@ -53,11 +51,10 @@ const Carrinho = () => {
     }
   }
 
-  // 🚚 Calcular frete (simulado)
   const calcularFrete = () => {
     const cepLimpo = cep.replace(/\D/g, '')
     if (cepLimpo.length === 8) {
-      setFrete(25) // valor fixo simulado
+      setFrete(25)
       alert('Frete calculado com sucesso!')
     } else {
       alert('Digite um CEP válido (8 dígitos)')
@@ -70,7 +67,6 @@ const Carrinho = () => {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        {/* 🛒 Carrinho */}
         <div className={styles.carrinho}>
           <h2>MEU CARRINHO</h2>
 
@@ -79,10 +75,10 @@ const Carrinho = () => {
           ) : (
             itens.map(item => (
               <div key={item.id} className={styles.item}>
-                <img src={item.imagem} alt={item.nome} className={styles.imagem} />
+                <img src={item.image} alt={item.name} className={styles.imagem} />
 
                 <div className={styles.info}>
-                  <h3>{item.nome}</h3>
+                  <h3>{item.name}</h3>
                   <p>Cor: {item.cor || 'Única'}</p>
                   <p>Tamanho: {item.tamanho || 'Único'}</p>
                 </div>
@@ -104,8 +100,8 @@ const Carrinho = () => {
                 </div>
 
                 <div className={styles.preco}>
-                  <p>{formatarPreco(item.preco)}</p>
-                  <p>{formatarPreco(item.preco * item.quantidade)}</p>
+                  <p>{formatarPreco(item.price)}</p>
+                  <p>{formatarPreco(item.price * item.quantidade)}</p>
                 </div>
 
                 <button
@@ -118,7 +114,6 @@ const Carrinho = () => {
             ))
           )}
 
-          {/* 🎟️ Cupom e 🚚 Frete */}
           <div className={styles.cupomFrete}>
             <div>
               <h3>Cupom de desconto</h3>
@@ -148,7 +143,6 @@ const Carrinho = () => {
           </div>
         </div>
 
-        {/* 🧾 Resumo */}
         <div className={styles.resumo}>
           <h2>RESUMO</h2>
 
@@ -190,7 +184,6 @@ const Carrinho = () => {
         </div>
       </main>
 
-      {/* ⭐ Produtos Sugeridos */}
       <section className={styles.sugestoes}>
         <h2>VOCÊ TAMBÉM PODE GOSTAR</h2>
 
