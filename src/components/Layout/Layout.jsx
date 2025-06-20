@@ -9,7 +9,7 @@ export default function Layout() {
   return (
     <div className={styles.container}>
       <Header />
-      <Breadcrumb /> {/* adiciona aqui */}
+      <Breadcrumb />
       <main className={styles.main}>
         <Outlet />
       </main>
