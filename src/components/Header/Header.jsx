@@ -1,35 +1,40 @@
-import React, { useState } from 'react'
-import { Link, useNavigate, useLocation } from 'react-router-dom'
-import headerLogo from '../../assets/logo-header.svg'
-import styles from './Header.module.css'
-import CartModal from '../CartModal/CartModal'
-import { useCarrinho } from '../../contexts/CarrinhoContext'
-import { useAuth } from '../../contexts/AuthContext'
-import { HashLink } from 'react-router-hash-link'
+import React, { useState } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import headerLogo from '../../assets/logo-header.svg';
+import styles from './Header.module.css';
+import CartModal from '../CartModal/CartModal';
+import { useCarrinho } from '../../contexts/CarrinhoContext';
+import { useAuth } from '../../contexts/AuthContext';
+import { HashLink } from 'react-router-hash-link';
 
 export default function Header() {
-  const [showCart, setShowCart] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [searchTerm, setSearchTerm] = useState('')
-  const navigate = useNavigate()
-  const location = useLocation()
+  const [showCart, setShowCart] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const { itens, limparCarrinho } = useCarrinho()
-  const { usuario } = useAuth()
+  const { itens, limparCarrinho } = useCarrinho();
+  const { usuario, logout } = useAuth();
 
   const primeiroNome = usuario?.user_metadata?.nome?.split(' ')[0] || '';
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && searchTerm.trim() !== '') {
-      navigate(`/busca?query=${encodeURIComponent(searchTerm.trim())}`)
+      navigate(`/busca?query=${encodeURIComponent(searchTerm.trim())}`);
     }
-  }
+  };
 
   const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen)
-  }
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
 
-  const esconderSearchBar = location.pathname === '/produtos'
+  const handleLogout = async () => {
+    await logout();
+    navigate('/');
+  };
+
+  const esconderSearchBar = location.pathname === '/produtos';
 
   return (
     <header className={styles.header}>
@@ -59,15 +64,37 @@ export default function Header() {
 
         {/* Ações */}
         <div className={styles.headerActions}>
-          <Link to="/cadastro" className={styles.linkText}>Cadastre-se</Link>
-
-          {usuario ? (
-            <span className={styles.userGreeting}>Olá, {primeiroNome}</span>
-          ) : (
-            <Link to="/login" className={styles.btnPrimary}>Entrar</Link>
+          {!usuario && (
+            <Link to="/cadastro" className={styles.linkText}>
+              Cadastre-se
+            </Link>
           )}
 
-          {/* Botão do carrinho e modal juntos */}
+          {usuario ? (
+            <>
+              <span className={styles.userGreeting}>Olá, {primeiroNome}</span>
+              <button
+                onClick={handleLogout}
+                className={styles.btnPrimary}
+                title="Sair"
+                style={{ marginLeft: '10px', padding: '6px 12px', fontSize: '0.9rem' }}
+              >
+                <span
+                  className="material-symbols-outlined"
+                  style={{ verticalAlign: 'middle', marginRight: '4px' }}
+                >
+                  logout
+                </span>
+                Sair
+              </button>
+            </>
+          ) : (
+            <Link to="/login" className={styles.btnPrimary}>
+              Entrar
+            </Link>
+          )}
+
+          {/* Carrinho */}
           <div className={styles.cartWrapper}>
             <button
               className={styles.cart}
@@ -101,22 +128,34 @@ export default function Header() {
       </div>
 
       {/* Navegação principal */}
-      <nav className={`${styles.mainNav} ${mobileMenuOpen ? styles.mobileOpen : ''}`}>
+      <nav
+        className={`${styles.mainNav} ${
+          mobileMenuOpen ? styles.mobileOpen : ''
+        }`}
+      >
         <ul className={styles.navList}>
-          <li className={styles.active}>
-            <Link to="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
+          <li>
+            <Link to="/" onClick={() => setMobileMenuOpen(false)}>
+              Home
+            </Link>
           </li>
           <li>
-            <Link to="/produtos" onClick={() => setMobileMenuOpen(false)}>Produtos</Link>
+            <Link to="/produtos" onClick={() => setMobileMenuOpen(false)}>
+              Produtos
+            </Link>
           </li>
           <li>
-            <HashLink to="/#categorias" onClick={() => setMobileMenuOpen(false)}>Categorias</HashLink>
+            <HashLink to="/#categorias" onClick={() => setMobileMenuOpen(false)}>
+              Categorias
+            </HashLink>
           </li>
           <li>
-            <Link to="/usuario/pedidos" onClick={() => setMobileMenuOpen(false)}>Meus Pedidos</Link>
+            <Link to="/usuario/pedidos" onClick={() => setMobileMenuOpen(false)}>
+              Meus Pedidos
+            </Link>
           </li>
         </ul>
       </nav>
     </header>
-  )
+  );
 }
