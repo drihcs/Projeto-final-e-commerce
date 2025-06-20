@@ -24,6 +24,7 @@ export default function CarrinhoResumo() {
             <p className={styles.nomeProduto}>{produto.name}</p>
             <p>Quantidade: {produto.quantidade}</p>
             <p>Preço unitário: R$ {produto.price.toFixed(2).replace('.', ',')}</p>
+            {produto.discount && <p className={styles.desconto}>{produto.discount}</p>}
             <p>
               Total: R$ {(produto.price * produto.quantidade).toFixed(2).replace('.', ',')}
             </p>

@@ -30,12 +30,16 @@ export function useProdutosCarrinho() {
 
         // Combinar dados do produto com quantidade do carrinho
         const produtosComQuantidade = data.map(produto => {
-          const itemCarrinho = itens.find(i => i.id === produto.id)
-          return {
-            ...produto,
+        const itemCarrinho = itens.find(i => i.id === produto.id)
+        return {
+            id: produto.id,
+            name: produto.name,
+            price: produto.price,
+            discount: produto.discount,
+            image: produto.image,
             quantidade: itemCarrinho?.quantidade || 1
-          }
-        })
+        }
+    })
 
         setProdutosDetalhados(produtosComQuantidade)
       } catch (err) {

@@ -4,17 +4,13 @@
   background-color: #f8f9fa;
   min-height: 100vh;
   padding: 2rem;
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
 }
 
-/* ============ Seção do Carrinho ============ */
 .cartSection {
   background-color: white;
   border-radius: 8px;
   padding: 2rem;
-  flex: 2;
+  margin-bottom: 2rem;
 }
 
 .sectionTitle {
@@ -68,7 +64,7 @@
   background-color: #fafafa;
 }
 
-.quantityControl button {
+.quantityButton {
   border: none;
   background: none;
   cursor: pointer;
@@ -78,11 +74,11 @@
   transition: color 0.2s;
 }
 
-.quantityControl button:hover {
+.quantityButton:hover {
   color: #e91e63;
 }
 
-.quantityControl span {
+.quantityDisplay {
   min-width: 24px;
   text-align: center;
   font-weight: bold;
@@ -96,107 +92,26 @@
   color: #333;
 }
 
-/* ============ Botão Limpar Carrinho ============ */
+/* ============ Botão limpar carrinho discreto ============ */
 .clearCart {
-  text-align: right;
   margin-top: 1rem;
+  text-align: right;
 }
 
 .clearCart button {
-  background-color: transparent;
-  color: #e91e63;
+  background: none;
   border: none;
+  color: #e91e63;
+  font-weight: bold;
   cursor: pointer;
-  font-size: 0.9rem;
-  text-decoration: underline;
-  transition: color 0.2s;
+  transition: color 0.3s;
 }
 
 .clearCart button:hover {
-  color: #d81b60;
-}
-
-/* ============ Resumo do Pedido ============ */
-.summary {
-  background-color: white;
-  border-radius: 8px;
-  padding: 2rem;
-  height: fit-content;
-  flex: 1;
-}
-
-.summaryContent {
-  margin-bottom: 1rem;
-}
-
-.summaryRow {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 0.5rem;
-  color: #555;
-}
-
-.totalRow {
-  display: flex;
-  justify-content: space-between;
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-
-.totalPrice {
-  color: #e91e63;
-}
-
-.divider {
-  border: none;
-  border-top: 1px solid #e0e0e0;
-  margin: 1rem 0;
-}
-
-.installments {
-  font-size: 0.85rem;
-  color: #666;
-  text-align: right;
-  margin-top: 0.5rem;
-}
-
-/* ============ Botões ============ */
-.buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-top: 1rem;
-}
-
-.continueButton {
-  width: 100%;
-  background-color: #ff9800;
-  color: white;
-  border: none;
-  padding: 1rem;
-  border-radius: 4px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.continueButton:hover {
-  background-color: #fb8c00;
+  color: #b0003a;
 }
 
 /* ============ Responsividade ============ */
-@media (max-width: 1024px) {
-  .container {
-    flex-direction: column;
-  }
-
-  .cartSection,
-  .summary {
-    width: 100%;
-  }
-}
-
 @media (max-width: 768px) {
   .cartItem {
     grid-template-columns: 1fr;
@@ -210,14 +125,6 @@
   }
 
   .priceColumn {
-    text-align: left;
-  }
-
-  .buttons {
-    flex-direction: column;
-  }
-
-  .clearCart {
     text-align: left;
   }
 }
