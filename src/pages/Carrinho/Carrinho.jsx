@@ -176,7 +176,7 @@ const Carrinho = () => {
 
           <button
             className={styles.botao}
-            onClick={() => navigate('/finalizar')}
+            onClick={() => navigate('/finalizar-compra')}
             disabled={itens.length === 0}
           >
             Continuar
