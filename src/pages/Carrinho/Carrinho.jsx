@@ -1,7 +1,11 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCarrinho } from '../../contexts/CarrinhoContext'
+import QuantityControl from '../../components/QuantityControl/QuantityControl'
 import styles from './Carrinho.module.css'
+
+const formatarPreco = (valor) =>
+  new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valor)
 
 const Carrinho = () => {
   const {
@@ -16,6 +20,25 @@ const Carrinho = () => {
 
   const subtotal = calcularTotal()
 
+  // Funções para manipular quantidade via QuantityControl
+  const handleQuantidadeChange = (itemId, novaQuantidade) => {
+    if (novaQuantidade >= 1) {
+      alterarQuantidade(itemId, novaQuantidade)
+    }
+  }
+
+  const handleRemoverItem = (itemId) => {
+    if (window.confirm('Tem certeza que deseja remover este item?')) {
+      removerItem(itemId)
+    }
+  }
+
+  const handleLimparCarrinho = () => {
+    if (window.confirm('Tem certeza que deseja limpar todo o carrinho?')) {
+      limparCarrinho()
+    }
+  }
+
   return (
     <div className={styles.container}>
       <section className={styles.cartSection}>
@@ -24,7 +47,7 @@ const Carrinho = () => {
         {itens.length === 0 ? (
           <p>Seu carrinho está vazio.</p>
         ) : (
-          itens.map((item) => (
+          itens.map(item => (
             <div key={item.id} className={styles.cartItem}>
               <div className={styles.productImage}>
                 <div className={styles.productIcon}>👟</div>
@@ -37,24 +60,22 @@ const Carrinho = () => {
               </div>
 
               <div className={styles.quantityControl}>
-                <button onClick={() => alterarQuantidade(item.id, item.quantidade - 1)}>-</button>
-                <span>{item.quantidade}</span>
-                <button onClick={() => alterarQuantidade(item.id, item.quantidade + 1)}>+</button>
+                <QuantityControl
+                  quantidade={item.quantidade}
+                  onChange={(novaQtd) => handleQuantidadeChange(item.id, novaQtd)}
+                  onRemove={() => handleRemoverItem(item.id)}
+                  min={1}
+                />
               </div>
 
               <div className={styles.priceColumn}>
-                <p>R$ {(item.preco * item.quantidade).toFixed(2).replace('.', ',')}</p>
-              </div>
-
-              <div className={styles.removeItem}>
-                <button onClick={() => removerItem(item.id)}>Remover</button>
+                <p>{formatarPreco(item.preco * item.quantidade)}</p>
               </div>
             </div>
           ))
         )}
       </section>
 
-      {/* Resumo */}
       {itens.length > 0 && (
         <section className={styles.summary}>
           <h2 className={styles.sectionTitle}>RESUMO</h2>
@@ -62,7 +83,7 @@ const Carrinho = () => {
           <div className={styles.summaryContent}>
             <div className={styles.summaryRow}>
               <span>Subtotal:</span>
-              <span>R$ {subtotal.toFixed(2).replace('.', ',')}</span>
+              <span>{formatarPreco(subtotal)}</span>
             </div>
 
             <div className={styles.summaryRow}>
@@ -74,11 +95,11 @@ const Carrinho = () => {
 
             <div className={styles.totalRow}>
               <span>Total</span>
-              <span className={styles.totalPrice}>R$ {subtotal.toFixed(2).replace('.', ',')}</span>
+              <span className={styles.totalPrice}>{formatarPreco(subtotal)}</span>
             </div>
 
             <p className={styles.installments}>
-              ou 10x de R$ {(subtotal / 10).toFixed(2).replace('.', ',')} sem juros
+              ou 10x de {formatarPreco(subtotal / 10)} sem juros
             </p>
           </div>
 
@@ -91,7 +112,7 @@ const Carrinho = () => {
             </button>
             <button
               className={styles.clearButton}
-              onClick={() => limparCarrinho()}
+              onClick={handleLimparCarrinho}
             >
               Limpar Carrinho
             </button>

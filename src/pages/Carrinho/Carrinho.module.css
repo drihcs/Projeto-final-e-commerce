@@ -1,35 +1,28 @@
-/* Container geral */
+/* ============ Layout Geral ============ */
 .container {
   font-family: Arial, sans-serif;
   background-color: #f8f9fa;
   min-height: 100vh;
+  padding: 2rem;
 }
 
-/* Main */
-.main {
-   max-width: 1200px;
-  margin: 2rem auto;
-  padding: 0 2rem;
-  display: flex;
-  gap: 2rem;
-}
-
-/* Seção do carrinho */
 .cartSection {
   background-color: white;
   border-radius: 8px;
   padding: 2rem;
+  margin-bottom: 2rem;
 }
 
 .sectionTitle {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   font-size: 1.5rem;
   font-weight: bold;
 }
 
+/* ============ Itens do Carrinho ============ */
 .cartItem {
   display: grid;
-  grid-template-columns: auto 1fr auto auto auto;
+  grid-template-columns: 80px 1fr auto auto;
   gap: 1rem;
   align-items: center;
   padding: 1rem 0;
@@ -39,8 +32,12 @@
 .productImage {
   width: 80px;
   height: 60px;
-  border-radius: 4px;
   background-color: #f0f0f0;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
 }
 
 .productInfo {}
@@ -56,13 +53,15 @@
   font-size: 0.9rem;
 }
 
+/* ============ Controle de Quantidade ============ */
 .quantityControl {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   border: 1px solid #ddd;
   border-radius: 4px;
-  padding: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  background-color: #fafafa;
 }
 
 .quantityButton {
@@ -70,65 +69,30 @@
   background: none;
   cursor: pointer;
   padding: 0.25rem 0.5rem;
+  font-size: 1.2rem;
+  color: #333;
+  transition: color 0.2s;
+}
+
+.quantityButton:hover {
+  color: #e91e63;
 }
 
 .quantityDisplay {
-  min-width: 20px;
+  min-width: 24px;
   text-align: center;
-}
-
-.priceColumn {
-  text-align: center;
-}
-
-.oldPrice {
-  color: #666;
-  font-size: 0.9rem;
-  text-decoration: line-through;
-}
-
-.currentPrice {
   font-weight: bold;
   font-size: 1rem;
 }
 
-.removeItem {
+/* ============ Preço ============ */
+.priceColumn {
   text-align: right;
-  margin-top: 1rem;
-  font-size: 0.9rem;
-  color: #e91e63;
-  cursor: pointer;
+  font-weight: bold;
+  color: #333;
 }
 
-.discountShipping {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.inputGroup {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.input {
-  flex: 1;
-  padding: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.button {
-  background-color: #e91e63;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-/* Resumo do pedido */
+/* ============ Resumo ============ */
 .summary {
   background-color: white;
   border-radius: 8px;
@@ -136,10 +100,15 @@
   height: fit-content;
 }
 
+.summaryContent {
+  margin-bottom: 1rem;
+}
+
 .summaryRow {
   display: flex;
   justify-content: space-between;
   margin-bottom: 0.5rem;
+  color: #555;
 }
 
 .totalRow {
@@ -153,11 +122,25 @@
   color: #e91e63;
 }
 
+.divider {
+  border: none;
+  border-top: 1px solid #e0e0e0;
+  margin: 1rem 0;
+}
+
 .installments {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: #666;
   text-align: right;
   margin-top: 0.5rem;
+}
+
+/* ============ Botões ============ */
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
 }
 
 .continueButton {
@@ -170,78 +153,48 @@
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-/* Seção relacionada */
-.relatedSection {
-  max-width: 1200px;
-  margin: 4rem auto;
-  padding: 0 2rem;
+.continueButton:hover {
+  background-color: #fb8c00;
 }
 
-.relatedHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-
-.viewAllLink {
-  color: #e91e63;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.productsGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-}
-
-.productCard {
-  background-color: white;
-  border-radius: 8px;
-  padding: 1rem;
-  position: relative;
-}
-
-.discountBadge {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  background-color: #4caf50;
-  color: white;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  font-weight: bold;
-}
-
-.productCardImage {
+.clearButton {
   width: 100%;
-  height: 150px;
-  object-fit: cover;
+  background-color: #e91e63;
+  color: white;
+  border: none;
+  padding: 1rem;
   border-radius: 4px;
-  margin-bottom: 1rem;
-  background-color: #f0f0f0;
-}
-
-.productCategory {
-  color: #666;
-  font-size: 0.8rem;
-  margin-bottom: 0.5rem;
-}
-
-.productName {
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: bold;
-  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.priceRow {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+.clearButton:hover {
+  background-color: #d81b60;
+}
+
+/* ============ Responsividade ============ */
+@media (max-width: 768px) {
+  .cartItem {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+
+  .productImage {
+    width: 100%;
+    height: 150px;
+  }
+
+  .priceColumn {
+    text-align: left;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
 }
