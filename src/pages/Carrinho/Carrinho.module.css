@@ -1,130 +1,250 @@
-/* ============ Layout Geral ============ */
+/* Container principal */
 .container {
   font-family: Arial, sans-serif;
   background-color: #f8f9fa;
   min-height: 100vh;
-  padding: 2rem;
 }
 
-.cartSection {
+/* Layout principal */
+.main {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+/* Seção do carrinho */
+.carrinho {
   background-color: white;
   border-radius: 8px;
   padding: 2rem;
-  margin-bottom: 2rem;
 }
 
-.sectionTitle {
-  margin-bottom: 1.5rem;
+/* Título das seções */
+.carrinho h2,
+.resumo h2,
+.sugestoes h2 {
+  margin-bottom: 2rem;
   font-size: 1.5rem;
   font-weight: bold;
 }
 
-/* ============ Itens do Carrinho ============ */
-.cartItem {
+/* Itens do carrinho */
+.item {
   display: grid;
-  grid-template-columns: 80px 1fr auto auto;
+  grid-template-columns: auto 1fr auto auto auto;
   gap: 1rem;
   align-items: center;
   padding: 1rem 0;
   border-bottom: 1px solid #e0e0e0;
 }
 
-.productImage {
+/* Imagem do produto */
+.imagem {
   width: 80px;
   height: 60px;
-  background-color: #f0f0f0;
   border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
+  background-color: #f0f0f0;
+  object-fit: cover;
 }
 
-.productInfo {}
+/* Informações do produto */
+.info {
+  display: flex;
+  flex-direction: column;
+}
 
-.productTitle {
+.info h3 {
   font-size: 1rem;
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
 
-.productDetail {
+.info p {
   color: #666;
   font-size: 0.9rem;
 }
 
-/* ============ Controle de Quantidade ============ */
-.quantityControl {
+/* Controle de quantidade */
+.quantidade {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   border: 1px solid #ddd;
   border-radius: 4px;
-  padding: 0.25rem 0.5rem;
-  background-color: #fafafa;
+  padding: 0.25rem;
 }
 
-.quantityButton {
+.quantidade button {
   border: none;
   background: none;
   cursor: pointer;
   padding: 0.25rem 0.5rem;
-  font-size: 1.2rem;
-  color: #333;
-  transition: color 0.2s;
 }
 
-.quantityButton:hover {
-  color: #e91e63;
-}
-
-.quantityDisplay {
-  min-width: 24px;
+.quantidade span {
+  min-width: 20px;
   text-align: center;
-  font-weight: bold;
-  font-size: 1rem;
 }
 
-/* ============ Preço ============ */
-.priceColumn {
-  text-align: right;
-  font-weight: bold;
-  color: #333;
+/* Preço */
+.preco {
+  text-align: center;
 }
 
-/* ============ Botão limpar carrinho discreto ============ */
-.clearCart {
-  margin-top: 1rem;
-  text-align: right;
+.preco p {
+  margin: 0;
 }
 
-.clearCart button {
-  background: none;
-  border: none;
+.remover {
   color: #e91e63;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+/* Cupom e Frete */
+.cupomFrete {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.inputGroup {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.inputGroup input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.inputGroup button {
+  background-color: #e91e63;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Resumo */
+.resumo {
+  background-color: white;
+  border-radius: 8px;
+  padding: 2rem;
+  height: fit-content;
+}
+
+.linha {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.total span:last-child {
+  color: #e91e63;
+}
+
+.parcelas {
+  font-size: 0.8rem;
+  color: #666;
+  text-align: right;
+  margin-top: 0.5rem;
+}
+
+.botao {
+  width: 100%;
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 4px;
+  font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
-  transition: color 0.3s;
+  margin-top: 1rem;
 }
 
-.clearCart button:hover {
-  color: #b0003a;
+/* Seção de sugestões */
+.sugestoes {
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 0 2rem;
 }
 
-/* ============ Responsividade ============ */
-@media (max-width: 768px) {
-  .cartItem {
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.card {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  position: relative;
+}
+
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  background-color: #f0f0f0;
+}
+
+.card h3 {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.card button {
+  background-color: #e91e63;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+@media (max-width: 960px) {
+  .main {
     grid-template-columns: 1fr;
-    gap: 1rem;
-    padding: 1rem 0;
   }
 
-  .productImage {
-    width: 100%;
-    height: 150px;
+  .cupomFrete {
+    grid-template-columns: 1fr;
   }
 
-  .priceColumn {
-    text-align: left;
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
   }
 }
