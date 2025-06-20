@@ -95,32 +95,46 @@ function FinalizarCompra() {
   }
 
   const handleSubmit = (e) => {
-    if (e) e.preventDefault()
+  if (e) e.preventDefault()
 
-    const obrigatorios = ['nome', 'cpf', 'email', 'celular', 'endereco', 'bairro', 'cidade', 'cep']
-    const faltando = obrigatorios.filter(field => !formData[field]?.trim())
+  const obrigatorios = ['nome', 'cpf', 'email', 'celular', 'endereco', 'bairro', 'cidade', 'cep']
+  const faltando = obrigatorios.filter(field => !formData[field]?.trim())
 
-    if (faltando.length > 0) {
-      alert('Preencha todos os campos obrigatórios.')
+  if (faltando.length > 0) {
+    alert('Preencha todos os campos obrigatórios.')
+    return
+  }
+
+  if (formData.paymentMethod === 'credit') {
+    const cartaoCampos = ['cardName', 'cardNumber', 'cardExpiry', 'cvv']
+    const faltandoCartao = cartaoCampos.filter(field => !formData[field]?.trim())
+
+    if (faltandoCartao.length > 0) {
+      alert('Preencha todos os dados do cartão.')
       return
     }
-
-    if (formData.paymentMethod === 'credit') {
-      const cartaoCampos = ['cardName', 'cardNumber', 'cardExpiry', 'cvv']
-      const faltandoCartao = cartaoCampos.filter(field => !formData[field]?.trim())
-
-      if (faltandoCartao.length > 0) {
-        alert('Preencha todos os dados do cartão.')
-        return
-      }
-    }
-
-    alert('Pedido finalizado com sucesso!')
-    console.log('Pedido:', { formData, itens, totalFinal })
-
-    limparCarrinho()
-    navigate('/compra-finalizada')
   }
+
+  // Mapeia os itens para as propriedades usadas na página de confirmação (nome, preco, quantidade)
+  const itensFormatados = itens.map(item => ({
+    id: item.id,
+    nome: item.name,    // ajuste para 'name' se seus itens usam esse campo
+    preco: item.price,  // ajuste para 'price' se seus itens usam esse campo
+    quantidade: item.quantidade,
+  }))
+
+  const pedido = {
+    itens: itensFormatados,
+    total: totalFinal,
+    dadosCliente: formData,
+  }
+
+  alert('Pedido finalizado com sucesso!')
+  console.log('Pedido:', pedido)
+
+  limparCarrinho()
+  navigate('/compra-finalizada', { state: { pedido } })
+}
 
   // Formatação inputs especiais
   const formatCPF = (value) => {
