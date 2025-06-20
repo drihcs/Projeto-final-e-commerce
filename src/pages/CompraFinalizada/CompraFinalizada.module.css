@@ -70,6 +70,7 @@
   gap: 12px;
   padding: 8px 0;
   border-bottom: 1px solid #f3f4f6;
+  page-break-inside: avoid; /* Evita quebra dentro do resumo do produto */
 }
 
 .productImage img {
@@ -153,12 +154,11 @@
   .actionButtons,
   .printButton,
   .homeButton,
-  .breadcrumbs, /* 🔥 Adiciona essa linha */
-  .breadcrumbsContainer /* Caso use outro nome */
+  .breadcrumbs, /* se usar breadcrumbs */
+  .breadcrumbsContainer /* ou outro nome que use para breadcrumbs */
   {
     display: none !important;
   }
-}
 
   body {
     margin: 0;
@@ -167,12 +167,11 @@
   }
 
   .container {
-    width: 100%;
-    max-width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 10px;
     box-shadow: none;
     border: none;
-    margin: 0;
-    padding: 0;
   }
 
   .productSummary {
@@ -182,3 +181,4 @@
   @page {
     margin: 10mm;
   }
+}
