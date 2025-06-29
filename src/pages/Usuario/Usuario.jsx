@@ -27,6 +27,7 @@ export default function UserPage() {
           >
             Meus Pedidos
           </a>
+
           <a
             href="#"
             onClick={(e) => {
@@ -39,7 +40,17 @@ export default function UserPage() {
           >
             Minhas Informações
           </a>
-          <a href="#" className={styles.sidebarLink}>
+
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              handleTabClick("pagamento");
+            }}
+            className={`${styles.sidebarLink} ${
+              activeTab === "pagamento" ? styles.sidebarLinkActive : ""
+            }`}
+          >
             Métodos de Pagamento
           </a>
         </nav>
@@ -47,7 +58,13 @@ export default function UserPage() {
 
       <main className={styles.mainContent}>
         {activeTab === "pedidos" && <InfoPedidos />}
-        {activeTab === "info" && <InfoUsuario />}        
+        {activeTab === "info" && <InfoUsuario />}
+        {activeTab === "pagamento" && (
+          <div className={styles.placeholder}>
+            <h2>Métodos de Pagamento</h2>
+            <p>Em breve você poderá gerenciar seus cartões aqui.</p>
+          </div>
+        )}
       </main>
     </div>
   );
