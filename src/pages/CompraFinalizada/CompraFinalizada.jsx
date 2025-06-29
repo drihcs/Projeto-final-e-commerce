@@ -54,10 +54,13 @@ const CompraFinalizada = () => {
     <div className={styles.container}>
       <main className={styles.main}>
         <div className={styles.infoCard}>
-          {/* Título */}
+          {/* Título e Número do Pedido */}
           <section className={styles.successSection}>
             <img src={sucessoImg} alt="Sucesso" className={styles.successImage} />
             <h1 className={styles.successTitle}>Compra Realizada com Sucesso!</h1>
+            <p className={styles.orderNumber}>
+              Número do Pedido: <strong>{pedido.numero_pedido || '-'}</strong>
+            </p>
           </section>
 
           {/* Informações Pessoais */}
@@ -83,22 +86,22 @@ const CompraFinalizada = () => {
             </div>
           </section>
 
-          {/* Entrega */}
+          {/* Informações de Entrega */}
           <section>
             <h2 className={styles.sectionTitle}>Informações de Entrega</h2>
             <div className={styles.infoGrid}>
               <div className={styles.infoItem}>
                 <span className={styles.infoLabel}>Endereço:</span>
-                <span className={styles.infoValue}>{endereco.rua}</span>
+                <span className={styles.infoValue}>{endereco.rua || '-'}</span>
               </div>
               <div className={styles.infoItem}>
                 <span className={styles.infoLabel}>Bairro:</span>
-                <span className={styles.infoValue}>{endereco.bairro}</span>
+                <span className={styles.infoValue}>{endereco.bairro || '-'}</span>
               </div>
               <div className={styles.infoItem}>
                 <span className={styles.infoLabel}>Cidade:</span>
                 <span className={styles.infoValue}>
-                  {endereco.cidade} {endereco.estado ? `, ${endereco.estado}` : ''}
+                  {endereco.cidade || '-'}{endereco.estado ? `, ${endereco.estado}` : ''}
                 </span>
               </div>
               <div className={styles.infoItem}>
@@ -108,7 +111,7 @@ const CompraFinalizada = () => {
             </div>
           </section>
 
-          {/* Pagamento */}
+          {/* Informações de Pagamento */}
           <section>
             <h2 className={styles.sectionTitle}>Informações de Pagamento</h2>
             <div className={styles.infoGrid}>
@@ -129,10 +132,9 @@ const CompraFinalizada = () => {
 
             {pedido.itens.map((item) => (
               <div key={item.id} className={styles.productSummary}>
-                
                 <div className={styles.productImage}>
                   {item.image ? (
-                  <img src={item.image || item.imagem} alt={item.nome} />
+                    <img src={item.image} alt={item.nome} />
                   ) : (
                     <div>Sem imagem</div>
                   )}

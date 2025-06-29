@@ -94,48 +94,76 @@ function FinalizarCompra() {
     }))
   }
 
-  const handleSubmit = (e) => {
-  if (e) e.preventDefault()
-
-  const obrigatorios = ['nome', 'cpf', 'email', 'celular', 'endereco', 'bairro', 'cidade', 'cep']
-  const faltando = obrigatorios.filter(field => !formData[field]?.trim())
-
-  if (faltando.length > 0) {
-    alert('Preencha todos os campos obrigatórios.')
-    return
+  // Função para gerar número de pedido AAAAMMDD + 4 dígitos aleatórios
+  const gerarNumeroPedido = () => {
+    const now = new Date()
+    const dataStr = now.toISOString().slice(0, 10).replace(/-/g, '') // AAAAMMDD
+    const randomSeq = Math.floor(1000 + Math.random() * 9000) // 4 dígitos aleatórios
+    return `${dataStr}${randomSeq}`
   }
 
-  if (formData.paymentMethod === 'credit') {
-    const cartaoCampos = ['cardName', 'cardNumber', 'cardExpiry', 'cvv']
-    const faltandoCartao = cartaoCampos.filter(field => !formData[field]?.trim())
+  const handleSubmit = async (e) => {
+    if (e) e.preventDefault()
 
-    if (faltandoCartao.length > 0) {
-      alert('Preencha todos os dados do cartão.')
+    const obrigatorios = ['nome', 'cpf', 'email', 'celular', 'endereco', 'bairro', 'cidade', 'cep']
+    const faltando = obrigatorios.filter(field => !formData[field]?.trim())
+
+    if (faltando.length > 0) {
+      alert('Preencha todos os campos obrigatórios.')
       return
     }
+
+    if (formData.paymentMethod === 'credit') {
+      const cartaoCampos = ['cardName', 'cardNumber', 'cardExpiry', 'cvv']
+      const faltandoCartao = cartaoCampos.filter(field => !formData[field]?.trim())
+
+      if (faltandoCartao.length > 0) {
+        alert('Preencha todos os dados do cartão.')
+        return
+      }
+    }
+
+    if (itens.length === 0) {
+      alert('Seu carrinho está vazio.')
+      return
+    }
+
+    const numeroPedido = gerarNumeroPedido()
+
+    try {
+      // Inserir cada item como um registro na tabela pedidos
+      for (const item of itens) {
+        const { data, error } = await supabase
+          .from('pedidos')
+          .insert({
+            numero_pedido: numeroPedido,
+            usuario_id: usuario.id,
+            produto_id: item.id,
+            quantidade: item.quantidade || 1,
+            preco_total: totalFinal,
+            status: 'Em processamento',
+            data_pedido: new Date().toISOString(),
+          })
+
+        if (error) throw error
+      }
+
+      alert('Pedido finalizado com sucesso!')
+
+      limparCarrinho()
+      navigate('/compra-finalizada', {
+        state: {
+          numeroPedido,
+          itens,
+          totalFinal,
+          dadosCliente: formData
+        }
+      })
+    } catch (error) {
+      console.error('Erro ao salvar pedido:', error.message)
+      alert('Ocorreu um erro ao processar seu pedido. Tente novamente mais tarde.')
+    }
   }
-
-  // Mapeia os itens para as propriedades usadas na página de confirmação (nome, preco, quantidade)
-  const itensFormatados = itens.map(item => ({
-    id: item.id,
-    nome: item.name,
-    preco: item.price,
-    quantidade: item.quantidade,
-    image: item.image,
-  }))
-
-  const pedido = {
-    itens: itensFormatados,
-    total: totalFinal,
-    dadosCliente: formData,
-  }
-
-  alert('Pedido finalizado com sucesso!')
-  console.log('Pedido:', pedido)
-
-  limparCarrinho()
-  navigate('/compra-finalizada', { state: { pedido } })
-}
 
   // Formatação inputs especiais
   const formatCPF = (value) => {
