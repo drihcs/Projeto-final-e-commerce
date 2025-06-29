@@ -25,6 +25,7 @@ const InfoPedidos = () => {
       if (error) {
         console.error("Erro ao buscar pedidos:", error);
       } else {
+        console.log("Pedidos recebidos:", data); // para debugar
         setPedidos(data);
       }
     };
@@ -53,32 +54,42 @@ const InfoPedidos = () => {
       </header>
 
       <div className={styles.ordersList}>
-        {pedidos.map((pedido) => (
-          <div key={pedido.numero_pedido} className={styles.orderItem}>
-            <div className={styles.orderInfo}>
-              <div className={styles.orderImage}>
-                <img
-                  src={pedido.produtosList?.imagem_url || "/fallback.jpg"}
-                  alt={pedido.produtosList?.nome || "Produto"}
-                  className={styles.productImage}
-                />
+        {pedidos.length === 0 ? (
+          <p>Você ainda não realizou pedidos.</p>
+        ) : (
+          pedidos.map((pedido) => {
+            // Pega o primeiro produto do array produtosList
+            const produto = pedido.produtosList?.[0];
+
+            return (
+              <div key={pedido.numero_pedido} className={styles.orderItem}>
+                <div className={styles.orderInfo}>
+                  <div className={styles.orderImage}>
+                    <img
+                      src={produto?.imagem_url || "/fallback.jpg"}
+                      alt={produto?.nome || "Produto"}
+                      className={styles.productImage}
+                    />
+                  </div>
+                  <div>
+                    <p className={styles.orderId}>Pedido nº {pedido.numero_pedido}</p>
+                    <h3 className={styles.productName}>{produto?.nome || "Produto"}</h3>
+                    <p className={styles.orderDate}>
+                      Data: {new Date(pedido.data_pedido).toLocaleDateString("pt-BR")}
+                    </p>
+                    <p className={styles.orderPrice}>
+                      Total: R$ {pedido.preco_total?.toFixed(2)}
+                    </p>
+                    <p>Quantidade: {pedido.quantidade}</p>
+                  </div>
+                </div>
+                <div className={`${styles.orderStatus} ${getStatusColor(pedido.status)}`}>
+                  {pedido.status}
+                </div>
               </div>
-              <div>
-                <p className={styles.orderId}>Pedido nº {pedido.numero_pedido}</p>
-                <h3 className={styles.productName}>{pedido.produtosList?.nome}</h3>
-                <p className={styles.orderDate}>
-                  Data: {new Date(pedido.data_pedido).toLocaleDateString("pt-BR")}
-                </p>
-                <p className={styles.orderPrice}>
-                  Total: R$ {pedido.preco_total?.toFixed(2)}
-                </p>
-              </div>
-            </div>
-            <div className={`${styles.orderStatus} ${getStatusColor(pedido.status)}`}>
-              {pedido.status}
-            </div>
-          </div>
-        ))}
+            );
+          })
+        )}
       </div>
     </div>
   );
